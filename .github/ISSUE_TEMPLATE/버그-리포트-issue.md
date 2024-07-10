@@ -1,10 +1,9 @@
 ---
 name: 버그 리포트 Issue
 about: 발생한 버그에 대한 Issue를 작성합니다.
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
 
 ## 어떤 버그인가요?

@@ -1,4 +1,5 @@
 ## 개요
+
 <h3 align="center">Emotion Tree Talk 프로젝트 🎄 </h2>
 <p align="center">
 <img src="https://img.shields.io/badge/-typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=48a0eb">
@@ -10,27 +11,24 @@
 </p>
 <hr>
 
-
 ### 커밋 컨벤션
 
-
-|     | 태그 이름    | 설명                      | 
-|-----|----------|-------------------------|
-| 기능  | Feat     | 새로운 기능을 추가할 경우          |  
-| 기능  | Fix      | 버그를 고친 경우               |  
-| 기능  | Design   | CSS 등 사용자 UI 디자인 변경     |  
-| 개선  | Style    | 코드 Format, 코드 수정이 없는 경우 |  
-| 개선  | Refactor | 코드 리팩토링                 |
-| 개선  | Comment  | 주석 변경                   | 
-| ETC | Docs     | 문서 수정                   | 
-| ETC | Chore    | 빌드 테스트, 패키지 매니저         | 
-| ETC | Rename   | 파일 명 수정                 |
+|      | 태그 이름 | 설명                               |
+| ---- | --------- | ---------------------------------- |
+| 기능 | Feat      | 새로운 기능을 추가할 경우          |
+| 기능 | Fix       | 버그를 고친 경우                   |
+| 기능 | Design    | CSS 등 사용자 UI 디자인 변경       |
+| 개선 | Style     | 코드 Format, 코드 수정이 없는 경우 |
+| 개선 | Refactor  | 코드 리팩토링                      |
+| 개선 | Comment   | 주석 변경                          |
+| ETC  | Docs      | 문서 수정                          |
+| ETC  | Chore     | 빌드 테스트, 패키지 매니저         |
+| ETC  | Rename    | 파일 명 수정                       |
 
 ```
 예시: Feat: ~~ 기능추가
 기능을 무슨무슨행위로 만들었다.
 ```
-
 
 ### Issue 컨벤션
 
