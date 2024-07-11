@@ -25,6 +25,7 @@ export default {
                 primary: {
                     DEFAULT: "#8AFF05",
                     dark: "#001600",
+                    light: "#99FF45",
                 },
                 gray: {
                     200: "#BEBEBE",

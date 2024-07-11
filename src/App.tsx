@@ -1,13 +1,12 @@
-import ColorTest from "./ColorTest";
-import { LogoSymbol } from "./IconData";
+import ButtonDefault from "./components/button/ButtonDefault";
+import ButtonDisable from "./components/button/ButtonDisable";
 
 function App() {
     return (
-        <div className="font-body p-10 bg-gray-50 w-full h-[100vh]">
-            <LogoSymbol className="w-[30px] h-[32px]" />
-            <ColorTest />
+        <div className="font-body flex gap-4 p-10 bg-black w-full h-[100vh]">
+            <ButtonDisable>감정 나무</ButtonDisable>
+            <ButtonDefault>감정 나무</ButtonDefault>
         </div>
     );
 }
-
 export default App;

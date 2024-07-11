@@ -13,9 +13,6 @@ import { ReactComponent as IconUpdate } from "./assets/icon-update.svg";
 import { ReactComponent as IconUser } from "./assets/icon-user.svg";
 import { ReactComponent as LogoGoogle } from "./assets/logo-google.svg";
 import { ReactComponent as LogoKakao } from "./assets/logo-kakao.svg";
-import { ReactComponent as LogoPrimary } from "./assets/logo-primary.svg";
-import { ReactComponent as LogoSymbol } from "./assets/logo-symbol.svg";
-import { ReactComponent as Logo } from "./assets/logo-white.svg";
 
 export {
     IconAddChat,
@@ -33,7 +30,4 @@ export {
     IconUser,
     LogoGoogle,
     LogoKakao,
-    LogoPrimary,
-    LogoSymbol,
-    Logo,
 };
