@@ -25,7 +25,7 @@ export default {
                 primary: {
                     DEFAULT: "#8AFF05",
                     dark: "#001600",
-                    light: "#99FF45",
+                    light: "#b5ec66",
                 },
                 gray: {
                     200: "#BEBEBE",
@@ -35,10 +35,10 @@ export default {
                 },
                 literal: {
                     error: "#FF4545",
-                    angry: "#FF8373",
+                    angry: "#FFD250",
                     joy: "#FF953F",
                     happy: "#FFD250",
-                    sorrow: "#6164fa",
+                    sorrow: "#3F61FF",
                 },
             },
             fontFamily: {

@@ -5,6 +5,7 @@ const ColorTest = () => {
         <>
             <div className="mb-2 font-title">Primary</div>
             <div className="flex mb-8">
+                <Color color="bg-primary-light" text="Primary-light" />
                 <Color color="bg-primary" text="Primary" />
                 <Color color="bg-primary-dark" text="Primary-dark" type="white" />
             </div>
@@ -24,7 +25,6 @@ const ColorTest = () => {
                 <Color color="bg-literal-happy" text="Happy" type="white" />
                 <Color color="bg-literal-sorrow" text="Sorrow" type="white" />
             </div>
-
             <div className=""></div>
         </>
     );
