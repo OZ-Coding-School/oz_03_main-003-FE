@@ -6,6 +6,7 @@ import ButtonError from "./components/button/ButtonError";
 import ButtonPrimary from "./components/button/ButtonPrimary";
 import ChatListContent from "./components/chatList/ChatListContent";
 import ChatListHeader from "./components/chatList/ChatListHeader";
+import ButtonEmoTree from "./components/button/ButtonEmoTree";
 
 function Layout() {
     return (
@@ -14,6 +15,7 @@ function Layout() {
                 <ColorTest />
                 <ChatListHeader />
                 <ChatListContent />
+                <ButtonEmoTree>감정을 나무에게 전달하기</ButtonEmoTree>
             </div>
             <ButtonDisable>감정 나무</ButtonDisable>
             <ButtonDefault>감정 나무</ButtonDefault>
@@ -22,7 +24,6 @@ function Layout() {
         </div>
     );
 }
-
 function App() {
     return (
         <Routes>
