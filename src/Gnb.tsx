@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { IconChat, IconHome, IconUser } from "./IconData";
+import { twMerge as tw } from "tailwind-merge";
 
 const Gnb = () => {
     const location = useLocation();
@@ -13,18 +14,29 @@ const Gnb = () => {
     ];
 
     return (
-        <ul className="font-title leading-[48px] flex bg-black text-gray-200 text-center items-center transition ">
+        <ul className="font-title leading-[48px] flex bg-black text-gray-200 text-center items-center transition">
             {navItems.map((item) => {
                 const IconComponent = item.icon;
                 const active = isActive(item.path);
+
                 return (
                     <li
                         key={item.path}
-                        className={`relative w-36 flex justify-center group ${active ? "text-primary bg-gray-800" : "hover:text-white hover:bg-gray-800"}`}
+                        className={tw(
+                            "relative w-36 flex justify-center group",
+                            active
+                                ? "text-primary bg-gray-800"
+                                : "hover:text-white hover:bg-gray-800"
+                        )}
                     >
                         <Link to={item.path} className="flex items-center">
                             <IconComponent
-                                className={`w-5 h-5 mr-[5px] ${active ? "group-hover:fill-primary fill-primary" : "fill-gray-400 group-hover:fill-white"}`}
+                                className={tw(
+                                    "w-5 h-5 mr-[5px]",
+                                    active
+                                        ? "fill-primary group-hover:fill-primary"
+                                        : "fill-gray-400 group-hover:fill-white"
+                                )}
                                 fill={active ? "#83DF00" : "#bebebe"}
                             />
                             {item.label}
