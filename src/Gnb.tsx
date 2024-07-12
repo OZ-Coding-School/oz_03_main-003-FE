@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
+import { IconChat, IconHome, IconUser } from "./IconData";
 import { twMerge as tw } from "tailwind-merge";
-import { IconChat, IconHome, IconUser } from "../../IconData";
 
 const Gnb = () => {
     const location = useLocation();

@@ -47,6 +47,11 @@ export default {
             },
         },
     },
+    variants: {
+        extend: {
+            fill: ["hover", "group-hover"], // hover 및 group-hover 변형을 활성화
+        },
+    },
 
     plugins: [],
 };
