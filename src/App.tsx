@@ -7,6 +7,11 @@ import ChatListContent from "./components/chatList/ChatListContent";
 import ChatListHeader from "./components/chatList/ChatListHeader";
 import ButtonEmoTree from "./components/button/ButtonEmoTree";
 import Gnb from "./Gnb";
+import BadgeAngry from "./components/badge/BadgeAngry";
+import BadgeHappy from "./components/badge/BadgeHappy";
+import BadgeIndifference from "./components/badge/BadgeIndifference";
+import BadgeJoy from "./components/badge/BadgeJoy";
+import BadgeSorrow from "./components/badge/BadgeSorrow";
 
 function Layout() {
     return (
@@ -21,6 +26,13 @@ function Layout() {
             <ButtonDefault>감정 나무</ButtonDefault>
             <ButtonError>감정 나무</ButtonError>
             <ButtonPrimary>감정 나무</ButtonPrimary>
+            <div>
+                <BadgeAngry />
+                <BadgeJoy />
+                <BadgeHappy />
+                <BadgeSorrow />
+                <BadgeIndifference />
+            </div>
         </div>
     );
 }
