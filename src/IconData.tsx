@@ -13,6 +13,11 @@ import { ReactComponent as IconUpdate } from "./assets/icon-update.svg";
 import { ReactComponent as IconUser } from "./assets/icon-user.svg";
 import { ReactComponent as LogoGoogle } from "./assets/logo-google.svg";
 import { ReactComponent as LogoKakao } from "./assets/logo-kakao.svg";
+import { ReactComponent as IconAngry } from "./assets/icon-angry.svg";
+import { ReactComponent as IconHappy } from "./assets/icon-happy.svg";
+import { ReactComponent as IconJoy } from "./assets/icon-joy.svg";
+import { ReactComponent as IconSorrow } from "./assets/icon-sorrow.svg";
+import { ReactComponent as IconIndifference } from "./assets/icon-Indifference.svg";
 
 export {
     IconAddChat,
@@ -28,6 +33,11 @@ export {
     IconTooltip,
     IconUpdate,
     IconUser,
+    IconAngry,
+    IconHappy,
+    IconJoy,
+    IconSorrow,
+    IconIndifference,
     LogoGoogle,
     LogoKakao,
 };
