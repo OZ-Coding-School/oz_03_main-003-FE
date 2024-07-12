@@ -18,6 +18,7 @@ import { ReactComponent as IconHappy } from "./assets/icon-happy.svg";
 import { ReactComponent as IconJoy } from "./assets/icon-joy.svg";
 import { ReactComponent as IconSorrow } from "./assets/icon-sorrow.svg";
 import { ReactComponent as IconIndifference } from "./assets/icon-indifference.svg";
+import { ReactComponent as IconSetting } from "./assets/icon-set.svg";
 
 export {
     IconAddChat,
@@ -38,6 +39,7 @@ export {
     IconJoy,
     IconSorrow,
     IconIndifference,
+    IconSetting,
     LogoGoogle,
     LogoKakao,
 };
