@@ -15,6 +15,7 @@ function Layout() {
             <div>
                 <Gnb />
                 <ColorTest />
+                <emotionBadge />
                 <ChatListHeader />
                 <ChatListContent />
             </div>
