@@ -1,18 +1,18 @@
-import { IconAddChat } from "../../IconData";
-import { twMerge as tw } from "tailwind-merge";
+import { contentDummy } from "./ChatListDummy";
+
 const ChatListContent = () => {
+    console.log(contentDummy);
+
     return (
-        <div className="px-5 w-[300px] h-[64px] border border-gray-800  flex justify-between items-center">
-            <div className="text-white">목록</div>
-            <div
-                className={tw(
-                    "w-10 h-10 rounded-full flex justify-center items-center",
-                    "fill-white hover:fill-primary hover:bg-gray-800",
-                    "cursor-pointer transition"
-                )}
-            >
-                <IconAddChat className="w-6 h-6" />
-            </div>
+        <div className="flex flex-col justify-center">
+            {contentDummy.map((item, index) => (
+                <div
+                    className="text-white px-5 py-3 w-[300px] h-16 flex flex-col justify-center"
+                    key={index}
+                >
+                    <div>{item.chat_room_name}</div>
+                </div>
+            ))}
         </div>
     );
 };
