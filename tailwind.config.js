@@ -35,7 +35,7 @@ export default {
                 },
                 literal: {
                     error: "#FF4545",
-                    angry: "#FFD250",
+                    angry: "#FF3F3F",
                     joy: "#FF953F",
                     happy: "#FFD250",
                     sorrow: "#3F61FF",
