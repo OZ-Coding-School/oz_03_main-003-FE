@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import ColorTest from "./ColorTest";
 import ButtonDefault from "./components/button/ButtonDefault";
 import ButtonDisable from "./components/button/ButtonDisable";
 import ButtonError from "./components/button/ButtonError";
@@ -16,10 +15,9 @@ import BadgeIndifference from "./components/badge/BadgeIndifference";
 
 function Layout() {
     return (
-        <div className="font-body flex gap-4 p-10 bg-black w-full h-[100vh]">
+        <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
             <div>
                 <Gnb />
-                <ColorTest />
                 <ChatListHeader />
                 <ChatListContent />
                 <ButtonEmoTree>감정을 나무에게 전달하기</ButtonEmoTree>
@@ -51,9 +49,9 @@ function App() {
                     </div>
                 }
             />
-            <Route path="/mypage" element={<div>어카운트</div>} />
-            <Route path="/chat" element={<div>채팅</div>} />
-            <Route path="*" element={<div>잘못된 페이지</div>} />
+            <Route path="/mypage" element={<Gnb />} />
+            <Route path="/chat" element={<Gnb />} />
+            <Route path="*" element={<Gnb />} />
         </Routes>
     );
 }
