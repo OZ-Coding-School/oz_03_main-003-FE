@@ -8,6 +8,11 @@ import ChatListContent from "./components/chatList/ChatListContent";
 import ChatListHeader from "./components/chatList/ChatListHeader";
 import ButtonEmoTree from "./components/button/ButtonEmoTree";
 import Gnb from "./Gnb";
+import BadgeAngry from "./components/badge/BadgeAngry";
+import BadgeJoy from "./components/badge/BadgeJoy";
+import BadgeHappy from "./components/badge/BadgeHappy";
+import BadgeSorrow from "./components/badge/IconSorrow";
+import BadgeIndifference from "./components/badge/BadgeIndifference";
 
 function Layout() {
     return (
@@ -18,6 +23,13 @@ function Layout() {
                 <ChatListHeader />
                 <ChatListContent />
                 <ButtonEmoTree>감정을 나무에게 전달하기</ButtonEmoTree>
+            </div>
+            <div>
+                <BadgeAngry />
+                <BadgeJoy />
+                <BadgeHappy />
+                <BadgeSorrow />
+                <BadgeIndifference />
             </div>
             <ButtonDisable>감정 나무</ButtonDisable>
             <ButtonDefault>감정 나무</ButtonDefault>
