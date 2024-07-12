@@ -6,11 +6,14 @@ import ButtonError from "./components/button/ButtonError";
 import ButtonPrimary from "./components/button/ButtonPrimary";
 import ChatListContent from "./components/chatList/ChatListContent";
 import ChatListHeader from "./components/chatList/ChatListHeader";
+import Gnb from "./Gnb";
+import emotionBadge from "./emotionBadge";
 
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[100vh]">
             <div>
+                <Gnb />
                 <ColorTest />
                 <ChatListHeader />
                 <ChatListContent />
@@ -27,7 +30,15 @@ function App() {
     return (
         <Routes>
             <Route index element={<Layout />} />
-            <Route path="/home" element={<div>그리드 페이지</div>} />
+            <Route
+                path="/home"
+                element={
+                    <div>
+                        <Gnb />
+                        그리드 페이지
+                    </div>
+                }
+            />
             <Route path="/mypage" element={<div>어카운트</div>} />
             <Route path="/chat" element={<div>채팅</div>} />
             <Route path="*" element={<div>잘못된 페이지</div>} />
