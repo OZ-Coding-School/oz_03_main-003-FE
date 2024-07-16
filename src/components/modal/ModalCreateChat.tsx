@@ -21,7 +21,7 @@ const ModalCreateChat = () => {
                 onMouseLeave={() => setHover(false)}
                 className="relative"
             >
-                <div className="p-4 bg-gray-600 hover:bg-gray-400 fill-white flex items-center justify-between cursor-pointer">
+                <div className="p-4 bg-gray-600 hover:bg-gray-400 fill-white flex items-center justify-between cursor-pointer select-none cursor-default">
                     나무를 선택해 주세요.
                     <IconSelectArrow
                         className={`w-4 transition-transform duration-300 ${hover ? "transform rotate-180" : ""}`}

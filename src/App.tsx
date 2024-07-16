@@ -16,8 +16,6 @@ import ModalDeleteChat from "./components/modal/ModalDeleteChat";
 import ModalUpdateChat from "./components/modal/ModalUpdateChat";
 import ModalCreateChat from "./components/modal/ModalCreateChat";
 import ModalCreatetree from "./components/modal/ModalCreateTree";
-import ChatBox from "./components/ChatBox/ChatBox";
-
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
@@ -34,7 +32,6 @@ function Layout() {
                 <br />
                 <ModalCreatetree />
                 <br />
-                <ChatBox />
             </div>
             <ButtonDisable>감정 나무</ButtonDisable>
             <ButtonDefault>감정 나무</ButtonDefault>
