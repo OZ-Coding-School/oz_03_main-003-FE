@@ -65,6 +65,9 @@ export default {
             width: {
                 4.5: "18px",
             },
+            height: {
+                4.5: "18px",
+            },
             padding: {
                 2.4: "11px",
             },

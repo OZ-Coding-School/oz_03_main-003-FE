@@ -23,6 +23,7 @@ import ModalTreeDetail from "./components/modal/ModalTreeDetail";
 import ChatHeader from "./components/ChatHeader";
 import UserInfoHome from "./components/userInfo/UserInfoHome";
 import UserInfoMypage from "./components/userInfo/UserInfoMypage";
+import InputChat from "./components/input/InputChat";
 
 function Layout() {
     return (
@@ -59,6 +60,7 @@ function Layout() {
             <div className="flex flex-col gap-2">
                 <UserInfoHome />
                 <UserInfoMypage />
+                <InputChat />
             </div>
         </div>
     );

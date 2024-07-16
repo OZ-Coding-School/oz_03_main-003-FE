@@ -19,7 +19,7 @@ const Progress = () => {
             <Bar text="Tree detail modal" value={100} />
             <Bar text="Delete tree modal" value={100} />
             <Bar text="Change tree location" value={100} />
-            <Bar text="MyPage User Info" value={1} />
+            <Bar text="MyPage User Info" value={100} />
         </div>
     );
 };
