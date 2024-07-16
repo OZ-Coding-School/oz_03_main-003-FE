@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { UserInfoData, UserInfoDummy } from "./UserInfoDummy";
-import { IconUpdate } from "../../IconData";
+import { IconTooltip } from "../../IconData";
 import { twMerge as tw } from "tailwind-merge";
+import ModalTooltip from "../modal/ModalTooltip";
+import { AnimatePresence, motion } from "framer-motion";
 
 const UserInfoHome = () => {
     const [data, setData] = useState<UserInfoData>(UserInfoDummy);
+    const [isVisible, setIsVisible] = useState(false);
 
     return (
         <div className="bg-gray-800 text-white">
@@ -29,7 +32,30 @@ const UserInfoHome = () => {
                     </div>
                 </div>
             </div>
-            <div className="p-5">
+            <div className="p-5 relative">
+                <div className="absolute top-5 right-5">
+                    <IconTooltip
+                        className={tw(
+                            "w-4 h-4 fill-gray-400 mt-[2px]",
+                            "cursor-help hover:fill-white transition"
+                        )}
+                        onMouseEnter={() => setIsVisible(true)}
+                        onMouseLeave={() => setIsVisible(false)}
+                    />
+                    <AnimatePresence>
+                        {isVisible && (
+                            <motion.div
+                                initial={{ translateX: 0, opacity: 1 }}
+                                transition={{ duration: 1, type: "spring" }}
+                                animate={{ translateX: [20, 0], opacity: [0, 1] }}
+                                exit={{ translateX: 20, opacity: 0 }}
+                                className="absolute z-20 left-[38px] top-[4px]"
+                            >
+                                <ModalTooltip type="USERINFO" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
                 <div className="flex">
                     <ul className="w-20 text-gray-200">
                         <li className="mb-3">tree</li>
