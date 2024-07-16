@@ -21,6 +21,7 @@ import ModalCreateChat from "./components/modal/ModalCreateChat";
 import ModalCreateTree from "./components/modal/ModalCreateTree";
 import ButtonSignInGoogle from "./components/button/ButtonSignInGoogle";
 import ButtonSignInKakao from "./components/button/ButtonSignInKakao";
+import ChatHeader from "./components/ChatHeader";
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
