@@ -23,6 +23,7 @@ import ButtonSignInGoogle from "./components/button/ButtonSignInGoogle";
 import ButtonSignInKakao from "./components/button/ButtonSignInKakao";
 import ModalChangeLocation from "./components/modal/ModalChangeLocation";
 import ModalModifyTreeName from "./components/modal/ModalModifyTreeName";
+import InputChat from "./components/InputChat";
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[300vh]">
@@ -55,6 +56,7 @@ function Layout() {
                     <ModalModifyTreeName />
                     <ButtonSignInGoogle>Sign in with Google</ButtonSignInGoogle>
                     <ButtonSignInKakao>Sign in with Kakao</ButtonSignInKakao>
+                    <InputChat />
                 </div>
             </div>
         </div>
