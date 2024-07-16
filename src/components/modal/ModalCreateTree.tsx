@@ -10,7 +10,7 @@ const ModalCreateTree = () => {
                 "w-full relative border border-gray-600"
             )}
         >
-            <h3 className="font-title leading-5">새 나무 심기</h3>
+            <h3 className="font-title leading-5 text-gray-200">새 나무 심기</h3>
             <input
                 type="text"
                 placeholder="이름을 지어주세요."
