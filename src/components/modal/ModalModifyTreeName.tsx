@@ -4,12 +4,7 @@ import { twMerge as tw } from "tailwind-merge";
 
 const ModalModifyTreeName = () => {
     return (
-        <div
-            className={tw(
-                "p-5 bg-gray-800 text-white max-w-80",
-                "w-full relative border border-gray-600"
-            )}
-        >
+        <div className={tw("p-5 bg-gray-800 text-white w-80", "relative border border-gray-600")}>
             <h3 className="font-title leading-5 text-gray-200">나무 이름 변경</h3>
             <input
                 type="text"
