@@ -54,16 +54,20 @@ const ModalTreeDetailGraph = ({ emotion }: ModalTreeDetailGraphProps) => {
                     <div className="text-gray-200 text-xs">0</div>
                 </article>
                 <article className="w-full h-full border-b border-gray-400">
-                    <div className="w-full h-full pl-4 flex gap-[44px] items-end">
+                    <div className="w-full h-full pl-4 flex gap-[44px] items-end relative">
                         {emotionData.map(({ name, color, count }) => (
-                            <div
-                                key={name}
-                                style={{ "--target-height": `${count}%` } as React.CSSProperties}
-                                className={tw(
-                                    "relative border-white z-10 flex gap-[40px] w-2 rounded-t-[2px] animate-height",
-                                    color
-                                )}
-                            ></div>
+                            <>
+                                <div
+                                    key={name}
+                                    style={
+                                        { "--target-height": `${count}%` } as React.CSSProperties
+                                    }
+                                    className={tw(
+                                        "relative border-white z-10 flex gap-[40px] w-2 rounded-t-[2px] animate-height",
+                                        color
+                                    )}
+                                ></div>
+                            </>
                         ))}
                     </div>
                     <div className="absolute w-[calc(100%-20px)] border-gray-600 border-b top-0 mt-8"></div>
