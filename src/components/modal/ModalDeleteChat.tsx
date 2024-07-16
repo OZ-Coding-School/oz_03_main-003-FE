@@ -1,4 +1,3 @@
-import React from "react";
 import ButtonDefault from "../button/ButtonDefault";
 import ButtonError from "../button/ButtonError";
 import { IconClose } from "../../IconData";

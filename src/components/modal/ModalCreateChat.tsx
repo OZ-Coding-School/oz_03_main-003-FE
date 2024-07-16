@@ -8,7 +8,7 @@ const ModalCreateChat = () => {
     const [hover, setHover] = useState(false);
 
     return (
-        <div className="p-5 bg-gray-800 text-white max-w-80 w-full relative">
+        <div className="p-5 bg-gray-800 text-white w-80 relative">
             <h3 className="font-title leading-5 mb-4">대화 분석방 생성</h3>
             <input
                 type="text"

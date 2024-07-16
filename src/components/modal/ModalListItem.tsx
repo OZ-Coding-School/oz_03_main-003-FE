@@ -1,4 +1,3 @@
-import { useState } from "react";
 interface ModalListItem {
     item: {
         id: number;
