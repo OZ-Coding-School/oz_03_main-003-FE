@@ -13,12 +13,14 @@ const Progress = () => {
             <Bar text="Create Chat Modal" value={100} />
             <Bar text="Delete Chat Modal" value={100} />
             <Bar text="Update Chat Modal" value={100} />
-            <Bar text="Input Chat" value={100} />
+            <Bar text="Input Chat" value={1} />
             <Bar text="Chat box" value={1} />
             <Bar text="Home user Info" value={1} />
-            <Bar text="Home Modal" value={100} />
+            <Bar text="Create tree modal" value={100} />
+            <Bar text="Tree detail modal" value={1} />
+            <Bar text="Delete tree modal" value={100} />
+            <Bar text="Change tree location" value={100} />
             <Bar text="MyPage User Info" value={1} />
-            <Bar text="Grid" value={1} />
         </div>
     );
 };

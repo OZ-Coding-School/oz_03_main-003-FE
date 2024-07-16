@@ -21,12 +21,11 @@ import ModalCreateChat from "./components/modal/ModalCreateChat";
 import ModalCreateTree from "./components/modal/ModalCreateTree";
 import ButtonSignInGoogle from "./components/button/ButtonSignInGoogle";
 import ButtonSignInKakao from "./components/button/ButtonSignInKakao";
-import ModalChangeLocation from "./components/modal/ModalChangeLocation";
-import ModalModifyTreeName from "./components/modal/ModalModifyTreeName";
+import ModalTreeDetail from "./components/modal/ModalTreeDetail";
 import InputChat from "./components/InputChat";
 function Layout() {
     return (
-        <div className="font-body flex gap-4 p-10 bg-black w-full h-[300vh]">
+        <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
             <div>
                 <Gnb />
                 <h1 className="text-white text-4xl font-title">Common Components</h1>
@@ -52,10 +51,10 @@ function Layout() {
                     <ModalUpdateChat />
                     <ModalCreateChat />
                     <ModalCreateTree />
-                    <ModalChangeLocation />
-                    <ModalModifyTreeName />
-                    <ButtonSignInGoogle>Sign in with Google</ButtonSignInGoogle>
-                    <ButtonSignInKakao>Sign in with Kakao</ButtonSignInKakao>
+
+                    <ModalTreeDetail />
+                    <ButtonSignInGoogle />
+                    <ButtonSignInKakao />
                     <InputChat />
                 </div>
             </div>
