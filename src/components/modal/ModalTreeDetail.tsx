@@ -3,6 +3,8 @@ import { DetailDummy } from "./ModalTreeDetailDummy";
 import { IconClose, IconTooltip } from "../../IconData";
 import { twMerge as tw } from "tailwind-merge";
 import ModalTreeDetailGraph from "./ModalTreeDetailGraph";
+import ModalTooltip from "./ModalTooltip";
+import { AnimatePresence, motion } from "framer-motion";
 
 //? 추후 페이지 제작시 사용
 // interface DetailProps {
@@ -36,6 +38,7 @@ interface DetailData {
 
 const ModalTreeDetail = () => {
     const [data, setData] = useState<DetailData>(DetailDummy);
+    const [isVisible, setIsVisible] = useState(false);
 
     //? 위 항목은 실제 API가 제작될 경우 useEffect가 아닌 커스텀 훅으로 대체할 예정입니다.
     useEffect(() => {
@@ -58,7 +61,7 @@ const ModalTreeDetail = () => {
     }, []);
 
     return (
-        <div className="p-5 w-[320px] h-fit bg-gray-800 border border-gray-600">
+        <div className="select-none p-5 w-[320px] h-fit bg-gray-800 border border-gray-600">
             <div className="w-full flex justify-between">
                 <h1 className="text-gray-200 font-title text-base mb-5">나무 정보</h1>
                 <IconClose className="w-5 h-5 cursor-pointer fill-gray-600 transition hover:fill-white" />
@@ -68,16 +71,31 @@ const ModalTreeDetail = () => {
                 <div className="text-white text-base">{data.name}</div>
             </article>
             <article className="mb-[10px]">
-                <div className="flex gap-2">
+                <div className="flex gap-2 relative">
                     <div className={data.style}>{data.type}</div>
                     <IconTooltip
                         className={tw(
                             "w-4 h-4 fill-gray-400 mt-[2px]",
-                            "cursor-pointer hover:fill-white transition"
+                            "cursor-help hover:fill-white transition"
                         )}
+                        onMouseEnter={() => setIsVisible(true)}
+                        onMouseLeave={() => setIsVisible(false)}
                     />
+                    <AnimatePresence>
+                        {isVisible && (
+                            <motion.div
+                                initial={{ translateX: 0, opacity: 1 }}
+                                transition={{ duration: 1, type: "spring" }}
+                                animate={{ translateX: [20, 0], opacity: [0, 1] }}
+                                exit={{ translateX: 20, opacity: 0 }}
+                                className="absolute z-20 left-[72px] top-[2px]"
+                            >
+                                <ModalTooltip type="DETAIL" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
-                <div className="text-white text-base">{data.desc}</div>
+                <div className="text-white text-sm">{data.desc}</div>
             </article>
             <article className="mb-[20px]">
                 <div className="w-full flex justify-between items-center">
