@@ -9,13 +9,8 @@ const ModalCreateChat = () => {
     const [hover, setHover] = useState(false);
 
     return (
-        <div
-            className={tw(
-                "p-5 bg-gray-800 text-white max-w-80",
-                "w-full relative border border-gray-600"
-            )}
-        >
-            <h3 className="font-title leading-5">대화 분석방 생성</h3>
+        <div className={tw("p-5 bg-gray-800 text-white w-80", "relative border border-gray-600")}>
+            <h3 className="font-title leading-5 text-gray-200">대화 분석방 생성</h3>
             <input
                 type="text"
                 placeholder="이름을 지어주세요."
@@ -24,7 +19,7 @@ const ModalCreateChat = () => {
                     "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
                 )}
             ></input>
-            <h3 className="font-title leading-5 mb-4 mt-6">함께할 나무 선택</h3>
+            <h3 className="font-title leading-5 mb-4 mt-6 text-gray-200">함께할 나무 선택</h3>
             <div
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
