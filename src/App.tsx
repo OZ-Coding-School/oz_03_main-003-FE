@@ -54,9 +54,6 @@ function Layout() {
                     <ModalCreateTree />
                     <ModalModifyTreeName />
                     <ModalChangeLocation />
-                    <ModalChangeName />
-                    <ButtonSignInGoogle>Sign in with Google</ButtonSignInGoogle>
-                    <ButtonSignInKakao>Sign in with Kakao</ButtonSignInKakao>
                 </div>
             </div>
         </div>
