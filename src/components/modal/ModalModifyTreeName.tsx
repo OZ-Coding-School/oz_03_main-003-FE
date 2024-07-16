@@ -2,7 +2,7 @@ import ButtonDefault from "../button/ButtonDefault";
 import { IconClose } from "../../IconData";
 import { twMerge as tw } from "tailwind-merge";
 
-const ModalUpdateChat = () => {
+const ModalModifyTreeName = () => {
     return (
         <div
             className={tw(
@@ -10,15 +10,14 @@ const ModalUpdateChat = () => {
                 "w-full relative border border-gray-600"
             )}
         >
-            {" "}
-            <h3 className="font-title leading-5 mb-4">대화 분석방 이름 변경</h3>
-            <p>
-                ‘<strong>친구01</strong>’의 이름을 변경합니다.
-            </p>
+            <h3 className="font-title leading-5">나무 이름 변경</h3>
             <input
                 type="text"
-                placeholder="이름을 입력해주세요."
-                className="mt-6 border-b outline-none border-gray-600 h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
+                placeholder="새 이름을 지어주세요."
+                className={tw(
+                    "mt-6 border-b outline-none border-gray-600",
+                    "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
+                )}
             ></input>
             <div className="text-right mt-4">
                 <ButtonDefault className="ml-1">변경하기</ButtonDefault>
@@ -34,4 +33,4 @@ const ModalUpdateChat = () => {
     );
 };
 
-export default ModalUpdateChat;
+export default ModalModifyTreeName;
