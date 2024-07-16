@@ -1,5 +1,5 @@
 import ButtonDefault from "../button/ButtonDefault";
-import { IconClose, IconPlus, IconSelectArrow } from "../../IconData";
+import { IconClose, IconSelectArrow } from "../../IconData";
 import { ContentDummy } from "./ModalContentDummy";
 import ModalListItem from "./ModalListItem";
 import { useState } from "react";
@@ -21,14 +21,14 @@ const ModalCreateChat = () => {
                 onMouseLeave={() => setHover(false)}
                 className="relative"
             >
-                <div className="p-4 bg-gray-600 hover:bg-gray-400 fill-white flex items-center justify-between cursor-pointer select-none cursor-default">
+                <div className="p-4 bg-gray-600 hover:bg-gray-400 fill-white flex items-center justify-between select-none cursor-default">
                     나무를 선택해 주세요.
                     <IconSelectArrow
                         className={`w-4 transition-transform duration-300 ${hover ? "transform rotate-180" : ""}`}
                     />
                 </div>
                 {hover && (
-                    <div className="absolute left-0 top-13 right-0 z-10">
+                    <div className="absolute left-0 top-13 right-0 z-10 cursor-pointer">
                         {ContentDummy.map((item, index) => (
                             <ModalListItem key={index} item={item} />
                         ))}
