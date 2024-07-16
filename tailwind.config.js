@@ -4,6 +4,7 @@ export default {
     theme: {
         extend: {
             fontSize: {
+                zero: ["0"],
                 xs: ["12px", { lineHeight: "18px" }],
                 sm: ["14px", { lineHeight: "22px" }],
                 base: ["16px", { lineHeight: "24px" }],
