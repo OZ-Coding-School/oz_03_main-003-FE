@@ -62,6 +62,12 @@ export default {
                 body: ["Pretendard-Regular", "sans-serif"],
                 title: ["HS-Regular", "sans-serif"],
             },
+            width: {
+                4.5: "18px",
+            },
+            padding: {
+                2.4: "11px",
+            },
         },
     },
     variants: {
