@@ -10,13 +10,13 @@ const Progress = () => {
             <Bar text="Button" value={100} />
             <Bar text="Emotion Badge" value={100} />
             <Bar text="Chat list" value={100} />
-            <Bar text="Create Chat Modal" value={1} />
-            <Bar text="Delete Chat Modal" value={30} />
-            <Bar text="Update Chat Modal" value={1} />
+            <Bar text="Create Chat Modal" value={100} />
+            <Bar text="Delete Chat Modal" value={100} />
+            <Bar text="Update Chat Modal" value={100} />
             <Bar text="Input Chat" value={100} />
             <Bar text="Chat box" value={1} />
             <Bar text="Home user Info" value={1} />
-            <Bar text="Home Modal" value={1} />
+            <Bar text="Home Modal" value={100} />
             <Bar text="MyPage User Info" value={1} />
             <Bar text="Grid" value={1} />
         </div>

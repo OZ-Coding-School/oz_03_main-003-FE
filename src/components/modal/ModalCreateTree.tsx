@@ -1,7 +1,7 @@
 import ButtonDefault from "../button/ButtonDefault";
 import { IconClose } from "../../IconData";
 
-const ModalCreatetree = () => {
+const ModalCreateTree = () => {
     return (
         <div className="p-5 bg-gray-800 text-white max-w-80	w-full relative">
             <h3 className="font-title leading-5">새 나무 심기</h3>
@@ -21,4 +21,4 @@ const ModalCreatetree = () => {
     );
 };
 
-export default ModalCreatetree;
+export default ModalCreateTree;

@@ -12,6 +12,13 @@ import BadgeHappy from "./components/badge/BadgeHappy";
 import BadgeIndifference from "./components/badge/BadgeIndifference";
 import BadgeJoy from "./components/badge/BadgeJoy";
 import BadgeSorrow from "./components/badge/BadgeSorrow";
+import BadgeWorry from "./components/badge/BadgeWorry";
+import Description from "./components/common/Description";
+import Progress from "./components/common/Progress";
+import ModalDeleteChat from "./components/modal/ModalDeleteChat";
+import ModalUpdateChat from "./components/modal/ModalUpdateChat";
+import ModalCreateChat from "./components/modal/ModalCreateChat";
+import ModalCreateTree from "./components/modal/ModalCreateTree";
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
@@ -23,26 +30,24 @@ function Layout() {
                 <ChatListHeader />
                 <ChatListContent />
                 <ButtonEmoTree>감정을 나무에게 전달하기</ButtonEmoTree>
-                <ModalDeleteChat />
-                <br />
-                <ModalUpdateChat />
-                <br />
-                <ModalCreateChat />
-                <br />
-                <ModalCreatetree />
-                <br />
             </div>
             <ButtonDisable>감정 나무</ButtonDisable>
             <ButtonDefault>감정 나무</ButtonDefault>
             <ButtonError>감정 나무</ButtonError>
             <ButtonPrimary>감정 나무</ButtonPrimary>
             <div>
-                <BadgeAngry />
-                <BadgeJoy />
-                <BadgeHappy />
-                <BadgeSorrow />
-                <BadgeIndifference />
-                <BadgeWorry />
+                <div className="flex flex-col gap-2">
+                    <BadgeAngry />
+                    <BadgeJoy />
+                    <BadgeHappy />
+                    <BadgeSorrow />
+                    <BadgeIndifference />
+                    <BadgeWorry />
+                    <ModalDeleteChat />
+                    <ModalUpdateChat />
+                    <ModalCreateChat />
+                    <ModalCreateTree />
+                </div>
             </div>
         </div>
     );
