@@ -24,6 +24,12 @@
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
+html,
+body,
+:root {
+    background-color: black;
+}
+
 /* Webkit (Chrome, Safari) */
 *::-webkit-scrollbar {
     width: 9px;

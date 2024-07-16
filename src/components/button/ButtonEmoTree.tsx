@@ -34,7 +34,7 @@ const ButtonDefault = ({ className, type = "button", onClick, children }: Button
                     style={{
                         textShadow: "4px 0 4px rgba(0, 0, 0, 0.25)",
                     }}
-                    className="absolute  w-full h-full top-0 left-0 flex justify-center items-center z-10"
+                    className="absolute w-full h-full top-0 left-0 flex justify-center items-center z-10"
                 >
                     {children}
                 </div>

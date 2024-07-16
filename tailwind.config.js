@@ -3,6 +3,21 @@ export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
+            keyframes: {
+                width: {
+                    "0%": { width: "0%" },
+                    "100%": { width: "var(--target-width, 100%)" },
+                },
+                height: {
+                    "0%": { height: "0%" },
+                    "100%": { height: "var(--target-height, 100%)" },
+                },
+            },
+            animation: {
+                width: "width 1s ease-out forwards",
+                height: "height 1.5s ease-out forwards",
+            },
+
             fontSize: {
                 zero: ["0"],
                 xs: ["12px", { lineHeight: "18px" }],
