@@ -3,6 +3,7 @@ import { ReactComponent as IconChange } from "./assets/icon-change.svg";
 import { ReactComponent as IconChat } from "./assets/icon-chat.svg";
 import { ReactComponent as IconClose } from "./assets/icon-close.svg";
 import { ReactComponent as IconDeleteBtn } from "./assets/icon-deleteBtn.svg";
+import { ReactComponent as IconDetail } from "./assets/icon-detail.svg";
 import { ReactComponent as IconHome } from "./assets/icon-home.svg";
 import { ReactComponent as IconLeft } from "./assets/icon-left.svg";
 import { ReactComponent as IconPlus } from "./assets/icon-plus.svg";
@@ -29,6 +30,7 @@ export {
     IconDeleteBtn,
     IconHome,
     IconLeft,
+    IconDetail,
     IconPlus,
     IconSelectArrow,
     IconSendMsg,
