@@ -39,6 +39,7 @@ export default {
                     joy: "#FF953F",
                     happy: "#FFD250",
                     sorrow: "#3F61FF",
+                    worry: "#7A53FF",
                 },
             },
             fontFamily: {

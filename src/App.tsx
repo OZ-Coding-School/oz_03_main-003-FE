@@ -14,6 +14,7 @@ import BadgeJoy from "./components/badge/BadgeJoy";
 import BadgeSorrow from "./components/badge/BadgeSorrow";
 import Description from "./components/common/Description";
 import Progress from "./components/common/Progress";
+import BadgeWorry from "./components/badge/BadgeWorry";
 
 function Layout() {
     return (
@@ -37,6 +38,7 @@ function Layout() {
                 <BadgeHappy />
                 <BadgeSorrow />
                 <BadgeIndifference />
+                <BadgeWorry />
             </div>
         </div>
     );
