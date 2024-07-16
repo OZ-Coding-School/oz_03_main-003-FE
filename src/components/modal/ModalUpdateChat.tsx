@@ -5,7 +5,6 @@ import { twMerge as tw } from "tailwind-merge";
 const ModalUpdateChat = () => {
     return (
         <div className={tw("p-5 bg-gray-800 text-white w-80", "relative border border-gray-600")}>
-            {" "}
             <h3 className="font-title leading-5 mb-4 text-gray-200">대화 분석방 이름 변경</h3>
             <p>
                 ‘<strong>친구01</strong>’의 이름을 변경합니다.
