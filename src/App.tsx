@@ -23,6 +23,7 @@ import ButtonSignInGoogle from "./components/button/ButtonSignInGoogle";
 import ButtonSignInKakao from "./components/button/ButtonSignInKakao";
 import ModalTreeDetail from "./components/modal/ModalTreeDetail";
 import InputChat from "./components/InputChat";
+import ChatHeader from "./components/ChatHeader";
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
@@ -34,6 +35,7 @@ function Layout() {
                 <ChatListHeader />
                 <ChatListContent />
                 <ButtonEmoTree>감정을 나무에게 전달하기</ButtonEmoTree>
+                <ChatHeader />
             </div>
             <ButtonDisable>감정 나무</ButtonDisable>
             <ButtonDefault>감정 나무</ButtonDefault>
