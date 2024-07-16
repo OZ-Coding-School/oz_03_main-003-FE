@@ -49,8 +49,8 @@ function Layout() {
                     <ModalUpdateChat />
                     <ModalCreateChat />
                     <ModalCreateTree />
-                    <ButtonSignInGoogle>Sign in with Google</ButtonSignInGoogle>
-                    <ButtonSignInKakao>Sign in with Kakao</ButtonSignInKakao>
+                    <ButtonSignInGoogle />
+                    <ButtonSignInKakao />
                 </div>
             </div>
         </div>

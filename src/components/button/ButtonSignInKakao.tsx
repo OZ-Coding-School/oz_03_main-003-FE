@@ -7,23 +7,21 @@ interface ButtonProps extends PropsWithChildren {
     onClick?: () => void;
 }
 
-
-const ButtonSignInGoogle = ({ type = "button", children }: ButtonProps) => { 
-
-    return (        
-            <button
-                className={tw(
+const ButtonSignInGoogle = ({ type = "button", onClick }: ButtonProps) => {
+    return (
+        <button
+            type={type}
+            onClick={onClick}
+            className={tw(
                 "flex items-center z-10 pl-6 transition",
                 "bg-gray-800 hover:bg-gray-600 border-gray-300 text-white",
-                "left-[56px] top-[385px] w-[300px] h-[48px]",
+                "w-[300px] h-[48px]"
             )}
-    
-            >
-                <LogoKakao className="fill-white w-6 h-6 mr-2" />
-                 {children}
-            </button>
-            );
-        };
-
+        >
+            <LogoKakao className="fill-white w-6 h-6 mr-4" />
+            <div>Sign in with Kakao</div>
+        </button>
+    );
+};
 
 export default ButtonSignInGoogle;
