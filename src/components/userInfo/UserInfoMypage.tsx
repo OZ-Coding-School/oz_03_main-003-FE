@@ -3,7 +3,7 @@ import { UserInfoData, UserInfoDummy } from "./UserInfoDummy";
 import { IconUpdate } from "../../IconData";
 import { twMerge as tw } from "tailwind-merge";
 
-const UserInfoHome = () => {
+const UserInfoMypage = () => {
     const [data, setData] = useState<UserInfoData>(UserInfoDummy);
 
     return (
@@ -67,4 +67,4 @@ const UserInfoHome = () => {
     );
 };
 
-export default UserInfoHome;
+export default UserInfoMypage;
