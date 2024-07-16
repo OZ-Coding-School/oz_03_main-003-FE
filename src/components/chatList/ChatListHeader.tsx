@@ -3,7 +3,7 @@ import { twMerge as tw } from "tailwind-merge";
 const ChatListHeader = () => {
     return (
         <div className="px-5 w-[300px] h-[64px] border border-gray-800  flex justify-between items-center">
-            <div className="text-white">목록</div>
+            <div className="text-white select-none">목록</div>
             <div
                 className={tw(
                     "w-10 h-10 rounded-full flex justify-center items-center",

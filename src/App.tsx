@@ -12,15 +12,14 @@ import BadgeHappy from "./components/badge/BadgeHappy";
 import BadgeIndifference from "./components/badge/BadgeIndifference";
 import BadgeJoy from "./components/badge/BadgeJoy";
 import BadgeSorrow from "./components/badge/BadgeSorrow";
-import ModalDeleteChat from "./components/modal/ModalDeleteChat";
-import ModalUpdateChat from "./components/modal/ModalUpdateChat";
-import ModalCreateChat from "./components/modal/ModalCreateChat";
-import ModalCreatetree from "./components/modal/ModalCreateTree";
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
             <div>
                 <Gnb />
+                <h1 className="text-white text-4xl font-title">Common Components</h1>
+                <Description />
+                <Progress />
                 <ChatListHeader />
                 <ChatListContent />
                 <ButtonEmoTree>감정을 나무에게 전달하기</ButtonEmoTree>
@@ -43,6 +42,7 @@ function Layout() {
                 <BadgeHappy />
                 <BadgeSorrow />
                 <BadgeIndifference />
+                <BadgeWorry />
             </div>
         </div>
     );

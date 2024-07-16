@@ -8,7 +8,7 @@ interface ButtonProps extends PropsWithChildren {
     onClick?: () => void;
 }
 
-const ButtonDefault = ({ className, type = "button", onClick, children }: ButtonProps) => {
+const ButtonEmoTree = ({ className, type = "button", onClick, children }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -57,4 +57,4 @@ const ButtonDefault = ({ className, type = "button", onClick, children }: Button
     );
 };
 
-export default ButtonDefault;
+export default ButtonEmoTree;
