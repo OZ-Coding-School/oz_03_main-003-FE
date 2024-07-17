@@ -4,20 +4,47 @@
 
 @font-face {
     font-family: "HS-Regular";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff") format("woff");
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff")
+        format("woff");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Pretendard-Regular";
-    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+        format("woff");
     font-weight: 400;
     font-style: normal;
 }
 
-:root,
+* {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
 html,
-body {
-    font-size: 16px;
+body,
+:root {
+    background-color: black;
+}
+
+/* Webkit (Chrome, Safari) */
+*::-webkit-scrollbar {
+    width: 9px;
+    height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #565656;
+    border-radius: 5px;
+    margin: 10px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #dad0ea;
+    border-radius: 10px;
 }
