@@ -6,7 +6,7 @@ import ModalTooltip from "../modal/ModalTooltip";
 import { AnimatePresence, motion } from "framer-motion";
 
 const UserInfoHome = () => {
-    const [data, setData] = useState<UserInfoData>(UserInfoDummy);
+    const [data, _setData] = useState<UserInfoData>(UserInfoDummy);
     const [isVisible, setIsVisible] = useState(false);
 
     return (

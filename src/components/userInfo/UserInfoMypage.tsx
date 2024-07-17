@@ -4,7 +4,7 @@ import { IconUpdate } from "../../IconData";
 import { twMerge as tw } from "tailwind-merge";
 
 const UserInfoMypage = () => {
-    const [data, setData] = useState<UserInfoData>(UserInfoDummy);
+    const [data, _setData] = useState<UserInfoData>(UserInfoDummy);
 
     return (
         <div className="bg-gray-800 text-white">
