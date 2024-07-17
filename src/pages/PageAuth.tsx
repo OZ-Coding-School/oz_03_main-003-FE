@@ -1,11 +1,12 @@
-import Gnb from "../Gnb";
+import ButtonSignInGoogle from "../components/button/ButtonSignInGoogle";
+import ButtonSignInKakao from "../components/button/ButtonSignInKakao";
 
 const PageAuth = () => {
     return (
-        <>
-            <Gnb />
-            <div>PageAuth</div>
-        </>
+        <div className="w-full h-[100vh] bg-black m-auto flex flex-col gap-[10px] justify-center items-center">
+            <ButtonSignInGoogle />
+            <ButtonSignInKakao />
+        </div>
     );
 };
 

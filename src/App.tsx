@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import PageHome from "./page/PageHome";
-import PageMy from "./page/PageMy";
-import PageChat from "./page/PageChat";
-import PageNotFound from "./page/PageNotFound";
-import PageAuth from "./page/PageAuth";
+import PageHome from "./pages/PageHome";
+import PageMy from "./pages/PageMy";
+import PageChat from "./pages/PageChat";
+import PageNotFound from "./pages/PageNotFound";
+import PageAuth from "./pages/PageAuth";
 
 function App() {
     return (
