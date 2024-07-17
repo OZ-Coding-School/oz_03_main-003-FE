@@ -21,6 +21,10 @@ import ModalCreateChat from "./components/modal/ModalCreateChat";
 import ModalCreateTree from "./components/modal/ModalCreateTree";
 import ModalTreeDetail from "./components/modal/ModalTreeDetail";
 import ChatHeader from "./components/ChatHeader";
+import ModalGridSetting from "./components/modal/ModalGridSetting";
+import UserInfoHome from "./components/userInfo/UserInfoHome";
+import UserInfoMypage from "./components/userInfo/UserInfoMypage";
+import InputChat from "./components/input/InputChat";
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
