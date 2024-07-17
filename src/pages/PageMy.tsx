@@ -1,12 +1,12 @@
 import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
-import Gnb from "../Gnb";
 
 const PageMy = () => {
     return (
         <>
             <HeaderLoggedIn />
-            <Gnb />
-            <div>PageMy</div>
+            <div className="bg-black pt-[129px] w-full h-screen box-border">
+                <div className="text-white">PageMy</div>
+            </div>
         </>
     );
 };
