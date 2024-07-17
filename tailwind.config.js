@@ -71,6 +71,12 @@ export default {
             padding: {
                 2.4: "11px",
             },
+            top: {
+                "-33px": "-33px",
+            },
+            translate: {
+                "-1/2": "-50%",
+            },
         },
     },
     variants: {
