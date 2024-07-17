@@ -21,7 +21,6 @@ import ModalCreateChat from "./components/modal/ModalCreateChat";
 import ModalCreateTree from "./components/modal/ModalCreateTree";
 import ModalTreeDetail from "./components/modal/ModalTreeDetail";
 import ChatHeader from "./components/ChatHeader";
-import ModalGridSetting from "./components/modal/ModalGridSetting";
 function Layout() {
     return (
         <div className="font-body flex gap-4 p-10 bg-black w-full h-[200vh]">
@@ -54,6 +53,11 @@ function Layout() {
                     <ModalCreateChat />
                     <ModalCreateTree />
                 </div>
+            </div>
+            <div className="flex flex-col gap-2">
+                <UserInfoHome />
+                <UserInfoMypage />
+                <InputChat />
             </div>
         </div>
     );

@@ -1,3 +1,4 @@
+import UserInfoText from "../userInfo/UserInfoText";
 import ModalTreeDetailText from "./ModalTreeDetailText";
 
 interface ModalTooltipProps {
@@ -11,6 +12,7 @@ const ModalTooltip = ({ type }: ModalTooltipProps) => {
     "
         >
             {type === "DETAIL" && <ModalTreeDetailText />}
+            {type === "USERINFO" && <UserInfoText />}
             <div className="absolute w-5 h-5 bg-gray-600 skew-x-[45deg] rounded-tl-[4px] top-1 -left-2"></div>
         </div>
     );
