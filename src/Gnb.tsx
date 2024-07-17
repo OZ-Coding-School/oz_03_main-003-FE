@@ -14,7 +14,7 @@ const Gnb = () => {
     ];
 
     return (
-        <ul className="font-title select-none leading-[48px] flex bg-black text-gray-200 text-center items-center transition">
+        <ul className="font-title select-none leading-[48px] flex bg-black text-gray-200 text-center items-center transition border-b border-gray-600 box-border">
             {navItems.map((item) => {
                 const IconComponent = item.icon;
                 const active = isActive(item.path);
