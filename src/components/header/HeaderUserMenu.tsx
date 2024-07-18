@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { IconLogout, IconUser } from "../../IconData";
+import { IconLogout, IconUser } from "../../config/IconData";
 import { UserInfoDummy, UserInfoData } from "../userInfo/UserInfoDummy";
 import { useState } from "react";
 import { authApi } from "../../api";

@@ -1,7 +1,7 @@
 import _React, { useState, useEffect, useRef } from "react";
 import { UserInfoDummy, UserInfoData } from "../userInfo/UserInfoDummy";
 import HeaderUserMenu from "./HeaderUserMenu";
-import Gnb from "../../Gnb";
+import Gnb from "../Gnb";
 
 const HeaderLoggedIn = () => {
     const [data, _setData] = useState<UserInfoData>(UserInfoDummy);

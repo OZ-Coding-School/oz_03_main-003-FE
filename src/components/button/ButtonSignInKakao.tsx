@@ -1,6 +1,6 @@
 import { twMerge as tw } from "tailwind-merge";
 import { PropsWithChildren } from "react";
-import { LogoKakao } from "../../IconData";
+import { LogoKakao } from "../../config/IconData";
 
 interface ButtonProps extends PropsWithChildren {
     type?: "submit" | "reset" | "button";

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { IconStar } from "../IconData";
+import { IconStar } from "../config/IconData";
 
 const Landing = () => {
     return (

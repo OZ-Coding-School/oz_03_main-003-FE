@@ -1,7 +1,7 @@
 import { axiosInstance } from "./axios";
 
 export const userTokenRefresh = () => {
-    return axiosInstance.post("auth/token/refresh");
+    return axiosInstance.post("/auth/token/refresh");
 };
 
 export const userTokenVerify = () => {

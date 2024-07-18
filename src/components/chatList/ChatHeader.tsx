@@ -1,4 +1,4 @@
-import { IconLeft } from "../../IconData";
+import { IconLeft } from "../../config/IconData";
 const ChatHeader = () => {
     return (
         <div className="select-none flex p-5 w-full border border-gray-600">
