@@ -22,6 +22,7 @@ import { ReactComponent as IconSorrow } from "./assets/icon-sorrow.svg";
 import { ReactComponent as IconIndifference } from "./assets/icon-indifference.svg";
 import { ReactComponent as IconSetting } from "./assets/icon-set.svg";
 import { ReactComponent as IconLogout } from "./assets/icon-logout.svg";
+import { ReactComponent as IconStar } from "./assets/icon-landing-star.svg";
 
 export {
     IconAddChat,
@@ -48,4 +49,5 @@ export {
     IconSetting,
     LogoGoogle,
     LogoKakao,
+    IconStar,
 };

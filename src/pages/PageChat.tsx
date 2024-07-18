@@ -2,22 +2,8 @@ import { contentDummy } from "../components/chatList/ChatListDummy";
 import ChatListHeader from "../components/chatList/ChatListHeader";
 import ChatListItem from "../components/chatList/ChatListItem";
 import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import useCookie from "../hook/useCookie";
 
 const PageChat = () => {
-    const nav = useNavigate();
-
-    const { verifyCookie } = useCookie();
-
-    useEffect(() => {
-        const verify = verifyCookie();
-        if (!verify) {
-            nav("/");
-        }
-    }, [verifyCookie, nav]);
-
     return (
         <>
             <HeaderLoggedIn />
