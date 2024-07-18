@@ -21,6 +21,7 @@ import { ReactComponent as IconWorry } from "./assets/icon-worry.svg";
 import { ReactComponent as IconSorrow } from "./assets/icon-sorrow.svg";
 import { ReactComponent as IconIndifference } from "./assets/icon-indifference.svg";
 import { ReactComponent as IconSetting } from "./assets/icon-set.svg";
+import { ReactComponent as IconLogout } from "./assets/icon-logout.svg";
 
 export {
     IconAddChat,
@@ -30,6 +31,7 @@ export {
     IconDeleteBtn,
     IconHome,
     IconLeft,
+    IconLogout,
     IconDetail,
     IconPlus,
     IconSelectArrow,

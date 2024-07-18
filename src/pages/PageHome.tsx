@@ -1,8 +1,7 @@
+import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
 import { useNavigate } from "react-router-dom";
-import Gnb from "../Gnb";
 import useCookie from "../hook/useCookie";
 import { useEffect } from "react";
-
 const PageHome = () => {
     const nav = useNavigate();
 
@@ -17,8 +16,10 @@ const PageHome = () => {
 
     return (
         <>
-            <Gnb />
-            <div>PageHome</div>
+            <HeaderLoggedIn />
+            <div className="bg-black pt-[129px] w-full h-screen box-border">
+                <div className="text-white">PageHome</div>
+            </div>
         </>
     );
 };
