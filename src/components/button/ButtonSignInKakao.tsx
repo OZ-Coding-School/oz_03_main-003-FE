@@ -7,7 +7,7 @@ interface ButtonProps extends PropsWithChildren {
     onClick?: () => void;
 }
 
-const ButtonSignInGoogle = ({ type = "button", onClick }: ButtonProps) => {
+const ButtonSignInKakao = ({ type = "button", onClick }: ButtonProps) => {
     return (
         <button
             type={type}
@@ -24,4 +24,4 @@ const ButtonSignInGoogle = ({ type = "button", onClick }: ButtonProps) => {
     );
 };
 
-export default ButtonSignInGoogle;
+export default ButtonSignInKakao;
