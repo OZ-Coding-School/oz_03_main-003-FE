@@ -1,13 +1,13 @@
 import { twMerge as tw } from "tailwind-merge";
 import { PropsWithChildren } from "react";
-import { LogoKakao } from "../../IconData";
+import { LogoKakao } from "../../config/IconData";
 
 interface ButtonProps extends PropsWithChildren {
     type?: "submit" | "reset" | "button";
     onClick?: () => void;
 }
 
-const ButtonSignInGoogle = ({ type = "button", onClick }: ButtonProps) => {
+const ButtonSignInKakao = ({ type = "button", onClick }: ButtonProps) => {
     return (
         <button
             type={type}
@@ -24,4 +24,4 @@ const ButtonSignInGoogle = ({ type = "button", onClick }: ButtonProps) => {
     );
 };
 
-export default ButtonSignInGoogle;
+export default ButtonSignInKakao;

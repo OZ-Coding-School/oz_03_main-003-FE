@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UserInfoData, UserInfoDummy } from "./UserInfoDummy";
-import { IconTooltip } from "../../IconData";
+import { IconTooltip } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import ModalTooltip from "../modal/ModalTooltip";
 import { AnimatePresence, motion } from "framer-motion";

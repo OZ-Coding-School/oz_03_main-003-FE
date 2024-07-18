@@ -1,6 +1,6 @@
 import ButtonDefault from "../button/ButtonDefault";
 import ButtonError from "../button/ButtonError";
-import { IconClose } from "../../IconData";
+import { IconClose } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 
 const ModalDeleteChat = () => {

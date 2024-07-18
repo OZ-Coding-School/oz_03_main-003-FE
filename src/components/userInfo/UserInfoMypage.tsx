@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UserInfoData, UserInfoDummy } from "./UserInfoDummy";
-import { IconUpdate } from "../../IconData";
+import { IconUpdate } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 
 const UserInfoMypage = () => {

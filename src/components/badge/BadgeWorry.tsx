@@ -1,5 +1,5 @@
 import { twMerge as tw } from "tailwind-merge";
-import { IconWorry } from "../../IconData";
+import { IconWorry } from "../../config/IconData";
 
 const BadgeWorry = () => {
     return (

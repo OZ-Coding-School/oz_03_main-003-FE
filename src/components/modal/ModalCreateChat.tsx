@@ -1,5 +1,5 @@
 import ButtonDefault from "../button/ButtonDefault";
-import { IconClose, IconSelectArrow } from "../../IconData";
+import { IconClose, IconSelectArrow } from "../../config/IconData";
 import { ContentDummy } from "./ModalContentDummy";
 import ModalListItem from "./ModalListItem";
 import { useState } from "react";

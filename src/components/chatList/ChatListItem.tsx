@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
-import { IconChange, IconDeleteBtn } from "../../IconData";
+import { IconChange, IconDeleteBtn } from "../../config/IconData";
 
 interface ChatListItem {
     item: {
@@ -24,8 +24,8 @@ const ChatListItem = ({ item }: ChatListItem) => {
             onMouseLeave={() => setHover(false)}
         >
             <nav className="flex flex-col">
-                <div>{item.chat_room_name}</div>
-                <div className="text-gray-400">{item.created_at}</div>
+                <div className="text-sm">{item.chat_room_name}</div>
+                <div className="text-gray-400 text-xs">{item.created_at}</div>
             </nav>
             {hover && (
                 <nav className="flex gap-1">
