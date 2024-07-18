@@ -8,7 +8,7 @@ import PageAuth from "./pages/PageAuth";
 function App() {
     return (
         <Routes>
-            <Route index element={<PageAuth />} />
+            <Route path="/" element={<PageAuth />} />
             <Route path="/home" element={<PageHome />} />
             <Route path="/mypage" element={<PageMy />} />
             <Route path="/chat" element={<PageChat />} />

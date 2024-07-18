@@ -1,4 +1,4 @@
-import * as authApi from "./auth";
+import * as tokenApi from "./token";
 import * as healthApi from "./health";
 
-export { authApi, healthApi };
+export { tokenApi, healthApi };
