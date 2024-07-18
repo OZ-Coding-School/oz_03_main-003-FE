@@ -18,7 +18,7 @@ const ChatListItem = ({ item }: ChatListItem) => {
             className={tw(
                 "text-white px-5 py-3 fill-white",
                 "w-[300px] h-16 flex justify-between items-center",
-                "hover:bg-gray-800 transition"
+                "hover:bg-gray-800 transition cursor-pointer"
             )}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
