@@ -2,6 +2,8 @@ import { IconUpdate } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { useUserStore } from "../../config/store";
 import UserInfoBadge from "./UserInfoBadge";
+import { useState } from "react";
+import ModalChangeName from "../modal/ModalChangeName";
 
 export interface userInfoData {
     created_at: string;
@@ -12,6 +14,15 @@ export interface userInfoData {
 
 const UserInfoMypage = () => {
     const { userData } = useUserStore();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleModalClose = () => {
+        setIsOpen(false);
+    };
+
+    const handleModalOpen = () => {
+        setIsOpen(true);
+    };
 
     return (
         <div className="w-full flex justify-center gap-3 select-none">
@@ -46,6 +57,7 @@ const UserInfoMypage = () => {
                                 "fill-white hover:bg-gray-600",
                                 "cursor-pointer transition"
                             )}
+                            onClick={handleModalOpen}
                         >
                             <IconUpdate className="h-4" />
                         </div>
@@ -69,6 +81,7 @@ const UserInfoMypage = () => {
                 </div>
             </div>
             <UserInfoBadge />
+            <ModalChangeName isOpen={isOpen} onClose={handleModalClose} />
         </div>
     );
 };
