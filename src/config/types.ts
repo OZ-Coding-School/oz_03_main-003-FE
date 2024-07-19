@@ -11,6 +11,7 @@ export interface UserLevel {
     treeMax: number;
     treeCurrent: number;
     gridSize: number;
+    userExperience: number;
 }
 
 export interface AccessibleIndices {

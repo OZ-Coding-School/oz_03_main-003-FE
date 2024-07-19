@@ -1,25 +1,46 @@
-import { useEffect } from "react";
+import { useCallback, useState } from "react";
 import { useUserStore } from "../config/store";
 import dayjs from "dayjs";
-import { authApi } from "../api";
+import { authApi, forestApi } from "../api";
+import { calculateForest } from "../components/util/UtilUserLevel";
 
 const useUserInfo = () => {
-    const { setUserData } = useUserStore();
+    const { setUserData, setLevelData } = useUserStore();
+    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const getUserInfo = async () => {
-            const { data: response } = await authApi.getUserInfo();
-            setUserData({
-                id: response.id,
-                imgUrl: response.profile_image,
-                username: response.username,
-                email: response.email,
-                created_at: dayjs(response.created_at).format("YYYY-MM-DD"),
-            });
-        };
-        getUserInfo();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const getUserInfo = useCallback(async () => {
+        setIsLoading(true);
+        const { data: accountResponse } = await authApi.getUserInfo();
+
+        setUserData({
+            id: accountResponse.uuid,
+            imgUrl: accountResponse.profile_image,
+            username: accountResponse.username,
+            email: accountResponse.email,
+            created_at: dayjs(accountResponse.created_at).format("YYYY-MM-DD"),
+        });
+        setIsLoading(false);
+    }, [setUserData]);
+
+    const getUserLevelInfo = useCallback(async () => {
+        setIsLoading(true);
+        const { data: forestResponse } = await forestApi.getForestData();
+        const levelData = calculateForest(forestResponse.forest_level);
+        setLevelData({
+            userLevel: levelData.userLevel,
+            userExperience: levelData.experience,
+            treeMax: levelData.treeMax,
+            treeCurrent: levelData.treeCurrent,
+            gridSize: levelData.gridSize,
+        });
+        setIsLoading(false);
+    }, [setLevelData]);
+
+    return {
+        getUserInfo,
+        getUserLevelInfo,
+        isLoading,
+    };
 };
 
 export default useUserInfo;

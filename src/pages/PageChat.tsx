@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { contentDummy } from "../components/chatList/ChatListDummy";
 import ChatListHeader from "../components/chatList/ChatListHeader";
 import ChatListItem from "../components/chatList/ChatListItem";
 import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
 import ModalCreateChat from "../components/modal/ModalCreateChat";
+import useUserInfo from "../hook/useUserInfo";
 
 const PageChat = () => {
+    const { getUserInfo } = useUserInfo();
+
+    useEffect(() => {
+        const refreshUserInfo = async () => {
+            await getUserInfo();
+        };
+        refreshUserInfo();
+    }, [getUserInfo]);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);

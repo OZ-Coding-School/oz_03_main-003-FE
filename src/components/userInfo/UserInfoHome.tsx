@@ -7,31 +7,34 @@ import { useUserStore } from "../../config/store";
 
 const UserInfoHome = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const {userData} = useUserStore();
+    const { userData } = useUserStore();
 
     return (
         <div className="bg-gray-800 text-white w-[340px] fixed z-10">
             <div className="flex p-5 pb-6 border-b border-gray-600">
-            <div className="relative w-12 h-12 border border-white rounded-full">
-                        <img
-                            src={userData.user.imgUrl || "/img/profile-placeholder.png"}
-                            alt={"Profile Image"}
-                            className="w-12 h-12 rounded-full"
-                        />
-                        <div className="w-6 h-6 absolute bottom-[-6px] right-[-6px] border border-primary rounded-full bg-gray-800 text-center text-sm">
-                            {userData.level.userLevel}
-                        </div>
+                <div className="relative w-12 h-12 border border-white rounded-full">
+                    <img
+                        src={userData.user.imgUrl || "/img/profile-placeholder.png"}
+                        alt={"Profile Image"}
+                        className="w-12 h-12 rounded-full"
+                    />
+                    <div className="w-6 h-6 absolute bottom-[-6px] right-[-6px] border border-primary rounded-full bg-gray-800 text-center text-sm">
+                        {userData.level.userLevel}
                     </div>
-                    <div className="ml-5 flex-grow flex flex-col justify-end">
-                        <p className="font-title text-lg">{userData.user.username}</p>
-                        <div className="rounded-sm border h-2">
-                            <div
-                                className="bg-primary h-full animate-width"
-                                style={{ "--target-width": `${userData.level.userLevel}%` } as React.CSSProperties}
-                            ></div>
-                        </div>
+                </div>
+                <div className="ml-5 flex-grow flex flex-col justify-end">
+                    <p className="font-title text-lg">{userData.user.username}</p>
+                    <div className="rounded-sm border h-2">
+                        <div
+                            className="bg-primary h-full animate-width"
+                            style={
+                                {
+                                    "--target-width": `${userData.level.userExperience}%`,
+                                } as React.CSSProperties
+                            }
+                        ></div>
                     </div>
-               
+                </div>
             </div>
             <div className="p-5 relative">
                 <div className="absolute top-5 right-5">
@@ -64,10 +67,10 @@ const UserInfoHome = () => {
                     </ul>
                     <ul>
                         <li className="mb-3">
-                            : {0} / {0}
+                            : {userData.level.treeCurrent} / {userData.level.treeMax}
                         </li>
                         <li className="mb-3">
-                            : {0} * {0}
+                            : {userData.level.gridSize} x {userData.level.gridSize}
                         </li>
                     </ul>
                 </div>

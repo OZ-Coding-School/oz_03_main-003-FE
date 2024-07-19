@@ -1,21 +1,26 @@
 import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserInfoHome from "../components/userInfo/UserInfoHome";
 import ButtonPrimary from "../components/button/ButtonPrimary";
-import ModalCreateTree from "../components/modal/ModalCreateTree";
-import useUserInfo from "../hook/useUserInfo";
 import { useUserStore } from "../config/store";
 import { accessibleIndices } from "../components/util/UtilUserLevel";
 import { twMerge as tw } from "tailwind-merge";
+import ModalCreateTree from "../components/modal/ModalCreateTree";
+import useUserInfo from "../hook/useUserInfo";
 
 const PageHome = () => {
-    useUserInfo();
+    const { getUserInfo, getUserLevelInfo } = useUserInfo();
+
+    useEffect(() => {
+        const refreshUserInfo = async () => {
+            await getUserInfo();
+            await getUserLevelInfo();
+        };
+        refreshUserInfo();
+    }, [getUserInfo, getUserLevelInfo]);
+
     const { userData } = useUserStore();
     const [isOpen, setIsOpen] = useState(false);
-
-    const isAccessible = (index: number): boolean => {
-        return accessibleIndices[userData.level.userLevel].includes(index) || false;
-    };
 
     const handleModalClose = () => {
         setIsOpen(false);
@@ -28,6 +33,10 @@ const PageHome = () => {
     const handleClick = (id: number) => {
         console.log(id);
         handleModalOpen();
+    };
+
+    const isAccessible = (index: number): boolean => {
+        return accessibleIndices[userData.level.userLevel].includes(index) || false;
     };
 
     return (

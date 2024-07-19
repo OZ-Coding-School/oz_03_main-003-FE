@@ -21,6 +21,7 @@ export const useUserStore = create<UserStore>((set) => ({
         },
         level: {
             userLevel: 1,
+            userExperience: 0,
             treeMax: 3,
             treeCurrent: 0,
             gridSize: 0,
