@@ -1,5 +1,11 @@
 import { twMerge as tw } from "tailwind-merge";
-import { IconAngry, IconHappy, IconIndifference, IconSorrow, IconWorry } from "../../IconData";
+import {
+    IconAngry,
+    IconHappy,
+    IconIndifference,
+    IconSorrow,
+    IconWorry,
+} from "../../config/IconData";
 
 interface ModalTreeDetailGraphProps {
     emotion: {

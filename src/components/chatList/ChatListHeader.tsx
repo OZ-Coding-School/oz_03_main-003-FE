@@ -1,4 +1,4 @@
-import { IconAddChat } from "../../IconData";
+import { IconAddChat } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 
 interface ChatListHeaderProps {

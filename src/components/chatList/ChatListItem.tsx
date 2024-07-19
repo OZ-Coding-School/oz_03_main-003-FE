@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
-import { IconChange, IconDeleteBtn } from "../../IconData";
+import { IconChange, IconDeleteBtn } from "../../config/IconData";
 
 interface ChatListItem {
     item: {

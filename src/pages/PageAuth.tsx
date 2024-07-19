@@ -1,6 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import ButtonSignInGoogle from "../components/button/ButtonSignInGoogle";
-import { tokenApi } from "../api";
+import { authApi } from "../api";
 import Landing from "../components/Landing";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const PageAuth = () => {
 
     const googleLoginRequest = async (token: string) => {
         try {
-            const result = await tokenApi.POST_loginGoogle(token);
+            const result = await authApi.userGoogleAccessTokenReceiver(token);
             if (result.status === 200) {
                 nav("/home");
             }

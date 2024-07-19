@@ -1,10 +1,10 @@
 import _React, { useState, useEffect, useRef } from "react";
-import { UserInfoDummy, UserInfoData } from "../userInfo/UserInfoDummy";
 import HeaderUserMenu from "./HeaderUserMenu";
-import Gnb from "../../Gnb";
+import Gnb from "../Gnb";
+import { useUserStore } from "../../config/store";
 
 const HeaderLoggedIn = () => {
-    const [data, _setData] = useState<UserInfoData>(UserInfoDummy);
+    const { userData } = useUserStore();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +35,7 @@ const HeaderLoggedIn = () => {
                     onClick={toggleMenu}
                 >
                     <img
-                        src={data.imgUrl}
+                        src={userData.user.imgUrl || "img/profile-placeholder.png"}
                         alt="User Icon"
                         className="w-full h-full object-cover rounded-full cursor-pointer"
                     />

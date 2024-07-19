@@ -1,4 +1,4 @@
-import { IconChange, IconDeleteBtn, IconDetail, IconUpdate } from "../../IconData";
+import { IconChange, IconDeleteBtn, IconDetail, IconUpdate } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 
 const ModalGridSetting = () => {

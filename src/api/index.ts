@@ -1,4 +1,4 @@
-import * as tokenApi from "./token";
-import * as healthApi from "./health";
+import * as authApi from "./auth";
+import * as chatApi from "./chat";
 
-export { tokenApi, healthApi };
+export { authApi, chatApi };

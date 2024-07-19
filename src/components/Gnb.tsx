@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { IconChat, IconHome, IconUser } from "./IconData";
+import { IconChat, IconHome, IconUser } from "../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 
 const Gnb = () => {
