@@ -7,7 +7,7 @@ import { accessibleIndices } from "../components/util/UtilUserLevel";
 import { twMerge as tw } from "tailwind-merge";
 import ModalCreateTree from "../components/modal/ModalCreateTree";
 import useUserInfo from "../hook/useUserInfo";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const PageHome = () => {
     const { isLoading, getUserInfo, getUserLevelInfo } = useUserInfo();

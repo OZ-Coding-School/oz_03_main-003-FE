@@ -13,6 +13,9 @@ export default defineConfig({
         },
     },
     server: {
+        host: "localhost", // 이 부분이 localhost로 설정되어야 합니다
+        port: 5173, // 원하는 포트 번호로 설정합니다
+        open: true, // 브라우저 자동 열기 옵션 (선택 사항)
         proxy: {
             "/api": {
                 target: "https://emotree.yoyobar.xyz",
