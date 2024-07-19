@@ -4,7 +4,7 @@ import { IconClose } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
 import useUserInfo from "../../hook/useUserInfo";
-import { updateUserInfoName } from "../../api/auth";
+import { authApi } from "../../api";
 
 interface ModalChangeNameProps {
     isOpen: boolean;
@@ -12,15 +12,15 @@ interface ModalChangeNameProps {
 }
 
 const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) => {
-    useUserInfo();
+    const { getUserInfo } = useUserInfo();
+
     const inputRef = useRef<HTMLInputElement>(null);
     const [isUpdatedNewName, setIsUpdatedNewName] = useState("");
-
     useEffect(() => {
         if (inputRef.current && isOpen) {
             inputRef.current.focus();
         }
-    }, [isOpen]);
+    }, [isOpen, getUserInfo]);
 
     const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
@@ -35,7 +35,8 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
     };
 
     const handleButtonClick = async () => {
-        await updateUserInfoName(isUpdatedNewName);
+        await authApi.updateUserInfoName(isUpdatedNewName);
+        await getUserInfo();
     };
 
     return (
@@ -76,7 +77,6 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
                                 onClick={() => {
                                     handleButtonClick();
                                     onClose();
-                                    useUserInfo();
                                 }}
                             >
                                 변경하기

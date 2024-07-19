@@ -38,8 +38,8 @@ const useUserInfo = () => {
 
     return {
         getUserInfo,
-        getUserLevelInfo,
         isLoading,
+        getUserLevelInfo,
     };
 };
 
