@@ -1,25 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IconLogout, IconUser } from "../../config/IconData";
-import { UserInfoDummy, UserInfoData } from "../userInfo/UserInfoDummy";
-import { useState } from "react";
 import { authApi } from "../../api";
+import { useUserStore } from "../../config/store";
 
 const HeaderUserMenu = () => {
     const nav = useNavigate();
+    const { userData } = useUserStore();
     const logoutHandler = async () => {
         try {
-            await authApi.userLogoutGoogle();
+            await authApi.userLogout();
             nav("/");
         } catch (error) {
             console.error(error);
         }
     };
 
-    const [data, _setData] = useState<UserInfoData>(UserInfoDummy);
     return (
         <div className="w-40 bg-gray-800 text-white  text-md font-title">
             <ul>
-                <li className="py-5 px-6 w-full border-b border-gray-600">{data.name}</li>
+                <li className="py-5 px-6 w-full border-b border-gray-600">
+                    {userData.user.username}
+                </li>
                 <li className="w-full h-12">
                     <Link
                         to="/mypage"

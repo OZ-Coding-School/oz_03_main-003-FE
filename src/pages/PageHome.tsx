@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
 import { useState } from "react";
 import UserInfoHome from "../components/userInfo/UserInfoHome";

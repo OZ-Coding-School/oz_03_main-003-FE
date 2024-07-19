@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { tokenApi } from "../api";
+import { authApi } from "../api";
 import PageLoading from "../pages/PageLoading";
 import { Navigate } from "react-router-dom";
 
@@ -23,7 +23,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest
 
     const checkLoginStatus = useCallback(async () => {
         try {
-            const verifyResponse = await tokenApi.userTokenVerify();
+            const verifyResponse = await authApi.userTokenVerify();
 
             setAuthStatus(
                 verifyResponse.status === 200 ? authStatusType.VERIFIED : authStatusType.UNVERIFIED
@@ -31,8 +31,8 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest
         } catch (error) {
             console.log("AccessToken Verification Failed. Retrying...");
             try {
-                await tokenApi.userTokenRefresh();
-                const retryResponse = await tokenApi.userTokenVerify();
+                await authApi.userTokenRefresh();
+                const retryResponse = await authApi.userTokenVerify();
                 setAuthStatus(
                     retryResponse.status === 200
                         ? authStatusType.VERIFIED

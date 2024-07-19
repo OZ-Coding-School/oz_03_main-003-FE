@@ -9,7 +9,7 @@ const PageAuth = () => {
 
     const googleLoginRequest = async (token: string) => {
         try {
-            const result = await authApi.userLoginGoogle(token);
+            const result = await authApi.userGoogleAccessTokenReceiver(token);
             if (result.status === 200) {
                 nav("/home");
             }
