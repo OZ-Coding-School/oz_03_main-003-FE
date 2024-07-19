@@ -1,5 +1,5 @@
 import { twMerge as tw } from "tailwind-merge";
-import { IconHappy } from "../../IconData";
+import { IconHappy } from "../../config/IconData";
 
 const BadgeHappy = () => {
     return (

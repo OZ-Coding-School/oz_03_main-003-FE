@@ -12,7 +12,7 @@ export interface UserInfoData {
 
 export const UserInfoDummy: UserInfoData = {
     name: "User01",
-    imgUrl: "https://example.com/profile.jpg",
+    imgUrl: "http://placehold.it/40x40",
     email: "user01@example.com",
     level: 1,
     growth: 75,

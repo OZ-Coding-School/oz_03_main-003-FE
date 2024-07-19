@@ -1,6 +1,12 @@
-import { IconAddChat } from "../../IconData";
+import { IconAddChat } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
-const ChatListHeader = () => {
+
+interface ChatListHeaderProps {
+    onAddChatClick: () => void;
+}
+
+// const ChatListHeader = () => {
+const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onAddChatClick }) => {
     return (
         <div className="px-5 w-full h-[64px] flex justify-between items-center">
             <div className="text-white select-none text-sm font-medium">목록</div>
@@ -10,6 +16,7 @@ const ChatListHeader = () => {
                     "fill-white hover:fill-primary hover:bg-gray-800",
                     "cursor-pointer transition"
                 )}
+                onClick={onAddChatClick}
             >
                 <IconAddChat className="w-6 h-6" />
             </div>

@@ -1,7 +1,7 @@
 import _React, { useState, useEffect, useRef } from "react";
 import { UserInfoDummy, UserInfoData } from "../userInfo/UserInfoDummy";
 import HeaderUserMenu from "./HeaderUserMenu";
-import Gnb from "../../Gnb";
+import Gnb from "../Gnb";
 
 const HeaderLoggedIn = () => {
     const [data, _setData] = useState<UserInfoData>(UserInfoDummy);
@@ -26,11 +26,11 @@ const HeaderLoggedIn = () => {
     }, []);
 
     return (
-        <header className="fixed w-full">
+        <header className="fixed w-full z-30">
             <div className="h-20 p-5 w-full bg-black flex text-white justify-between">
                 <img src="/logo-white.png" alt="Logo" className="h-10" />
                 <div
-                    className="relative w-10 h-10 border border-white rounded-full"
+                    className="relative w-10 h-10 border border-white rounded-full z-10"
                     ref={menuRef}
                     onClick={toggleMenu}
                 >

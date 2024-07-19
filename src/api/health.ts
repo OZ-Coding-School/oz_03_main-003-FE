@@ -1,5 +1,5 @@
-import axios from "./axios";
+import { axiosInstance } from "./axios";
 
 export const healthCheck = async () => {
-    return await axios.get("/health");
+    return await axiosInstance.get("/health");
 };

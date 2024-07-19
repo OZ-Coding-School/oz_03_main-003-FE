@@ -1,4 +1,4 @@
-import { IconSendMsg } from "../../IconData";
+import { IconSendMsg } from "../../config/IconData";
 
 const InputChat = () => {
     return (
