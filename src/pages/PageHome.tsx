@@ -1,14 +1,10 @@
-import { useEffect } from "react";
 import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
 import { useState } from "react";
 import UserInfoHome from "../components/userInfo/UserInfoHome";
 import ButtonPrimary from "../components/button/ButtonPrimary";
 import { LevelDummy } from "./PageLevelDummy";
 import ModalCreateTree from "../components/modal/ModalCreateTree";
-import { LogoSymbol } from "../config/IconData";
-//import useCookie from "../hook/useCookie";
 
-// LevelDummy 타입 정의
 interface LevelItem {
     level: number;
     width: string;
@@ -17,9 +13,6 @@ interface LevelItem {
 
 const PageHome = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    //const nav = useNavigate();
-
-    //const { verifyCookie } = useCookie();
 
     const handleModalClose = () => {
         setIsOpen(false);
@@ -29,10 +22,8 @@ const PageHome = () => {
         setIsOpen(true);
     };
 
-    //const [selectedId, setSelectedId] = useState<string | null>(null);
-
     const handleClick = (id: string) => {
-        //setSelectedId(id);
+        console.log(id);
         handleModalOpen();
     };
 
@@ -76,9 +67,7 @@ const PageHome = () => {
                                                 id={id}
                                                 className={`w-[150px] h-[150px] border border-black bg-gray-800 inline-block hover:bg-gray-opacity hover:border-primary `}
                                                 onClick={() => handleClick(id)}
-                                            >
-                                                ${id === "1-2" ? <LogoSymbol /> : ""}
-                                            </div>
+                                            ></div>
                                         );
                                     })}
                                 </div>

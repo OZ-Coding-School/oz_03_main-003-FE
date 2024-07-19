@@ -1,4 +1,3 @@
-import React from "react";
 import {
     IconAngry,
     IconHappy,
@@ -6,6 +5,7 @@ import {
     IconSorrow,
     IconWorry,
 } from "../../config/IconData";
+
 import UserInfoBadgeContent from "./UserInfoBadgeContent";
 
 const UserInfoBadge = () => {

@@ -23,7 +23,6 @@ import { ReactComponent as IconIndifference } from "../assets/icon-indifference.
 import { ReactComponent as IconSetting } from "../assets/icon-set.svg";
 import { ReactComponent as IconLogout } from "../assets/icon-logout.svg";
 import { ReactComponent as IconStar } from "../assets/icon-landing-star.svg";
-import LogoSymbol from "../../public/logo-symbol.png";
 
 export {
     IconAddChat,
@@ -50,6 +49,5 @@ export {
     IconSetting,
     LogoGoogle,
     LogoKakao,
-    LogoSymbol,
     IconStar,
 };

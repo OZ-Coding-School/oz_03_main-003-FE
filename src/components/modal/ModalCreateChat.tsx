@@ -4,8 +4,6 @@ import { ContentDummy } from "./ModalContentDummy";
 import ModalListItem from "./ModalListItem";
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
-import { useUserStore } from "../../config/store";
-import { chatApi } from "../../api";
 
 interface ModalCreateChatProps {
     onClose: () => void;
@@ -14,8 +12,6 @@ interface ModalCreateChatProps {
 const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedTree, setSelectedTree] = useState("default");
-
-    const user = useUserStore((state) => state.userData.user);
 
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 

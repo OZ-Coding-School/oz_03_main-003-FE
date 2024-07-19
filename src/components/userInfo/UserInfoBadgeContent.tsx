@@ -1,4 +1,9 @@
-const UserInfoBadgeContent = () => {
+interface UserInfoBadgeProps {
+    type: "angry" | "happy" | "sorrow" | "worry" | "indifference";
+}
+
+const UserInfoBadgeContent = ({ type }: UserInfoBadgeProps) => {
+    console.log(type);
     return (
         <div className="flex flex-col gap-5">
             <nav>
