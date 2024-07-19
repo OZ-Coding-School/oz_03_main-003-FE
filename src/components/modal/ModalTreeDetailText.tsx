@@ -1,4 +1,4 @@
-import { IconLeft } from "../../IconData";
+import { IconLeft } from "../../config/IconData";
 
 const ModalTreeDetailText = () => {
     return (
