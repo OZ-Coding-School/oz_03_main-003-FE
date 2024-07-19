@@ -1,37 +1,21 @@
 import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import UserInfoHome from "../components/userInfo/UserInfoHome";
 import ButtonPrimary from "../components/button/ButtonPrimary";
-import { LevelDummy } from "./PageLevelDummy";
 import ModalCreateTree from "../components/modal/ModalCreateTree";
+import useUserInfo from "../hook/useUserInfo";
 import { useUserStore } from "../config/store";
-import { authApi } from "../api";
-import dayjs from "dayjs";
+import { accessibleIndices } from "../components/util/UtilUserLevel";
+import { twMerge as tw } from "tailwind-merge";
 
-interface LevelItem {
-    level: number;
-    width: string;
-    treeMax: number;
-}
 const PageHome = () => {
-    const { setUserData } = useUserStore();
+    useUserInfo();
+    const { userData } = useUserStore();
+    const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(() => {
-        const getUserInfo = async () => {
-            const { data: response } = await authApi.getUserInfo();
-            setUserData({
-                id: response.id,
-                imgUrl: response.profile_image,
-                username: response.username,
-                email: response.email,
-                created_at: dayjs(response.created_at).format("YYYY-MM-DD"),
-            });
-        };
-        getUserInfo();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const isAccessible = (index: number): boolean => {
+        return accessibleIndices[userData.level.userLevel].includes(index) || false;
+    };
 
     const handleModalClose = () => {
         setIsOpen(false);
@@ -41,7 +25,7 @@ const PageHome = () => {
         setIsOpen(true);
     };
 
-    const handleClick = (id: string) => {
+    const handleClick = (id: number) => {
         console.log(id);
         handleModalOpen();
     };
@@ -50,51 +34,66 @@ const PageHome = () => {
         <>
             <HeaderLoggedIn />
             <div className="bg-black pt-[129px] w-full min-h-screen h-100 box-border">
-                <div className="text-white relative">
+                <nav className="text-white relative">
                     <div className="flex absolute left-5 top-10">
                         <div className="w-[338px] mr-5">
                             <UserInfoHome />
                         </div>
-                        <ButtonPrimary onClick={handleModalOpen}>새 나무 심기</ButtonPrimary>
+                        <ButtonPrimary
+                            className="fixed z-10 left-[380px]"
+                            onClick={handleModalOpen}
+                        >
+                            새 나무 심기
+                        </ButtonPrimary>
                     </div>
-                    <div className="flex items-center justify-center pt-64 pb-20">
+                </nav>
+
+                <main
+                    className={tw(
+                        "flex items-center justify-center pt-64 pb-20",
+                        isOpen && "blur-sm"
+                    )}
+                >
+                    <div
+                        style={{
+                            transformStyle: "preserve-3d",
+                            transform: "rotateX(51deg) rotateZ(43deg)",
+                        }}
+                        className="text-zero grid gap-0"
+                    >
                         <div
-                            className="text-zero grid gap-0" // auto-rows-[200px] auto-cols-[200px]
+                            className="grid"
                             style={{
-                                transformStyle: "preserve-3d",
-                                transform: "rotateX(51deg) rotateZ(43deg)",
+                                gridTemplateRows: `repeat(5, 1fr)`,
+                                gridTemplateColumns: `repeat(5, 1fr)`,
                             }}
                         >
-                            {LevelDummy.filter(
-                                (item): item is LevelItem => item !== undefined && item.level > 4
-                            ).map((item) => (
-                                <div
-                                    key={item.level}
-                                    className="grid"
-                                    style={{
-                                        gridTemplateRows: `repeat(${item.level}, 1fr)`,
-                                        gridTemplateColumns: `repeat(${item.level}, 1fr)`,
-                                    }}
-                                >
-                                    {Array.from({ length: item.treeMax }).map((_, index) => {
-                                        const row = Math.floor(index / item.level) + 1;
-                                        const col = (index % item.level) + 1;
-                                        const id = `${row}-${col}`;
-                                        return (
-                                            <div
-                                                key={id}
-                                                id={id}
-                                                className={`w-[150px] h-[150px] border border-black bg-gray-800 inline-block hover:bg-gray-opacity hover:border-primary `}
-                                                onClick={() => handleClick(id)}
-                                            ></div>
-                                        );
-                                    })}
-                                </div>
-                            ))}
+                            {Array.from({ length: 25 }).map((_, index) => {
+                                const isEnabled = isAccessible(index);
+                                return (
+                                    <div
+                                        key={index}
+                                        className={`w-[150px] h-[150px] border border-black inline-block 
+                  ${
+                      isEnabled
+                          ? "bg-gray-800 hover:bg-gray-700 hover:border-primary transition cursor-pointer"
+                          : "bg-black"
+                  }`}
+                                        onClick={() => {
+                                            if (isEnabled) {
+                                                handleClick(index);
+                                            }
+                                        }}
+                                    >
+                                        {index}
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
-                </div>
+                </main>
             </div>
+
             <ModalCreateTree isOpen={isOpen} onClose={handleModalClose} />
         </>
     );
