@@ -61,8 +61,8 @@ jobs:
             # 해당 부분은 과금될 수 있으니 확인 후 사용하세요!
             - name: CloudFront Invalidation
               env:
-                  CLOUD_FRONT_ID: ${{ secrets.AWS_CLOUDFRONT_ID}}
-                  VITE_CLIENT_ID: ${{ 214975388603-2s7nkfj4rne648gv6no245r2nfg6315p.apps.googleusercontent.com}}
+                  CLOUD_FRONT_ID: ${{ secrets.AWS_CLOUDFRONT_ID }}
+                  VITE_CLIENT_ID: ${{ 214975388603-2s7nkfj4rne648gv6no245r2nfg6315p.apps.googleusercontent.com }}
               run: |
                   aws cloudfront create-invalidation \
                     --distribution-id $CLOUD_FRONT_ID --paths /*
