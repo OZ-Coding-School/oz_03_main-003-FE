@@ -4,6 +4,8 @@ import { ContentDummy } from "./ModalContentDummy";
 import ModalListItem from "./ModalListItem";
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
+import { useUserStore } from "../../config/store";
+import { chatApi } from "../../api";
 
 interface ModalCreateChatProps {
     onClose: () => void;
@@ -11,12 +13,14 @@ interface ModalCreateChatProps {
 
 const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectTree, setSelectTree] = useState("나무를 선택해 주세요.");
+    const [selectedTree, setSelectedTree] = useState("default");
+
+    const user = useUserStore((state) => state.userData.user);
 
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
     const handleItemClick = (groupName: string) => {
-        setSelectTree(groupName);
+        setSelectedTree(groupName);
         setIsDropdownOpen(false);
     };
 
@@ -36,7 +40,7 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
                     "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
                 )}
             />
-            <h3 className="font-title leading-5 mb-2 mt-6 text-gray-200">함께할 나무 선택</h3>
+            <h3 className="font-title leading-5 mb-2 mt-6 text-gray-200">나무를 선택해 주세요.</h3>
             <div onClick={toggleDropdown} className="relative">
                 <div
                     id="tab"
@@ -46,7 +50,7 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
                         "fill-white flex items-center justify-between select-none "
                     )}
                 >
-                    {selectTree}
+                    {selectedTree === "default" ? "함께할 나무 선택" : selectedTree}
                     <IconSelectArrow
                         className={`w-4 transition-transform duration-300 ${isDropdownOpen ? "transform rotate-180" : ""}`}
                     />
