@@ -7,9 +7,10 @@ import { accessibleIndices } from "../components/util/UtilUserLevel";
 import { twMerge as tw } from "tailwind-merge";
 import ModalCreateTree from "../components/modal/ModalCreateTree";
 import useUserInfo from "../hook/useUserInfo";
+import { AnimatePresence, motion } from "framer-motion";
 
 const PageHome = () => {
-    const { getUserInfo, getUserLevelInfo } = useUserInfo();
+    const { isLoading, getUserInfo, getUserLevelInfo } = useUserInfo();
 
     useEffect(() => {
         const refreshUserInfo = async () => {
@@ -70,35 +71,38 @@ const PageHome = () => {
                         }}
                         className="text-zero grid gap-0"
                     >
-                        <div
-                            className="grid"
-                            style={{
-                                gridTemplateRows: `repeat(5, 1fr)`,
-                                gridTemplateColumns: `repeat(5, 1fr)`,
-                            }}
-                        >
-                            {Array.from({ length: 25 }).map((_, index) => {
-                                const isEnabled = isAccessible(index);
-                                return (
-                                    <div
-                                        key={index}
-                                        className={`w-[150px] h-[150px] border border-black inline-block 
-                  ${
-                      isEnabled
-                          ? "bg-gray-800 hover:bg-gray-700 hover:border-primary transition cursor-pointer"
-                          : "bg-black"
-                  }`}
-                                        onClick={() => {
-                                            if (isEnabled) {
-                                                handleClick(index);
-                                            }
-                                        }}
-                                    >
-                                        {index}
-                                    </div>
-                                );
-                            })}
-                        </div>
+                        {!isLoading && (
+                            <motion.div
+                                animate={{ opacity: [0, 1], translateZ: [-100, 0] }}
+                                className="grid"
+                                style={{
+                                    gridTemplateRows: `repeat(5, 1fr)`,
+                                    gridTemplateColumns: `repeat(5, 1fr)`,
+                                }}
+                            >
+                                {Array.from({ length: 25 }).map((_, index) => {
+                                    const isEnabled = isAccessible(index);
+                                    return (
+                                        <div
+                                            key={index}
+                                            className={`w-[150px] h-[150px] border border-black inline-block 
+                      ${
+                          isEnabled
+                              ? "bg-gray-800 hover:bg-gray-700 hover:border-primary transition cursor-pointer"
+                              : "bg-black"
+                      }`}
+                                            onClick={() => {
+                                                if (isEnabled) {
+                                                    handleClick(index);
+                                                }
+                                            }}
+                                        >
+                                            {index}
+                                        </div>
+                                    );
+                                })}
+                            </motion.div>
+                        )}
                     </div>
                 </main>
             </div>
