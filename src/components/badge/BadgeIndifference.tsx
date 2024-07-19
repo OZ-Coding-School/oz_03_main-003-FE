@@ -1,5 +1,5 @@
 import { twMerge as tw } from "tailwind-merge";
-import { IconIndifference } from "../../IconData";
+import { IconIndifference } from "../../config/IconData";
 
 const BadgeIndifference = () => {
     return (

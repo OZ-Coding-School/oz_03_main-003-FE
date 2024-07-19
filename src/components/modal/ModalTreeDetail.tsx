@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DetailDummy } from "./ModalTreeDetailDummy";
-import { IconClose, IconTooltip } from "../../IconData";
+import { IconClose, IconTooltip } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import ModalTreeDetailGraph from "./ModalTreeDetailGraph";
 import ModalTooltip from "./ModalTooltip";

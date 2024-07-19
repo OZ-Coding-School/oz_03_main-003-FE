@@ -1,33 +1,27 @@
 import React, { useState } from "react";
-import { UserInfoData, UserInfoDummy } from "./UserInfoDummy";
-import { IconTooltip } from "../../IconData";
+import { IconTooltip } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import ModalTooltip from "../modal/ModalTooltip";
 import { AnimatePresence, motion } from "framer-motion";
 
 const UserInfoHome = () => {
-    const [data, _setData] = useState<UserInfoData>(UserInfoDummy);
     const [isVisible, setIsVisible] = useState(false);
 
     return (
         <div className="bg-gray-800 text-white">
             <div className="flex p-5 pb-6 border-b border-gray-600">
                 <div className="relative w-12 h-12 border border-white rounded-full mr-[10px]">
-                    <img
-                        src={data.imgUrl}
-                        alt={data.name}
-                        className="w-full h-full object-cover rounded-full"
-                    />
+                    <img src={""} alt={""} className="w-full h-full object-cover rounded-full" />
                     <div className="w-6 h-6 absolute bottom-[-6px] right-[-6px] border border-primary rounded-full bg-gray-800 text-center text-sm">
                         00
                     </div>
                 </div>
                 <div className="w-full flex flex-col justify-end">
-                    <p className="font-title text-lg">{data.name}</p>
+                    <p className="font-title text-lg">{""}</p>
                     <div className="rounded-sm border h-2">
                         <div
                             className="bg-primary h-full animate-width"
-                            style={{ "--target-width": `${data.growth}%` } as React.CSSProperties}
+                            style={{ "--target-width": `${0}%` } as React.CSSProperties}
                         ></div>
                     </div>
                 </div>
@@ -63,10 +57,10 @@ const UserInfoHome = () => {
                     </ul>
                     <ul>
                         <li className="mb-3">
-                            : {data.treeCurrent} / {data.treeMax}
+                            : {0} / {0}
                         </li>
                         <li className="mb-3">
-                            : {data.gridSize} * {data.gridSize}
+                            : {0} * {0}
                         </li>
                     </ul>
                 </div>
