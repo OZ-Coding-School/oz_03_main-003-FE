@@ -4,8 +4,8 @@ export const accessibleIndices: AccessibleIndices = {
     0: [6, 7, 11, 12],
     1: [6, 7, 11, 12],
     2: [6, 7, 8, 11, 12, 13, 16, 17, 18],
-    3: [6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24],
-    4: [6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24],
+    // 3: [6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24],
+    // 4: [6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24],
 };
 
 export const userExperience: { [key: number]: number } = {
@@ -36,7 +36,7 @@ export const calculateForest = (level: number) => {
             userLevel: level,
             treeMax: 4,
             treeCurrent: 0,
-            gridSize: 1,
+            gridSize: 2,
             experience: 0,
             accessibleIndices: accessibleIndices[level],
         };
@@ -45,27 +45,18 @@ export const calculateForest = (level: number) => {
             userLevel: level,
             treeMax: 9,
             treeCurrent: 0,
-            gridSize: 2,
-            experience: 0,
-            accessibleIndices: accessibleIndices[level],
-        };
-    } else if (level <= 4) {
-        return {
-            userLevel: level,
-            treeMax: 16,
-            treeCurrent: 0,
-            gridSize: 2,
+            gridSize: 3,
             experience: 0,
             accessibleIndices: accessibleIndices[level],
         };
     } else {
         return {
             userLevel: level,
-            treeMax: 25,
+            treeMax: 9,
             treeCurrent: 0,
-            gridSize: 2,
+            gridSize: 3,
             experience: 0,
-            accessibleIndices: Array.from({ length: 25 }, (_, i) => i),
+            accessibleIndices: accessibleIndices[2],
         };
     }
 };

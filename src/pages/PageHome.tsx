@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import UserInfoHome from "../components/userInfo/UserInfoHome";
 import ButtonPrimary from "../components/button/ButtonPrimary";
 import { useUserStore } from "../config/store";
-import { accessibleIndices } from "../components/util/UtilUserLevel";
 import { twMerge as tw } from "tailwind-merge";
 import ModalCreateTree from "../components/modal/ModalCreateTree";
 import useUserInfo from "../hook/useUserInfo";
@@ -36,8 +35,10 @@ const PageHome = () => {
         handleModalOpen();
     };
 
+    console.log(userData.level);
+
     const isAccessible = (index: number): boolean => {
-        return accessibleIndices[userData.level.gridSize].includes(index) || false;
+        return userData.level.accessibleIndices.includes(index) || false;
     };
 
     return (

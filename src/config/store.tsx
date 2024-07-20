@@ -25,6 +25,7 @@ export const useUserStore = create<UserStore>((set) => ({
             treeMax: 0,
             treeCurrent: 0,
             gridSize: 0,
+            accessibleIndices: [6, 7, 11, 12],
         },
     },
 

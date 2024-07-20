@@ -12,6 +12,7 @@ export interface UserLevel {
     treeCurrent: number;
     gridSize: number;
     userExperience: number;
+    accessibleIndices: number[];
 }
 
 export interface AccessibleIndices {

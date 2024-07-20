@@ -32,6 +32,7 @@ const useUserInfo = () => {
             treeMax: levelData.treeMax,
             treeCurrent: levelData.treeCurrent,
             gridSize: levelData.gridSize,
+            accessibleIndices: levelData.accessibleIndices,
         });
         setIsLoading(false);
     }, [setLevelData]);
