@@ -1,5 +1,6 @@
 type AccessibleIndices = { [key: number]: number[] };
 
+//? 현재 핵심개발 단계이므로 grid size는 2x2, 3x3으로 제한합니다.
 export const accessibleIndices: AccessibleIndices = {
     0: [6, 7, 11, 12],
     1: [6, 7, 11, 12],

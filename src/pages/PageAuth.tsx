@@ -4,7 +4,6 @@ import { authApi, forestApi } from "../api";
 import Landing from "../components/Landing";
 import { useNavigate } from "react-router-dom";
 import useUserInfo from "../hook/useUserInfo";
-import ButtonDefault from "../components/button/ButtonDefault";
 
 const PageAuth = () => {
     const nav = useNavigate();
@@ -44,13 +43,6 @@ const PageAuth = () => {
         <div className="w-full h-[100vh] bg-black m-auto flex flex-col gap-[10px] justify-center items-center">
             <Landing />
             <ButtonSignInGoogle onClick={googleLoginHandler} />
-            <ButtonDefault
-                onClick={async () => {
-                    forestApi.createForest();
-                }}
-            >
-                (임시) 포레스트 생성
-            </ButtonDefault>
         </div>
     );
 };

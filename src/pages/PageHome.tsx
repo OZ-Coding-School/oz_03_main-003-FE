@@ -31,11 +31,10 @@ const PageHome = () => {
     };
 
     const handleClick = (id: number) => {
+        //TODO: 나무 생성이 가능해지면 추가해야 함
         console.log(id);
         handleModalOpen();
     };
-
-    console.log(userData.level);
 
     const isAccessible = (index: number): boolean => {
         return userData.level.accessibleIndices.includes(index) || false;
@@ -86,12 +85,12 @@ const PageHome = () => {
                                     return (
                                         <div
                                             key={index}
-                                            className={`w-[150px] border-2 h-[150px] border-black inline-block 
-                      ${
-                          isEnabled
-                              ? "bg-gray-800 hover:bg-gray-700 hover:border-primary transition cursor-pointer"
-                              : "bg-black"
-                      }`}
+                                            className={tw(
+                                                "w-[150px] border-2 h-[150px] border-black inline-block",
+                                                isEnabled
+                                                    ? "bg-gray-800 hover:bg-gray-700 hover:border-primary transition cursor-pointer"
+                                                    : "bg-black"
+                                            )}
                                             onClick={() => {
                                                 if (isEnabled) {
                                                     handleClick(index);
