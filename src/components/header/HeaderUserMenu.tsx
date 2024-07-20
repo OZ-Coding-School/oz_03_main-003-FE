@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IconLogout, IconUser } from "../../config/IconData";
 import { authApi } from "../../api";
 import { useUserStore } from "../../config/store";
+import { motion } from "framer-motion";
 
 const HeaderUserMenu = () => {
     const nav = useNavigate();
@@ -16,7 +17,10 @@ const HeaderUserMenu = () => {
     };
 
     return (
-        <div className="w-40 bg-gray-800 text-white  text-md font-title">
+        <motion.div
+            animate={{ translateY: [-20, 0] }}
+            className="w-40 bg-gray-800 text-white  text-md font-title"
+        >
             <ul>
                 <li className="py-5 px-6 w-full border-b border-gray-600">
                     {userData.user.username}
@@ -44,7 +48,7 @@ const HeaderUserMenu = () => {
                     </button>
                 </li>
             </ul>
-        </div>
+        </motion.div>
     );
 };
 

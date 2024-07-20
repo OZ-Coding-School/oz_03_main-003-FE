@@ -2,6 +2,8 @@ import { IconUpdate } from "../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { useUserStore } from "../../config/store";
 import UserInfoBadge from "./UserInfoBadge";
+import { useState } from "react";
+import ModalChangeName from "../modal/ModalChangeName";
 
 export interface userInfoData {
     created_at: string;
@@ -12,6 +14,15 @@ export interface userInfoData {
 
 const UserInfoMypage = () => {
     const { userData } = useUserStore();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleModalClose = () => {
+        setIsOpen(false);
+    };
+
+    const handleModalOpen = () => {
+        setIsOpen(true);
+    };
 
     return (
         <div className="w-full flex justify-center gap-3 select-none">
@@ -32,7 +43,11 @@ const UserInfoMypage = () => {
                         <div className="rounded-sm border h-2">
                             <div
                                 className="bg-primary h-full animate-width"
-                                style={{ "--target-width": `0%` } as React.CSSProperties}
+                                style={
+                                    {
+                                        "--target-width": `${userData.level.userExperience}%`,
+                                    } as React.CSSProperties
+                                }
                             ></div>
                         </div>
                     </div>
@@ -46,6 +61,7 @@ const UserInfoMypage = () => {
                                 "fill-white hover:bg-gray-600",
                                 "cursor-pointer transition"
                             )}
+                            onClick={handleModalOpen}
                         >
                             <IconUpdate className="h-4" />
                         </div>
@@ -62,13 +78,18 @@ const UserInfoMypage = () => {
                             <li className="mb-3">: {userData.user.username}</li>
                             <li className="mb-3">: {userData.user.email}</li>
                             <li className="mb-3">: {userData.user.created_at}</li>
-                            <li className="mb-3">: 2 / 2</li>
-                            <li className="mb-3">: 2 x 2</li>
+                            <li className="mb-3">
+                                : {userData.level.treeCurrent} / {userData.level.treeMax}
+                            </li>
+                            <li className="mb-3">
+                                : {userData.level.gridSize} x {userData.level.gridSize}
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <UserInfoBadge />
+            <ModalChangeName isOpen={isOpen} onClose={handleModalClose} />
         </div>
     );
 };

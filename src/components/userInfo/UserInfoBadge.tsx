@@ -35,7 +35,7 @@ const UserInfoBadge = () => {
                     <UserInfoBadgeContent type="worry" />
                 </nav>
                 <nav>
-                    <UserInfoBadgeContent type="indifference" />
+                    <UserInfoBadgeContent type="indiff" />
                 </nav>
             </div>
         </div>
