@@ -1,19 +1,51 @@
-## 개요
+<h1 align="center">Emotion Tree Talk 프로젝트 🎄 </h1>
 
-<h3 align="center">Emotion Tree Talk 프로젝트 🎄 </h2>
-<p align="center">
-<img src="https://img.shields.io/badge/-typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=48a0eb">
-<img src="https://img.shields.io/badge/-React-20232a?style=for-the-badge&logo=React&logoColor=61dafb">
-<img src="https://img.shields.io/badge/-Framer%20Motion-0055FF?style=for-the-badge&logo=Framer&logoColor=white">
-  <img src="https://img.shields.io/badge/-TailwindCSS-647f8d?style=for-the-badge&logo=tailwindcss&logoColor=06B6D4">
-  <img src="https://img.shields.io/badge/-AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=FF9900">
-  <img src="https://img.shields.io/badge/-ZUSTAND-92305b?style=for-the-badge">
-</p>
-<hr>
+### Programming Languages
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/-React-20232a?style=for-the-badge&logo=React&logoColor=61DAFB)
 
-### 커밋 컨벤션
+### Library
+![Axios](https://img.shields.io/badge/-Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+![Day.js](https://img.shields.io/badge/-Day.js-FF5F4C?style=for-the-badge&logo=day.js&logoColor=white)
+![React OAuth](https://img.shields.io/badge/-React%20OAuth-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![React Router](https://img.shields.io/badge/-React%20Router%20Dom-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![SVGR/rollup](https://img.shields.io/badge/-SVGR/ROLLUP-FFB13B?style=for-the-badge&logo=svg&logoColor=black)
 
-|      | 태그 이름 | 설명                               |
+### Styling Library
+![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Tailwind Merge](https://img.shields.io/badge/-Tailwind%20Merge-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/-Framer%20Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
+
+### State Management
+![Zustand](https://img.shields.io/badge/-Zustand-FFB13B?style=for-the-badge)
+![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
+
+### Version Control
+![GitHub](https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github)
+![GitHub Actions](https://img.shields.io/badge/-GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+
+### Infrastructure
+![AWS S3](https://img.shields.io/badge/-AWS%20S3-569A31?style=for-the-badge&logo=amazon-s3&logoColor=white)
+![AWS Route 53](https://img.shields.io/badge/-AWS%20Route%2053-8C4FFF?style=for-the-badge&logo=amazonroute53&logoColor=white)
+![AWS CloudFront](https://img.shields.io/badge/-AWS%20CloudFront-8C4FFF?style=for-the-badge&logo=amazonwebservices&logoColor=white)
+![AWS Certificate Manager](https://img.shields.io/badge/-AWS%20Certificate%20Manager-cc4d3f?style=for-the-badge&logo=amazonwebservices&logoColor=white)
+
+## Architecture Structure
+
+![Architecture](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/Architecture.png?raw=true)
+
+
+## ERD
+![ERD](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/ERD.png)
+
+## API Specification
+![API](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/API.png?raw=true)
+
+## Convention
+
+### Commit Convention
+
+|      | Tag Name | Description                               |
 | ---- | --------- | ---------------------------------- |
 | 기능 | Feat      | 새로운 기능을 추가할 경우          |
 | 기능 | Fix       | 버그를 고친 경우                   |
@@ -25,17 +57,13 @@
 | ETC  | Chore     | 빌드 테스트, 패키지 매니저         |
 | ETC  | Rename    | 파일 명 수정                       |
 
-```
-예시: Feat: ~~ 기능추가
-기능을 무슨무슨행위로 만들었다.
-```
 
-### Issue 컨벤션
+## Issue Convention
 
 이슈와 관련된 템플릿은 이슈를 생성할때 자동으로 생성됩니다. <br/>
 해당 내용을 참고하시어 작성을 진행해주시기 바랍니다.
 
-### PR 컨벤션
+## Pull Request(PR) Convention
 
 PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <br/>
 해당 내용을 참고하시어 작성을 진행해주시기 바랍니다.

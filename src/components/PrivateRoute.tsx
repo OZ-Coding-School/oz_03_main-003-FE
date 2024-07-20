@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { authApi } from "../api";
 import PageLoading from "../pages/PageLoading";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 interface DefaultProps {
     [key: string]: unknown;
@@ -20,6 +20,7 @@ enum authStatusType {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest }) => {
     const [authStatus, setAuthStatus] = useState<authStatusType>(authStatusType.LOADING);
+    const { pathname } = useLocation();
 
     const checkLoginStatus = useCallback(async () => {
         try {
@@ -47,7 +48,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest
 
     useEffect(() => {
         checkLoginStatus();
-    }, [checkLoginStatus]);
+    }, [checkLoginStatus, pathname]);
 
     switch (authStatus) {
         case authStatusType.LOADING:

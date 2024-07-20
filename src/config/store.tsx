@@ -14,14 +14,15 @@ export const useUserStore = create<UserStore>((set) => ({
     userData: {
         user: {
             id: "",
-            username: "Guest",
-            imgUrl: "...",
+            username: "...",
+            imgUrl: "/img/profile-placeholder.png",
             email: "...",
             created_at: "...",
         },
         level: {
-            userLevel: 1,
-            treeMax: 3,
+            userLevel: 0,
+            userExperience: 0,
+            treeMax: 0,
             treeCurrent: 0,
             gridSize: 0,
         },

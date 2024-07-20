@@ -7,8 +7,13 @@ export interface UserAccount {
 }
 
 export interface UserLevel {
-    userLevel?: number;
-    treeMax?: number;
-    treeCurrent?: number;
-    gridSize?: number;
+    userLevel: number;
+    treeMax: number;
+    treeCurrent: number;
+    gridSize: number;
+    userExperience: number;
+}
+
+export interface AccessibleIndices {
+    [key: number]: number[];
 }
