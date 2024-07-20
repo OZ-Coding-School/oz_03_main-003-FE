@@ -7,7 +7,7 @@ import { accessibleIndices } from "../components/util/UtilUserLevel";
 import { twMerge as tw } from "tailwind-merge";
 import ModalCreateTree from "../components/modal/ModalCreateTree";
 import useUserInfo from "../hook/useUserInfo";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const PageHome = () => {
     const { isLoading, getUserInfo, getUserLevelInfo } = useUserInfo();
@@ -85,7 +85,7 @@ const PageHome = () => {
                                     return (
                                         <div
                                             key={index}
-                                            className={`w-[150px] h-[150px] border border-black inline-block 
+                                            className={`w-[150px] border-2 h-[150px] border-black inline-block 
                       ${
                           isEnabled
                               ? "bg-gray-800 hover:bg-gray-700 hover:border-primary transition cursor-pointer"
