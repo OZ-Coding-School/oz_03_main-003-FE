@@ -36,7 +36,7 @@ export const calculateForest = (level: number) => {
             userLevel: level,
             treeMax: 4,
             treeCurrent: 0,
-            gridSize: 2,
+            gridSize: 1,
             experience: 0,
             accessibleIndices: accessibleIndices[level],
         };
@@ -45,7 +45,7 @@ export const calculateForest = (level: number) => {
             userLevel: level,
             treeMax: 9,
             treeCurrent: 0,
-            gridSize: 3,
+            gridSize: 2,
             experience: 0,
             accessibleIndices: accessibleIndices[level],
         };
@@ -54,7 +54,7 @@ export const calculateForest = (level: number) => {
             userLevel: level,
             treeMax: 16,
             treeCurrent: 0,
-            gridSize: 4,
+            gridSize: 2,
             experience: 0,
             accessibleIndices: accessibleIndices[level],
         };
@@ -63,7 +63,7 @@ export const calculateForest = (level: number) => {
             userLevel: level,
             treeMax: 25,
             treeCurrent: 0,
-            gridSize: 5,
+            gridSize: 2,
             experience: 0,
             accessibleIndices: Array.from({ length: 25 }, (_, i) => i),
         };

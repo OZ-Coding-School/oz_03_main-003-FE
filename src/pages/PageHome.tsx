@@ -37,7 +37,7 @@ const PageHome = () => {
     };
 
     const isAccessible = (index: number): boolean => {
-        return accessibleIndices[userData.level.userLevel].includes(index) || false;
+        return accessibleIndices[userData.level.gridSize].includes(index) || false;
     };
 
     return (
