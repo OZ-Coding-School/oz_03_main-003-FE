@@ -1,3 +1,4 @@
+![image](https://github.com/user-attachments/assets/3a6deaf5-2d77-4e40-a2d9-408fd9576066)
 <h1 align="center">Emotion Tree Talk 프로젝트 🎄 </h1>
 
 ### Programming Languages
@@ -32,14 +33,14 @@
 
 ## Architecture Structure
 
-![Architecture](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/Architecture.png?raw=true)
+![Architecture](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/Architecture.png?raw=true)
 
 
 ## ERD
-![ERD](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/ERD.png)
+![ERD](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ERD.png?raw=true)
 
 ## API Specification
-![API](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/API.png?raw=true)
+![API](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/API.png?raw=true)
 
 ## Convention
 
