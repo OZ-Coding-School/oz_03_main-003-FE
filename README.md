@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/3a6deaf5-2d77-4e40-a2d9-408fd9576066)
 <h1 align="center">Emotion Tree Talk 프로젝트 🎄 </h1>
 
 ### Programming Languages
