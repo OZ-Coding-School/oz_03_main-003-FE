@@ -52,7 +52,6 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ isOpen, onClose }) =>
                         >
                             <h3 className="font-title leading-5 text-gray-200">새 나무 심기</h3>
                             <input
-                                tabIndex={-1}
                                 ref={inputRef}
                                 type="text"
                                 placeholder="이름을 지어주세요."
