@@ -10,7 +10,7 @@ const UserInfoHome = () => {
     const { userData } = useUserStore();
 
     return (
-        <div className="bg-gray-800 text-white w-[340px] fixed z-10">
+        <div className="bg-gray-800 text-white w-[340px] fixed z-10 top-[140px]">
             <div className="flex p-5 pb-6 border-b border-gray-600">
                 <div className="relative w-12 h-12 border border-white rounded-full">
                     <img

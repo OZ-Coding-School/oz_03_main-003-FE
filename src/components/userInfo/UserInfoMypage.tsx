@@ -89,7 +89,7 @@ const UserInfoMypage = () => {
                 </div>
             </div>
             <UserInfoBadge />
-            <ModalChangeName isOpen={isOpen} onClose={handleModalClose} />
+            {isOpen && <ModalChangeName isOpen={isOpen} onClose={handleModalClose} />}
         </div>
     );
 };

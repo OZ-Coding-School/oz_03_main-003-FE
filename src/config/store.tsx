@@ -26,7 +26,9 @@ export const useUserStore = create<UserStore>((set) => ({
             treeCurrent: 0,
             gridSize: 0,
             accessibleIndices: [6, 7, 11, 12],
+            forest_UUID: "0",
         },
+        // ? Tree 데이터도 추가해야 할듯
     },
 
     setUserData: (data: UserAccount) =>

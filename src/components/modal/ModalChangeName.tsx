@@ -5,6 +5,7 @@ import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
 import useUserInfo from "../../hook/useUserInfo";
 import { authApi } from "../../api";
+import useVerify from "../../hook/useVerify";
 
 interface ModalChangeNameProps {
     isOpen: boolean;
@@ -13,6 +14,7 @@ interface ModalChangeNameProps {
 
 const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) => {
     const { getUserInfo } = useUserInfo();
+    const { checkLoginStatus } = useVerify();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [isUpdatedNewName, setIsUpdatedNewName] = useState("");
@@ -35,13 +37,15 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
     };
 
     const handleButtonClick = async () => {
+        await checkLoginStatus();
         await authApi.updateUserInfoName(isUpdatedNewName);
         await getUserInfo();
     };
 
     return (
-        <AnimatePresence>
-            {isOpen && (
+        <>
+            <nav className="absolute opacity-50 top-0 w-full h-screen bg-black"></nav>
+            <AnimatePresence>
                 <motion.div
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -63,6 +67,7 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
                         <h3 className="font-title leading-5 text-gray-200">닉네임 변경</h3>
                         <input
                             type="text"
+                            maxLength={15}
                             placeholder="새 이름을 지어주세요."
                             className={tw(
                                 "mt-6 border-b outline-none border-gray-600",
@@ -92,8 +97,8 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
                         </button>
                     </nav>
                 </motion.div>
-            )}
-        </AnimatePresence>
+            </AnimatePresence>
+        </>
     );
 };
 

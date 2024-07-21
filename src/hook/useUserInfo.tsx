@@ -49,6 +49,7 @@ const useUserInfo = () => {
             treeCurrent: levelData.treeCurrent,
             gridSize: levelData.gridSize,
             accessibleIndices: levelData.accessibleIndices,
+            forest_UUID: forestResponse.forest_uuid,
         });
         setIsLoading(false);
     }, [setLevelData]);
