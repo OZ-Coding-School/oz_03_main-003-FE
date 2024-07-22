@@ -32,14 +32,14 @@
 
 ## Architecture Structure
 
-![Architecture](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/Architecture.png?raw=true)
+![Architecture](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/Architecture.png?raw=true)
 
 
 ## ERD
-![ERD](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/ERD.png)
+![ERD](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ERD.png?raw=true)
 
 ## API Specification
-![API](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/develop/home/docs/API.png?raw=true)
+![API](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/API.png?raw=true)
 
 ## Convention
 
