@@ -4,6 +4,7 @@ import { twMerge as tw } from "tailwind-merge";
 import ModalTooltip from "../modal/ModalTooltip";
 import { AnimatePresence, motion } from "framer-motion";
 import { useUserStore } from "../../config/store";
+import ButtonPrimary from "../button/ButtonPrimary";
 
 const UserInfoHome = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -75,6 +76,9 @@ const UserInfoHome = () => {
                     </ul>
                 </div>
             </div>
+            <ButtonPrimary className="fixed z-10 top-[140px] left-[360px]">
+                새 나무 심기
+            </ButtonPrimary>
         </div>
     );
 };

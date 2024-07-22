@@ -1,5 +1,5 @@
 import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
-import HomeMain from "../components/home/HomeMain";
+import HomeMain from "../components/home";
 
 const PageHome = () => {
     return (
