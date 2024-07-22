@@ -3,15 +3,18 @@ import ButtonDefault from "../button/ButtonDefault";
 import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
+import { treeApi } from "../../../api";
+import useVerify from "../../../hook/useVerify";
 
 interface ModalCreateTreeProps {
     isOpen: boolean;
+    treeIndex: number;
     onClose: () => void;
 }
 
-const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ isOpen, onClose }) => {
+const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ isOpen, onClose, treeIndex }) => {
     const inputRef = useRef<HTMLInputElement>(null);
-
+    const { checkLoginStatus } = useVerify();
     useEffect(() => {
         if (inputRef.current && isOpen) {
             inputRef.current.focus();
@@ -24,6 +27,14 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ isOpen, onClose }) =>
 
     const closeHandler = () => {
         onClose();
+    };
+
+    const createTreeHandler = async () => {
+        console.log(treeIndex);
+        await checkLoginStatus();
+        // await treeApi.createTree();
+        const result = await treeApi.getTreeList();
+        console.log(result);
     };
 
     return (
@@ -59,7 +70,9 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ isOpen, onClose }) =>
                             )}
                         ></input>
                         <div className="text-right mt-4">
-                            <ButtonDefault className="ml-1">나무 심기</ButtonDefault>
+                            <ButtonDefault onClick={createTreeHandler} className="ml-1">
+                                나무 심기
+                            </ButtonDefault>
                         </div>
                         <button
                             type="button"

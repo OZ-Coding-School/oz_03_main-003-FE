@@ -9,7 +9,7 @@ export const accessibleIndices: AccessibleIndices = {
     // 4: [6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24],
 };
 
-export const userExperience: { [key: number]: number } = {
+const userExperience: { [key: number]: number } = {
     0: 50,
     ...Object.fromEntries(Array.from({ length: 99 }, (_, i) => [i + 1, (i + 1) * 100])),
 };
@@ -20,8 +20,8 @@ export const calculateExperience = (level: number, currentExperience: number): s
     if (level < 0 || level > maxLevel) {
         return "Invalid level";
     }
-
     const requiredExperience = userExperience[level];
+
     const percentage = (currentExperience / requiredExperience) * 100;
 
     return Math.min(percentage, 100).toFixed(2);
@@ -32,13 +32,15 @@ export const calculateForest = (level: number) => {
         throw new Error("Invalid level");
     }
 
+    const currentExp = 30;
+
     if (level <= 1) {
         return {
             userLevel: level,
             treeMax: 4,
             treeCurrent: 0,
             gridSize: 2,
-            experience: 0,
+            experience: Number(calculateExperience(level, currentExp)),
             accessibleIndices: accessibleIndices[level],
         };
     } else if (level <= 2) {
@@ -47,7 +49,7 @@ export const calculateForest = (level: number) => {
             treeMax: 9,
             treeCurrent: 0,
             gridSize: 3,
-            experience: 0,
+            experience: Number(calculateExperience(level, currentExp)),
             accessibleIndices: accessibleIndices[level],
         };
     } else {
@@ -56,8 +58,13 @@ export const calculateForest = (level: number) => {
             treeMax: 9,
             treeCurrent: 0,
             gridSize: 3,
-            experience: 0,
+            experience: Number(calculateExperience(level, currentExp)),
             accessibleIndices: accessibleIndices[2],
         };
     }
+};
+
+//? 현재 감정 데이터의 최대값을 기준으로
+export const calculateTree = (level: number) => {
+    console.log(level);
 };

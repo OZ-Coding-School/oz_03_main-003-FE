@@ -9,6 +9,8 @@ import HomeDescription from "./HomeDescription";
 
 const HomeMain = () => {
     const { getUserInfo, getUserLevelInfo } = useUserInfo();
+    const [isOpen, setIsOpen] = useState(false);
+    const [treeIndex, setTreeIndex] = useState(0);
 
     useEffect(() => {
         const refreshUserInfo = async () => {
@@ -18,14 +20,13 @@ const HomeMain = () => {
         refreshUserInfo();
     }, [getUserInfo, getUserLevelInfo]);
 
-    const [isOpen, setIsOpen] = useState(false);
-
     const handleModalClose = () => {
         setIsOpen(false);
     };
 
     const handleModalOpen = (id: number) => {
         console.log(id);
+        setTreeIndex(id);
         setIsOpen(true);
     };
 
@@ -40,7 +41,9 @@ const HomeMain = () => {
                 </div>
             </main>
             <HomeDescription />
-            {isOpen && <ModalCreateTree isOpen={isOpen} onClose={handleModalClose} />}
+            {isOpen && (
+                <ModalCreateTree treeIndex={treeIndex} isOpen={isOpen} onClose={handleModalClose} />
+            )}
         </div>
     );
 };
