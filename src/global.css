@@ -42,3 +42,8 @@
     background-color: #dad0ea;
     border-radius: 10px;
 }
+
+body {
+    background-color: black;
+    overflow-y: hidden;
+}

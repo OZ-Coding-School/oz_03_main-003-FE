@@ -12,8 +12,16 @@ export interface UserLevel {
     treeCurrent: number;
     gridSize: number;
     userExperience: number;
+    accessibleIndices: number[];
+    forest_UUID: string;
 }
 
 export interface AccessibleIndices {
     [key: number]: number[];
+}
+
+export enum AuthStatusType {
+    LOADING = 1,
+    VERIFIED = 2,
+    UNVERIFIED = 3,
 }
