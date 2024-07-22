@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import PageLoading from "../pages/PageLoading";
 import useVerify from "../hook/useVerify";
@@ -17,18 +17,18 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest
     const { pathname } = useLocation();
     const [isVerified, setIsVerified] = useState<boolean | null>(false);
 
-    useEffect(() => {
-        const verifyUser = async () => {
-            try {
-                await checkLoginStatus();
-                setIsVerified(true);
-            } catch (error) {
-                setIsVerified(false);
-            }
-        };
+    const verifyUser = useCallback(async () => {
+        try {
+            await checkLoginStatus();
+            setIsVerified(true);
+        } catch (error) {
+            setIsVerified(false);
+        }
+    }, [checkLoginStatus]);
 
+    useEffect(() => {
         verifyUser();
-    }, [checkLoginStatus, pathname]);
+    }, [verifyUser, checkLoginStatus, pathname]);
 
     if (!isVerified) {
         return <PageLoading />;

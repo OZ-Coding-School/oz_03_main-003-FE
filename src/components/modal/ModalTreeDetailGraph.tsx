@@ -50,7 +50,7 @@ const ModalTreeDetailGraph = ({ emotion }: ModalTreeDetailGraphProps) => {
             color: "bg-gray-600 text-gray-600 fill-gray-600",
             count: emotion.indifference,
         },
-    ] as const;
+    ];
 
     return (
         <div className="w-full h-[200px] flex flex-col">

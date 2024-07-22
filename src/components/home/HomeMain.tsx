@@ -53,26 +53,35 @@ const HomeMain = () => {
                     </ButtonPrimary>
                 </div>
             </nav>
-            <main
-                style={{ backgroundImage: `url("/img/grid-background.png")` }}
-                className={tw("flex bg-cover items-center justify-center h-screen")}
-            >
+            <main className={tw("flex bg-cover items-center justify-center h-screen")}>
                 <div className="w-full relative flex items-center justify-center h-screen bg-cover">
-                    <sub
-                        style={{ backgroundImage: `url("/img/grid-cover.png")` }}
-                        className="absolute w-full h-screen bg-cover"
-                    ></sub>
-                    <div
+                    <img
+                        fetchPriority="high"
+                        src="/img/grid-background.webp"
+                        alt="gird-background"
+                        className="absolute animate-blur w-full h-screen bg-cover"
+                    ></img>
+                    <img
+                        fetchPriority="high"
+                        alt="grid-cover"
+                        src="/img/grid-cover.webp"
+                        className="absolute animate-blur w-full h-screen bg-cover"
+                    ></img>
+                    <img
+                        fetchPriority="high"
+                        alt="grid-userLevel"
                         className={tw(
-                            "absolute z-0 bg-cover flex justify-center items-center mr-10",
+                            "absolute animate-blur z-0 bg-cover flex justify-center items-center mr-10",
                             userData.level.userLevel > 1
                                 ? "w-[900px] h-[710px] mt-[400px]"
                                 : "w-[600px] h-[535px] mt-[200px]"
                         )}
-                        style={{
-                            backgroundImage: `url(${userData.level.userLevel > 1 ? "/img/grid-lv2.png" : "/img/grid-lv1.png"})`,
-                        }}
-                    ></div>
+                        src={
+                            userData.level.userLevel > 1
+                                ? "/img/grid-lv2.webp"
+                                : "/img/grid-lv1.webp"
+                        }
+                    ></img>
                     <div
                         style={{
                             transformStyle: "preserve-3d",
@@ -121,6 +130,10 @@ const HomeMain = () => {
             </main>
 
             {isOpen && <ModalCreateTree isOpen={isOpen} onClose={handleModalClose} />}
+            <div className="text-gray-200 text-sm select-none absolute bottom-5 right-10 animate-blur">
+                <p>해당 웹페이지는 현재 모바일을 지원하지 않습니다.</p>
+                <p>This webpage does not currently support mobile.</p>
+            </div>
         </div>
     );
 };

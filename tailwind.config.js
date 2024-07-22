@@ -14,12 +14,13 @@ export default {
                 },
                 blur: {
                     "0%": { opacity: 0 },
-                    "100%": { opacity: 0.5 },
+                    "100%": { opacity: 1 },
                 },
             },
             animation: {
                 width: "width 1s ease-out forwards",
                 height: "height 1.5s ease-out forwards",
+                blur: "blur 0.5s ease-out forwards",
             },
 
             screens: {
