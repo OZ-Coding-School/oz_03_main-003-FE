@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useUserStore } from "../config/store";
 import dayjs from "dayjs";
 import { authApi, forestApi } from "../api";
-import { calculateForest } from "../components/util/UtilUserLevel";
+import { calculateForest } from "../util/UtilUserLevel";
 
 /**
  * @description 사용자 정보를 불러오는 커스텀 훅입니다. 비동기이므로 로딩 상태도 제공합니다.

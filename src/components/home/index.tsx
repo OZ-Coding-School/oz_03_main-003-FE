@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import useUserInfo from "../../hook/useUserInfo";
-import UserInfoHome from "../userInfo/UserInfoHome";
-import ModalCreateTree from "../modal/ModalCreateTree";
+import UserInfoHome from "../common/userInfo/UserInfoHome";
+import ModalCreateTree from "../common/modal/ModalCreateTree";
 import HomeBackground from "./HomeBackground";
 import HomeGrid from "./HomeGrid";
 import HomeDescription from "./HomeDescription";
