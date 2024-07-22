@@ -1,9 +1,9 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ButtonDefault from "../button/ButtonDefault";
 import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
-import useUserInfo from "../../../hook/useUserInfo";
+import useInfo from "../../../hook/useInfo";
 import { authApi } from "../../../api";
 import useVerify from "../../../hook/useVerify";
 
@@ -13,11 +13,12 @@ interface ModalChangeNameProps {
 }
 
 const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) => {
-    const { getUserInfo } = useUserInfo();
+    const { getUserInfo } = useInfo();
     const { checkLoginStatus } = useVerify();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [isUpdatedNewName, setIsUpdatedNewName] = useState("");
+    const [userNameAlert, setUserNameAlert] = useState(false);
     useEffect(() => {
         if (inputRef.current && isOpen) {
             inputRef.current.focus();
@@ -28,18 +29,24 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
         e.stopPropagation();
     };
 
-    const closeHandler = () => {
-        onClose();
-    };
-
-    const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setIsUpdatedNewName(e.target.value);
-    };
-
     const handleButtonClick = async () => {
+        if (isUpdatedNewName.trim() === "") {
+            inputRef.current?.focus();
+            return setUserNameAlert(true);
+        }
         await checkLoginStatus();
         await authApi.updateUserInfoName(isUpdatedNewName);
         await getUserInfo();
+        handleModalClose();
+    };
+
+    const handleModalClose = () => {
+        onClose();
+    };
+
+    const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserNameAlert(false);
+        setIsUpdatedNewName(e.currentTarget.value);
     };
 
     return (
@@ -51,9 +58,9 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0 }}
                     transition={{ duration: 0.5, type: "spring" }}
-                    onClick={closeHandler}
+                    onClick={handleModalClose}
                     onKeyDown={(e) => {
-                        e.key === "Escape" && closeHandler();
+                        e.key === "Escape" && handleModalClose();
                     }}
                     className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
                 >
@@ -71,17 +78,25 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
                             placeholder="새 이름을 지어주세요."
                             className={tw(
                                 "mt-6 border-b outline-none border-gray-600",
-                                "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
+                                "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white",
+                                userNameAlert && "border-literal-error focus:border-literal-error"
                             )}
                             onChange={handleInputValue}
                             ref={inputRef}
                         />
+                        <p
+                            className={tw(
+                                "text-literal-error animate-blur text-xs",
+                                !userNameAlert && "invisible"
+                            )}
+                        >
+                            1글자 이상 작성해 주세요.
+                        </p>
                         <div className="text-right mt-4">
                             <ButtonDefault
                                 className="ml-1"
                                 onClick={() => {
                                     handleButtonClick();
-                                    onClose();
                                 }}
                             >
                                 변경하기
@@ -90,7 +105,7 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
                         <button
                             type="button"
                             className="text-zero w-5 h-5 absolute right-5 top-5 fill-gray-600 hover:fill-white transition"
-                            onClick={closeHandler}
+                            onClick={handleModalClose}
                         >
                             <IconClose />
                             닫기

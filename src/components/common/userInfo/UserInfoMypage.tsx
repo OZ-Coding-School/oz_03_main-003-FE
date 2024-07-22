@@ -79,10 +79,10 @@ const UserInfoMyPage = () => {
                             <li className="mb-3">: {userData.user.email}</li>
                             <li className="mb-3">: {userData.user.created_at}</li>
                             <li className="mb-3">
-                                : {userData.level.treeCurrent} / {userData.level.treeMax}
+                                : {userData.tree.treeCurrent} / {userData.tree.treeMax}
                             </li>
                             <li className="mb-3">
-                                : {userData.level.gridSize} x {userData.level.gridSize}
+                                : {userData.tree.gridSize} x {userData.tree.gridSize}
                             </li>
                         </ul>
                     </div>

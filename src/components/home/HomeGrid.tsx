@@ -14,14 +14,14 @@ const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
     };
 
     const isAccessible = (index: number): boolean => {
-        return userData.level.accessibleIndices.includes(index) || false;
+        return userData.tree.accessibleIndices.includes(index) || false;
     };
     return (
         <>
             <div
                 style={{
                     transformStyle: "preserve-3d",
-                    transform: "rotateX(51deg) rotateZ(43deg)",
+                    transform: "rotateX(45deg) rotateZ(45deg)",
                 }}
                 className={tw(
                     "grid gap-0",

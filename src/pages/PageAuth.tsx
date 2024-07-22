@@ -3,25 +3,25 @@ import ButtonSignInGoogle from "../components/common/button/ButtonSignInGoogle";
 import { authApi, forestApi } from "../api";
 import Landing from "../components/Landing";
 import { useNavigate } from "react-router-dom";
-import useUserInfo from "../hook/useUserInfo";
+import useUserInfo from "../hook/useInfo";
 
 const PageAuth = () => {
     const nav = useNavigate();
-    const { getUserInfo, getUserLevelInfo } = useUserInfo();
+    const { getUserInfo, getUserGridInfo } = useUserInfo();
 
     const googleLoginRequest = async (token: string) => {
         try {
             const result = await authApi.userGoogleAccessTokenReceiver(token);
-            console.log(result);
+
             if (result.status === 200) {
                 await getUserInfo();
-                await getUserLevelInfo();
+                await getUserGridInfo();
                 nav("/home");
             }
             if (result.status === 201) {
                 await forestApi.createForest();
                 await getUserInfo();
-                await getUserLevelInfo();
+                await getUserGridInfo();
                 nav("/home");
             }
         } catch (error) {

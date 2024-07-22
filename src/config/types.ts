@@ -8,12 +8,29 @@ export interface UserAccount {
 
 export interface UserLevel {
     userLevel: number;
+    userExperience: number;
+    forestUUID: string;
+}
+
+export interface UserTreeDetail {
+    tree_uuid: string;
+    tree_name: string;
+    tree_level: number;
+    location: number;
+    emotion: {
+        happiness: number;
+        anger: number;
+        sadness: number;
+        worry: number;
+        indifference: number;
+    };
+}
+
+export interface UserTree {
     treeMax: number;
     treeCurrent: number;
     gridSize: number;
-    userExperience: number;
     accessibleIndices: number[];
-    forest_UUID: string;
 }
 
 export interface AccessibleIndices {
@@ -24,4 +41,10 @@ export enum AuthStatusType {
     LOADING = 1,
     VERIFIED = 2,
     UNVERIFIED = 3,
+}
+
+export interface TreeFormData {
+    tree_name: string;
+    tree_level: number;
+    location: number;
 }

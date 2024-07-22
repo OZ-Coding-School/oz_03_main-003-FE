@@ -19,7 +19,7 @@ export default {
             },
             animation: {
                 width: "width 1s ease-out forwards",
-                height: "height 1.5s ease-out forwards",
+                height: "height 1s ease-out forwards",
                 blur: "blur 0.5s ease-out forwards",
             },
 

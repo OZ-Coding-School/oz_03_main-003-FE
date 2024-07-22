@@ -68,10 +68,10 @@ const UserInfoHome = () => {
                     </ul>
                     <ul>
                         <li className="mb-3">
-                            : {userData.level.treeCurrent} / {userData.level.treeMax}
+                            : {userData.tree.treeCurrent} / {userData.tree.treeMax}
                         </li>
                         <li className="mb-3">
-                            : {userData.level.gridSize} x {userData.level.gridSize}
+                            : {userData.tree.gridSize} x {userData.tree.gridSize}
                         </li>
                     </ul>
                 </div>
