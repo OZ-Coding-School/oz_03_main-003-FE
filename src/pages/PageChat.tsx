@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { contentDummy } from "../components/chatList/ChatListDummy";
-import ChatListHeader from "../components/chatList/ChatListHeader";
-import ChatListItem from "../components/chatList/ChatListItem";
-import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
-import ModalCreateChat from "../components/modal/ModalCreateChat";
+import { contentDummy } from "../components/common/chatList/ChatListDummy";
+import ChatListHeader from "../components/common/chatList/ChatListHeader";
+import ChatListItem from "../components/common/chatList/ChatListItem";
+import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
+import ModalCreateChat from "../components/common/modal/ModalCreateChat";
 import useUserInfo from "../hook/useUserInfo";
 
 const PageChat = () => {

@@ -1,5 +1,5 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import ButtonSignInGoogle from "../components/button/ButtonSignInGoogle";
+import ButtonSignInGoogle from "../components/common/button/ButtonSignInGoogle";
 import { authApi, forestApi } from "../api";
 import Landing from "../components/Landing";
 import { useNavigate } from "react-router-dom";

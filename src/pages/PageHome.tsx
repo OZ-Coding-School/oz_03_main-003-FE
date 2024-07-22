@@ -1,4 +1,4 @@
-import HeaderLoggedIn from "../components/header/HeaderLoggedIn";
+import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import HomeMain from "../components/home";
 
 const PageHome = () => {
