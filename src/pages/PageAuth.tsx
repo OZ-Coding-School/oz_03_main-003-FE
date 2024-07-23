@@ -4,10 +4,30 @@ import { authApi, forestApi } from "../api";
 import Landing from "../components/Landing";
 import { useNavigate } from "react-router-dom";
 import useUserInfo from "../hook/useInfo";
+import { useEffect } from "react";
 
 const PageAuth = () => {
     const nav = useNavigate();
     const { getUserInfo, getUserGridInfo } = useUserInfo();
+
+    useEffect(() => {
+        const loginUserVerify = async () => {
+            try {
+                await authApi.userTokenVerify();
+                nav("/home");
+            } catch (tokenError) {
+                console.log("AccessToken Verification Failed. Retrying...");
+                try {
+                    await authApi.userTokenRefresh();
+                    await authApi.userTokenVerify();
+                    nav("/home");
+                } catch (retryError) {
+                    console.error(retryError);
+                }
+            }
+        };
+        loginUserVerify();
+    }, [nav]);
 
     const googleLoginRequest = async (token: string) => {
         try {
