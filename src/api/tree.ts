@@ -2,7 +2,7 @@ import { TreeFormData } from "../config/types";
 import { axiosInstance } from "./axios";
 
 export const createTree = () => {
-    return axiosInstance.post("/trees/");
+    return axiosInstance.post("/trees/new");
 };
 
 export const getTreeDataAll = () => {
