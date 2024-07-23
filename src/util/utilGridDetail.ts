@@ -35,18 +35,6 @@ export const calculateTree = async () => {
     const { data: emotionResponse } = await treeApi.getTreeEmotionDataAll();
     const indices = calculateGrid(treeResponse, accessibleIndices);
 
-    if (emotionResponse !== "object") {
-        //TODO: 백엔드 개선후 삭제 예정
-        return {
-            treeMax: accessibleIndices[forestResponse.forest_level].length,
-            treeCurrent: treeResponse.length,
-            gridSize: Math.sqrt(accessibleIndices[forestResponse.forest_level].length),
-            accessibleIndices: indices[forestResponse.forest_level],
-            details: treeResponse,
-            emotions: [],
-        };
-    }
-
     return {
         treeMax: accessibleIndices[forestResponse.forest_level].length,
         treeCurrent: treeResponse.length,

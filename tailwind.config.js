@@ -16,11 +16,17 @@ export default {
                     "0%": { opacity: 0 },
                     "100%": { opacity: 1 },
                 },
+                gravity: {
+                    "0%": { transform: "translateY(5px)" },
+                    "50%": { transform: "translateY(0px)" },
+                    "100%": { transform: "translateY(5px)" },
+                },
             },
             animation: {
                 width: "width 1s ease-out forwards",
                 height: "height 1s ease-out forwards",
                 blur: "blur 0.5s ease-out forwards",
+                gravity: "gravity 3s ease-in-out infinite",
             },
 
             screens: {

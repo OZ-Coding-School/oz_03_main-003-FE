@@ -6,7 +6,6 @@ import HomeBackground from "./HomeBackground";
 import HomeGrid from "./HomeGrid";
 import HomeDescription from "./HomeDescription";
 import useInfo from "../../hook/useInfo";
-
 const HomeMain = () => {
     const { getUserInfo, getUserGridInfo, getUserLevelInfo } = useInfo();
     const [isOpen, setIsOpen] = useState(false);
@@ -38,9 +37,11 @@ const HomeMain = () => {
             <main className={tw("flex bg-cover items-center justify-center h-screen")}>
                 <div className="w-full relative flex items-center justify-center h-screen bg-cover">
                     <HomeBackground />
+
                     <HomeGrid onCreateTreeModal={handleModalOpen} />
                 </div>
             </main>
+
             <HomeDescription />
             {isOpen && (
                 <ModalCreateTree treeIndex={treeIndex} isOpen={isOpen} onClose={handleModalClose} />

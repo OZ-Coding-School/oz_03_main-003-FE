@@ -19,7 +19,7 @@ const HomeBackground = () => {
             <img
                 alt="grid-userLevel"
                 className={tw(
-                    "absolute select-none animate-blur z-0 bg-cover flex justify-center items-center mr-10",
+                    "absolute select-none z-0 bg-cover flex justify-center items-center mr-10",
                     userData.level.userLevel > 1
                         ? "w-[900px] h-[710px] mt-[400px]"
                         : "w-[600px] h-[535px] mt-[200px]"

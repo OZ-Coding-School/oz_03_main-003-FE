@@ -18,6 +18,7 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ isOpen, onClose, tree
     const inputRef = useRef<HTMLInputElement>(null);
     const [treeName, setTreeName] = useState("");
     const [treeNameAlert, setTreeNameAlert] = useState(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const { getUserGridInfo } = useInfo();
 
     const { checkLoginStatus } = useVerify();
@@ -52,9 +53,13 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ isOpen, onClose, tree
             inputRef.current?.focus();
             return setTreeNameAlert(true);
         }
-        await checkLoginStatus();
-        const { data: createTreeResponse } = await treeApi.createTree();
-        updateTreeHandler(createTreeResponse.tree_uuid);
+        if (!isLoading) {
+            setIsLoading(true);
+            await checkLoginStatus();
+            const { data: createTreeResponse } = await treeApi.createTree();
+            await updateTreeHandler(createTreeResponse.tree_uuid);
+            setIsLoading(false);
+        }
     };
 
     const treeNameInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,6 +79,7 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ isOpen, onClose, tree
                     onClick={closeHandler}
                     onKeyDown={(e) => {
                         e.key === "Escape" && closeHandler();
+                        e.key === "Enter" && createTreeHandler();
                     }}
                     className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
                 >

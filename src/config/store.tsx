@@ -6,13 +6,14 @@ interface UserStore {
         user: UserAccount;
         level: UserLevel;
         tree: UserTree;
-        treeDetail: UserTreeDetail | object;
+        treeDetail: UserTreeDetail[] | Record<string, never>;
+        treeEmotion: UserTreeEmotionDetail[] | Record<string, never>;
     };
     setUserData: (data: UserAccount) => void;
     setLevelData: (data: UserLevel) => void;
     setTreeData: (data: UserTree) => void;
-    setTreeDetailData: (data: UserTreeDetail) => void;
-    setTreeDetailEmotionData: (data: UserTreeEmotionDetail) => void;
+    setTreeDetailData: (data: UserTreeDetail[]) => void;
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
 }
 
 /**
@@ -41,8 +42,8 @@ export const useUserStore = create<UserStore>((set) => ({
             gridSize: 0,
             accessibleIndices: [],
         },
-        treeDetail: {},
-        treeEmotion: {},
+        treeDetail: [],
+        treeEmotion: [],
     },
 
     setUserData: (data: UserAccount) =>
@@ -57,11 +58,11 @@ export const useUserStore = create<UserStore>((set) => ({
         set((state) => ({
             userData: { ...state.userData, tree: data },
         })),
-    setTreeDetailData: (data: UserTreeDetail) =>
+    setTreeDetailData: (data: UserTreeDetail[]) =>
         set((state) => ({
             userData: { ...state.userData, treeDetail: data },
         })),
-    setTreeDetailEmotionData: (data: UserTreeEmotionDetail) =>
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) =>
         set((state) => ({
             userData: { ...state.userData, treeEmotion: data },
         })),

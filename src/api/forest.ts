@@ -4,7 +4,7 @@ export const createForest = () => {
     return axiosInstance.post("/forest/new");
 };
 export const getForestData = () => {
-    return axiosInstance.get("/forest");
+    return axiosInstance.get("/forest/");
 };
 
 export const updateForestLevel = (uuid: string, level: number) => {

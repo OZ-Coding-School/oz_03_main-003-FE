@@ -8,15 +8,13 @@ export const createTree = () => {
 export const getTreeDataAll = () => {
     return axiosInstance.get("/trees/");
 };
+
 export const getTreeData = (id: string) => {
-    return axiosInstance.get(`/trees/${id}`);
+    return axiosInstance.get(`/trees/?tree_uuid=${id}`);
 };
 
 export const getTreeEmotionDataAll = () => {
-    return axiosInstance.get(`/trees/emotion/`);
-};
-export const getTreeEmotionData = (id: string) => {
-    return axiosInstance.get(`/trees/emotion/${id}`);
+    return axiosInstance.get(`/trees/emotion`);
 };
 
 export const updateTree = (id: string, form: TreeFormData) => {

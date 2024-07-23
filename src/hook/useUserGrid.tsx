@@ -13,12 +13,9 @@ const useUserGrid = () => {
             gridSize: treeData.gridSize,
             accessibleIndices: treeData.accessibleIndices,
         });
-        setTreeDetailData({
-            ...treeData.details,
-        });
-        setTreeDetailEmotionData({
-            ...treeData.emotions,
-        });
+
+        setTreeDetailData(treeData.details);
+        setTreeDetailEmotionData(treeData.emotions);
     }, [setTreeData, setTreeDetailData, setTreeDetailEmotionData]);
 
     return {

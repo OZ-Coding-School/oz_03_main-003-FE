@@ -21,7 +21,7 @@ const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
             <div
                 style={{
                     transformStyle: "preserve-3d",
-                    transform: "rotateX(45deg) rotateZ(45deg)",
+                    transform: "rotateX(50deg) rotateZ(45deg)",
                 }}
                 className={tw(
                     "grid gap-0",
@@ -50,7 +50,26 @@ const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
                                     }
                                 }}
                             >
-                                {index}
+                                {userData.treeDetail.map((item) => {
+                                    if (index === item.location) {
+                                        return (
+                                            <div
+                                                style={{
+                                                    transform: "skewX(45deg) skewY(-27deg)",
+                                                }}
+                                                className={tw(
+                                                    "w-[300px] h-[300px] flex relative origin-center bottom-20",
+                                                    "text-xl text-white z-10"
+                                                )}
+                                            >
+                                                <img
+                                                    className="object-cover"
+                                                    src="/img/tree-0.png"
+                                                />
+                                            </div>
+                                        );
+                                    }
+                                })}
                             </div>
                         );
                     })}
