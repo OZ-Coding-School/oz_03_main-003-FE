@@ -23,12 +23,12 @@ const PageChat: FC = () => {
     useEffect(() => {
         const fetchChatRooms = async () => {
             try {
-                const chatRooms = await getChatRooms();
-                console.log("Fetched chat rooms:", chatRooms);
-                if (Array.isArray(chatRooms)) {
-                    setChatList(chatRooms);
+                const response = await getChatRooms();
+                console.log("Fetched chat rooms:", response.data); // response.data로 접근
+                if (Array.isArray(response.data)) {
+                    setChatList(response.data);
                 } else {
-                    console.error("Fetched chat rooms are not in array format:", chatRooms);
+                    console.error("Fetched chat rooms are not in array format:", response.data);
                 }
             } catch (error) {
                 console.error("Failed to fetch chat rooms:", error);

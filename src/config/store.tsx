@@ -102,7 +102,7 @@ export const useChatStore = create<ChatStore>((set) => ({
     chatList: [],
     addChatRoom: (chatRoom) =>
         set((state) => ({
-            chatList: [chatRoom, ...state.chatList], // 최신순으로 추가
+            chatList: [chatRoom, ...state.chatList],
         })),
     setChatList: (chatList) =>
         set(() => ({

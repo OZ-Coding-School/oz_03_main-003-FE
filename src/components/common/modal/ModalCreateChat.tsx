@@ -4,13 +4,9 @@ import { IconClose, IconSelectArrow } from "../../../config/IconData";
 import ModalListItem from "./ModalListItem";
 import { twMerge as tw } from "tailwind-merge";
 import useVerify from "../../../hook/useVerify";
-import { CreateChatRoom, getTreeDataAll } from "../../../api/chat";
+import { CreateChatRoom } from "../../../api/chat";
+import useTrees from "../../../hook/useTrees";
 import { ChatRoom } from "../../../config/store";
-
-interface TreeItem {
-    id: number;
-    group_name: string;
-}
 
 interface ModalCreateChatProps {
     onClose: () => void;
@@ -23,7 +19,7 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
     const [chatRoomName, setChatRoomName] = useState("");
     const [selectedRelation, setSelectedRelation] = useState("default");
     const [errorMessage, setErrorMessage] = useState("");
-    const [trees, setTrees] = useState<TreeItem[]>([]);
+    const { trees, loading, error } = useTrees();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const { checkLoginStatus } = useVerify();
@@ -32,17 +28,6 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
         if (inputRef.current) {
             inputRef.current.focus();
         }
-
-        const fetchTrees = async () => {
-            try {
-                const treesData = await getTreeDataAll();
-                setTrees(treesData);
-            } catch (error) {
-                console.error("Failed to fetch tree data:", error);
-            }
-        };
-
-        fetchTrees();
     }, []);
 
     const createChatHandler = async () => {
@@ -53,19 +38,20 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
 
         await checkLoginStatus();
         try {
-            const result = await CreateChatRoom({
+            const form = {
                 chat_room_name: chatRoomName,
                 analyze_target_name: selectedTree,
                 analyze_target_relation: selectedRelation,
-            });
-            console.log("Chat room created:", result);
+            };
+            const response = await CreateChatRoom(form);
+            console.log("Chat room created:", response);
 
             onAddChatRoom({
-                chat_room_uuid: result.chat_room_uuid,
+                chat_room_uuid: response.data.chat_room_uuid,
                 chat_room_name: chatRoomName,
                 analyze_target_name: selectedTree,
                 analyze_target_relation: selectedRelation,
-                created_at: new Date().toISOString(),
+                created_at: response.data.created_at,
             });
 
             onClose();
@@ -82,6 +68,14 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
         setIsDropdownOpen(false);
     };
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
     return (
         <div
             className={tw(
@@ -96,7 +90,7 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
                 value={chatRoomName}
                 onChange={(e) => {
                     setChatRoomName(e.target.value);
-                    setErrorMessage(""); // 입력값이 변경될 때 에러 메시지 초기화
+                    setErrorMessage("");
                 }}
                 className={tw(
                     "mt-6 border-b outline-none border-gray-600",
