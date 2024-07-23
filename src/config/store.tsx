@@ -82,3 +82,30 @@ export const useUserStore = create<UserStore>((set) => ({
             userData: { ...state.userData, treeEmotion: data },
         })),
 }));
+// src/config/store.ts
+
+export interface ChatRoom {
+    chat_room_uuid: string;
+    chat_room_name: string;
+    analyze_target_name: string;
+    analyze_target_relation: string;
+    created_at: string;
+}
+
+interface ChatStore {
+    chatList: ChatRoom[];
+    addChatRoom: (chatRoom: ChatRoom) => void;
+    setChatList: (chatList: ChatRoom[]) => void;
+}
+
+export const useChatStore = create<ChatStore>((set) => ({
+    chatList: [],
+    addChatRoom: (chatRoom) =>
+        set((state) => ({
+            chatList: [chatRoom, ...state.chatList], // 최신순으로 추가
+        })),
+    setChatList: (chatList) =>
+        set(() => ({
+            chatList: chatList,
+        })),
+}));

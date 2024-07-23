@@ -1,16 +1,19 @@
+// src/components/common/chatList/ChatListItem.tsx
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import { IconChange, IconDeleteBtn } from "../../../config/IconData";
 
-interface ChatListItem {
+interface ChatListItemProps {
     item: {
+        chat_room_uuid: string;
         chat_room_name: string;
         analyze_target_name: string;
+        analyze_target_relation: string;
         created_at: string;
     };
 }
 
-const ChatListItem = ({ item }: ChatListItem) => {
+const ChatListItem = ({ item }: ChatListItemProps) => {
     const [hover, setHover] = useState(false);
 
     return (
