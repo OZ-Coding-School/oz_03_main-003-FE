@@ -62,20 +62,3 @@ const HomeTree = ({
 };
 
 export default HomeTree;
-
-{
-    /* <div
-style={{
-    transform: "skewX(45deg) skewY(-27deg)",
-}}
-className={tw(
-    "w-[300px] h-[300px] flex relative origin-center bottom-20",
-    "text-xl text-white z-10"
-)}
->
-<img
-    className="object-cover"
-    src="/img/tree-0.png"
-/>
-</div> */
-}

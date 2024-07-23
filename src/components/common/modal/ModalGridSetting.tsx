@@ -33,9 +33,9 @@ const ModalGridSetting = ({ tree_uuid, onEditModal, onDetailModal }: ModalGridSe
             <div className="relative w-40 h-40 border-gray-600 mt-32">
                 <div
                     className={tw(
-                        "border h-[38px] border-gray-600 rounded-full",
+                        "border bg-opacity-75 border-gray-600 rounded-full",
                         "flex gap-1 justify-center bg-gray-800 fill-white text-zero p-1 max-w-auto",
-                        "absolute top-0 left-1/2 -translate-x-1/2"
+                        "absolute -top-3 left-1/2 -translate-x-1/2"
                     )}
                 >
                     <button
