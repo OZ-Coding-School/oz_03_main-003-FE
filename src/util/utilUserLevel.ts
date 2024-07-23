@@ -50,6 +50,10 @@ export const calculateUserLevel = async (level: number, forestUUID: string): Pro
     }
 
     const { data: emotionResponse } = await treeApi.getTreeEmotionDataAll();
+    if (emotionResponse !== "object") {
+        //TODO: 백엔드 개선후 삭제 예정
+        return { userLevel: level, experience: 0 };
+    }
     const currentExp = calculateCurrentExperience(emotionResponse);
     const percentage = calculateExperience(level, currentExp);
 
