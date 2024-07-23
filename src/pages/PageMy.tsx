@@ -3,7 +3,6 @@ import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import UserInfoMyPage from "../components/common/userInfo/UserInfoMypage";
 import useUserInfo from "../hook/useInfo";
 import { useUserStore } from "../config/store";
-
 const PageMy = () => {
     const { getUserInfo, getUserGridInfo } = useUserInfo();
 

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { UserAccount, UserLevel, UserTree, UserTreeDetail } from "./types";
+import { UserAccount, UserLevel, UserTree, UserTreeDetail, UserTreeEmotionDetail } from "./types";
 
 interface UserStore {
     userData: {
@@ -12,6 +12,7 @@ interface UserStore {
     setLevelData: (data: UserLevel) => void;
     setTreeData: (data: UserTree) => void;
     setTreeDetailData: (data: UserTreeDetail) => void;
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail) => void;
 }
 
 /**
@@ -41,6 +42,7 @@ export const useUserStore = create<UserStore>((set) => ({
             accessibleIndices: [],
         },
         treeDetail: {},
+        treeEmotion: {},
     },
 
     setUserData: (data: UserAccount) =>
@@ -58,5 +60,9 @@ export const useUserStore = create<UserStore>((set) => ({
     setTreeDetailData: (data: UserTreeDetail) =>
         set((state) => ({
             userData: { ...state.userData, treeDetail: data },
+        })),
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail) =>
+        set((state) => ({
+            userData: { ...state.userData, treeEmotion: data },
         })),
 }));

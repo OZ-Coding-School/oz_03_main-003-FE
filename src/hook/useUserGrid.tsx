@@ -3,7 +3,7 @@ import { calculateTree } from "../util/utilGridDetail";
 import { useUserStore } from "../config/store";
 
 const useUserGrid = () => {
-    const { setTreeData, setTreeDetailData } = useUserStore();
+    const { setTreeData, setTreeDetailData, setTreeDetailEmotionData } = useUserStore();
     const getUserGridInfo = useCallback(async () => {
         const treeData = await calculateTree();
 
@@ -13,12 +13,13 @@ const useUserGrid = () => {
             gridSize: treeData.gridSize,
             accessibleIndices: treeData.accessibleIndices,
         });
-
         setTreeDetailData({
             ...treeData.details,
+        });
+        setTreeDetailEmotionData({
             ...treeData.emotions,
         });
-    }, [setTreeData, setTreeDetailData]);
+    }, [setTreeData, setTreeDetailData, setTreeDetailEmotionData]);
 
     return {
         getUserGridInfo,

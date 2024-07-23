@@ -17,6 +17,9 @@ export interface UserTreeDetail {
     tree_name: string;
     tree_level: number;
     location: number;
+}
+export interface UserTreeEmotionDetail {
+    tree_uuid: string;
     emotion: {
         happiness: number;
         anger: number;
