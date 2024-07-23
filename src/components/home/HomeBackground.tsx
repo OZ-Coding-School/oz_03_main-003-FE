@@ -9,12 +9,12 @@ const HomeBackground = () => {
             <img
                 src="/img/grid-background.webp"
                 alt="gird-background"
-                className="select-none absolute animate-blur w-full h-screen bg-cover"
+                className="select-none absolute w-full h-screen bg-cover"
             ></img>
             <img
                 alt="grid-cover"
                 src="/img/grid-cover.webp"
-                className="select-none absolute animate-blur w-full h-screen bg-cover"
+                className="select-none absolute w-full h-screen bg-cover"
             ></img>
             <img
                 alt="grid-userLevel"

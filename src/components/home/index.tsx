@@ -35,7 +35,7 @@ const HomeMain = () => {
             <UserInfoHome />
 
             <main className={tw("flex bg-cover items-center justify-center h-screen")}>
-                <div className="w-full relative flex items-center justify-center h-screen bg-cover">
+                <div className="w-full animate-blur relative flex items-center justify-center h-screen bg-cover">
                     <HomeBackground />
 
                     <HomeGrid onCreateTreeModal={handleModalOpen} />

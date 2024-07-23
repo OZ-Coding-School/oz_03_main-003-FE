@@ -1,5 +1,6 @@
 import { twMerge as tw } from "tailwind-merge";
 import { useUserStore } from "../../config/store";
+import HomeTree from "./HomeTree";
 
 interface HomeGridProps {
     onCreateTreeModal: (id: number) => void;
@@ -39,7 +40,7 @@ const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
                         const isEnabled = isAccessible(index);
                         return (
                             <div
-                                key={index}
+                                key={"grid" + index}
                                 className={tw(
                                     "w-[170px] h-[170px] transition",
                                     isEnabled && "hover:bg-primary hover:opacity-25 cursor-pointer"
@@ -53,20 +54,11 @@ const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
                                 {userData.treeDetail.map((item) => {
                                     if (index === item.location) {
                                         return (
-                                            <div
-                                                style={{
-                                                    transform: "skewX(45deg) skewY(-27deg)",
-                                                }}
-                                                className={tw(
-                                                    "w-[300px] h-[300px] flex relative origin-center bottom-20",
-                                                    "text-xl text-white z-10"
-                                                )}
-                                            >
-                                                <img
-                                                    className="object-cover"
-                                                    src="/img/tree-0.png"
-                                                />
-                                            </div>
+                                            <HomeTree
+                                                key={item.tree_uuid}
+                                                user_level={userData.level.userLevel}
+                                                {...item}
+                                            />
                                         );
                                     }
                                 })}

@@ -4,8 +4,6 @@ import { useUserStore } from "../../../config/store";
 import UserInfoBadge from "./UserInfoBadge";
 import { useState } from "react";
 import ModalChangeName from "../modal/ModalChangeName";
-import ButtonError from "../button/ButtonError";
-import { treeApi } from "../../../api";
 
 export interface userInfoData {
     created_at: string;
@@ -24,13 +22,6 @@ const UserInfoMyPage = () => {
 
     const handleModalOpen = () => {
         setIsOpen(true);
-    };
-
-    const removeHandler = () => {
-        const UUID = prompt("삭제를 원하는 나무의 UUID를 입력하세요 (콘솔창 참고)");
-        if (UUID) {
-            treeApi.deleteTree(UUID);
-        }
     };
 
     return (
@@ -99,9 +90,6 @@ const UserInfoMyPage = () => {
             </div>
             <UserInfoBadge />
             {isOpen && <ModalChangeName isOpen={isOpen} onClose={handleModalClose} />}
-            <ButtonError onClick={removeHandler} className="mt-8 w-fit px-4">
-                (개발) 나무삭제
-            </ButtonError>
         </div>
     );
 };
