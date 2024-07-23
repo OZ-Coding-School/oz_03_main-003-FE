@@ -7,14 +7,21 @@ const useUserLevel = () => {
     const { setLevelData } = useUserStore();
 
     const getUserLevelInfo = useCallback(async () => {
-        const { data: forestResponse } = await forestApi.getForestData();
-        const levelData = calculateUserLevel(forestResponse.forest_level);
+        try {
+            const { data: forestResponse } = await forestApi.getForestData();
+            const levelData = await calculateUserLevel(
+                forestResponse.forest_level,
+                forestResponse.forest_uuid
+            );
 
-        setLevelData({
-            forestUUID: forestResponse.forest_uuid,
-            userLevel: levelData.userLevel,
-            userExperience: levelData.experience,
-        });
+            setLevelData({
+                forestUUID: forestResponse.forest_uuid,
+                userLevel: levelData.userLevel,
+                userExperience: levelData.experience,
+            });
+        } catch (error) {
+            console.error("Error calculating user level:", error);
+        }
     }, [setLevelData]);
 
     return {
