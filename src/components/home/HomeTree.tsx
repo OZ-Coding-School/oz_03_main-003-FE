@@ -11,9 +11,19 @@ interface HomeTreeProps {
     user_level: number;
     tree_level: number;
     location: number;
+    onEditModal: (id: string) => void;
+    onDetailModal: (id: string) => void;
 }
 
-const HomeTree = ({ tree_uuid, tree_name, user_level, tree_level, location }: HomeTreeProps) => {
+const HomeTree = ({
+    tree_uuid,
+    tree_name,
+    user_level,
+    tree_level,
+    location,
+    onEditModal,
+    onDetailModal,
+}: HomeTreeProps) => {
     const nowLevel = user_level > 2 ? true : false;
     const [hover, setHover] = useState(false);
 
@@ -36,7 +46,13 @@ const HomeTree = ({ tree_uuid, tree_name, user_level, tree_level, location }: Ho
                 onMouseLeave={() => setHover(false)}
                 className="w-2/3 h-full absolute z-20 flex justify-center items-end"
             >
-                {hover && <ModalGridSetting tree_uuid={tree_uuid} />}
+                {hover && (
+                    <ModalGridSetting
+                        onDetailModal={onDetailModal}
+                        onEditModal={onEditModal}
+                        tree_uuid={tree_uuid}
+                    />
+                )}
                 {hover && (
                     <HomeTreeDescription treeName={tree_name} treeType={TREE_TYPE[tree_level]} />
                 )}

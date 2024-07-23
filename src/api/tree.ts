@@ -18,7 +18,7 @@ export const getTreeEmotionDataAll = () => {
 };
 
 export const updateTree = (id: string, form: TreeFormData) => {
-    return axiosInstance.put(`/trees/${id}`, form);
+    return axiosInstance.patch(`/trees/${id}`, form);
 };
 
 export const deleteTree = (id: string) => {

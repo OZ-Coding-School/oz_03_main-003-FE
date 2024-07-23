@@ -8,47 +8,47 @@ import {
 } from "../../../config/IconData";
 
 interface ModalTreeDetailGraphProps {
-    emotion: {
-        angry: number;
-        happy: number;
-        sorrow: number;
+    emotions: {
+        happiness: number;
+        anger: number;
+        sadness: number;
         worry: number;
         indifference: number;
     };
 }
 
-const ModalTreeDetailGraph = ({ emotion }: ModalTreeDetailGraphProps) => {
+const ModalTreeDetailGraph = ({ emotions }: ModalTreeDetailGraphProps) => {
     //? 해당 데이터는 API 적용시 수정될 데이터
     const emotionData = [
         {
             name: "분노",
             Icon: IconAngry,
             color: "bg-literal-angry text-literal-angry fill-literal-angry",
-            count: emotion.angry,
+            count: emotions.anger,
         },
         {
             name: "행복",
             Icon: IconHappy,
             color: "bg-literal-happy text-literal-happy fill-literal-happy",
-            count: emotion.happy,
+            count: emotions.happiness,
         },
         {
             name: "슬픔",
             Icon: IconSorrow,
             color: "bg-literal-sorrow text-literal-sorrow fill-literal-sorrow",
-            count: emotion.sorrow,
+            count: emotions.sadness,
         },
         {
             name: "걱정",
             Icon: IconWorry,
             color: "bg-literal-worry text-literal-worry fill-literal-worry",
-            count: emotion.worry,
+            count: emotions.worry,
         },
         {
             name: "무관심",
             Icon: IconIndifference,
             color: "bg-gray-600 text-gray-600 fill-gray-600",
-            count: emotion.indifference,
+            count: emotions.indifference,
         },
     ];
 
@@ -62,18 +62,14 @@ const ModalTreeDetailGraph = ({ emotion }: ModalTreeDetailGraphProps) => {
                 <article className="w-full h-full border-b border-gray-400">
                     <div className="w-full h-full pl-4 flex gap-[44px] items-end relative">
                         {emotionData.map(({ name, color, count }) => (
-                            <>
-                                <div
-                                    key={name}
-                                    style={
-                                        { "--target-height": `${count}%` } as React.CSSProperties
-                                    }
-                                    className={tw(
-                                        "relative border-white z-10 flex gap-[40px] w-2 rounded-t-[2px] animate-height",
-                                        color
-                                    )}
-                                ></div>
-                            </>
+                            <div
+                                key={name}
+                                style={{ "--target-height": `${count}%` } as React.CSSProperties}
+                                className={tw(
+                                    "relative border-white z-10 flex gap-[40px] w-2 rounded-t-[2px] animate-height",
+                                    color
+                                )}
+                            ></div>
                         ))}
                     </div>
                     <div className="absolute w-[calc(100%-20px)] border-gray-600 border-b top-0 mt-8"></div>

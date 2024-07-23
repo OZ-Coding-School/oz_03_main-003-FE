@@ -1,26 +1,25 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ButtonDefault from "../button/ButtonDefault";
 import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
+import useInfo from "../../../hook/useInfo";
 import { treeApi } from "../../../api";
 import useVerify from "../../../hook/useVerify";
-import { TreeFormData } from "../../../config/types";
-import useInfo from "../../../hook/useInfo";
 
-interface ModalCreateTreeProps {
-    treeLocation: number;
+interface ModalChangeNameProps {
     onClose: () => void;
+    treeUUID: string;
 }
 
-const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ onClose, treeLocation }) => {
-    const inputRef = useRef<HTMLInputElement>(null);
-    const [treeName, setTreeName] = useState("");
-    const [treeNameAlert, setTreeNameAlert] = useState(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+const ModalChangeTreeName = ({ onClose, treeUUID }: ModalChangeNameProps) => {
     const { getUserGridInfo } = useInfo();
-
     const { checkLoginStatus } = useVerify();
+
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [isUpdatedNewName, setIsUpdatedNewName] = useState("");
+    const [userNameAlert, setUserNameAlert] = useState(false);
+
     useEffect(() => {
         if (inputRef.current) {
             inputRef.current.focus();
@@ -31,39 +30,28 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ onClose, treeLocation
         e.stopPropagation();
     };
 
-    const closeHandler = () => {
+    const handleButtonClick = async () => {
+        if (isUpdatedNewName.trim() === "") {
+            inputRef.current?.focus();
+            return setUserNameAlert(true);
+        }
+        const nameForm = {
+            tree_name: isUpdatedNewName,
+        };
+
+        await checkLoginStatus();
+        await treeApi.updateTree(treeUUID, nameForm);
+        await getUserGridInfo();
+        handleModalClose();
+    };
+
+    const handleModalClose = () => {
         onClose();
     };
 
-    const updateTreeHandler = async (uuid: string) => {
-        const treeForm: TreeFormData = {
-            tree_name: treeName,
-            tree_level: 0,
-            location: treeLocation,
-        };
-        await treeApi.updateTree(uuid, treeForm);
-        await getUserGridInfo();
-        setTreeName("");
-        closeHandler();
-    };
-
-    const createTreeHandler = async () => {
-        if (treeName.trim() === "") {
-            inputRef.current?.focus();
-            return setTreeNameAlert(true);
-        }
-        if (!isLoading) {
-            setIsLoading(true);
-            await checkLoginStatus();
-            const { data: createTreeResponse } = await treeApi.createTree();
-            await updateTreeHandler(createTreeResponse.tree_uuid);
-            setIsLoading(false);
-        }
-    };
-
-    const treeNameInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTreeNameAlert(false);
-        setTreeName(e.currentTarget.value);
+    const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserNameAlert(false);
+        setIsUpdatedNewName(e.currentTarget.value);
     };
 
     return (
@@ -75,10 +63,10 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ onClose, treeLocation
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0 }}
                     transition={{ duration: 0.5, type: "spring" }}
-                    onClick={closeHandler}
+                    onClick={handleModalClose}
                     onKeyDown={(e) => {
-                        e.key === "Escape" && closeHandler();
-                        e.key === "Enter" && createTreeHandler();
+                        e.key === "Escape" && handleModalClose();
+                        e.key === "Enter" && handleButtonClick();
                     }}
                     className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
                 >
@@ -89,37 +77,41 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ onClose, treeLocation
                             "absolute z-20"
                         )}
                     >
-                        <h3 className="font-title leading-5 text-gray-200">새 나무 심기</h3>
+                        <h3 className="font-title leading-5 text-gray-200">나무 이름 변경</h3>
                         <input
-                            ref={inputRef}
-                            onChange={treeNameInputHandler}
-                            maxLength={10}
-                            value={treeName}
                             type="text"
-                            placeholder="이름을 지어주세요."
+                            maxLength={15}
+                            placeholder="새 이름을 지어주세요."
                             className={tw(
                                 "mt-6 border-b outline-none border-gray-600",
                                 "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white",
-                                treeNameAlert && "border-literal-error focus:border-literal-error"
+                                userNameAlert && "border-literal-error focus:border-literal-error"
                             )}
-                        ></input>
+                            onChange={handleInputValue}
+                            ref={inputRef}
+                        />
                         <p
                             className={tw(
                                 "text-literal-error animate-blur text-xs",
-                                !treeNameAlert && "invisible"
+                                !userNameAlert && "invisible"
                             )}
                         >
                             1글자 이상 작성해 주세요.
                         </p>
                         <div className="text-right mt-4">
-                            <ButtonDefault onClick={createTreeHandler} className="ml-1">
-                                나무 심기
+                            <ButtonDefault
+                                className="ml-1"
+                                onClick={() => {
+                                    handleButtonClick();
+                                }}
+                            >
+                                변경하기
                             </ButtonDefault>
                         </div>
                         <button
                             type="button"
                             className="text-zero w-5 h-5 absolute right-5 top-5 fill-gray-600 hover:fill-white transition"
-                            onClick={onClose}
+                            onClick={handleModalClose}
                         >
                             <IconClose />
                             닫기
@@ -131,4 +123,4 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ onClose, treeLocation
     );
 };
 
-export default ModalCreateTree;
+export default ModalChangeTreeName;

@@ -4,14 +4,13 @@ import { twMerge as tw } from "tailwind-merge";
 import ModalTooltip from "../modal/ModalTooltip";
 import { AnimatePresence, motion } from "framer-motion";
 import { useUserStore } from "../../../config/store";
-import ButtonPrimary from "../button/ButtonPrimary";
 
 const UserInfoHome = () => {
     const [isVisible, setIsVisible] = useState(false);
     const { userData } = useUserStore();
 
     return (
-        <div className="bg-gray-800 text-white w-[340px] fixed z-10 top-[140px]">
+        <div className="bg-gray-800 text-white w-[340px] fixed z-10 top-[140px] left-5">
             <div className="flex p-5 pb-6 border-b border-gray-600">
                 <div className="relative w-12 h-12 border border-white rounded-full">
                     <img
@@ -76,9 +75,6 @@ const UserInfoHome = () => {
                     </ul>
                 </div>
             </div>
-            <ButtonPrimary className="fixed z-10 top-[140px] left-[360px]">
-                새 나무 심기
-            </ButtonPrimary>
         </div>
     );
 };

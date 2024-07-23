@@ -6,15 +6,26 @@ import useInfo from "../../../hook/useInfo";
 
 interface ModalGridSettingProps {
     tree_uuid: string;
+    onEditModal: (id: string) => void;
+    onDetailModal: (id: string) => void;
 }
 
-const ModalGridSetting = ({ tree_uuid }: ModalGridSettingProps) => {
+const ModalGridSetting = ({ tree_uuid, onEditModal, onDetailModal }: ModalGridSettingProps) => {
     const { checkLoginStatus } = useVerify();
     const { getUserGridInfo } = useInfo();
+
+    const editHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onEditModal(e.currentTarget.id);
+    };
+
     const deleteHandler = async () => {
         await checkLoginStatus();
         await treeApi.deleteTree(tree_uuid);
         await getUserGridInfo();
+    };
+
+    const detailHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onDetailModal(e.currentTarget.id);
     };
 
     return (
@@ -28,14 +39,18 @@ const ModalGridSetting = ({ tree_uuid }: ModalGridSettingProps) => {
                     )}
                 >
                     <button
+                        id={tree_uuid}
                         title="자세히"
                         type="button"
+                        onClick={detailHandler}
                         className="w-8 flex justify-center items-center py-1 px-2 hover:bg-gray-600 transition rounded-full"
                     >
                         <IconDetail className="w-4 h-4" />
                     </button>
                     <button
+                        id={tree_uuid}
                         title="수정"
+                        onClick={editHandler}
                         type="button"
                         className="w-8 flex justify-center items-center py-1 px-2 hover:bg-gray-600 transition rounded-full"
                     >

@@ -1,22 +1,50 @@
 import { twMerge as tw } from "tailwind-merge";
 import { useUserStore } from "../../config/store";
 import HomeTree from "./HomeTree";
+import { useState } from "react";
+import ModalCreateTree from "../common/modal/ModalCreateTree";
+import ModalChangeTreeName from "../common/modal/ModalChangeTreeName";
+import ModalTreeDetail from "../common/modal/ModalTreeDetail";
 
-interface HomeGridProps {
-    onCreateTreeModal: (id: number) => void;
-}
-
-const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
+const HomeGrid = () => {
     const { userData } = useUserStore();
+    const [createModalOpen, setCreateModalOpen] = useState(false);
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [detailModalOpen, setDetailModalOpen] = useState(false);
+    const [treeLocation, setTreeLocation] = useState(0);
+    const [treeUUID, setTreeUUID] = useState("");
 
-    const handleClick = (id: number) => {
-        //TODO: 나무 생성이 가능해지면 추가해야 함
-        onCreateTreeModal(id);
+    const createModalCloseHandler = () => {
+        setCreateModalOpen(false);
+    };
+
+    const editModalCloseHandler = () => {
+        setEditModalOpen(false);
+    };
+
+    const detailModalCloseHandler = () => {
+        setDetailModalOpen(false);
+    };
+
+    const createModalOpenHandler = (id: number) => {
+        setTreeLocation(id);
+        setCreateModalOpen(true);
+    };
+
+    const editModalOpenHandler = (id: string) => {
+        setTreeUUID(id);
+        setEditModalOpen(true);
+    };
+
+    const detailModalOpenHandler = (id: string) => {
+        setTreeUUID(id);
+        setDetailModalOpen(true);
     };
 
     const isAccessible = (index: number): boolean => {
         return userData.tree.accessibleIndices.includes(index) || false;
     };
+
     return (
         <>
             <div
@@ -47,7 +75,7 @@ const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
                                 )}
                                 onClick={() => {
                                     if (isEnabled) {
-                                        handleClick(index);
+                                        createModalOpenHandler(index);
                                     }
                                 }}
                             >
@@ -55,6 +83,8 @@ const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
                                     if (index === item.location) {
                                         return (
                                             <HomeTree
+                                                onDetailModal={detailModalOpenHandler}
+                                                onEditModal={editModalOpenHandler}
                                                 key={item.tree_uuid}
                                                 user_level={userData.level.userLevel}
                                                 {...item}
@@ -67,6 +97,15 @@ const HomeGrid = ({ onCreateTreeModal }: HomeGridProps) => {
                     })}
                 </div>
             </div>
+            {createModalOpen && (
+                <ModalCreateTree treeLocation={treeLocation} onClose={createModalCloseHandler} />
+            )}
+            {editModalOpen && (
+                <ModalChangeTreeName treeUUID={treeUUID} onClose={editModalCloseHandler} />
+            )}
+            {detailModalOpen && (
+                <ModalTreeDetail treeUUID={treeUUID} onClose={detailModalCloseHandler} />
+            )}
         </>
     );
 };
