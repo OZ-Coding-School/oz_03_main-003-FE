@@ -29,6 +29,16 @@ export interface UserTreeEmotionDetail {
     };
 }
 
+export interface Emotion {
+    emotions: {
+        happiness: number;
+        anger: number;
+        sadness: number;
+        worry: number;
+        indifference: number;
+    };
+}
+
 export interface UserTree {
     treeMax: number;
     treeCurrent: number;

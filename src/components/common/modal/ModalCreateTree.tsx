@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ButtonDefault from "../button/ButtonDefault";
 import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { treeApi } from "../../../api";
 import useVerify from "../../../hook/useVerify";
 import { TreeFormData } from "../../../config/types";
@@ -69,64 +69,61 @@ const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ onClose, treeLocation
     return (
         <>
             <nav className="absolute opacity-50 top-0 w-full h-screen bg-black"></nav>
-            <AnimatePresence>
-                <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    transition={{ duration: 0.5, type: "spring" }}
-                    onClick={closeHandler}
-                    onKeyDown={(e) => {
-                        e.key === "Escape" && closeHandler();
-                        e.key === "Enter" && createTreeHandler();
-                    }}
-                    className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
+
+            <motion.div
+                animate={{ opacity: [0, 1], scale: [0, 1] }}
+                transition={{ duration: 0.5, type: "spring" }}
+                onClick={closeHandler}
+                onKeyDown={(e) => {
+                    e.key === "Escape" && closeHandler();
+                    e.key === "Enter" && createTreeHandler();
+                }}
+                className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
+            >
+                <nav
+                    onClick={stopPropagation}
+                    className={tw(
+                        "p-5 bg-gray-800 text-white w-80 border border-gray-600",
+                        "absolute z-20"
+                    )}
                 >
-                    <nav
-                        onClick={stopPropagation}
+                    <h3 className="font-title leading-5 text-gray-200">새 나무 심기</h3>
+                    <input
+                        ref={inputRef}
+                        onChange={treeNameInputHandler}
+                        maxLength={10}
+                        value={treeName}
+                        type="text"
+                        placeholder="이름을 지어주세요."
                         className={tw(
-                            "p-5 bg-gray-800 text-white w-80 border border-gray-600",
-                            "absolute z-20"
+                            "mt-6 border-b outline-none border-gray-600",
+                            "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white",
+                            treeNameAlert && "border-literal-error focus:border-literal-error"
+                        )}
+                    ></input>
+                    <p
+                        className={tw(
+                            "text-literal-error animate-blur text-xs",
+                            !treeNameAlert && "invisible"
                         )}
                     >
-                        <h3 className="font-title leading-5 text-gray-200">새 나무 심기</h3>
-                        <input
-                            ref={inputRef}
-                            onChange={treeNameInputHandler}
-                            maxLength={10}
-                            value={treeName}
-                            type="text"
-                            placeholder="이름을 지어주세요."
-                            className={tw(
-                                "mt-6 border-b outline-none border-gray-600",
-                                "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white",
-                                treeNameAlert && "border-literal-error focus:border-literal-error"
-                            )}
-                        ></input>
-                        <p
-                            className={tw(
-                                "text-literal-error animate-blur text-xs",
-                                !treeNameAlert && "invisible"
-                            )}
-                        >
-                            1글자 이상 작성해 주세요.
-                        </p>
-                        <div className="text-right mt-4">
-                            <ButtonDefault onClick={createTreeHandler} className="ml-1">
-                                나무 심기
-                            </ButtonDefault>
-                        </div>
-                        <button
-                            type="button"
-                            className="text-zero w-5 h-5 absolute right-5 top-5 fill-gray-600 hover:fill-white transition"
-                            onClick={onClose}
-                        >
-                            <IconClose />
-                            닫기
-                        </button>
-                    </nav>
-                </motion.div>
-            </AnimatePresence>
+                        1글자 이상 작성해 주세요.
+                    </p>
+                    <div className="text-right mt-4">
+                        <ButtonDefault onClick={createTreeHandler} className="ml-1">
+                            나무 심기
+                        </ButtonDefault>
+                    </div>
+                    <button
+                        type="button"
+                        className="text-zero w-5 h-5 absolute right-5 top-5 fill-gray-600 hover:fill-white transition"
+                        onClick={onClose}
+                    >
+                        <IconClose />
+                        닫기
+                    </button>
+                </nav>
+            </motion.div>
         </>
     );
 };

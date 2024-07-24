@@ -68,11 +68,11 @@ const UserInfoMyPage = () => {
                     </div>
                     <div className="flex">
                         <ul className="w-20 text-gray-200">
-                            <li className="mb-3">nickName</li>
-                            <li className="mb-3">email</li>
-                            <li className="mb-3">join date</li>
-                            <li className="mb-3">tree</li>
-                            <li className="mb-3">grid size</li>
+                            <li className="mb-3">Name</li>
+                            <li className="mb-3">Email</li>
+                            <li className="mb-3">Join date</li>
+                            <li className="mb-3">Tree</li>
+                            <li className="mb-3">Grid size</li>
                         </ul>
                         <ul>
                             <li className="mb-3">: {userData.user.username}</li>

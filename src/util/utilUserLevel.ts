@@ -16,7 +16,14 @@ interface LevelData {
 
 const userExperience: { [key: number]: number } = {
     0: 50,
-    ...Object.fromEntries(Array.from({ length: 99 }, (_, i) => [i + 1, (i + 1) * 100])),
+    ...Object.fromEntries(Array.from({ length: 99 }, (_, i) => [i + 1, (i + 1) * 150])),
+};
+
+const levelInitialExperience: { [key: number]: number } = {
+    0: 0,
+    1: 50,
+    2: 200,
+    ...Object.fromEntries(Array.from({ length: 97 }, (_, i) => [i + 3, (i + 3 - 2) * 150])),
 };
 
 const calculateExperience = (level: number, currentExperience: number): number => {
@@ -26,10 +33,11 @@ const calculateExperience = (level: number, currentExperience: number): number =
         return 0;
     }
     const requiredExperience = userExperience[level];
+    const initialExperience = levelInitialExperience[level] || 0;
 
-    const percentage = (currentExperience / requiredExperience) * 100;
+    const percentage = ((currentExperience - initialExperience) / requiredExperience) * 100;
 
-    const result = Math.min(percentage, 100).toFixed(0);
+    const result = Math.min(Math.max(percentage, 0), 100).toFixed(0);
 
     return Number(result);
 };
@@ -61,9 +69,9 @@ export const calculateUserLevel = async (level: number, forestUUID: string): Pro
     const percentage = calculateExperience(level, currentExp);
 
     if (Number(percentage) === 100) {
-        //? 레벨업 진행
+        // 레벨업 진행
         await forestApi.updateForestLevel(forestUUID, level + 1);
-        //? 재귀적 레벨 계산
+        // 재귀적 레벨 계산
         return calculateUserLevel(level + 1, forestUUID);
     }
 

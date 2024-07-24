@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useUserStore } from "../../../config/store";
 import { UserTreeDetail, UserTreeEmotionDetail } from "../../../config/types";
 import { TREE_TYPE } from "../../../config/const";
+// import { calculateTreeLevel } from "../../../util/utilTreeLevel";
 
 //? 추후 페이지 제작시 사용
 
@@ -36,6 +37,8 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
         }
     }, []);
 
+    // const treeExperience = calculateTreeLevel(emotionData);
+
     return (
         <>
             <nav
@@ -54,7 +57,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                     e.key === "Escape" && closeHandler();
                     e.key === "Enter" && closeHandler();
                 }}
-                className="select-none absolute left-[370px] top-[140px] p-5 w-[340px] h-fit bg-gray-800 border border-gray-600"
+                className="select-none absolute z-10 left-[370px] top-[140px] p-5 w-[340px] h-fit bg-gray-800 border border-gray-600"
             >
                 <div className="w-full flex justify-between">
                     <h1 className="text-gray-200 font-title text-base mb-5">나무 정보</h1>

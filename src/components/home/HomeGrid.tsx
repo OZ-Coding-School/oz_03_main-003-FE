@@ -1,5 +1,5 @@
 import { twMerge as tw } from "tailwind-merge";
-import { useUserStore } from "../../config/store";
+import { useModalStore, useUserStore } from "../../config/store";
 import HomeTree from "./HomeTree";
 import { useRef, useState } from "react";
 import { UserTreeDetail } from "../../config/types";
@@ -9,11 +9,15 @@ import ModalTreeDetail from "../common/modal/ModalTreeDetail";
 import { findTreeLocation, moveTreeLocation, swapTreeLocation } from "../../util/utilTreeLocation";
 import useInfo from "../../hook/useInfo";
 import useVerify from "../../hook/useVerify";
+import ToastDefault from "../common/toast/ToastDefault";
 
 const HomeGrid = () => {
+    //? USER_DATA / USER_DATA SYNC / USER_VERIFY / TOASTER_MODAL
     const { userData } = useUserStore();
     const { getUserGridInfo } = useInfo();
     const { checkLoginStatus } = useVerify();
+    const { modal, setModal } = useModalStore();
+    //? MODAL STATE
     const [createModalOpen, setCreateModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [detailModalOpen, setDetailModalOpen] = useState(false);
@@ -21,41 +25,40 @@ const HomeGrid = () => {
     const [moveModalOpen, setMoveModalOpen] = useState(false);
     const [treeUUID, setTreeUUID] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
+    //? REF
+    const moveRef = useRef<HTMLDivElement>(null);
 
+    //? CLOSE HANDLER
     const createModalCloseHandler = () => {
         setCreateModalOpen(false);
     };
-
     const editModalCloseHandler = () => {
         setEditModalOpen(false);
     };
-
     const detailModalCloseHandler = () => {
         setDetailModalOpen(false);
     };
 
+    //? OPEN HANDLER
     const createModalOpenHandler = (id: number) => {
         setTreeLocation(id);
         setCreateModalOpen(true);
     };
-
     const editModalOpenHandler = (id: string) => {
         setTreeUUID(id);
         setEditModalOpen(true);
     };
-
     const detailModalOpenHandler = (id: string) => {
         setTreeUUID(id);
         setDetailModalOpen(true);
     };
-
     const moveTreeOpenHandler = (id: string) => {
         setTreeUUID(id);
-        ref.current?.focus();
+        moveRef.current?.focus();
         setMoveModalOpen(true);
     };
 
+    //? CONTROLLER HANDLER
     const moveTreeControlHandler = async (location: number) => {
         setIsLoading(true);
         const treeDetail = userData.treeDetail as UserTreeDetail[];
@@ -66,20 +69,24 @@ const HomeGrid = () => {
             await checkLoginStatus();
             await swapTreeLocation(locationData);
             await getUserGridInfo();
+            setModal(true);
             setIsLoading(false);
         } else {
             setMoveModalOpen(false);
             await checkLoginStatus();
             await moveTreeLocation(locationData);
             await getUserGridInfo();
+            setModal(true);
             setIsLoading(false);
         }
     };
 
+    //? LEVEL PER GRID DATA NOT PLANT
     const isAccessible = (index: number): boolean => {
         return userData.tree.accessibleIndices.includes(index) || false;
     };
 
+    //? LEVEL PER GRID DATA NOT SELF
     const isOrigin = (index: number) => {
         const nowPath = userData.treeDetail.find(
             (item) => item.tree_uuid === treeUUID
@@ -98,7 +105,7 @@ const HomeGrid = () => {
                 onKeyDown={(e) => {
                     if (e.key === "Escape") setMoveModalOpen(false);
                 }}
-                ref={ref}
+                ref={moveRef}
                 tabIndex={-1}
                 style={{
                     transformStyle: "preserve-3d",
@@ -132,9 +139,11 @@ const HomeGrid = () => {
                                         "bg-primary bg-opacity-50 animate-pulse cursor-pointer"
                                 )}
                                 onClick={() => {
+                                    //? STATUS ON && EDIT MODAL ON && !LOADING
                                     if (moveModalOpen && isEdit && !isLoading) {
                                         moveTreeControlHandler(index);
                                     }
+                                    //? STATUS OFF && NEW AREA && !LOADING
                                     if (!moveModalOpen && isEnabled && !isLoading) {
                                         createModalOpenHandler(index);
                                     }
@@ -169,6 +178,7 @@ const HomeGrid = () => {
             {detailModalOpen && (
                 <ModalTreeDetail treeUUID={treeUUID} onClose={detailModalCloseHandler} />
             )}
+            {modal && <ToastDefault message={"위치가 변경되었습니다."} />}
         </>
     );
 };

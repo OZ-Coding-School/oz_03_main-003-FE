@@ -28,11 +28,9 @@ const calculateGrid = (res: TreeResponse[], originalIndices: AccessibleIndices) 
 
     return newAccessibleIndices;
 };
-
 export const calculateTree = async () => {
     const { data: forestResponse } = await forestApi.getForestData();
     const { data: treeResponse } = await treeApi.getTreeDataAll();
-    console.log(treeResponse);
     const { data: emotionResponse } = await treeApi.getTreeEmotionDataAll();
     const indices = calculateGrid(treeResponse, accessibleIndices);
 

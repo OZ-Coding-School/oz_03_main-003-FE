@@ -66,5 +66,4 @@ const PageAuth = () => {
         </div>
     );
 };
-
 export default PageAuth;

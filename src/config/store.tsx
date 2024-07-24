@@ -1,6 +1,20 @@
 import { create } from "zustand";
 import { UserAccount, UserLevel, UserTree, UserTreeDetail, UserTreeEmotionDetail } from "./types";
 
+interface ModalStore {
+    modal: boolean;
+    setModal: (bool: boolean) => void;
+}
+
+export const useModalStore = create<ModalStore>((set) => ({
+    modal: false,
+
+    setModal: (bool: boolean) =>
+        set(() => ({
+            modal: bool,
+        })),
+}));
+
 interface UserStore {
     userData: {
         user: UserAccount;

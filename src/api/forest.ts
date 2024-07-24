@@ -8,7 +8,10 @@ export const getForestData = () => {
 };
 
 export const updateForestLevel = (uuid: string, level: number) => {
-    return axiosInstance.put(`/forest/${uuid}`, level);
+    const requestForm = {
+        forest_level: level,
+    };
+    return axiosInstance.put(`/forest/${uuid}`, requestForm);
 };
 
 export const deleteForest = (uuid: string) => {
