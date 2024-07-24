@@ -1,9 +1,10 @@
 import ButtonDefault from "../button/ButtonDefault";
 import { IconClose, IconSelectArrow } from "../../../config/IconData";
-import { ContentDummy } from "./ModalContentDummy";
+// import { ContentDummy } from "./ModalContentDummy";
 import ModalListItem from "./ModalListItem";
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
+import { useUserStore } from "../../../config/store";
 
 interface ModalCreateChatProps {
     onClose: () => void;
@@ -15,8 +16,11 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
 
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-    const handleItemClick = (groupName: string) => {
-        setSelectedTree(groupName);
+    // zustand store에서 treeDetail 데이터 받기
+    const { treeDetail } = useUserStore((state) => state.userData);
+
+    const handleItemClick = (treeName: string) => {
+        setSelectedTree(treeName);
         setIsDropdownOpen(false);
     };
 
@@ -53,8 +57,12 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
                 </div>
                 {isDropdownOpen && (
                     <ul className="absolute left-0 top-13 right-0 z-10 cursor-pointer">
-                        {ContentDummy.map((item, index) => (
-                            <ModalListItem key={index} item={item} onClick={handleItemClick} />
+                        {treeDetail.map((item) => (
+                            <ModalListItem
+                                key={item.tree_uuid}
+                                item={item}
+                                onClick={handleItemClick}
+                            />
                         ))}
                     </ul>
                 )}
