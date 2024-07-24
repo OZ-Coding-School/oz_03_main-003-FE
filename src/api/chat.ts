@@ -1,22 +1,37 @@
 import { axiosInstance } from "./axios";
 
 export const getTreeDataAll = async () => {
-    const response = await axiosInstance.get("/trees");
-    return response.data;
+    try {
+        const response = await axiosInstance.get("/trees/");
+        return response.data;
+    } catch (error) {
+        console.error("Failed to fetch tree data:", error);
+        throw error;
+    }
 };
 
 export const getChatRooms = async () => {
-    const response = await axiosInstance.get("/chat");
-    console.log("getChatRooms response:", response);
+    try {
+        const response = await axiosInstance.get("/chat");
+        console.log("getChatRooms response:", response);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to fetch chat rooms:", error);
+        throw error;
+    }
 };
 
 export const CreateChatRoom = async (params: {
     chat_room_name: string;
     analyze_target_name: string;
     analyze_target_relation: string;
-    tree_uuid: string;
 }) => {
-    const response = await axiosInstance.post("/chat/new", params);
-    console.log("CreateChatRoom response:", response);
-    return response.data;
+    try {
+        const response = await axiosInstance.post("/chat/new/", params);
+        console.log("CreateChatRoom response:", response);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to create chat room:", error);
+        throw error;
+    }
 };
