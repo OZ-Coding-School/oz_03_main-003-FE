@@ -54,7 +54,6 @@ export const useUserStore = create<UserStore>((set) => ({
             treeCurrent: 0,
             gridSize: 0,
             accessibleIndices: [],
-            originIndices: [],
         },
         treeDetail: {},
         treeEmotion: {},
@@ -82,14 +81,6 @@ export const useUserStore = create<UserStore>((set) => ({
         })),
 }));
 // src/config/store.ts
-
-export interface ChatRoom {
-    chat_room_uuid: string;
-    chat_room_name: string;
-    analyze_target_name: string;
-    analyze_target_relation: string;
-    created_at: string;
-}
 
 export interface ChatRoom {
     chat_room_uuid: string;

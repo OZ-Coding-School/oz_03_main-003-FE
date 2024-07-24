@@ -4,9 +4,8 @@ import { IconClose, IconSelectArrow } from "../../../config/IconData";
 import ModalListItem from "./ModalListItem";
 import { twMerge as tw } from "tailwind-merge";
 import useVerify from "../../../hook/useVerify";
-import { CreateChatRoom } from "../../../api/chat";
+import { CreateChatRoom, getTreeDataAll } from "../../../api/chat";
 import { ChatRoom } from "../../../config/store";
-import { getTreeDataAll } from "../../../api/tree";
 
 interface TreeItem {
     id: number;
@@ -36,7 +35,7 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
 
         const fetchTrees = async () => {
             try {
-                const treesData: TreeItem[] = await getTreeDataAll();
+                const treesData = await getTreeDataAll();
                 setTrees(treesData);
             } catch (error) {
                 console.error("Failed to fetch tree data:", error);
@@ -59,6 +58,7 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
                 analyze_target_name: selectedTree,
                 analyze_target_relation: selectedRelation,
             });
+            console.log("Chat room created:", result);
 
             onAddChatRoom({
                 chat_room_uuid: result.chat_room_uuid,
@@ -71,7 +71,6 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
             onClose();
         } catch (error) {
             console.error("Error creating chat room:", error);
-            setErrorMessage("채팅방 생성 중 오류가 발생했습니다.");
         }
     };
 

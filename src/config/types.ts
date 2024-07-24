@@ -20,7 +20,7 @@ export interface UserTreeDetail {
 }
 export interface UserTreeEmotionDetail {
     tree_uuid: string;
-    emotions: {
+    emotion: {
         happiness: number;
         anger: number;
         sadness: number;
@@ -42,7 +42,6 @@ export interface UserTree {
     treeCurrent: number;
     gridSize: number;
     accessibleIndices: number[];
-    originIndices: number[];
 }
 
 export interface AccessibleIndices {
@@ -56,7 +55,7 @@ export enum AuthStatusType {
 }
 
 export interface TreeFormData {
-    tree_name?: string;
-    tree_level?: number;
-    location?: number;
+    tree_name: string;
+    tree_level: number;
+    location: number;
 }
