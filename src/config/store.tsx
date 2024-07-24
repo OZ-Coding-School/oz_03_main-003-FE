@@ -20,14 +20,13 @@ interface UserStore {
         user: UserAccount;
         level: UserLevel;
         tree: UserTree;
-        treeDetail: UserTreeDetail[] | Record<string, never>;
-        treeEmotion: UserTreeEmotionDetail[] | Record<string, never>;
+        treeDetail: UserTreeDetail | object;
     };
     setUserData: (data: UserAccount) => void;
     setLevelData: (data: UserLevel) => void;
     setTreeData: (data: UserTree) => void;
-    setTreeDetailData: (data: UserTreeDetail[]) => void;
-    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
+    setTreeDetailData: (data: UserTreeDetail) => void;
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail) => void;
 }
 
 /**
@@ -57,8 +56,8 @@ export const useUserStore = create<UserStore>((set) => ({
             accessibleIndices: [],
             originIndices: [],
         },
-        treeDetail: [],
-        treeEmotion: [],
+        treeDetail: {},
+        treeEmotion: {},
     },
 
     setUserData: (data: UserAccount) =>
@@ -73,16 +72,24 @@ export const useUserStore = create<UserStore>((set) => ({
         set((state) => ({
             userData: { ...state.userData, tree: data },
         })),
-    setTreeDetailData: (data: UserTreeDetail[]) =>
+    setTreeDetailData: (data: UserTreeDetail) =>
         set((state) => ({
             userData: { ...state.userData, treeDetail: data },
         })),
-    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) =>
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail) =>
         set((state) => ({
             userData: { ...state.userData, treeEmotion: data },
         })),
 }));
 // src/config/store.ts
+
+export interface ChatRoom {
+    chat_room_uuid: string;
+    chat_room_name: string;
+    analyze_target_name: string;
+    analyze_target_relation: string;
+    created_at: string;
+}
 
 export interface ChatRoom {
     chat_room_uuid: string;
@@ -102,7 +109,7 @@ export const useChatStore = create<ChatStore>((set) => ({
     chatList: [],
     addChatRoom: (chatRoom) =>
         set((state) => ({
-            chatList: [chatRoom, ...state.chatList],
+            chatList: [chatRoom, ...state.chatList], // 최신순으로 추가
         })),
     setChatList: (chatList) =>
         set(() => ({

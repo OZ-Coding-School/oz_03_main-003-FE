@@ -1,4 +1,3 @@
-// src/components/common/modal/ModalCreateChat.tsx
 import { FC, useEffect, useRef, useState } from "react";
 import ButtonDefault from "../button/ButtonDefault";
 import { IconClose, IconSelectArrow } from "../../../config/IconData";
@@ -6,8 +5,13 @@ import ModalListItem from "./ModalListItem";
 import { twMerge as tw } from "tailwind-merge";
 import useVerify from "../../../hook/useVerify";
 import { CreateChatRoom } from "../../../api/chat";
-import useTrees from "../../../hook/useTrees";
 import { ChatRoom } from "../../../config/store";
+import { getTreeDataAll } from "../../../api/tree";
+
+interface TreeItem {
+    id: number;
+    group_name: string;
+}
 
 interface ModalCreateChatProps {
     onClose: () => void;
@@ -20,7 +24,7 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
     const [chatRoomName, setChatRoomName] = useState("");
     const [selectedRelation, setSelectedRelation] = useState("default");
     const [errorMessage, setErrorMessage] = useState("");
-    const { trees, loading, error } = useTrees();
+    const [trees, setTrees] = useState<TreeItem[]>([]);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const { checkLoginStatus } = useVerify();
@@ -29,7 +33,19 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
         if (inputRef.current) {
             inputRef.current.focus();
         }
+
+        const fetchTrees = async () => {
+            try {
+                const treesData: TreeItem[] = await getTreeDataAll();
+                setTrees(treesData);
+            } catch (error) {
+                console.error("Failed to fetch tree data:", error);
+            }
+        };
+
+        fetchTrees();
     }, []);
+
     const createChatHandler = async () => {
         if (chatRoomName.trim() === "") {
             setErrorMessage("이름을 입력해주세요.");
@@ -38,29 +54,21 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
 
         await checkLoginStatus();
         try {
-            const form = {
+            const result = await CreateChatRoom({
                 chat_room_name: chatRoomName,
                 analyze_target_name: selectedTree,
                 analyze_target_relation: selectedRelation,
-            };
-            console.log("Request payload:", form); // 요청 데이터 확인
+            });
 
-            const response = await CreateChatRoom(form);
-            console.log("Chat room created:", response);
+            onAddChatRoom({
+                chat_room_uuid: result.chat_room_uuid,
+                chat_room_name: chatRoomName,
+                analyze_target_name: selectedTree,
+                analyze_target_relation: selectedRelation,
+                created_at: new Date().toISOString(),
+            });
 
-            if (response && response.data) {
-                onAddChatRoom({
-                    chat_room_uuid: response.data.chat_room_uuid,
-                    chat_room_name: chatRoomName,
-                    analyze_target_name: selectedTree,
-                    analyze_target_relation: selectedRelation,
-                    created_at: response.data.created_at,
-                });
-
-                onClose();
-            } else {
-                setErrorMessage("채팅방 생성 응답이 유효하지 않습니다.");
-            }
+            onClose();
         } catch (error) {
             console.error("Error creating chat room:", error);
             setErrorMessage("채팅방 생성 중 오류가 발생했습니다.");
@@ -74,14 +82,6 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
         setSelectedRelation(groupName);
         setIsDropdownOpen(false);
     };
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
 
     return (
         <div
@@ -97,7 +97,7 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
                 value={chatRoomName}
                 onChange={(e) => {
                     setChatRoomName(e.target.value);
-                    setErrorMessage("");
+                    setErrorMessage(""); // 입력값이 변경될 때 에러 메시지 초기화
                 }}
                 className={tw(
                     "mt-6 border-b outline-none border-gray-600",
