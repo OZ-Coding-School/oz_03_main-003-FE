@@ -58,5 +58,23 @@ export interface TreeFormData {
     tree_name: string;
     tree_level: number;
     location: number;
+    tree_uuid: string;
+}
+export interface ChatRoom {
     chat_room_uuid: string;
+    chat_room_name: string;
+    created_at: string;
+    analyze_target_name: string;
+    analyze_target_relation: string;
+}
+
+export interface UserTreeEmotionDetail {
+    tree_uuid: string;
+    emotion: {
+        happiness: number;
+        anger: number;
+        sadness: number;
+        worry: number;
+        indifference: number;
+    };
 }

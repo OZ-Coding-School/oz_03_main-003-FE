@@ -4,18 +4,15 @@ import ChatListItem from "../components/common/chatList/ChatListItem";
 import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import ModalCreateChat from "../components/common/modal/ModalCreateChat";
 import useUserInfo from "../hook/useInfo";
-import { useChatStore, ChatRoom } from "../config/store";
+import { useUserStore, ChatRoom } from "../config/store";
 import { getChatRooms } from "../api/chat";
-
-import { useUserStore } from "../config/store";
 
 const PageChat: FC = () => {
     const { getUserInfo } = useUserInfo();
-    const chatList = useChatStore((state) => state.chatList);
-    const addChatRoom = useChatStore((state) => state.addChatRoom);
-    const setChatList = useChatStore((state) => state.setChatList);
-    const { userData } = useUserStore();
-    console.log(userData);
+    const chatList = useUserStore((state) => state.chatList);
+    const addChatRoom = useUserStore((state) => state.addChatRoom);
+    const setChatList = useUserStore((state) => state.setChatList);
+
     useEffect(() => {
         const refreshUserInfo = async () => {
             await getUserInfo();
@@ -26,19 +23,19 @@ const PageChat: FC = () => {
     useEffect(() => {
         const fetchChatRooms = async () => {
             try {
-                const response = await getChatRooms();
-                console.log("Fetched chat rooms:", response.data); // response.data로 접근
-                if (Array.isArray(response.data)) {
-                    setChatList(response.data);
+                const chatRooms = await getChatRooms();
+                console.log("Fetched chat rooms:", chatRooms);
+                if (Array.isArray(chatRooms)) {
+                    setChatList(chatRooms);
                 } else {
-                    console.error("Fetched chat rooms are not in array format:", response.data);
+                    console.error("Fetched chat rooms are not in array format:", chatRooms);
                 }
             } catch (error) {
                 console.error("Failed to fetch chat rooms:", error);
             }
         };
         fetchChatRooms();
-    }, [chatList]);
+    }, [setChatList]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -57,9 +54,10 @@ const PageChat: FC = () => {
                     <div className="w-80 h-full border-r border-gray-600">
                         <ChatListHeader onAddChatClick={openModal} />
                         {Array.isArray(chatList) &&
-                            chatList.map((item) => (
+                            chatList.map((item: ChatRoom) => (
                                 <ChatListItem key={item.chat_room_uuid} item={item} />
                             ))}
+                        <li>test</li>
                     </div>
                 </div>
             </div>

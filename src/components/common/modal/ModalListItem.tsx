@@ -8,12 +8,15 @@ interface ModalListItemProps {
 
 const ModalListItem: React.FC<ModalListItemProps> = ({ item, onClick }) => {
     return (
-        <li
-            className="text-white transition py-3 px-4 cursor-pointer bg-gray-600 hover:bg-gray-400"
-            onClick={() => onClick(item.group_name)}
-        >
-            {item.group_name}
-        </li>
+        <>
+            <li
+                className="text-white transition py-3 px-4 cursor-pointer bg-gray-600 hover:bg-gray-400"
+                onClick={() => onClick(item.group_name)}
+            >
+                {item.group_name}
+            </li>
+            ㅌㄴ
+        </>
     );
 };
 
