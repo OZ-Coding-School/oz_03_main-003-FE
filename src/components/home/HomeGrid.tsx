@@ -20,6 +20,7 @@ const HomeGrid = () => {
     const [treeLocation, setTreeLocation] = useState(0);
     const [moveModalOpen, setMoveModalOpen] = useState(false);
     const [treeUUID, setTreeUUID] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
     const createModalCloseHandler = () => {
@@ -56,6 +57,7 @@ const HomeGrid = () => {
     };
 
     const moveTreeControlHandler = async (location: number) => {
+        setIsLoading(true);
         const treeDetail = userData.treeDetail as UserTreeDetail[];
         const locationData = findTreeLocation(location, treeUUID, treeDetail);
 
@@ -64,11 +66,13 @@ const HomeGrid = () => {
             await checkLoginStatus();
             await swapTreeLocation(locationData);
             await getUserGridInfo();
+            setIsLoading(false);
         } else {
             setMoveModalOpen(false);
             await checkLoginStatus();
             await moveTreeLocation(locationData);
             await getUserGridInfo();
+            setIsLoading(false);
         }
     };
 
@@ -128,9 +132,10 @@ const HomeGrid = () => {
                                         "bg-primary bg-opacity-50 animate-pulse cursor-pointer"
                                 )}
                                 onClick={() => {
-                                    if (moveModalOpen && isEdit) {
+                                    if (moveModalOpen && isEdit && !isLoading) {
                                         moveTreeControlHandler(index);
-                                    } else if (isEnabled) {
+                                    }
+                                    if (!moveModalOpen && isEnabled && !isLoading) {
                                         createModalOpenHandler(index);
                                     }
                                 }}
