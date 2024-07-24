@@ -1,3 +1,4 @@
+// src/components/common/modal/ModalCreateChat.tsx
 import { FC, useEffect, useRef, useState } from "react";
 import ButtonDefault from "../button/ButtonDefault";
 import { IconClose, IconSelectArrow } from "../../../config/IconData";
@@ -29,7 +30,6 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
             inputRef.current.focus();
         }
     }, []);
-
     const createChatHandler = async () => {
         if (chatRoomName.trim() === "") {
             setErrorMessage("이름을 입력해주세요.");
@@ -43,20 +43,27 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
                 analyze_target_name: selectedTree,
                 analyze_target_relation: selectedRelation,
             };
+            console.log("Request payload:", form); // 요청 데이터 확인
+
             const response = await CreateChatRoom(form);
             console.log("Chat room created:", response);
 
-            onAddChatRoom({
-                chat_room_uuid: response.data.chat_room_uuid,
-                chat_room_name: chatRoomName,
-                analyze_target_name: selectedTree,
-                analyze_target_relation: selectedRelation,
-                created_at: response.data.created_at,
-            });
+            if (response && response.data) {
+                onAddChatRoom({
+                    chat_room_uuid: response.data.chat_room_uuid,
+                    chat_room_name: chatRoomName,
+                    analyze_target_name: selectedTree,
+                    analyze_target_relation: selectedRelation,
+                    created_at: response.data.created_at,
+                });
 
-            onClose();
+                onClose();
+            } else {
+                setErrorMessage("채팅방 생성 응답이 유효하지 않습니다.");
+            }
         } catch (error) {
             console.error("Error creating chat room:", error);
+            setErrorMessage("채팅방 생성 중 오류가 발생했습니다.");
         }
     };
 

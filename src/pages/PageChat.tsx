@@ -24,7 +24,7 @@ const PageChat: FC = () => {
         const fetchChatRooms = async () => {
             try {
                 const response = await getChatRooms();
-                console.log("Fetched chat rooms:", response.data); // response.data로 접근
+                console.log("Fetched chat rooms:", response.data);
                 if (Array.isArray(response.data)) {
                     setChatList(response.data);
                 } else {
