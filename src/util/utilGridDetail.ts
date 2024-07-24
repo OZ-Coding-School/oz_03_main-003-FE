@@ -40,6 +40,7 @@ export const calculateTree = async () => {
         treeCurrent: treeResponse.length,
         gridSize: Math.sqrt(accessibleIndices[forestResponse.forest_level].length),
         accessibleIndices: indices[forestResponse.forest_level],
+        originIndices: accessibleIndices[forestResponse.forest_level],
         details: treeResponse,
         emotions: emotionResponse,
     };

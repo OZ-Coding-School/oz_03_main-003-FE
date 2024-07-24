@@ -11,8 +11,10 @@ interface HomeTreeProps {
     user_level: number;
     tree_level: number;
     location: number;
+    moveState: boolean;
     onEditModal: (id: string) => void;
     onDetailModal: (id: string) => void;
+    onMoveModal: (id: string) => void;
 }
 
 const HomeTree = ({
@@ -23,6 +25,8 @@ const HomeTree = ({
     location,
     onEditModal,
     onDetailModal,
+    onMoveModal,
+    moveState,
 }: HomeTreeProps) => {
     const nowLevel = user_level > 2 ? true : false;
     const [hover, setHover] = useState(false);
@@ -39,22 +43,30 @@ const HomeTree = ({
                 nowLevel ? TREE_STYLE_LV2[location] : TREE_STYLE_LV1[location]
             )}
         >
-            <img className="object-cover" src={TREE_IMG[tree_level]} />
+            <img className="select-none object-cover" src={TREE_IMG[tree_level]} />
 
             <div
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 className="w-2/3 h-full absolute z-20 flex justify-center items-end"
             >
-                {hover && (
-                    <ModalGridSetting
-                        onDetailModal={onDetailModal}
-                        onEditModal={onEditModal}
-                        tree_uuid={tree_uuid}
-                    />
-                )}
-                {hover && (
-                    <HomeTreeDescription treeName={tree_name} treeType={TREE_TYPE[tree_level]} />
+                {!moveState && (
+                    <>
+                        {hover && (
+                            <ModalGridSetting
+                                onDetailModal={onDetailModal}
+                                onEditModal={onEditModal}
+                                onMoveModal={onMoveModal}
+                                tree_uuid={tree_uuid}
+                            />
+                        )}
+                        {hover && (
+                            <HomeTreeDescription
+                                treeName={tree_name}
+                                treeType={TREE_TYPE[tree_level]}
+                            />
+                        )}
+                    </>
                 )}
             </div>
         </div>

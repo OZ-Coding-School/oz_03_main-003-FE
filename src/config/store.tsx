@@ -41,6 +41,7 @@ export const useUserStore = create<UserStore>((set) => ({
             treeCurrent: 0,
             gridSize: 0,
             accessibleIndices: [],
+            originIndices: [],
         },
         treeDetail: [],
         treeEmotion: [],

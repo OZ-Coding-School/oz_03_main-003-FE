@@ -49,7 +49,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
-                transition={{ duration: 0.5, type: "tween" }}
+                transition={{ duration: 0.3, type: "tween" }}
                 onKeyDown={(e) => {
                     e.key === "Escape" && closeHandler();
                     e.key === "Enter" && closeHandler();
@@ -94,7 +94,9 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                             )}
                         </AnimatePresence>
                     </div>
-                    <div className="text-white text-sm">{TREE_TYPE[treeData.tree_level].desc}</div>
+                    <div className="text-white text-sm whitespace-pre-wrap">
+                        {TREE_TYPE[treeData.tree_level].desc}
+                    </div>
                 </article>
                 <article className="mb-[20px]">
                     <div className="w-full flex justify-between items-center">

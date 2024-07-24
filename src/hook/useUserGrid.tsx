@@ -12,6 +12,7 @@ const useUserGrid = () => {
             treeCurrent: treeData.treeCurrent,
             gridSize: treeData.gridSize,
             accessibleIndices: treeData.accessibleIndices,
+            originIndices: treeData.originIndices,
         });
 
         setTreeDetailData(treeData.details);

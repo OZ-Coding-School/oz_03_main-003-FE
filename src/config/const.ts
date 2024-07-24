@@ -22,7 +22,7 @@ export const TREE_TYPE: TREE_CONST_TYPE_LIST = {
     0: {
         name: "새싹",
         style: "font-title text-primary",
-        desc: "어쩌구 저쩌구",
+        desc: "아직 자라고있는 무궁무진한 가능성의 새싹\n감정에 민감하게 반응할 것 같다.",
     },
     1: {
         name: "발광 묘목",

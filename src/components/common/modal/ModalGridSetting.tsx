@@ -8,9 +8,15 @@ interface ModalGridSettingProps {
     tree_uuid: string;
     onEditModal: (id: string) => void;
     onDetailModal: (id: string) => void;
+    onMoveModal: (id: string) => void;
 }
 
-const ModalGridSetting = ({ tree_uuid, onEditModal, onDetailModal }: ModalGridSettingProps) => {
+const ModalGridSetting = ({
+    tree_uuid,
+    onEditModal,
+    onDetailModal,
+    onMoveModal,
+}: ModalGridSettingProps) => {
     const { checkLoginStatus } = useVerify();
     const { getUserGridInfo } = useInfo();
 
@@ -26,6 +32,10 @@ const ModalGridSetting = ({ tree_uuid, onEditModal, onDetailModal }: ModalGridSe
 
     const detailHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         onDetailModal(e.currentTarget.id);
+    };
+
+    const moveHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onMoveModal(e.currentTarget.id);
     };
 
     return (
@@ -57,6 +67,8 @@ const ModalGridSetting = ({ tree_uuid, onEditModal, onDetailModal }: ModalGridSe
                         <IconUpdate className="w-4 h-4" />
                     </button>
                     <button
+                        id={tree_uuid}
+                        onClick={moveHandler}
                         title="위치변경"
                         type="button"
                         className="w-8 flex justify-center items-center py-1 px-2 hover:bg-gray-600 transition rounded-full"
@@ -65,7 +77,7 @@ const ModalGridSetting = ({ tree_uuid, onEditModal, onDetailModal }: ModalGridSe
                     </button>
                     <button
                         onClick={deleteHandler}
-                        id="tree_uuid"
+                        id={tree_uuid}
                         title="삭제"
                         type="button"
                         className="w-8 flex justify-center items-center py-1 px-2 hover:bg-gray-600 transition rounded-full"

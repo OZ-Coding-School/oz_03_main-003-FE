@@ -34,6 +34,7 @@ export interface UserTree {
     treeCurrent: number;
     gridSize: number;
     accessibleIndices: number[];
+    originIndices: number[];
 }
 
 export interface AccessibleIndices {
