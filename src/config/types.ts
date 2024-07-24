@@ -60,3 +60,13 @@ export interface TreeFormData {
     tree_level?: number;
     location?: number;
 }
+
+// chat types
+export interface CreateChatRoomRequest {
+    chat_room_name: string;
+    tree_uuid: string;
+}
+
+export interface CreateChatRoomResponse {
+    chat_room_uuid: string;
+}
