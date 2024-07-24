@@ -12,15 +12,14 @@ interface ModalCreateChatProps {
 
 const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedTree, setSelectedTree] = useState("default");
-
+    const [selectedTree, setSelectedTree] = useState<{ name: string; uuid: string } | null>(null);
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
     // zustand store에서 treeDetail 데이터 받기
     const { treeDetail } = useUserStore((state) => state.userData);
 
-    const handleItemClick = (treeName: string) => {
-        setSelectedTree(treeName);
+    const handleItemClick = (tree: { name: string; uuid: string }) => {
+        setSelectedTree(tree);
         setIsDropdownOpen(false);
     };
 
@@ -50,7 +49,7 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
                         "fill-white flex items-center justify-between select-none "
                     )}
                 >
-                    {selectedTree === "default" ? "함께할 나무 선택" : selectedTree}
+                    {selectedTree ? selectedTree.name : "함께할 나무 선택"}
                     <IconSelectArrow
                         className={`w-4 transition-transform duration-300 ${isDropdownOpen ? "transform rotate-180" : ""}`}
                     />
@@ -60,7 +59,7 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
                         {treeDetail.map((item) => (
                             <ModalListItem
                                 key={item.tree_uuid}
-                                item={item}
+                                item={{ name: item.tree_name, uuid: item.tree_uuid }}
                                 onClick={handleItemClick}
                             />
                         ))}
