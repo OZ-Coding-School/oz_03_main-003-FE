@@ -1,5 +1,12 @@
 import { create } from "zustand";
-import { UserAccount, UserLevel, UserTree, UserTreeDetail, UserTreeEmotionDetail } from "./types";
+import {
+    UserAccount,
+    UserLevel,
+    UserTree,
+    UserTreeDetail,
+    UserTreeEmotionDetail,
+    ChatRoom,
+} from "./types";
 
 interface ModalStore {
     modal: boolean;
@@ -23,11 +30,13 @@ interface UserStore {
         treeDetail: UserTreeDetail[] | Record<string, never>;
         treeEmotion: UserTreeEmotionDetail[] | Record<string, never>;
     };
+    chatRooms: ChatRoom[];
     setUserData: (data: UserAccount) => void;
     setLevelData: (data: UserLevel) => void;
     setTreeData: (data: UserTree) => void;
     setTreeDetailData: (data: UserTreeDetail[]) => void;
     setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
+    setChatRooms: (rooms: ChatRoom[]) => void;
 }
 
 /**
@@ -35,6 +44,7 @@ interface UserStore {
  * @function setLevelData: (data: UserLevel) => void;
  * @function setTreeData: (data: UserTree) => void;
  * @function setTreeDetailData: (data: UserTreeDetail) => void;
+ * @function setChatRooms : (data : chatRooms[]) => void;
  */
 export const useUserStore = create<UserStore>((set) => ({
     userData: {
@@ -60,6 +70,7 @@ export const useUserStore = create<UserStore>((set) => ({
         treeDetail: [],
         treeEmotion: [],
     },
+    chatRooms: [],
 
     setUserData: (data: UserAccount) =>
         set((state) => ({
@@ -80,5 +91,9 @@ export const useUserStore = create<UserStore>((set) => ({
     setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) =>
         set((state) => ({
             userData: { ...state.userData, treeEmotion: data },
+        })),
+    setChatRooms: (rooms: ChatRoom[]) =>
+        set(() => ({
+            chatRooms: rooms,
         })),
 }));

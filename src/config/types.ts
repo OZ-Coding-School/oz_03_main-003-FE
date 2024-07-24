@@ -70,3 +70,8 @@ export interface CreateChatRoomRequest {
 export interface CreateChatRoomResponse {
     chat_room_uuid: string;
 }
+
+export interface ChatRoom {
+    chat_room_uuid: string;
+    chat_room_name: string;
+}

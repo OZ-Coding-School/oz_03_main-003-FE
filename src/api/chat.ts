@@ -1,5 +1,5 @@
 import { axiosInstance } from "./axios";
-import { CreateChatRoomRequest, CreateChatRoomResponse } from "../config/types";
+import { CreateChatRoomRequest, CreateChatRoomResponse, ChatRoom } from "../config/types";
 
 export const createChatRoom = async (data: CreateChatRoomRequest) => {
     try {
@@ -9,4 +9,9 @@ export const createChatRoom = async (data: CreateChatRoomRequest) => {
         console.error("Error creating chat room:", error);
         throw error;
     }
+};
+
+export const getChatRoomList = async (): Promise<ChatRoom[]> => {
+    const response = await axiosInstance.get<ChatRoom[]>("/chat");
+    return response.data;
 };
