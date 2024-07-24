@@ -2,25 +2,25 @@ import { TreeFormData } from "../config/types";
 import { axiosInstance } from "./axios";
 
 export const createTree = () => {
-    return axiosInstance.post("/trees/new");
+    return axiosInstance.post("/tree/new");
 };
 
 export const getTreeDataAll = () => {
-    return axiosInstance.get("/trees/");
+    return axiosInstance.get("/tree");
 };
 
 export const getTreeData = (id: string) => {
-    return axiosInstance.get(`/trees/?tree_uuid=${id}`);
+    return axiosInstance.get(`/tree/?tree_uuid=${id}`);
 };
 
 export const getTreeEmotionDataAll = () => {
-    return axiosInstance.get(`/trees/emotion`);
+    return axiosInstance.get(`/tree/emotion`);
 };
 
 export const updateTree = (id: string, form: TreeFormData) => {
-    return axiosInstance.patch(`/trees/${id}`, form);
+    return axiosInstance.patch(`/tree/${id}`, form);
 };
 
 export const deleteTree = (id: string) => {
-    return axiosInstance.delete(`/trees/${id}`);
+    return axiosInstance.delete(`/tree/${id}`);
 };

@@ -16,7 +16,6 @@ const HomeMain = () => {
             await getUserLevelInfo();
         };
         refreshUserInfo();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getUserInfo, getUserGridInfo, getUserLevelInfo]);
 
     return (
