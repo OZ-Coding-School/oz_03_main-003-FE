@@ -49,12 +49,12 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
-                transition={{ duration: 0.5, type: "spring" }}
+                transition={{ duration: 0.5, type: "tween" }}
                 onKeyDown={(e) => {
                     e.key === "Escape" && closeHandler();
                     e.key === "Enter" && closeHandler();
                 }}
-                className="select-none absolute left-5 top-[360px] p-5 w-[340px] h-fit bg-gray-800 border border-gray-600"
+                className="select-none absolute left-[370px] top-[140px] p-5 w-[340px] h-fit bg-gray-800 border border-gray-600"
             >
                 <div className="w-full flex justify-between">
                     <h1 className="text-gray-200 font-title text-base mb-5">나무 정보</h1>
