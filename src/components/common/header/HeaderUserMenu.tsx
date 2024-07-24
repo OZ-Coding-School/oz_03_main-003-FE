@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IconLogout, IconUser } from "../../../config/IconData";
-import { authApi } from "../../../api";
+import { authApi } from "../../../api/index";
 import { useUserStore } from "../../../config/store";
 import { motion } from "framer-motion";
 

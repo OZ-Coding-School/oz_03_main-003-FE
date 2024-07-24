@@ -58,4 +58,5 @@ export interface TreeFormData {
     tree_name: string;
     tree_level: number;
     location: number;
+    chat_room_uuid: string;
 }
