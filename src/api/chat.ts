@@ -1,14 +1,12 @@
 import { axiosInstance } from "./axios";
+import { CreateChatRoomRequest, CreateChatRoomResponse } from "../config/types";
 
-export const createChatRoom = (data: {
-    user_uuid: string;
-    chat_room_name: string;
-    analyze_target_name: string;
-    analyze_target_relation: string;
-}) => {
-    return axiosInstance.post("/chat/create", data);
-};
-
-export const getChatRooms = () => {
-    return axiosInstance.get("/chat/rooms");
+export const createChatRoom = async (data: CreateChatRoomRequest) => {
+    try {
+        const response = await axiosInstance.post<CreateChatRoomResponse>("/chat/new", data);
+        return response.data;
+    } catch (error) {
+        console.error("Error creating chat room:", error);
+        throw error;
+    }
 };

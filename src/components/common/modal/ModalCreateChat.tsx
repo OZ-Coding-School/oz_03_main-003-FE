@@ -5,6 +5,7 @@ import ModalListItem from "./ModalListItem";
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import { useUserStore } from "../../../config/store";
+import { chatApi } from "../../../api";
 
 interface ModalCreateChatProps {
     onClose: () => void;
@@ -12,7 +13,10 @@ interface ModalCreateChatProps {
 
 const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    // dropDown treelist data
     const [selectedTree, setSelectedTree] = useState<{ name: string; uuid: string } | null>(null);
+    const [chatRoomName, setChatRoomName] = useState("");
+
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
     // zustand store에서 treeDetail 데이터 받기
@@ -23,6 +27,23 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
         setIsDropdownOpen(false);
     };
 
+    const handleSubmit = async () => {
+        if (chatRoomName && selectedTree) {
+            try {
+                const response = await chatApi.createChatRoom({
+                    chat_room_name: chatRoomName,
+                    tree_uuid: selectedTree.uuid,
+                });
+                console.log("Chat room created with UUID", response.chat_room_uuid);
+                onClose();
+            } catch (error) {
+                console.error("Failed to create chat room", error);
+            }
+        } else {
+            console.log("Chat room name or tree is not selected");
+        }
+    };
+
     return (
         <div
             className={tw(
@@ -31,9 +52,11 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
             )}
         >
             <h3 className="font-title leading-5 text-gray-200">대화 분석방 생성</h3>
+            {/* create chat room name */}
             <input
                 type="text"
                 placeholder="이름을 지어주세요."
+                onChange={(e) => setChatRoomName(e.target.value)}
                 className={tw(
                     "mt-6 border-b outline-none border-gray-600",
                     "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
@@ -54,6 +77,7 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
                         className={`w-4 transition-transform duration-300 ${isDropdownOpen ? "transform rotate-180" : ""}`}
                     />
                 </div>
+                {/* tree list rendering */}
                 {isDropdownOpen && (
                     <ul className="absolute left-0 top-13 right-0 z-10 cursor-pointer">
                         {treeDetail.map((item) => (
@@ -67,7 +91,9 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
                 )}
             </div>
             <div className="text-right mt-4">
-                <ButtonDefault className="ml-1">생성하기</ButtonDefault>
+                <ButtonDefault className="ml-1" onClick={handleSubmit}>
+                    생성하기
+                </ButtonDefault>
             </div>
             <button
                 type="button"
