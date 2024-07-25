@@ -2,7 +2,7 @@ import ChatListItem from "./ChatListItem";
 import { useUserChatStore } from "../../../config/store";
 
 const ChatListContent = () => {
-    const chatRooms = useUserChatStore((state) => state.chatRooms);
+    const { chatRooms } = useUserChatStore();
 
     return (
         <div className="select-none overflow-y-auto w-fit flex flex-col">

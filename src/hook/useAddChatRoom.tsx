@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useUserStore, useUserChatStore } from "../config/store";
 import { createChatRoom } from "../api/chat";
-import { ChatRoom } from "../config/types";
+import { ChatRoom, CreateChatRoomResponse } from "../config/types";
 
 const useAddChatRoom = () => {
     const { setChatRooms } = useUserChatStore((state) => ({
@@ -13,8 +13,9 @@ const useAddChatRoom = () => {
         async (chat_room_name: string, tree_uuid: string) => {
             try {
                 const response = await createChatRoom({ chat_room_name, tree_uuid });
+                const { chat_room_uuid }: CreateChatRoomResponse = response.data;
                 const newRoom: ChatRoom = {
-                    chat_room_uuid: response.chat_room_uuid,
+                    chat_room_uuid,
                     chat_room_name,
                     tree_uuid,
                 };

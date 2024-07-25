@@ -3,22 +3,24 @@ import { useUserChatStore } from "../config/store";
 import { deleteChatRoom } from "../api/chat";
 
 const useRemoveChatRoom = () => {
-    const { setChatRooms } = useUserChatStore((state) => ({
+    const { setChatRooms, chatRooms } = useUserChatStore((state) => ({
         setChatRooms: state.setChatRooms,
+        chatRooms: state.chatRooms,
     }));
 
     const removeChatRoom = useCallback(
         async (chat_room_uuid: string) => {
             try {
                 await deleteChatRoom(chat_room_uuid);
-                setChatRooms((prevRooms) =>
-                    prevRooms.filter((room) => room.chat_room_uuid !== chat_room_uuid)
+                const updatedRooms = chatRooms.filter(
+                    (room) => room.chat_room_uuid !== chat_room_uuid
                 );
+                setChatRooms(updatedRooms);
             } catch (error) {
                 console.log("Failed to delete chat room", error);
             }
         },
-        [setChatRooms]
+        [setChatRooms, chatRooms]
     );
 
     return { removeChatRoom };
