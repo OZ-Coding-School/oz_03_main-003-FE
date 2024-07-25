@@ -2,20 +2,11 @@ import { useEffect, useState } from "react";
 import ChatListHeader from "../components/common/chatList/ChatListHeader";
 import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import ModalCreateChat from "../components/common/modal/ModalCreateChat";
-import useUserInfo from "../hook/useInfo";
 import useChatRooms from "../hook/useChatRooms";
 import ChatListContent from "../components/common/chatList/ChatListContent";
 
 const PageChat = () => {
-    const { getUserInfo } = useUserInfo();
     const { fetchChatRooms } = useChatRooms();
-
-    useEffect(() => {
-        const refreshUserInfo = async () => {
-            await getUserInfo();
-        };
-        refreshUserInfo();
-    }, [getUserInfo]);
 
     useEffect(() => {
         fetchChatRooms();

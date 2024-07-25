@@ -6,7 +6,6 @@ import {
     UserTreeDetail,
 } from "../config/types";
 import { fetchTreeDataAll } from "./tree";
-
 /**
  *
  * @description 채팅방 CRUD관련 api호출 함수
@@ -15,44 +14,28 @@ import { fetchTreeDataAll } from "./tree";
  * @returns deleteChatRoom 특정 채팅방을 서버에서 삭제
  */
 export const createChatRoom = async (data: CreateChatRoomRequest): Promise<ChatRoom> => {
-    try {
-        const response = await axiosInstance.post<CreateChatRoomResponse>("/chat/new", data);
-        return {
-            chat_room_uuid: response.data.chat_room_uuid,
-            chat_room_name: data.chat_room_name,
-            tree_uuid: data.tree_uuid,
-        };
-    } catch (error) {
-        console.error("Error creating chat room:", error);
-        throw error;
-    }
+    const response = await axiosInstance.post<CreateChatRoomResponse>("/chat/new", data);
+    return {
+        chat_room_uuid: response.data.chat_room_uuid,
+        chat_room_name: data.chat_room_name,
+        tree_uuid: data.tree_uuid,
+    };
 };
-
 export const getChatRoomList = async (): Promise<ChatRoom[]> => {
-    try {
-        const [chatRoomsResponse, trees] = await Promise.all([
-            axiosInstance.get<ChatRoom[]>("/chat"),
-            fetchTreeDataAll(),
-        ]);
+    const [chatRoomsResponse, trees] = await Promise.all([
+        axiosInstance.get<ChatRoom[]>("/chat"),
+        fetchTreeDataAll(),
+    ]);
 
-        return chatRoomsResponse.data.map((chatRoom) => {
-            const tree = trees.find((t: UserTreeDetail) => t.tree_uuid === chatRoom.tree_uuid);
-            return {
-                ...chatRoom,
-                tree_name: tree ? tree.tree_name : "No tree name",
-            };
-        });
-    } catch (error) {
-        console.error("Error fetching chat rooms:", error);
-        throw error;
-    }
+    return chatRoomsResponse.data.map((chatRoom) => {
+        const tree = trees.find((t: UserTreeDetail) => t.tree_uuid === chatRoom.tree_uuid);
+        return {
+            ...chatRoom,
+            tree_name: tree ? tree.tree_name : "No tree name",
+        };
+    });
 };
 
 export const deleteChatRoom = async (id: string) => {
-    try {
-        await axiosInstance.delete(`/chat/${id}`);
-    } catch (error) {
-        console.error("Error deleting chat room:", error);
-        throw error;
-    }
+    await axiosInstance.delete(`/chat/${id}`);
 };
