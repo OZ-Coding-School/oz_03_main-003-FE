@@ -12,10 +12,9 @@ interface ModalChangeNameProps {
     onClose: () => void;
 }
 
-const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) => {
+const ModalChangeName = ({ isOpen, onClose }: ModalChangeNameProps) => {
     const { getUserInfo } = useInfo();
     const { checkLoginStatus } = useVerify();
-
     const inputRef = useRef<HTMLInputElement>(null);
     const [isUpdatedNewName, setIsUpdatedNewName] = useState("");
     const [userNameAlert, setUserNameAlert] = useState(false);

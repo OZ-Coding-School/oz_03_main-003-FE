@@ -1,14 +1,22 @@
+import { useCallback } from "react";
 import ButtonError from "../button/ButtonError";
 import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
 import ButtonDefault from "../button/ButtonDefault";
+import useChatRooms from "../../../hook/useChatRooms";
+import useVerify from "../../../hook/useVerify";
+
 interface ModalDeleteChatProps {
     isOpen: boolean;
     onClose: () => void;
+    chat_room_uuid: string;
 }
 
-const ModalDeleteChat: React.FC<ModalDeleteChatProps> = ({ isOpen, onClose }) => {
+const ModalDeleteChat = ({ isOpen, onClose, chat_room_uuid }: ModalDeleteChatProps) => {
+    const { removeChatRoom } = useChatRooms();
+    const { checkLoginStatus } = useVerify();
+
     const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
     };
@@ -16,6 +24,12 @@ const ModalDeleteChat: React.FC<ModalDeleteChatProps> = ({ isOpen, onClose }) =>
     const closeHandler = () => {
         onClose();
     };
+
+    const handleDelete = useCallback(async () => {
+        await checkLoginStatus();
+        await removeChatRoom(chat_room_uuid);
+        onClose();
+    }, [removeChatRoom, chat_room_uuid, onClose, checkLoginStatus]);
 
     return (
         <AnimatePresence>
@@ -46,7 +60,7 @@ const ModalDeleteChat: React.FC<ModalDeleteChatProps> = ({ isOpen, onClose }) =>
                             삭제 된 내용은 복구되지 않습니다
                         </p>
                         <div className="text-right mt-2.5">
-                            <ButtonError>삭제하기</ButtonError>
+                            <ButtonError onClick={handleDelete}>삭제하기</ButtonError>
                             <ButtonDefault className="ml-1">취소하기</ButtonDefault>
                         </div>
                         <button

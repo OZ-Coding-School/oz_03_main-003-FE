@@ -1,5 +1,12 @@
 import { create } from "zustand";
-import { UserAccount, UserLevel, UserTree, UserTreeDetail, UserTreeEmotionDetail } from "./types";
+import {
+    UserAccount,
+    UserLevel,
+    UserTree,
+    UserTreeDetail,
+    UserTreeEmotionDetail,
+    ChatRoom,
+} from "./types";
 
 interface ModalStore {
     modal: boolean;
@@ -30,12 +37,6 @@ interface UserStore {
     setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
 }
 
-/**
- * @function setUserData: (data: UserAccount) => void;
- * @function setLevelData: (data: UserLevel) => void;
- * @function setTreeData: (data: UserTree) => void;
- * @function setTreeDetailData: (data: UserTreeDetail) => void;
- */
 export const useUserStore = create<UserStore>((set) => ({
     userData: {
         user: {
@@ -80,5 +81,19 @@ export const useUserStore = create<UserStore>((set) => ({
     setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) =>
         set((state) => ({
             userData: { ...state.userData, treeEmotion: data },
+        })),
+}));
+
+interface UserChatStore {
+    chatRooms: ChatRoom[];
+    setChatRooms: (data: ChatRoom[]) => void;
+}
+
+export const useUserChatStore = create<UserChatStore>((set) => ({
+    chatRooms: [],
+
+    setChatRooms: (data: ChatRoom[]) =>
+        set(() => ({
+            chatRooms: data,
         })),
 }));

@@ -1,18 +1,18 @@
 interface ModalListItemProps {
     item: {
-        id: number;
-        group_name: string;
+        name: string;
+        uuid: string;
     };
-    onClick: (groupName: string) => void;
+    onClick: (tree: { name: string; uuid: string }) => void;
 }
 
-const ModalListItem: React.FC<ModalListItemProps> = ({ item, onClick }) => {
+const ModalListItem = ({ item, onClick }: ModalListItemProps) => {
     return (
         <li
             className="text-white transition py-3 px-4 cursor-pointer bg-gray-600 hover:bg-gray-400"
-            onClick={() => onClick(item.group_name)}
+            onClick={() => onClick(item)}
         >
-            {item.group_name}
+            {item.name}
         </li>
     );
 };
