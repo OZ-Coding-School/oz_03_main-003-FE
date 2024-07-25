@@ -7,7 +7,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useUserStore } from "../../../config/store";
 import { UserTreeDetail, UserTreeEmotionDetail } from "../../../config/types";
 import { TREE_TYPE } from "../../../config/const";
-// import { calculateTreeLevel } from "../../../util/utilTreeLevel";
+import { calculateTreeLevel } from "../../../util/utilTreeLevel";
+import ButtonPrimary from "../button/ButtonPrimary";
+import ButtonDisable from "../button/ButtonDisable";
+import { calculateTreeType } from "../../../util/utilTreeType";
+import { treeApi } from "../../../api";
+import useVerify from "../../../hook/useVerify";
+import useInfo from "../../../hook/useInfo";
 
 //? 추후 페이지 제작시 사용
 
@@ -18,6 +24,8 @@ interface ModalTreeDetailProps {
 const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
     const [isVisible, setIsVisible] = useState(false);
     const { userData } = useUserStore();
+    const { checkLoginStatus } = useVerify();
+    const { getUserGridInfo } = useInfo();
     const ref = useRef<HTMLDivElement>(null);
 
     const treeData = userData.treeDetail.find((item) =>
@@ -26,6 +34,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
     const emotionData = userData.treeEmotion.find((item) =>
         item.tree_uuid.includes(treeUUID)
     ) as UserTreeEmotionDetail;
+    const treeExperience = calculateTreeLevel(emotionData, treeData.tree_level);
 
     const closeHandler = () => {
         onClose();
@@ -37,7 +46,35 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
         }
     }, []);
 
-    // const treeExperience = calculateTreeLevel(emotionData);
+    const growHandler = async () => {
+        if (treeExperience.emotionMax === null) {
+            console.log("모든 값이 같음");
+        } else {
+            const type = calculateTreeType(treeExperience.emotionMax);
+
+            const requestForm = {
+                tree_level: type,
+            };
+            await checkLoginStatus();
+            await treeApi.updateTree(treeUUID, requestForm);
+            await getUserGridInfo();
+        }
+    };
+
+    const devGrowHandler = async () => {
+        const type = window.prompt(
+            "성장할 레벨 타입을 입력해주세요. \n5를 초과하는 숫자를 입력할 경우 계정 초기화를 해야 합니다."
+        );
+        if (type) {
+            const requestForm = {
+                tree_level: Number(type),
+            };
+
+            await checkLoginStatus();
+            await treeApi.updateTree(treeUUID, requestForm);
+            await getUserGridInfo();
+        }
+    };
 
     return (
         <>
@@ -68,6 +105,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                 </div>
                 <article className="mb-[10px]">
                     <div className="text-gray-200 font-title text-sm">이름</div>
+
                     <div className="text-white text-base">{treeData.tree_name}</div>
                 </article>
                 <article className="mb-[10px]">
@@ -90,7 +128,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                                     transition={{ duration: 1, type: "spring" }}
                                     animate={{ translateX: [20, 0], opacity: [0, 1] }}
                                     exit={{ translateX: 20, opacity: 0 }}
-                                    className="absolute z-20 left-[72px] top-[2px]"
+                                    className="absolute z-20 left-[150px] top-[2px]"
                                 >
                                     <ModalTooltip type="DETAIL" />
                                 </motion.div>
@@ -104,12 +142,16 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                 <article className="mb-[20px]">
                     <div className="w-full flex justify-between items-center">
                         <div className="text-gray-200 font-title text-sm">성장률</div>
-                        <div className="text-gray-200 font-title">0%</div>
+                        <div className="text-gray-200 font-title">{treeExperience.percentage}%</div>
                     </div>
                     <div className="rounded-sm border h-2">
                         <div
                             className="bg-primary h-full animate-width"
-                            style={{ "--target-width": `0%` } as React.CSSProperties}
+                            style={
+                                {
+                                    "--target-width": `${treeExperience.percentage}`,
+                                } as React.CSSProperties
+                            }
                         ></div>
                     </div>
                 </article>
@@ -117,6 +159,18 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                     <div className="text-gray-200 font-title text-sm">감정 기록</div>
                     <ModalTreeDetailGraph emotions={emotionData.emotions} />
                 </article>
+                <div className="flex justify-end gap-2">
+                    {treeExperience.percentage === 100 && treeData.tree_level === 0 ? (
+                        <ButtonPrimary onClick={growHandler} className="mt-8 text-sm font-title">
+                            비료 주기
+                        </ButtonPrimary>
+                    ) : (
+                        <ButtonDisable className="mt-8 text-sm font-title">비료 주기</ButtonDisable>
+                    )}
+                    <ButtonPrimary onClick={devGrowHandler} className="mt-8 text-sm font-title">
+                        (개발)강제 성장
+                    </ButtonPrimary>
+                </div>
             </motion.div>
         </>
     );

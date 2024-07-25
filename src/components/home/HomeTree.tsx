@@ -35,7 +35,7 @@ const HomeTree = ({
         <div
             id={tree_uuid}
             style={{
-                transform: "skewX(45deg) skewY(-27deg)",
+                transform: "skewX(45deg) skewY(-27deg) scaleY(0.95) scale(1.5) translateY(-20px)",
             }}
             className={tw(
                 "relative origin-center bottom-20 flex justify-center items-center",
@@ -53,18 +53,18 @@ const HomeTree = ({
                 {!moveState && (
                     <>
                         {hover && (
-                            <ModalGridSetting
-                                onDetailModal={onDetailModal}
-                                onEditModal={onEditModal}
-                                onMoveModal={onMoveModal}
-                                tree_uuid={tree_uuid}
-                            />
-                        )}
-                        {hover && (
-                            <HomeTreeDescription
-                                treeName={tree_name}
-                                treeType={TREE_TYPE[tree_level]}
-                            />
+                            <>
+                                <HomeTreeDescription
+                                    treeName={tree_name}
+                                    treeType={TREE_TYPE[tree_level]}
+                                />
+                                <ModalGridSetting
+                                    onDetailModal={onDetailModal}
+                                    onEditModal={onEditModal}
+                                    onMoveModal={onMoveModal}
+                                    tree_uuid={tree_uuid}
+                                />
+                            </>
                         )}
                     </>
                 )}

@@ -1,14 +1,47 @@
-// import { UserTreeEmotionDetail } from "../config/types";
-// import { Emotion } from "../config/types";
+import { UserTreeEmotionDetail, Emotion } from "../config/types";
 
-// const calculateEmotion = (emotion: Emotion) => {};
+const treeExperience: { [key: number]: number } = {
+    0: 100,
+};
 
-// const maxEmotion = (emotion: Emotion) => {};
+const levelInitialExperience: { [key: number]: number } = {
+    0: 0,
+};
 
-// export const calculateTreeLevel = (data: UserTreeEmotionDetail) => {
-//     const uuid = data.tree_uuid;
-//     const emotion = data.emotions;
+const totalEmotion = (emotion: Emotion): number => {
+    return Object.values(emotion).reduce((sum, value) => sum + Number(value), 0);
+};
 
-//     const emotionMax = maxEmotion(emotion);
-//     const emotionTotal = calculateEmotion(emotion);
-// };
+const maxEmotion = (emotion: Emotion): keyof Emotion | null => {
+    const result = Object.entries(emotion).reduce(
+        (max, [key, value]) => {
+            return value > max.value ? { key, value } : max;
+        },
+        { key: "", value: 0 }
+    );
+
+    return result.value > 0 ? (result.key as keyof Emotion) : null;
+};
+
+const calculateExperience = (level: number, currentExperience: number): number => {
+    if (level !== 0) {
+        return 0;
+    }
+    const requiredExperience = treeExperience[level];
+    const initialExperience = levelInitialExperience[level] || 0;
+
+    const percentage = ((currentExperience - initialExperience) / requiredExperience) * 100;
+
+    return Math.min(Math.max(Math.round(percentage), 0), 100);
+};
+
+export const calculateTreeLevel = (data: UserTreeEmotionDetail, level: number) => {
+    const emotionMax = maxEmotion(data.emotions);
+    const emotionTotal = totalEmotion(data.emotions);
+    const percentage = calculateExperience(level, emotionTotal);
+
+    return {
+        percentage,
+        emotionMax,
+    };
+};
