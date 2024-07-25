@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { useUserStore } from "../config/store";
+import { useUserChatStore } from "../config/store";
 import { deleteChatRoom } from "../api/chat";
 
 const useRemoveChatRoom = () => {
-    const { setChatRooms } = useUserStore((state) => ({
+    const { setChatRooms } = useUserChatStore((state) => ({
         setChatRooms: state.setChatRooms,
     }));
 

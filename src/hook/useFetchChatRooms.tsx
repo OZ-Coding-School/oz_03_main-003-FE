@@ -1,10 +1,10 @@
 import { useCallback } from "react";
-import { useUserStore } from "../config/store";
+import { useUserChatStore } from "../config/store";
 import { getChatRoomList } from "../api/chat";
 import { ChatRoom } from "../config/types";
 
 const useFetchChatRooms = () => {
-    const { setChatRooms } = useUserStore((state) => ({
+    const { setChatRooms } = useUserChatStore((state) => ({
         setChatRooms: state.setChatRooms,
     }));
 
