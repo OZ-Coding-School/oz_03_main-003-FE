@@ -9,6 +9,11 @@ export const getTreeDataAll = () => {
     return axiosInstance.get("/tree");
 };
 
+export const fetchTreeDataAll = async () => {
+    const response = await getTreeDataAll();
+    return response.data;
+};
+
 export const getTreeData = (id: string) => {
     return axiosInstance.get(`/tree/?tree_uuid=${id}`);
 };
