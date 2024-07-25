@@ -4,9 +4,13 @@ import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import ModalCreateChat from "../components/common/modal/ModalCreateChat";
 import useChatRooms from "../hook/useChatRooms";
 import ChatListContent from "../components/common/chatList/ChatListContent";
+import { useUserStore } from "../config/store";
+import NonData from "../components/NonData";
 
 const PageChat = () => {
     const { fetchChatRooms } = useChatRooms();
+    const { userData } = useUserStore();
+
     useEffect(() => {
         fetchChatRooms();
     }, [fetchChatRooms]);
@@ -17,6 +21,15 @@ const PageChat = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    if (userData.tree.treeCurrent === 0) {
+        return (
+            <>
+                <HeaderLoggedIn />
+                <NonData />
+            </>
+        );
+    }
 
     return (
         <>
