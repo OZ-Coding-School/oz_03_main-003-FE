@@ -100,6 +100,7 @@ interface ChatStore {
     setChatList: (chatList: ChatRoom[]) => void;
     setTreeList: (treeList: TreeItem[]) => void; // setTreeList 추가
     setTreeUuid: (uuid: string) => void;
+    fetchChatRooms: () => Promise<void>;
     fetchTreeList: () => Promise<void>;
     deleteChatRoom: (chatRoomId: string) => Promise<void>;
 }
@@ -131,6 +132,22 @@ export const useChatStore = create<ChatStore>((set) => ({
         set(() => ({
             treeUuid: uuid,
         })),
+    fetchChatRooms: async () => {
+        try {
+            const response = await axiosInstance.get("/chat");
+            const chatRooms: ChatRoom[] = response.data;
+            set((state) => ({
+                chatList: chatRooms.map((chatRoom) => ({
+                    ...chatRoom,
+                    tree_name:
+                        state.treeList.find((tree) => tree.tree_uuid === chatRoom.tree_uuid)
+                            ?.tree_name || "Unknown",
+                })),
+            }));
+        } catch (error) {
+            console.error("Failed to fetch chat rooms:", error);
+        }
+    },
     fetchTreeList: async () => {
         try {
             const response = await axiosInstance.get("/tree");
