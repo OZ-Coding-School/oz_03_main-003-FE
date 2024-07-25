@@ -31,7 +31,7 @@ const ModalCreateChat = ({ onClose }: ModalCreateChatProps) => {
         setIsDropdownOpen(false);
         setRequireSelectTree(false);
     };
-    useChatRooms();
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setChatRoomName(value);

@@ -13,7 +13,7 @@ interface ModalCreateTreeProps {
     onClose: () => void;
 }
 
-const ModalCreateTree: React.FC<ModalCreateTreeProps> = ({ onClose, treeLocation }) => {
+const ModalCreateTree = ({ onClose, treeLocation }: ModalCreateTreeProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [treeName, setTreeName] = useState("");
     const [treeNameAlert, setTreeNameAlert] = useState(false);

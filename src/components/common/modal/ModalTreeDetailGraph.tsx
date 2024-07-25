@@ -25,7 +25,7 @@ interface EmotionDataItem {
     count: number;
 }
 
-const ModalTreeDetailGraph: React.FC<ModalTreeDetailGraphProps> = ({ emotions }) => {
+const ModalTreeDetailGraph = ({ emotions }: ModalTreeDetailGraphProps) => {
     const emotionData: EmotionDataItem[] = useMemo(
         () => [
             {

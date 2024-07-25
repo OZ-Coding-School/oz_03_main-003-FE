@@ -13,7 +13,7 @@ interface ChatListItemProps {
     };
 }
 
-const ChatListItem: React.FC<ChatListItemProps> = ({ item }) => {
+const ChatListItem = ({ item }: ChatListItemProps) => {
     const [hover, setHover] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -35,7 +35,6 @@ const ChatListItem: React.FC<ChatListItemProps> = ({ item }) => {
     };
     return (
         <>
-            {" "}
             <div
                 className={tw(
                     "text-white px-5 py-3 fill-white",

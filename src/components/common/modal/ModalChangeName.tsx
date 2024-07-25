@@ -12,7 +12,7 @@ interface ModalChangeNameProps {
     onClose: () => void;
 }
 
-const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) => {
+const ModalChangeName = ({ isOpen, onClose }: ModalChangeNameProps) => {
     const { getUserInfo } = useInfo();
     const { checkLoginStatus } = useVerify();
 

@@ -20,10 +20,10 @@ const useAddChatRoom = () => {
                 };
                 const trees = userData.treeDetail;
                 const tree = trees.find((t) => t.tree_uuid === tree_uuid);
-                setChatRooms((prevRooms) => [
-                    ...prevRooms,
+                const newChatRooms = [
                     { ...newRoom, tree_name: tree ? tree.tree_name : "No tree name" },
-                ]);
+                ];
+                setChatRooms(newChatRooms);
             } catch (error) {
                 console.log("Failed to create chat room", error);
             }

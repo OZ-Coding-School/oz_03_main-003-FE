@@ -30,13 +30,11 @@ interface UserStore {
         treeDetail: UserTreeDetail[] | Record<string, never>;
         treeEmotion: UserTreeEmotionDetail[] | Record<string, never>;
     };
-    chatRooms: ChatRoom[];
     setUserData: (data: UserAccount) => void;
     setLevelData: (data: UserLevel) => void;
     setTreeData: (data: UserTree) => void;
     setTreeDetailData: (data: UserTreeDetail[]) => void;
     setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
-    setChatRooms: (rooms: ChatRoom[] | ((prevRooms: ChatRoom[]) => ChatRoom[])) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -63,7 +61,6 @@ export const useUserStore = create<UserStore>((set) => ({
         treeDetail: [],
         treeEmotion: [],
     },
-    chatRooms: [],
 
     setUserData: (data: UserAccount) =>
         set((state) => ({
@@ -85,22 +82,18 @@ export const useUserStore = create<UserStore>((set) => ({
         set((state) => ({
             userData: { ...state.userData, treeEmotion: data },
         })),
-    setChatRooms: (rooms: ChatRoom[] | ((prevRooms: ChatRoom[]) => ChatRoom[])) =>
-        set((state) => ({
-            chatRooms: typeof rooms === "function" ? rooms(state.chatRooms) : rooms,
-        })),
 }));
 
 interface UserChatStore {
     chatRooms: ChatRoom[];
-    setChatRooms: (rooms: ChatRoom[] | ((prevRooms: ChatRoom[]) => ChatRoom[])) => void;
+    setChatRooms: (data: ChatRoom[]) => void;
 }
 
 export const useUserChatStore = create<UserChatStore>((set) => ({
     chatRooms: [],
 
-    setChatRooms: (rooms: ChatRoom[] | ((prevRooms: ChatRoom[]) => ChatRoom[])) =>
-        set((state) => ({
-            chatRooms: typeof rooms === "function" ? rooms(state.chatRooms) : rooms,
+    setChatRooms: (data: ChatRoom[]) =>
+        set(() => ({
+            chatRooms: data,
         })),
 }));

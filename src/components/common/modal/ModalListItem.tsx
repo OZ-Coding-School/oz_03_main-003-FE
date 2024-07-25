@@ -8,7 +8,7 @@ interface ModalListItemProps {
     onClick: (tree: { name: string; uuid: string }) => void;
 }
 
-const ModalListItem: React.FC<ModalListItemProps> = ({ item, onClick }) => {
+const ModalListItem = ({ item, onClick }: ModalListItemProps) => {
     return (
         <li
             className="text-white transition py-3 px-4 cursor-pointer bg-gray-600 hover:bg-gray-400"

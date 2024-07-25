@@ -12,7 +12,7 @@ interface ModalUpdateChatProps {
     chat_room_uuid: string;
 }
 
-const ModalUpdateChat: React.FC<ModalUpdateChatProps> = ({ isOpen, onClose }) => {
+const ModalUpdateChat = ({ isOpen, onClose }: ModalUpdateChatProps) => {
     const { treeDetail } = useUserStore((state) => state.userData);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     // dropDown treelist data
