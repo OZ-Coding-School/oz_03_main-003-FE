@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useChatStore, ChatRoom } from "../../../config/store";
+import { useChatStore } from "../../../config/store";
 import { getChatRooms } from "../../../api/chat";
 import ChatListItem from "../../../components/common/chatList/ChatListItem";
 

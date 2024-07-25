@@ -3,13 +3,12 @@ import ChatListHeader from "../components/common/chatList/ChatListHeader";
 import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import ModalCreateChat from "../components/common/modal/ModalCreateChat";
 import useUserInfo from "../hook/useInfo";
-import { useChatStore, ChatRoom, useUserStore } from "../config/store";
+import { useChatStore, ChatRoom } from "../config/store";
 import ChatListContent from "../components/common/chatList/ChatListContent";
-import { getChatRooms } from "../api/chat";
 
 const PageChat: FC = () => {
     const { getUserInfo } = useUserInfo();
-    const { setChatList, addChatRoom } = useChatStore();
+    const { fetchTreeList, fetchChatRooms, addChatRoom } = useChatStore();
 
     useEffect(() => {
         const refreshUserInfo = async () => {
@@ -19,19 +18,12 @@ const PageChat: FC = () => {
     }, [getUserInfo]);
 
     useEffect(() => {
-        const fetchChatRooms = async () => {
-            try {
-                const chatRooms = await getChatRooms();
-                if (Array.isArray(chatRooms)) {
-                    setChatList(chatRooms);
-                }
-            } catch (error) {
-                console.error("Failed to fetch chat rooms:", error);
-            }
+        const fetchInitialData = async () => {
+            await fetchTreeList();
+            await fetchChatRooms();
         };
-
-        fetchChatRooms();
-    }, [setChatList]);
+        fetchInitialData();
+    }, [fetchTreeList, fetchChatRooms]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 

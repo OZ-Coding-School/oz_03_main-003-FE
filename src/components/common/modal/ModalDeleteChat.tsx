@@ -3,18 +3,37 @@ import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
 import ButtonDefault from "../button/ButtonDefault";
+import { useChatStore } from "../../../config/store";
+
 interface ModalDeleteChatProps {
     isOpen: boolean;
     onClose: () => void;
+    item: {
+        chat_room_uuid: string;
+        chat_room_name: string;
+        created_at: string;
+        tree_name: string;
+    };
 }
 
-const ModalDeleteChat: React.FC<ModalDeleteChatProps> = ({ isOpen, onClose }) => {
+const ModalDeleteChat: React.FC<ModalDeleteChatProps> = ({ item, isOpen, onClose }) => {
+    const deleteChatRoom = useChatStore((state) => state.deleteChatRoom);
+
     const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
     };
 
     const closeHandler = () => {
         onClose();
+    };
+
+    const handleDeleteChatRoom = async () => {
+        if (item && item.chat_room_uuid) {
+            await deleteChatRoom(item.chat_room_uuid);
+            onClose();
+        } else {
+            console.error("Chat room UUID is undefined");
+        }
     };
 
     return (
@@ -46,8 +65,10 @@ const ModalDeleteChat: React.FC<ModalDeleteChatProps> = ({ isOpen, onClose }) =>
                             삭제 된 내용은 복구되지 않습니다
                         </p>
                         <div className="text-right mt-2.5">
-                            <ButtonError>삭제하기</ButtonError>
-                            <ButtonDefault className="ml-1">취소하기</ButtonDefault>
+                            <ButtonError onClick={handleDeleteChatRoom}>삭제하기</ButtonError>
+                            <ButtonDefault className="ml-1" onClick={closeHandler}>
+                                취소하기
+                            </ButtonDefault>
                         </div>
                         <button
                             type="button"
