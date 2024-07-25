@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { IconTooltip } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import ModalTooltip from "../modal/ModalTooltip";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useUserStore } from "../../../config/store";
-import ButtonPrimary from "../button/ButtonPrimary";
 
 const UserInfoHome = () => {
     const [isVisible, setIsVisible] = useState(false);
     const { userData } = useUserStore();
 
     return (
-        <div className="bg-gray-800 text-white w-[340px] fixed z-10 top-[140px]">
+        <div className="bg-gray-800 text-white w-[340px] fixed z-10 top-[140px] left-5 select-none">
             <div className="flex p-5 pb-6 border-b border-gray-600">
                 <div className="relative w-12 h-12 border border-white rounded-full">
                     <img
@@ -47,19 +46,18 @@ const UserInfoHome = () => {
                         onMouseEnter={() => setIsVisible(true)}
                         onMouseLeave={() => setIsVisible(false)}
                     />
-                    <AnimatePresence>
-                        {isVisible && (
-                            <motion.div
-                                initial={{ translateX: 0, opacity: 1 }}
-                                transition={{ duration: 1, type: "spring" }}
-                                animate={{ translateX: [20, 0], opacity: [0, 1] }}
-                                exit={{ translateX: 20, opacity: 0 }}
-                                className="absolute z-20 left-[38px] top-[4px]"
-                            >
-                                <ModalTooltip type="USERINFO" />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+
+                    {isVisible && (
+                        <motion.div
+                            initial={{ translateX: 0, opacity: 1 }}
+                            transition={{ duration: 1, type: "spring" }}
+                            animate={{ translateX: [20, 0], opacity: [0, 1] }}
+                            exit={{ translateX: 20, opacity: 0 }}
+                            className="absolute z-20 left-[38px] top-[4px]"
+                        >
+                            <ModalTooltip type="USERINFO" />
+                        </motion.div>
+                    )}
                 </div>
                 <div className="flex">
                     <ul className="w-20 text-gray-200">
@@ -68,17 +66,14 @@ const UserInfoHome = () => {
                     </ul>
                     <ul>
                         <li className="mb-3">
-                            : {userData.level.treeCurrent} / {userData.level.treeMax}
+                            : {userData.tree.treeCurrent} / {userData.tree.treeMax}
                         </li>
                         <li className="mb-3">
-                            : {userData.level.gridSize} x {userData.level.gridSize}
+                            : {userData.tree.gridSize} x {userData.tree.gridSize}
                         </li>
                     </ul>
                 </div>
             </div>
-            <ButtonPrimary className="fixed z-10 top-[140px] left-[360px]">
-                새 나무 심기
-            </ButtonPrimary>
         </div>
     );
 };

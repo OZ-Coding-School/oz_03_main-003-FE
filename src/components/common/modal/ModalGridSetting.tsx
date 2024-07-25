@@ -1,44 +1,88 @@
+import { treeApi } from "../../../api";
 import { IconChange, IconDeleteBtn, IconDetail, IconUpdate } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
+import useVerify from "../../../hook/useVerify";
+import useInfo from "../../../hook/useInfo";
 
-const ModalGridSetting = () => {
+interface ModalGridSettingProps {
+    tree_uuid: string;
+    onEditModal: (id: string) => void;
+    onDetailModal: (id: string) => void;
+    onMoveModal: (id: string) => void;
+}
+
+const ModalGridSetting = ({
+    tree_uuid,
+    onEditModal,
+    onDetailModal,
+    onMoveModal,
+}: ModalGridSettingProps) => {
+    const { checkLoginStatus } = useVerify();
+    const { getUserGridInfo } = useInfo();
+
+    const editHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onEditModal(e.currentTarget.id);
+    };
+
+    const deleteHandler = async () => {
+        await checkLoginStatus();
+        await treeApi.deleteTree(tree_uuid);
+        await getUserGridInfo();
+    };
+
+    const detailHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onDetailModal(e.currentTarget.id);
+    };
+
+    const moveHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onMoveModal(e.currentTarget.id);
+    };
+
     return (
         <>
-            <div className="relative border w-40 h-40 border-gray-600 mt-32">
+            <div className="relative w-40 h-40 border-gray-600">
                 <div
                     className={tw(
-                        "border border-gray-600 rounded-full",
-                        "flex fill-gray-200 text-zero p-1 max-w-auto",
-                        "absolute -top-20 left-1/2 -translate-x-1/2"
+                        "border bg-opacity-75 border-gray-600 rounded-full scale-[80%]",
+                        "flex gap-1 justify-center bg-gray-800 fill-white text-zero p-1 max-w-auto",
+                        "absolute -top-3 left-1/2 -translate-x-1/2"
                     )}
                 >
                     <button
+                        id={tree_uuid}
+                        title="자세히"
                         type="button"
-                        className="w-8 py-1 px-2 hover:bg-gray-600 transition rounded-full mr-1"
+                        onClick={detailHandler}
+                        className="w-8 flex justify-center items-center py-1 px-2 hover:bg-gray-600 transition rounded-full"
                     >
-                        <IconDetail />
-                        확대
+                        <IconDetail className="w-4 h-4" />
                     </button>
                     <button
+                        id={tree_uuid}
+                        title="수정"
+                        onClick={editHandler}
                         type="button"
-                        className="w-8 py-1 px-2 hover:bg-gray-600 transition rounded-full mr-1"
+                        className="w-8 flex justify-center items-center py-1 px-2 hover:bg-gray-600 transition rounded-full"
                     >
-                        <IconUpdate />
-                        수정
+                        <IconUpdate className="w-4 h-4" />
                     </button>
                     <button
+                        id={tree_uuid}
+                        onClick={moveHandler}
+                        title="위치변경"
                         type="button"
-                        className="w-8 py-1 px-2 hover:bg-gray-600 transition rounded-full mr-1"
+                        className="w-8 flex justify-center items-center py-1 px-2 hover:bg-gray-600 transition rounded-full"
                     >
-                        <IconChange />
-                        위치변경
+                        <IconChange className="w-4 h-4" />
                     </button>
                     <button
+                        onClick={deleteHandler}
+                        id={tree_uuid}
+                        title="삭제"
                         type="button"
-                        className="w-8 py-1 px-2 hover:bg-gray-600 transition rounded-full"
+                        className="w-8 flex justify-center items-center py-1 px-2 hover:bg-gray-600 transition rounded-full"
                     >
-                        <IconDeleteBtn />
-                        삭제
+                        <IconDeleteBtn className="w-6 h-6" />
                     </button>
                 </div>
             </div>

@@ -1,15 +1,41 @@
 import { create } from "zustand";
-import { UserAccount, UserLevel } from "./types";
+import { UserAccount, UserLevel, UserTree, UserTreeDetail, UserTreeEmotionDetail } from "./types";
+
+interface ModalStore {
+    modal: boolean;
+    setModal: (bool: boolean) => void;
+}
+
+export const useModalStore = create<ModalStore>((set) => ({
+    modal: false,
+
+    setModal: (bool: boolean) =>
+        set(() => ({
+            modal: bool,
+        })),
+}));
 
 interface UserStore {
     userData: {
         user: UserAccount;
         level: UserLevel;
+        tree: UserTree;
+        treeDetail: UserTreeDetail[] | Record<string, never>;
+        treeEmotion: UserTreeEmotionDetail[] | Record<string, never>;
     };
     setUserData: (data: UserAccount) => void;
     setLevelData: (data: UserLevel) => void;
+    setTreeData: (data: UserTree) => void;
+    setTreeDetailData: (data: UserTreeDetail[]) => void;
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
 }
 
+/**
+ * @function setUserData: (data: UserAccount) => void;
+ * @function setLevelData: (data: UserLevel) => void;
+ * @function setTreeData: (data: UserTree) => void;
+ * @function setTreeDetailData: (data: UserTreeDetail) => void;
+ */
 export const useUserStore = create<UserStore>((set) => ({
     userData: {
         user: {
@@ -22,13 +48,17 @@ export const useUserStore = create<UserStore>((set) => ({
         level: {
             userLevel: 0,
             userExperience: 0,
+            forestUUID: "",
+        },
+        tree: {
             treeMax: 0,
             treeCurrent: 0,
             gridSize: 0,
-            accessibleIndices: [6, 7, 11, 12],
-            forest_UUID: "0",
+            accessibleIndices: [],
+            originIndices: [],
         },
-        // ? Tree 데이터도 추가해야 할듯
+        treeDetail: [],
+        treeEmotion: [],
     },
 
     setUserData: (data: UserAccount) =>
@@ -38,5 +68,17 @@ export const useUserStore = create<UserStore>((set) => ({
     setLevelData: (data: UserLevel) =>
         set((state) => ({
             userData: { ...state.userData, level: data },
+        })),
+    setTreeData: (data: UserTree) =>
+        set((state) => ({
+            userData: { ...state.userData, tree: data },
+        })),
+    setTreeDetailData: (data: UserTreeDetail[]) =>
+        set((state) => ({
+            userData: { ...state.userData, treeDetail: data },
+        })),
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) =>
+        set((state) => ({
+            userData: { ...state.userData, treeEmotion: data },
         })),
 }));

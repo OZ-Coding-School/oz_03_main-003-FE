@@ -4,26 +4,27 @@ import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
 import useInfo from "../../../hook/useInfo";
-import { authApi } from "../../../api";
+import { treeApi } from "../../../api";
 import useVerify from "../../../hook/useVerify";
 
 interface ModalChangeNameProps {
-    isOpen: boolean;
     onClose: () => void;
+    treeUUID: string;
 }
 
-const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) => {
-    const { getUserInfo } = useInfo();
+const ModalChangeTreeName = ({ onClose, treeUUID }: ModalChangeNameProps) => {
+    const { getUserGridInfo } = useInfo();
     const { checkLoginStatus } = useVerify();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [isUpdatedNewName, setIsUpdatedNewName] = useState("");
     const [userNameAlert, setUserNameAlert] = useState(false);
+
     useEffect(() => {
-        if (inputRef.current && isOpen) {
+        if (inputRef.current) {
             inputRef.current.focus();
         }
-    }, [isOpen, getUserInfo]);
+    }, []);
 
     const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
@@ -34,9 +35,13 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
             inputRef.current?.focus();
             return setUserNameAlert(true);
         }
+        const nameForm = {
+            tree_name: isUpdatedNewName,
+        };
+
         await checkLoginStatus();
-        await authApi.updateUserInfoName(isUpdatedNewName);
-        await getUserInfo();
+        await treeApi.updateTree(treeUUID, nameForm);
+        await getUserGridInfo();
         handleModalClose();
     };
 
@@ -61,6 +66,7 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
                     onClick={handleModalClose}
                     onKeyDown={(e) => {
                         e.key === "Escape" && handleModalClose();
+                        e.key === "Enter" && handleButtonClick();
                     }}
                     className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
                 >
@@ -71,7 +77,7 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
                             "absolute z-20"
                         )}
                     >
-                        <h3 className="font-title leading-5 text-gray-200">닉네임 변경</h3>
+                        <h3 className="font-title leading-5 text-gray-200">나무 이름 변경</h3>
                         <input
                             type="text"
                             maxLength={15}
@@ -117,4 +123,4 @@ const ModalChangeName: React.FC<ModalChangeNameProps> = ({ isOpen, onClose }) =>
     );
 };
 
-export default ModalChangeName;
+export default ModalChangeTreeName;

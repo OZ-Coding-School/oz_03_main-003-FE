@@ -19,6 +19,12 @@ export const getUserInfo = () => {
     return axiosInstance.get("/auth/profile");
 };
 
+export const deleteAccount = (email: string) => {
+    return axiosInstance.delete("/auth/delete", {
+        data: { email: email },
+    });
+};
+
 export const updateUserInfoName = (name: string) => {
     const userName = {
         username: name,
