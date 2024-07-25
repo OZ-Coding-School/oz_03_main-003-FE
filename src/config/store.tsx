@@ -22,16 +22,9 @@ interface UserStore {
     setTreeData: (data: UserTree) => void;
     setTreeDetailData: (data: UserTreeDetail[]) => void;
     setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
-    setChatRooms: (rooms: ChatRoom[]) => void;
+    setChatRooms: (rooms: ChatRoom[] | ((prevRooms: ChatRoom[]) => ChatRoom[])) => void;
 }
 
-/**
- * @function setUserData: (data: UserAccount) => void;
- * @function setLevelData: (data: UserLevel) => void;
- * @function setTreeData: (data: UserTree) => void;
- * @function setTreeDetailData: (data: UserTreeDetail) => void;
- * @function setChatRooms : (data : chatRooms[]) => void;
- */
 export const useUserStore = create<UserStore>((set) => ({
     userData: {
         user: {
@@ -78,8 +71,8 @@ export const useUserStore = create<UserStore>((set) => ({
         set((state) => ({
             userData: { ...state.userData, treeEmotion: data },
         })),
-    setChatRooms: (rooms: ChatRoom[]) =>
-        set(() => ({
-            chatRooms: rooms,
+    setChatRooms: (rooms: ChatRoom[] | ((prevRooms: ChatRoom[]) => ChatRoom[])) =>
+        set((state) => ({
+            chatRooms: typeof rooms === "function" ? rooms(state.chatRooms) : rooms,
         })),
 }));
