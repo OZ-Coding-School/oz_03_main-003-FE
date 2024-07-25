@@ -19,7 +19,6 @@
 
 ### State Management
 ![Zustand](https://img.shields.io/badge/-Zustand-FFB13B?style=for-the-badge)
-![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
 
 ### Version Control
 ![GitHub](https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github)
