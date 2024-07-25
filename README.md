@@ -1,4 +1,5 @@
 <h1 align="center">Emotion Tree Talk 프로젝트 🎄 </h1>
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FOZ-Coding-School%2Foz_03_main-003-FE%2Fhit-counter&count_bg=%233F3DC8&title_bg=%231B1B1B&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 
 ### Programming Languages
 ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
