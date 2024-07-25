@@ -45,7 +45,7 @@
 
 body {
     background-color: black;
-    overflow-y: hidden;
+    overflow: hidden;
     min-width: 1280px;
 }
 

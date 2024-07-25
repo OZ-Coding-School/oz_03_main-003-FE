@@ -60,6 +60,7 @@ const ModalChangeName = ({ isOpen, onClose }: ModalChangeNameProps) => {
                     onClick={handleModalClose}
                     onKeyDown={(e) => {
                         e.key === "Escape" && handleModalClose();
+                        e.key === "Enter" && handleButtonClick();
                     }}
                     className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
                 >
