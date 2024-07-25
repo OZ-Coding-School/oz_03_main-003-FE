@@ -82,6 +82,7 @@ export interface ChatRoom {
     chat_room_name: string;
     tree_uuid: string;
     created_at: string;
+    tree_name: string;
 }
 
 interface ChatStore {
@@ -94,14 +95,10 @@ export const useChatStore = create<ChatStore>((set) => ({
     chatList: [],
     addChatRoom: (chatRoom) =>
         set((state) => ({
-            chatList: [chatRoom, ...state.chatList].sort(
-                (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-            ),
+            chatList: [chatRoom, ...state.chatList],
         })),
     setChatList: (chatList) =>
         set(() => ({
-            chatList: chatList.sort(
-                (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-            ),
+            chatList: chatList,
         })),
 }));

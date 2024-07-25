@@ -1,4 +1,3 @@
-// src/components/common/chatList/ChatListItem.tsx
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import { IconChange, IconDeleteBtn } from "../../../config/IconData";
@@ -8,6 +7,7 @@ interface ChatListItemProps {
         chat_room_uuid: string;
         chat_room_name: string;
         created_at: string;
+        tree_name: string;
     };
 }
 
@@ -27,6 +27,7 @@ const ChatListItem = ({ item }: ChatListItemProps) => {
             <nav className="flex flex-col">
                 <div className="text-sm">{item.chat_room_name}</div>
                 <div className="text-gray-400 text-xs">{item.created_at}</div>
+                <div className="text-gray-400 text-xs">{item.tree_name}</div>
             </nav>
             {hover && (
                 <nav className="flex gap-1">

@@ -49,7 +49,7 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
         }
 
         if (!selectedTree) {
-            setErrorMessage("트리를 선택해주세요.");
+            setErrorMessage("나무를 선택해주세요.");
             return;
         }
 
@@ -59,12 +59,12 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
                 chat_room_name: chatRoomName,
                 tree_uuid: selectedTree.tree_uuid,
             });
-            console.log("Chat room created:", result);
 
             onAddChatRoom({
                 chat_room_uuid: result.chat_room_uuid,
                 chat_room_name: chatRoomName,
                 tree_uuid: selectedTree.tree_uuid,
+                tree_name: selectedTree.tree_name,
                 created_at: new Date().toISOString(),
             });
 
