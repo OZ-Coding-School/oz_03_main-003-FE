@@ -18,6 +18,7 @@ export interface UserTreeDetail {
     tree_level: number;
     location: number;
 }
+
 export interface UserTreeEmotionDetail {
     tree_uuid: string;
     emotions: {
@@ -74,4 +75,7 @@ export interface CreateChatRoomResponse {
 export interface ChatRoom {
     chat_room_uuid: string;
     chat_room_name: string;
+    tree_uuid: string;
+    tree_name?: string;
+    created_at?: string;
 }
