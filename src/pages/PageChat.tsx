@@ -7,7 +7,6 @@ import ChatListContent from "../components/common/chatList/ChatListContent";
 
 const PageChat = () => {
     const { fetchChatRooms } = useChatRooms();
-
     useEffect(() => {
         fetchChatRooms();
     }, [fetchChatRooms]);

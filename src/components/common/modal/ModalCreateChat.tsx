@@ -5,7 +5,6 @@ import ModalListItem from "./ModalListItem";
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import { useUserStore } from "../../../config/store";
-import { chatApi } from "../../../api";
 import useChatRooms from "../../../hook/useChatRooms";
 import ButtonDisable from "../button/ButtonDisable";
 import useVerify from "../../../hook/useVerify";
@@ -14,13 +13,13 @@ interface ModalCreateChatProps {
     onClose: () => void;
 }
 
-const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
+const ModalCreateChat = ({ onClose }: ModalCreateChatProps) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [selectedTree, setSelectedTree] = useState<{ name: string; uuid: string } | null>(null);
     const [chatRoomName, setChatRoomName] = useState("");
     const { treeDetail } = useUserStore((state) => state.userData);
-    const { fetchChatRooms } = useChatRooms();
+    const { fetchChatRooms, addChatRoom } = useChatRooms();
     const { checkLoginStatus } = useVerify();
     const [requireRoomName, setRequireRoomName] = useState(false);
     const [requireSelectTree, setRequireSelectTree] = useState(false);
@@ -32,7 +31,7 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
         setIsDropdownOpen(false);
         setRequireSelectTree(false);
     };
-
+    useChatRooms();
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setChatRoomName(value);
@@ -46,10 +45,7 @@ const ModalCreateChat: React.FC<ModalCreateChatProps> = ({ onClose }) => {
             setIsSubmitting(true);
             try {
                 await checkLoginStatus();
-                await chatApi.createChatRoom({
-                    chat_room_name: chatRoomName,
-                    tree_uuid: selectedTree.uuid,
-                });
+                await addChatRoom(chatRoomName, selectedTree.uuid);
                 await fetchChatRooms();
                 onClose();
             } catch (error) {

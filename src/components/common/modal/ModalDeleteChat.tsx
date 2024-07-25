@@ -13,7 +13,7 @@ interface ModalDeleteChatProps {
     chat_room_uuid: string;
 }
 
-const ModalDeleteChat: React.FC<ModalDeleteChatProps> = ({ isOpen, onClose, chat_room_uuid }) => {
+const ModalDeleteChat = ({ isOpen, onClose, chat_room_uuid }: ModalDeleteChatProps) => {
     const { removeChatRoom } = useChatRooms();
     const { checkLoginStatus } = useVerify();
 
