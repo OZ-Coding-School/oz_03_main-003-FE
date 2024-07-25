@@ -12,21 +12,25 @@ export interface UserLevel {
     forestUUID: string;
 }
 
+export interface UserTree {
+    treeMax: number;
+    treeCurrent: number;
+    gridSize: number;
+    accessibleIndices: number[];
+    originIndices: number[];
+}
+
 export interface UserTreeDetail {
     tree_uuid: string;
-    tree_name: string;
-    tree_level: number;
     location: number;
 }
+
 export interface UserTreeEmotionDetail {
-    tree_uuid: string;
-    emotion: {
-        happiness: number;
-        anger: number;
-        sadness: number;
-        worry: number;
-        indifference: number;
-    };
+    happiness: number;
+    anger: number;
+    sadness: number;
+    worry: number;
+    indifference: number;
 }
 
 export interface Emotion {
@@ -56,6 +60,13 @@ export enum AuthStatusType {
 
 export interface TreeFormData {
     tree_name: string;
+    tree_level: number;
+    location: number;
+}
+export interface TreeItem {
+    tree_uuid: string;
+    tree_name: string;
+    group_name: string;
     tree_level: number;
     location: number;
 }

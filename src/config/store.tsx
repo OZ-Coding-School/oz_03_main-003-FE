@@ -20,21 +20,16 @@ interface UserStore {
         user: UserAccount;
         level: UserLevel;
         tree: UserTree;
-        treeDetail: UserTreeDetail | object;
+        treeDetail: UserTreeDetail[];
+        treeEmotion: UserTreeEmotionDetail | object;
     };
     setUserData: (data: UserAccount) => void;
     setLevelData: (data: UserLevel) => void;
     setTreeData: (data: UserTree) => void;
-    setTreeDetailData: (data: UserTreeDetail) => void;
+    setTreeDetailData: (data: UserTreeDetail[]) => void;
     setTreeDetailEmotionData: (data: UserTreeEmotionDetail) => void;
 }
 
-/**
- * @function setUserData: (data: UserAccount) => void;
- * @function setLevelData: (data: UserLevel) => void;
- * @function setTreeData: (data: UserTree) => void;
- * @function setTreeDetailData: (data: UserTreeDetail) => void;
- */
 export const useUserStore = create<UserStore>((set) => ({
     userData: {
         user: {
@@ -54,9 +49,10 @@ export const useUserStore = create<UserStore>((set) => ({
             treeCurrent: 0,
             gridSize: 0,
             accessibleIndices: [],
+            originIndices: [], // 초기값 추가
         },
-        treeDetail: {},
-        treeEmotion: {},
+        treeDetail: [], // 초기값을 빈 배열로 지정
+        treeEmotion: {}, // 초기값 지정
     },
 
     setUserData: (data: UserAccount) =>
@@ -71,7 +67,7 @@ export const useUserStore = create<UserStore>((set) => ({
         set((state) => ({
             userData: { ...state.userData, tree: data },
         })),
-    setTreeDetailData: (data: UserTreeDetail) =>
+    setTreeDetailData: (data: UserTreeDetail[]) =>
         set((state) => ({
             userData: { ...state.userData, treeDetail: data },
         })),
@@ -80,13 +76,11 @@ export const useUserStore = create<UserStore>((set) => ({
             userData: { ...state.userData, treeEmotion: data },
         })),
 }));
-// src/config/store.ts
 
 export interface ChatRoom {
     chat_room_uuid: string;
     chat_room_name: string;
-    analyze_target_name: string;
-    analyze_target_relation: string;
+    tree_uuid: string;
     created_at: string;
 }
 
@@ -100,10 +94,14 @@ export const useChatStore = create<ChatStore>((set) => ({
     chatList: [],
     addChatRoom: (chatRoom) =>
         set((state) => ({
-            chatList: [chatRoom, ...state.chatList], // 최신순으로 추가
+            chatList: [chatRoom, ...state.chatList].sort(
+                (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+            ),
         })),
     setChatList: (chatList) =>
         set(() => ({
-            chatList: chatList,
+            chatList: chatList.sort(
+                (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+            ),
         })),
 }));

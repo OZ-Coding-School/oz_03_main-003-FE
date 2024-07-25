@@ -51,7 +51,7 @@ const PageChat: FC = () => {
             <HeaderLoggedIn />
             <div className="bg-black pt-[129px] w-full h-screen box-border">
                 <div className="w-full h-full flex">
-                    <div className="w-80 h-full border-r border-gray-600">
+                    <div className="w-80 h-full border-r border-gray-600 overflow-y-auto">
                         <ChatListHeader onAddChatClick={openModal} />
                         {Array.isArray(chatList) &&
                             chatList.map((item) => (

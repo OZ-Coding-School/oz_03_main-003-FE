@@ -4,13 +4,10 @@ import { IconClose, IconSelectArrow } from "../../../config/IconData";
 import ModalListItem from "./ModalListItem";
 import { twMerge as tw } from "tailwind-merge";
 import useVerify from "../../../hook/useVerify";
-import { CreateChatRoom, getTreeDataAll } from "../../../api/chat";
+import { CreateChatRoom } from "../../../api/chat";
+import { getTreeDataAll } from "../../../api/tree";
+import { TreeItem } from "../../../config/types";
 import { ChatRoom } from "../../../config/store";
-
-interface TreeItem {
-    id: number;
-    group_name: string;
-}
 
 interface ModalCreateChatProps {
     onClose: () => void;
@@ -19,9 +16,8 @@ interface ModalCreateChatProps {
 
 const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedTree, setSelectedTree] = useState("default");
+    const [selectedTree, setSelectedTree] = useState<TreeItem | null>(null);
     const [chatRoomName, setChatRoomName] = useState("");
-    const [selectedRelation, setSelectedRelation] = useState("default");
     const [errorMessage, setErrorMessage] = useState("");
     const [trees, setTrees] = useState<TreeItem[]>([]);
 
@@ -35,7 +31,8 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
 
         const fetchTrees = async () => {
             try {
-                const treesData = await getTreeDataAll();
+                const response = await getTreeDataAll();
+                const treesData: TreeItem[] = response.data;
                 setTrees(treesData);
             } catch (error) {
                 console.error("Failed to fetch tree data:", error);
@@ -51,20 +48,23 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
             return;
         }
 
+        if (!selectedTree) {
+            setErrorMessage("트리를 선택해주세요.");
+            return;
+        }
+
         await checkLoginStatus();
         try {
             const result = await CreateChatRoom({
                 chat_room_name: chatRoomName,
-                analyze_target_name: selectedTree,
-                analyze_target_relation: selectedRelation,
+                tree_uuid: selectedTree.tree_uuid,
             });
             console.log("Chat room created:", result);
 
             onAddChatRoom({
                 chat_room_uuid: result.chat_room_uuid,
                 chat_room_name: chatRoomName,
-                analyze_target_name: selectedTree,
-                analyze_target_relation: selectedRelation,
+                tree_uuid: selectedTree.tree_uuid,
                 created_at: new Date().toISOString(),
             });
 
@@ -76,9 +76,8 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
 
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-    const handleItemClick = (groupName: string) => {
-        setSelectedTree(groupName);
-        setSelectedRelation(groupName);
+    const handleItemClick = (item: TreeItem) => {
+        setSelectedTree(item);
         setIsDropdownOpen(false);
     };
 
@@ -115,7 +114,7 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
                     )}
                     onClick={toggleDropdown}
                 >
-                    {selectedRelation === "default" ? "나무를 선택해 주세요." : selectedRelation}
+                    {selectedTree ? selectedTree.tree_name : "나무를 선택해 주세요."}
                     <IconSelectArrow
                         className={`w-4 transition-transform duration-300 ${isDropdownOpen ? "transform rotate-180" : ""}`}
                     />
@@ -124,9 +123,9 @@ const ModalCreateChat: FC<ModalCreateChatProps> = ({ onClose, onAddChatRoom }) =
                     <ul className="absolute left-0 top-full right-0 z-10 cursor-pointer bg-gray-800">
                         {trees.map((item) => (
                             <ModalListItem
-                                key={item.id}
+                                key={item.tree_uuid}
                                 item={item}
-                                onClick={() => handleItemClick(item.group_name)}
+                                onClick={() => handleItemClick(item)}
                             />
                         ))}
                     </ul>

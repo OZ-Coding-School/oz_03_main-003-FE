@@ -7,8 +7,6 @@ interface ChatListItemProps {
     item: {
         chat_room_uuid: string;
         chat_room_name: string;
-        analyze_target_name: string;
-        analyze_target_relation: string;
         created_at: string;
     };
 }
