@@ -76,6 +76,4 @@ export interface ChatRoom {
     chat_room_uuid: string;
     chat_room_name: string;
     tree_uuid: string;
-    tree_name?: string;
-    created_at?: string;
 }

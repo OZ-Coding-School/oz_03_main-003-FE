@@ -90,3 +90,17 @@ export const useUserStore = create<UserStore>((set) => ({
             chatRooms: typeof rooms === "function" ? rooms(state.chatRooms) : rooms,
         })),
 }));
+
+interface UserChatStore {
+    chatRooms: ChatRoom[];
+    setChatRooms: (rooms: ChatRoom[] | ((prevRooms: ChatRoom[]) => ChatRoom[])) => void;
+}
+
+export const useUserChatStore = create<UserChatStore>((set) => ({
+    chatRooms: [],
+
+    setChatRooms: (rooms: ChatRoom[] | ((prevRooms: ChatRoom[]) => ChatRoom[])) =>
+        set((state) => ({
+            chatRooms: typeof rooms === "function" ? rooms(state.chatRooms) : rooms,
+        })),
+}));
