@@ -1,22 +1,45 @@
-// types.ts
 
-// 사용자 계정 정보
+export interface AdminPageUserData {
+    uuid: string;
+    username: string;
+    email: string;
+    profile_image: string;
+    social_platform: string;
+    created_at: string;
+    updated_at: string;
+    last_login: string;
+    is_active: boolean;
+    is_superuser: boolean;
+}
+
+export interface AdminPageForestData {
+    user_uuid: string;
+    forest_uuid: string;
+    forest_level: number;
+}
+
+export interface FormData {
+    user: AdminPageUserData[];
+    tree: AdminTreeDetail[];
+    emotion: UserTreeEmotionDetail[];
+    forest: AdminPageForestData[];
+}
+
 export interface UserAccount {
     id: string;
     username: string;
     imgUrl: string;
     email: string;
     created_at: string;
+    admin: boolean;
 }
 
-// 사용자 레벨 정보
 export interface UserLevel {
     userLevel: number;
     userExperience: number;
     forestUUID: string;
 }
 
-// 사용자 트리 상세 정보
 export interface UserTreeDetail {
     tree_uuid: string;
     tree_name: string;
@@ -24,7 +47,18 @@ export interface UserTreeDetail {
     location: number;
 }
 
-// 사용자 트리 감정 상세 정보
+
+
+export interface AdminTreeDetail {
+    user_uuid: string;
+    tree_detail: {
+        tree_uuid: string;
+        tree_name: string;
+        tree_level: number;
+        location: number;
+    };
+}
+
 export interface UserTreeEmotionDetail {
     tree_uuid: string;
     emotions: Emotions;
@@ -41,7 +75,6 @@ interface TreeEmotion {
     };
 }
 
-// 감정 타입
 export interface Emotions {
     happy: number;
     angry: number;
@@ -50,7 +83,6 @@ export interface Emotions {
     indifference: number;
 }
 
-// 사용자 트리 정보
 export interface UserTree {
     treeMax: number;
     treeCurrent: number;
@@ -59,48 +91,81 @@ export interface UserTree {
     originIndices: number[];
 }
 
-// 접근 가능한 인덱스
 export interface AccessibleIndices {
     [key: number]: number[];
 }
 
-// 인증 상태 타입
+
 export enum AuthStatusType {
     LOADING = 1,
     VERIFIED = 2,
     UNVERIFIED = 3,
 }
 
-// 트리 폼 데이터
 export interface TreeFormData {
     tree_name?: string;
     tree_level?: number;
     location?: number;
 }
 
-// 채팅방 생성 요청
+export interface AdminTreeFormData {
+    user_uuid: string;
+    tree_name?: string;
+    tree_level?: number;
+    location?: number;
+}
+
+
 export interface CreateChatRoomRequest {
     chat_room_name: string;
     tree_uuid: string;
 }
 
-// 채팅방 생성 응답
+
 export interface CreateChatRoomResponse {
     chat_room_uuid: string;
 }
 
-// 채팅방 정보
+
 export interface ChatRoom {
     chat_room_uuid: string;
     chat_room_name: string;
     tree_uuid: string;
 }
 
-// 사용자 데이터
+
 export interface UserData {
     user: UserAccount;
     level: UserLevel;
     tree: UserTree;
     treeDetail: UserTreeDetail[] | Record<string, never>;
     treeEmotion: UserTreeEmotionDetail[];
+
+  
+export interface UpdateChatRoom {
+    chat_room_uuid?: string;
+    tree_uuid?: string;
+}
+
+
+export interface UserMessage {
+    message_uuid: string;
+    message: string;
+}
+
+export interface ChatRoomMessages {
+    [chatRoomUuid: string]: UserMessage[];
+}
+
+export interface AIResponse {
+    emotions: {
+        happiness: number;
+        anger: number;
+        sadness: number;
+        worry: number;
+        indifference: number;
+    };
+    message_uuid: string;
+    message: string;
+    applied_state: boolean;
 }

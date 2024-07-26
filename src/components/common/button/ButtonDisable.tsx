@@ -13,7 +13,7 @@ const ButtonDisable = ({ className, type = "button", children }: ButtonProps) =>
             type={type}
             className={tw(
                 "bg-gray-600 select-none text-sm text-gray-400",
-                "w-[99px] h-[40px] text-center",
+                "px-6 h-[48px] text-center",
                 className
             )}
         >

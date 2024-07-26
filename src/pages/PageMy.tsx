@@ -4,12 +4,11 @@ import UserInfoMyPage from "../components/common/userInfo/UserInfoMypage";
 import useUserInfo from "../hook/useInfo";
 import { useUserChatStore, useUserStore } from "../config/store";
 import { UserTreeDetail } from "../config/types";
+import { useUserStore } from "../config/store";
+import useChatRooms from "../hook/useChatRooms";
 const PageMy = () => {
     const { getUserInfo, getUserGridInfo } = useUserInfo();
 
-    //? TEST용 코드
-    const { userData } = useUserStore();
-    const { chatRooms } = useUserChatStore();
 
     useEffect(() => {
         const refreshUserInfo = async () => {
@@ -18,17 +17,6 @@ const PageMy = () => {
         };
         refreshUserInfo();
     }, [getUserInfo, getUserGridInfo]);
-
-    //? TEST용 코드
-    useEffect(() => {
-        console.log(userData);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    useEffect(() => {
-        console.log(chatRooms);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <>

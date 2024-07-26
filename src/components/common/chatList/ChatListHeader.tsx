@@ -5,7 +5,6 @@ interface ChatListHeaderProps {
     onAddChatClick: () => void;
 }
 
-// const ChatListHeader = () => {
 const ChatListHeader = ({ onAddChatClick }: ChatListHeaderProps) => {
     return (
         <div className="px-5 w-full h-[64px] flex justify-between items-center">

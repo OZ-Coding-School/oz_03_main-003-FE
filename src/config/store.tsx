@@ -8,6 +8,10 @@ import {
     UserTreeEmotionDetail,
     ChatRoom,
     UserData,
+    UserMessage,
+    ChatRoomMessages,
+    AIResponse,
+    FormData,
 } from "./types";
 
 interface ModalStore {
@@ -37,6 +41,7 @@ export const useUserStore = create<UserStore>((set) => ({
             imgUrl: "/img/profile-placeholder.png",
             email: "...",
             created_at: "...",
+            admin: false,
         },
         level: {
             userLevel: 0,
@@ -77,10 +82,53 @@ export const useUserStore = create<UserStore>((set) => ({
 
 interface UserChatStore {
     chatRooms: ChatRoom[];
+    userMessages: ChatRoomMessages;
+    aiResponses: { [chatRoomUuid: string]: AIResponse[] };
     setChatRooms: (data: ChatRoom[]) => void;
+    setUserMessages: (chatRoomUuid: string, data: UserMessage[]) => void;
+    setAIResponse: (chatRoomUuid: string, data: AIResponse) => void;
 }
 
 export const useUserChatStore = create<UserChatStore>((set) => ({
     chatRooms: [],
     setChatRooms: (data: ChatRoom[]) => set(() => ({ chatRooms: data })),
+    userMessages: {},
+    aiResponses: {},
+
+    setChatRooms: (data: ChatRoom[]) =>
+        set(() => ({
+            chatRooms: data,
+        })),
+    setUserMessages: (chatRoomUuid: string, data: UserMessage[]) =>
+        set((state) => ({
+            userMessages: {
+                ...state.userMessages,
+                [chatRoomUuid]: data,
+            },
+        })),
+    setAIResponse: (chatRoomUuid: string, data: AIResponse) =>
+        set((state) => ({
+            aiResponses: {
+                ...state.aiResponses,
+                [chatRoomUuid]: [...(state.aiResponses[chatRoomUuid] || []), data],
+            },
+        })),
+}));
+
+interface AdminStore {
+    data: FormData;
+    setData: (data: FormData) => void;
+}
+
+export const useAdminStore = create<AdminStore>((set) => ({
+    data: {
+        user: [],
+        tree: [],
+        forest: [],
+        emotion: [],
+    },
+    setData: (data: FormData) =>
+        set(() => ({
+            data: data,
+        })),
 }));
