@@ -3,12 +3,12 @@ import { twMerge as tw } from "tailwind-merge";
 import { IconChange, IconDeleteBtn } from "../../../config/IconData";
 import ModalDeleteChat from "../modal/ModalDeleteChat";
 import ModalUpdateChat from "../modal/ModalUpdateChat";
+import { useUserChatStore, useUserStore } from "../../../config/store";
 
 interface ChatListItemProps {
     item: {
         chat_room_uuid: string;
         chat_room_name: string;
-        tree_name?: string;
         created_at?: string;
     };
 }
@@ -17,6 +17,13 @@ const ChatListItem = ({ item }: ChatListItemProps) => {
     const [hover, setHover] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+    const { userData } = useUserStore();
+    const { chatRooms } = useUserChatStore();
+
+    const treeUuid = chatRooms.find(
+        (data) => data.chat_room_uuid === item.chat_room_uuid
+    )?.tree_uuid;
+    const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
 
     const openDeleteModal = () => {
         setIsDeleteModalOpen(true);
@@ -46,7 +53,7 @@ const ChatListItem = ({ item }: ChatListItemProps) => {
             >
                 <nav className="flex flex-col">
                     <div className="text-sm">
-                        {item.chat_room_name} {item.tree_name ? `(${item.tree_name})` : ""}
+                        {item.chat_room_name} <span className="text-primary">{treeName}</span>
                     </div>
                     <div className="text-gray-400 text-xs">{item.created_at || "No date"}</div>
                 </nav>

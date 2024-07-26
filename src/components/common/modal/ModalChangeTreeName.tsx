@@ -70,17 +70,17 @@ const ModalChangeTreeName = ({ onClose, treeUUID }: ModalChangeNameProps) => {
                 <nav
                     onClick={stopPropagation}
                     className={tw(
-                        "p-5 bg-gray-800 text-white w-80 border border-gray-600",
+                        "p-5 bg-gray-800 text-white w-[420px] border border-gray-600",
                         "absolute z-20"
                     )}
                 >
-                    <h3 className="font-title leading-5 text-gray-200">나무 이름 변경</h3>
+                    <h3 className="font-title leading-5 text-gray-200 mb-10">나무 이름 변경</h3>
                     <input
                         type="text"
                         maxLength={15}
                         placeholder="새 이름을 지어주세요."
                         className={tw(
-                            "mt-6 border-b outline-none border-gray-600",
+                            "border-b outline-none border-gray-600",
                             "h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white",
                             userNameAlert && "border-literal-error focus:border-literal-error"
                         )}
@@ -89,13 +89,13 @@ const ModalChangeTreeName = ({ onClose, treeUUID }: ModalChangeNameProps) => {
                     />
                     <p
                         className={tw(
-                            "text-literal-error animate-blur text-xs",
+                            "text-literal-error animate-blur text-sm mt-1",
                             !userNameAlert && "invisible"
                         )}
                     >
                         1글자 이상 작성해 주세요.
                     </p>
-                    <div className="text-right mt-4">
+                    <div className="text-right mt-8">
                         <ButtonDefault
                             className="ml-1"
                             onClick={() => {
