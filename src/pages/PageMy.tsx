@@ -3,11 +3,13 @@ import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import UserInfoMyPage from "../components/common/userInfo/UserInfoMypage";
 import useUserInfo from "../hook/useInfo";
 import { useUserStore } from "../config/store";
+import useChatRooms from "../hook/useChatRooms";
 const PageMy = () => {
     const { getUserInfo, getUserGridInfo } = useUserInfo();
 
     //? TEST용 코드
     const { userData } = useUserStore();
+    const { chatRooms } = useChatRooms();
 
     useEffect(() => {
         const refreshUserInfo = async () => {
@@ -20,6 +22,7 @@ const PageMy = () => {
     //? TEST용 코드
     useEffect(() => {
         console.log(userData);
+        console.log(chatRooms);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

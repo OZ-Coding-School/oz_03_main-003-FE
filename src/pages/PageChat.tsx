@@ -6,10 +6,21 @@ import useChatRooms from "../hook/useChatRooms";
 import ChatListContent from "../components/common/chatList/ChatListContent";
 import { useUserStore } from "../config/store";
 import NonData from "../components/NonData";
+import useInfo from "../hook/useInfo";
 
 const PageChat = () => {
     const { fetchChatRooms } = useChatRooms();
     const { userData } = useUserStore();
+    const { getUserInfo, getUserGridInfo, getUserLevelInfo } = useInfo();
+
+    useEffect(() => {
+        const refreshUserInfo = async () => {
+            await getUserInfo();
+            await getUserGridInfo();
+            await getUserLevelInfo();
+        };
+        refreshUserInfo();
+    }, [getUserInfo, getUserGridInfo, getUserLevelInfo]);
 
     useEffect(() => {
         fetchChatRooms();

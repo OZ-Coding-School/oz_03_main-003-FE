@@ -37,7 +37,6 @@ const ModalGridSetting = ({
     const moveHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         onMoveModal(e.currentTarget.id);
     };
-
     return (
         <>
             <div className="relative w-40 h-40 border-gray-600">

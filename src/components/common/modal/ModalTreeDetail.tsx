@@ -21,6 +21,7 @@ interface ModalTreeDetailProps {
     treeUUID: string;
     onClose: () => void;
 }
+
 const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
     const [isVisible, setIsVisible] = useState(false);
     const { userData } = useUserStore();
@@ -35,6 +36,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
         item.tree_uuid.includes(treeUUID)
     ) as UserTreeEmotionDetail;
     const treeExperience = calculateTreeLevel(emotionData, treeData.tree_level);
+    console.log(treeExperience);
 
     const closeHandler = () => {
         onClose();
@@ -149,7 +151,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                             className="bg-primary h-full animate-width"
                             style={
                                 {
-                                    "--target-width": `${treeExperience.percentage}`,
+                                    "--target-width": `${treeExperience.percentage}%`,
                                 } as React.CSSProperties
                             }
                         ></div>
