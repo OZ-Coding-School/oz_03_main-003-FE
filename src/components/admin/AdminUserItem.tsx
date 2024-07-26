@@ -1,24 +1,22 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { FormData } from "../../config/types";
+import { FormData, AdminPageUserData } from "../../config/types";
 import { twMerge as tw } from "tailwind-merge";
 import { adminApi, authApi } from "../../api";
 import useVerify from "../../hook/useVerify";
-import { useState } from "react";
 import useAdminData from "../../hook/useAdminData";
-import { IconChange, IconDeleteBtn } from "../../config/IconData";
+import { IconChange, IconCopy, IconDeleteBtn } from "../../config/IconData";
+import { useAdminStore } from "../../config/store";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-interface AdminStatusItemProps {
-    data: FormData;
-}
-const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
-    const [data, setData] = useState<FormData | null>(originData);
+const AdminUserItem = () => {
+    const { data, setData } = useAdminStore();
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
+
     const formatDate = (dateString: string) => {
         return dayjs(dateString).format("YYYY-MM-DD HH:mm");
     };
@@ -34,20 +32,28 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
         const confirm = window.confirm("해당 어드민을 유저로 변경하겠습니까?");
 
         if (confirm) {
-            await checkLoginStatus();
-            await adminApi.adminToUser(id);
-            const newData = await fetchData();
-            setData(newData);
+            try {
+                await checkLoginStatus();
+                await adminApi.adminToUser(id);
+                const newData = (await fetchData()) as FormData;
+                setData(newData);
+            } catch (error) {
+                console.error("admin to user update error", error);
+            }
         }
     };
     const roleSetAdmin = async (id: string) => {
         const confirm = window.confirm("해당 유저를 어드민으로 변경하겠습니까?");
 
         if (confirm) {
-            await checkLoginStatus();
-            await adminApi.userToAdmin(id);
-            const newData = await fetchData();
-            setData(newData);
+            try {
+                await checkLoginStatus();
+                await adminApi.userToAdmin(id);
+                const newData = (await fetchData()) as FormData;
+                setData(newData);
+            } catch (error) {
+                console.error("user to admin update error", error);
+            }
         }
     };
 
@@ -55,16 +61,23 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
         const confirm = window.confirm("해당 계정을 정말로 삭제하겠습니까?");
 
         if (confirm) {
-            await checkLoginStatus();
-            await authApi.deleteAccount(email);
-            const newData = await fetchData();
-            setData(newData);
+            try {
+                await checkLoginStatus();
+                await authApi.deleteAccount(email);
+                const newData = (await fetchData()) as FormData;
+                setData(newData);
+            } catch (error) {
+                console.error("user deletion failed", error);
+            }
         }
     };
 
-    if (!data) {
-        return <div>Loading...</div>;
-    }
+    const clipBoardHandler = async (item: AdminPageUserData) => {
+        const form = `USER_UUID: ${item.uuid} \nUSER_EMAIL: ${item.email} \nCREATED_AT: ${formatDate(item.created_at)} \nUPDATED_AT: ${formatDate(item.last_login)} \nROLE: ${roleSelect(item.is_superuser)}
+        `;
+
+        await navigator.clipboard.writeText(form);
+    };
 
     const filteredData = data.user.sort((a, b) => {
         const dateA = new Date(a.created_at).getTime();
@@ -73,7 +86,7 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
     });
 
     return (
-        <div className="w-full p-8 flex justify-center">
+        <div className="w-full p-8 flex justify-center select-text">
             <table className="border-collapse w-full text-xl">
                 <thead>
                     <tr className="bg-gray-100">
@@ -91,8 +104,8 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
                             <td className="border p-2">
                                 <div
                                     className={tw(
-                                        "hover:bg-white hover:text-black hover:select-text",
-                                        "bg-slate-300 text-slate-300 rounded-md select-none"
+                                        "hover:bg-white hover:text-black",
+                                        "bg-slate-300 text-slate-300 rounded-md"
                                     )}
                                 >
                                     {item.uuid}
@@ -101,8 +114,8 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
                             <td className="border p-2">
                                 <div
                                     className={tw(
-                                        "hover:bg-white hover:text-black hover:select-text",
-                                        "bg-slate-300 text-slate-300 rounded-md select-none"
+                                        "hover:bg-white hover:text-black ",
+                                        "bg-slate-300 text-slate-300 rounded-md"
                                     )}
                                 >
                                     {item.email}
@@ -115,9 +128,8 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
                                 <div className="flex gap-1 justify-center">
                                     {item.is_superuser ? (
                                         <button
-                                            id={item.uuid}
-                                            onClick={(e) => roleSetUser(e.currentTarget.id)}
-                                            className="p-1 w-full rounded-md transition bg-indigo-400 hover:bg-indigo-600 text-white"
+                                            onClick={() => roleSetUser(item.uuid)}
+                                            className="select-none p-1 w-full rounded-md transition bg-indigo-400 hover:bg-indigo-600 text-white"
                                         >
                                             <div className="flex justify-center items-center relative">
                                                 <IconChange className="ml-2 fill-white w-4 absolute left-0" />
@@ -126,9 +138,8 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
                                         </button>
                                     ) : (
                                         <button
-                                            id={item.uuid}
-                                            onClick={(e) => roleSetAdmin(e.currentTarget.id)}
-                                            className="p-1 w-full rounded-md transition bg-rose-400 hover:bg-rose-600 text-white"
+                                            onClick={() => roleSetAdmin(item.uuid)}
+                                            className="select-none p-1 w-full rounded-md transition bg-rose-400 hover:bg-rose-600 text-white"
                                         >
                                             <div className="flex justify-center items-center relative">
                                                 <IconChange className="ml-2 fill-white w-4 absolute left-0" />
@@ -138,13 +149,20 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
                                     )}
                                 </div>
                             </td>
+                            <td>
+                                <div
+                                    onClick={() => clipBoardHandler(item)}
+                                    className="fill-white ml-2 p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md cursor-pointer flex justify-center"
+                                >
+                                    <IconCopy className="fill-white w-fit h-6" />
+                                </div>
+                            </td>
                             <td className="pl-4 rounded-md">
                                 <div
-                                    id={item.email}
-                                    onClick={(e) => deleteAccountHandler(e.currentTarget.id)}
-                                    className="fill-white w-8 p-2 bg-gray-200 hover:bg-gray-400 transition rounded-md cursor-pointer"
+                                    onClick={() => deleteAccountHandler(item.email)}
+                                    className="fill-white p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md cursor-pointer flex justify-center"
                                 >
-                                    <IconDeleteBtn className="fill-white" />
+                                    <IconDeleteBtn className="fill-white w-fit h-6" />
                                 </div>
                             </td>
                         </tr>
@@ -155,4 +173,4 @@ const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
     );
 };
 
-export default AdminStatusItem;
+export default AdminUserItem;

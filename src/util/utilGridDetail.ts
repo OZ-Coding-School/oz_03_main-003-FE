@@ -13,6 +13,9 @@ const accessibleIndices: AccessibleIndices = {
     0: [6, 7, 11, 12],
     1: [6, 7, 11, 12],
     2: [6, 7, 8, 11, 12, 13, 16, 17, 18],
+    ...Object.fromEntries(
+        Array.from({ length: 198 }, (_, i) => [i + 3, [6, 7, 8, 11, 12, 13, 16, 17, 18]])
+    ),
 };
 
 const calculateGrid = (res: TreeResponse[], originalIndices: AccessibleIndices) => {

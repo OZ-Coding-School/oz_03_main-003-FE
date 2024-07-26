@@ -6,6 +6,8 @@ import { useState } from "react";
 import ModalChangeName from "../modal/ModalChangeName";
 import ButtonError from "../button/ButtonError";
 import ModalQuitSite from "../modal/ModalQuitSite";
+import useSound from "use-sound";
+import pingSound from "../../../assets/sound/btn_ping.mp3";
 
 export interface userInfoData {
     created_at: string;
@@ -18,6 +20,8 @@ const UserInfoMyPage = () => {
     const { userData } = useUserStore();
     const [isOpen, setIsOpen] = useState(false);
     const [isQuitOpen, setIsQuitOpen] = useState(false);
+
+    const [playWarn] = useSound(pingSound, { volume: 0.75 });
 
     const handleModalClose = () => {
         setIsOpen(false);
@@ -33,6 +37,7 @@ const UserInfoMyPage = () => {
 
     const handleQuitModalOpen = () => {
         setIsQuitOpen(true);
+        playWarn();
     };
 
     return (

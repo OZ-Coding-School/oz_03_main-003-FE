@@ -1,27 +1,21 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { FormData } from "../../config/types";
-import { treeApi } from "../../api";
+import { FormData, UserTreeDetail } from "../../config/types";
+import { adminApi, treeApi } from "../../api";
 import useVerify from "../../hook/useVerify";
-import { useState } from "react";
+
 import useAdminData from "../../hook/useAdminData";
-import { IconChange, IconDeleteBtn } from "../../config/IconData";
+import { IconChange, IconCopy, IconDeleteBtn } from "../../config/IconData";
+import { useAdminStore } from "../../config/store";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-interface AdminStatusItemProps {
-    data: FormData;
-}
-const AdminTreeItem = ({ data: originData }: AdminStatusItemProps) => {
-    const [data, setData] = useState<FormData | null>(originData);
+const AdminTreeItem = () => {
+    const { data, setData } = useAdminStore();
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
-
-    if (!data) {
-        return <div>Loading...</div>;
-    }
 
     const levelHandler = async (id: string) => {
         const level = window.prompt("변경하실 나무의 레벨을 지정하세요.");
@@ -33,8 +27,8 @@ const AdminTreeItem = ({ data: originData }: AdminStatusItemProps) => {
 
         try {
             await checkLoginStatus();
-            await treeApi.updateTree(id, requestForm);
-            const data = await fetchData();
+            await adminApi.updateTree(id, requestForm);
+            const data = (await fetchData()) as FormData;
             setData(data);
         } catch (error) {
             console.error("Level Change Failed", error);
@@ -51,11 +45,11 @@ const AdminTreeItem = ({ data: originData }: AdminStatusItemProps) => {
 
         try {
             await checkLoginStatus();
-            await treeApi.updateTree(id, requestForm);
-            const data = await fetchData();
+            await adminApi.updateTree(id, requestForm);
+            const data = (await fetchData()) as FormData;
             setData(data);
         } catch (error) {
-            console.error("Level Change Failed", error);
+            console.error("Location Change Failed", error);
         }
     };
 
@@ -63,15 +57,27 @@ const AdminTreeItem = ({ data: originData }: AdminStatusItemProps) => {
         const confirm = window.confirm("해당 나무를 정말로 삭제하겠습니까?");
 
         if (confirm) {
-            await checkLoginStatus();
-            await treeApi.deleteTree(id);
-            const newData = await fetchData();
-            setData(newData);
+            try {
+                await checkLoginStatus();
+                //TODO: 수정필요
+                await treeApi.deleteTree(id);
+                const newData = (await fetchData()) as FormData;
+                setData(newData);
+            } catch (error) {
+                console.error("Delete Account Failed", error);
+            }
         }
     };
 
+    const clipBoardHandler = async (item: UserTreeDetail) => {
+        const form = `TREE_UUID: ${item.tree_uuid} \nTREE_NAME: ${item.tree_name} \nTREE_LEVEL: ${item.tree_level} \nTREE_LOCATION: ${item.location}
+        `;
+
+        await navigator.clipboard.writeText(form);
+    };
+
     return (
-        <div className="w-full p-8 flex justify-center">
+        <div className="w-full p-8 flex justify-center select-text">
             <table className="border-collapse w-full text-xl">
                 <thead>
                     <tr className="bg-gray-100">
@@ -92,9 +98,8 @@ const AdminTreeItem = ({ data: originData }: AdminStatusItemProps) => {
 
                             <td className="border p-2">
                                 <button
-                                    onClick={(e) => levelHandler(e.currentTarget.id)}
-                                    id={item.tree_uuid}
-                                    className="p-1 w-full rounded-md transition bg-green-600 hover:bg-green-800 text-white"
+                                    onClick={() => levelHandler(item.tree_uuid)}
+                                    className="select-none p-1 w-full rounded-md transition bg-green-600 hover:bg-green-800 text-white"
                                 >
                                     <div className="flex justify-center items-center relative">
                                         <IconChange className="fill-white w-4 absolute left-0 ml-2" />
@@ -105,9 +110,8 @@ const AdminTreeItem = ({ data: originData }: AdminStatusItemProps) => {
                             <td className="border p-2">{item.location}</td>
                             <td className="border p-2">
                                 <button
-                                    onClick={(e) => locationHandler(e.currentTarget.id)}
-                                    id={item.tree_uuid}
-                                    className="p-1 w-full rounded-md transition bg-green-600 hover:bg-green-800 text-white"
+                                    onClick={() => locationHandler(item.tree_uuid)}
+                                    className="select-none p-1 w-full rounded-md transition bg-green-600 hover:bg-green-800 text-white"
                                 >
                                     <div className="flex justify-center items-center relative">
                                         <IconChange className="fill-white w-4 absolute left-0 ml-2" />
@@ -115,13 +119,20 @@ const AdminTreeItem = ({ data: originData }: AdminStatusItemProps) => {
                                     </div>
                                 </button>
                             </td>
+                            <td>
+                                <div
+                                    onClick={() => clipBoardHandler(item)}
+                                    className="fill-white ml-2 p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md cursor-pointer flex justify-center"
+                                >
+                                    <IconCopy className="fill-white w-fit h-6" />
+                                </div>
+                            </td>
                             <td className="pl-4 rounded-md">
                                 <div
-                                    id={item.tree_uuid}
-                                    onClick={(e) => deleteAccountHandler(e.currentTarget.id)}
-                                    className="fill-white w-8 p-2 bg-gray-200 hover:bg-gray-400 transition rounded-md hover:cursor-pointer"
+                                    onClick={() => deleteAccountHandler(item.tree_uuid)}
+                                    className="fill-white ml-2 p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md hover:cursor-pointer flex justify-center"
                                 >
-                                    <IconDeleteBtn className="fill-white" />
+                                    <IconDeleteBtn className="fill-white w-fit h-6" />
                                 </div>
                             </td>
                         </tr>

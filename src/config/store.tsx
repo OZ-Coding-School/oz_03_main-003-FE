@@ -6,6 +6,7 @@ import {
     UserTreeDetail,
     UserTreeEmotionDetail,
     ChatRoom,
+    FormData,
 } from "./types";
 
 interface ModalStore {
@@ -96,5 +97,23 @@ export const useUserChatStore = create<UserChatStore>((set) => ({
     setChatRooms: (data: ChatRoom[]) =>
         set(() => ({
             chatRooms: data,
+        })),
+}));
+
+interface AdminStore {
+    data: FormData;
+    setData: (data: FormData) => void;
+}
+
+export const useAdminStore = create<AdminStore>((set) => ({
+    data: {
+        user: [],
+        tree: [],
+        forest: [],
+        emotion: [],
+    },
+    setData: (data: FormData) =>
+        set(() => ({
+            data: data,
         })),
 }));
