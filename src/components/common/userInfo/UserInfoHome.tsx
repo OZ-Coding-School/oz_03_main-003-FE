@@ -4,7 +4,6 @@ import { twMerge as tw } from "tailwind-merge";
 import ModalTooltip from "../modal/ModalTooltip";
 import { motion } from "framer-motion";
 import { useUserStore } from "../../../config/store";
-
 const UserInfoHome = () => {
     const [isVisible, setIsVisible] = useState(false);
     const { userData } = useUserStore();

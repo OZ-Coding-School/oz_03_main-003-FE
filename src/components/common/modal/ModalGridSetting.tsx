@@ -3,6 +3,8 @@ import { IconChange, IconDeleteBtn, IconDetail, IconUpdate } from "../../../conf
 import { twMerge as tw } from "tailwind-merge";
 import useVerify from "../../../hook/useVerify";
 import useInfo from "../../../hook/useInfo";
+import useSound from "use-sound";
+import deleteSound from "../../../assets/sound/btn_delete.mp3";
 
 interface ModalGridSettingProps {
     tree_uuid: string;
@@ -19,6 +21,7 @@ const ModalGridSetting = ({
 }: ModalGridSettingProps) => {
     const { checkLoginStatus } = useVerify();
     const { getUserGridInfo } = useInfo();
+    const [playDelete] = useSound(deleteSound, { volume: 0.75 });
 
     const editHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         onEditModal(e.currentTarget.id);
@@ -28,6 +31,7 @@ const ModalGridSetting = ({
         await checkLoginStatus();
         await treeApi.deleteTree(tree_uuid);
         await getUserGridInfo();
+        playDelete();
     };
 
     const detailHandler = (e: React.MouseEvent<HTMLButtonElement>) => {

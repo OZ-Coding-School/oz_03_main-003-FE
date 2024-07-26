@@ -16,14 +16,14 @@ interface LevelData {
 
 const userExperience: { [key: number]: number } = {
     0: 50,
-    ...Object.fromEntries(Array.from({ length: 99 }, (_, i) => [i + 1, (i + 1) * 150])),
+    ...Object.fromEntries(Array.from({ length: 200 }, (_, i) => [i + 1, (i + 1) * 150])),
 };
 
 const levelInitialExperience: { [key: number]: number } = {
     0: 0,
     1: 50,
     2: 200,
-    ...Object.fromEntries(Array.from({ length: 97 }, (_, i) => [i + 3, (i + 3 - 2) * 150])),
+    ...Object.fromEntries(Array.from({ length: 198 }, (_, i) => [i + 3, (i + 3 - 2) * 150])),
 };
 
 const calculateExperience = (level: number, currentExperience: number): number => {
@@ -35,11 +35,10 @@ const calculateExperience = (level: number, currentExperience: number): number =
     const requiredExperience = userExperience[level];
     const initialExperience = levelInitialExperience[level] || 0;
 
-    const percentage = ((currentExperience - initialExperience) / requiredExperience) * 100;
+    const adjustedCurrentExperience = Math.max(currentExperience - initialExperience, 0);
+    const percentage = (adjustedCurrentExperience / requiredExperience) * 100;
 
-    const result = Math.min(Math.max(percentage, 0), 100).toFixed(0);
-
-    return Number(result);
+    return Math.min(Math.max(percentage, 0), 100);
 };
 
 const calculateCurrentExperience = (res: TreeEmotionData[]) => {
@@ -53,7 +52,9 @@ const calculateCurrentExperience = (res: TreeEmotionData[]) => {
 };
 
 export const calculateUserLevel = async (level: number, forestUUID: string): Promise<LevelData> => {
-    if (level < 0 || level > 99) {
+    const maxLevel = Object.keys(userExperience).length - 1;
+
+    if (level < 0 || level > maxLevel) {
         throw new Error("Invalid level");
     }
 
@@ -68,7 +69,7 @@ export const calculateUserLevel = async (level: number, forestUUID: string): Pro
 
     const percentage = calculateExperience(level, currentExp);
 
-    if (Number(percentage) === 100) {
+    if (Number(percentage) === 100 && level < maxLevel) {
         // 레벨업 진행
         await forestApi.updateForestLevel(forestUUID, level + 1);
         // 재귀적 레벨 계산

@@ -73,17 +73,17 @@ const ModalTreeDetailGraph = ({ emotions }: ModalTreeDetailGraphProps) => {
     }, [maxValue]);
 
     return (
-        <div className="w-full h-[200px] flex flex-col">
-            <main className="relative flex h-[160px]">
+        <div className="w-full h-[260px] flex flex-col">
+            <main className="relative flex h-full">
                 <article className="w-[20px] border-r border-gray-400 h-full flex flex-col justify-between items-center">
                     {yAxisLabels.map((label, index) => (
-                        <div key={index} className="text-gray-200 text-xs">
+                        <div key={index} className="text-gray-200 text-sm">
                             {label}
                         </div>
                     ))}
                 </article>
                 <article className="w-full h-full border-b border-gray-400">
-                    <div className="w-full h-full pl-4 flex gap-[44px] items-end relative">
+                    <div className="w-full h-full flex pl-[28px] gap-[55px] items-end relative">
                         {emotionData.map(({ name, color, count }) => (
                             <div
                                 key={name}
@@ -93,7 +93,7 @@ const ModalTreeDetailGraph = ({ emotions }: ModalTreeDetailGraphProps) => {
                                     } as React.CSSProperties
                                 }
                                 className={tw(
-                                    "relative border-white z-10 flex gap-[40px] w-2 rounded-t-[2px] animate-height",
+                                    "relative border-white z-10 flex w-4 rounded-t-[2px] animate-height",
                                     color.split(" ")[0] // Use only the background color class
                                 )}
                             ></div>
@@ -108,7 +108,7 @@ const ModalTreeDetailGraph = ({ emotions }: ModalTreeDetailGraphProps) => {
                     ))}
                 </article>
             </main>
-            <article className="z-10 ml-7 flex w-full gap-8 text-xs font-title mt-2">
+            <article className="z-10 ml-[38px] flex w-full gap-[45px] text-md font-title mt-4">
                 {emotionData.map(({ name, Icon, color }) => (
                     <div
                         key={name}
@@ -117,7 +117,7 @@ const ModalTreeDetailGraph = ({ emotions }: ModalTreeDetailGraphProps) => {
                             color.split(" ").slice(1).join(" ")
                         )}
                     >
-                        <Icon className="w-[16px] h-[16px]" />
+                        <Icon className="w-[24px] h-[24px]" />
                         <div>{name}</div>
                     </div>
                 ))}

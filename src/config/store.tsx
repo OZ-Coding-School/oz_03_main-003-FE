@@ -9,6 +9,7 @@ import {
     UserMessage,
     ChatRoomMessages,
     AIResponse,
+    FormData,
 } from "./types";
 
 interface ModalStore {
@@ -119,5 +120,23 @@ export const useUserChatStore = create<UserChatStore>((set) => ({
                 ...state.aiResponses,
                 [chatRoomUuid]: [...(state.aiResponses[chatRoomUuid] || []), data],
             },
+        })),
+}));
+
+interface AdminStore {
+    data: FormData;
+    setData: (data: FormData) => void;
+}
+
+export const useAdminStore = create<AdminStore>((set) => ({
+    data: {
+        user: [],
+        tree: [],
+        forest: [],
+        emotion: [],
+    },
+    setData: (data: FormData) =>
+        set(() => ({
+            data: data,
         })),
 }));

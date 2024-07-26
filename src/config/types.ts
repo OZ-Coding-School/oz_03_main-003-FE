@@ -11,10 +11,17 @@ export interface AdminPageUserData {
     is_superuser: boolean;
 }
 
+export interface AdminPageForestData {
+    user_uuid: string;
+    forest_uuid: string;
+    forest_level: number;
+}
+
 export interface FormData {
     user: AdminPageUserData[];
     tree: UserTreeDetail[];
     emotion: UserTreeEmotionDetail[];
+    forest: AdminPageForestData[];
 }
 
 export interface UserAccount {
@@ -77,6 +84,13 @@ export enum AuthStatusType {
 }
 
 export interface TreeFormData {
+    tree_name?: string;
+    tree_level?: number;
+    location?: number;
+}
+
+export interface AdminTreeFormData {
+    user_uuid: string;
     tree_name?: string;
     tree_level?: number;
     location?: number;

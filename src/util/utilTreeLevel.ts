@@ -8,7 +8,7 @@ const levelInitialExperience: { [key: number]: number } = {
     0: 0,
 };
 
-const totalEmotion = (emotion: Emotion): number => {
+export const totalEmotion = (emotion: Emotion): number => {
     return Object.values(emotion).reduce((sum, value) => sum + Number(value), 0);
 };
 
