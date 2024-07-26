@@ -1,9 +1,29 @@
+export interface AdminPageUserData {
+    uuid: string;
+    username: string;
+    email: string;
+    profile_image: string;
+    social_platform: string;
+    created_at: string;
+    updated_at: string;
+    last_login: string;
+    is_active: boolean;
+    is_superuser: boolean;
+}
+
+export interface FormData {
+    user: AdminPageUserData[];
+    tree: UserTreeDetail[];
+    emotion: UserTreeEmotionDetail[];
+}
+
 export interface UserAccount {
     id: string;
     username: string;
     imgUrl: string;
     email: string;
     created_at: string;
+    admin: boolean;
 }
 
 export interface UserLevel {

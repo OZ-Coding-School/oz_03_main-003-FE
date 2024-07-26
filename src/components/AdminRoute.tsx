@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PageLoading from "../pages/PageLoading";
 import useVerify from "../hook/useVerify";
-import { useModalStore } from "../config/store";
+import { useModalStore, useUserStore } from "../config/store";
 
 interface DefaultProps {
     [key: string]: unknown;
@@ -13,20 +13,27 @@ interface PrivateRouteProps {
     [key: string]: unknown;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest }) => {
+const AdminRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest }) => {
     const { checkLoginStatus } = useVerify();
     const { pathname } = useLocation();
     const [isVerified, setIsVerified] = useState<boolean | null>(false);
     const { setModal } = useModalStore();
+    const { userData } = useUserStore();
+    const nav = useNavigate();
 
     const verifyUser = useCallback(async () => {
         try {
             await checkLoginStatus();
-            setIsVerified(true);
+            if (userData.user.admin) {
+                setIsVerified(true);
+            } else {
+                setIsVerified(false);
+                nav("/", { replace: true });
+            }
         } catch (error) {
             setIsVerified(false);
         }
-    }, [checkLoginStatus]);
+    }, [checkLoginStatus, userData.user.admin, nav]);
 
     useEffect(() => {
         verifyUser();
@@ -44,4 +51,4 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest
     }
 };
 
-export default PrivateRoute;
+export default AdminRoute;

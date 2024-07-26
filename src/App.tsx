@@ -5,6 +5,8 @@ import PageChat from "./pages/PageChat";
 import PageAuth from "./pages/PageAuth";
 import PageNotFound from "./pages/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
+import PageAdmin from "./pages/PageAdmin";
+import AdminRoute from "./components/AdminRoute";
 
 function App() {
     return (
@@ -13,6 +15,7 @@ function App() {
             <Route path="/home" element={<PrivateRoute element={PageHome} />} />
             <Route path="/mypage" element={<PrivateRoute element={PageMy} />} />
             <Route path="/chat" element={<PrivateRoute element={PageChat} />} />
+            <Route path="/admin" element={<AdminRoute element={PageAdmin} />} />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     );

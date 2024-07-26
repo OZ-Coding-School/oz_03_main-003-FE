@@ -47,7 +47,7 @@ const HeaderLoggedIn = () => {
                         className="w-full h-full object-cover rounded-full cursor-pointer"
                     />
                     <div className="absolute right-0 top-12">
-                        {isMenuOpen && <HeaderUserMenu />}
+                        {isMenuOpen && <HeaderUserMenu isAdmin={userData.user.admin} />}
                     </div>
                 </div>
             </div>

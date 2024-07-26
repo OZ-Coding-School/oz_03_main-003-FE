@@ -29,7 +29,7 @@ export const updateUserInfoName = (name: string) => {
     const userName = {
         username: name,
     };
-    return axiosInstance.post("/auth/profile", userName);
+    return axiosInstance.post("/user/profile", userName);
 };
 
 export const updateUserInfoProfileImage = (image: string) => {

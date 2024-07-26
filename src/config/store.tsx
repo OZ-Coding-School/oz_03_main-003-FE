@@ -45,6 +45,7 @@ export const useUserStore = create<UserStore>((set) => ({
             imgUrl: "/img/profile-placeholder.png",
             email: "...",
             created_at: "...",
+            admin: false,
         },
         level: {
             userLevel: 0,
