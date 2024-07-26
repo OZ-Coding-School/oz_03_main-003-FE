@@ -31,6 +31,7 @@ interface UserStore {
     setTreeData: (data: UserTree) => void;
     setTreeDetailData: (data: UserTreeDetail[]) => void;
     setTreeEmotionData: (data: UserTreeEmotionDetail[]) => void;
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -78,6 +79,10 @@ export const useUserStore = create<UserStore>((set) => ({
         set((state) => ({
             userData: { ...state.userData, treeEmotion: data },
         })),
+    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) =>
+        set((state) => ({
+            userData: { ...state.userData, treeEmotion: data },
+        })),
 }));
 
 interface UserChatStore {
@@ -91,7 +96,6 @@ interface UserChatStore {
 
 export const useUserChatStore = create<UserChatStore>((set) => ({
     chatRooms: [],
-    setChatRooms: (data: ChatRoom[]) => set(() => ({ chatRooms: data })),
     userMessages: {},
     aiResponses: {},
 

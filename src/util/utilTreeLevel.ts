@@ -1,4 +1,4 @@
-import { UserTreeEmotionDetail, Emotion } from "../config/types";
+import { UserTreeEmotionDetail, Emotions } from "../config/types";
 
 const treeExperience: { [key: number]: number } = {
     0: 100,
@@ -8,11 +8,11 @@ const levelInitialExperience: { [key: number]: number } = {
     0: 0,
 };
 
-export const totalEmotion = (emotion: Emotion): number => {
+export const totalEmotion = (emotion: Emotions): number => {
     return Object.values(emotion).reduce((sum, value) => sum + Number(value), 0);
 };
 
-const maxEmotion = (emotion: Emotion): keyof Emotion | null => {
+const maxEmotion = (emotion: Emotions): keyof Emotions | null => {
     const result = Object.entries(emotion).reduce(
         (max, [key, value]) => {
             return value > max.value ? { key, value } : max;
@@ -20,7 +20,7 @@ const maxEmotion = (emotion: Emotion): keyof Emotion | null => {
         { key: "", value: 0 }
     );
 
-    return result.value > 0 ? (result.key as keyof Emotion) : null;
+    return result.value > 0 ? (result.key as keyof Emotions) : null;
 };
 
 const calculateExperience = (level: number, currentExperience: number): number => {

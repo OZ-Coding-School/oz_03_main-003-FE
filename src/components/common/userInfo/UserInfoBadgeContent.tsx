@@ -1,14 +1,7 @@
 import { TREE_BADGE } from "../../../config/const";
 import { useUserStore } from "../../../config/store";
 import { UserTreeEmotionDetail } from "../../../config/types";
-
-interface Emotions {
-    happiness: string;
-    anger: string;
-    sadness: string;
-    worry: string;
-    indifference: string;
-}
+import { Emotions } from "../../../config/types";
 
 const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
     const { userData } = useUserStore();
