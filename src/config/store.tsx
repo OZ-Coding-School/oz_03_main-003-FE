@@ -6,6 +6,9 @@ import {
     UserTreeDetail,
     UserTreeEmotionDetail,
     ChatRoom,
+    UserMessage,
+    ChatRoomMessages,
+    AIResponse,
     FormData,
 } from "./types";
 
@@ -88,15 +91,35 @@ export const useUserStore = create<UserStore>((set) => ({
 
 interface UserChatStore {
     chatRooms: ChatRoom[];
+    userMessages: ChatRoomMessages;
+    aiResponses: { [chatRoomUuid: string]: AIResponse[] };
     setChatRooms: (data: ChatRoom[]) => void;
+    setUserMessages: (chatRoomUuid: string, data: UserMessage[]) => void;
+    setAIResponse: (chatRoomUuid: string, data: AIResponse) => void;
 }
 
 export const useUserChatStore = create<UserChatStore>((set) => ({
     chatRooms: [],
+    userMessages: {},
+    aiResponses: {},
 
     setChatRooms: (data: ChatRoom[]) =>
         set(() => ({
             chatRooms: data,
+        })),
+    setUserMessages: (chatRoomUuid: string, data: UserMessage[]) =>
+        set((state) => ({
+            userMessages: {
+                ...state.userMessages,
+                [chatRoomUuid]: data,
+            },
+        })),
+    setAIResponse: (chatRoomUuid: string, data: AIResponse) =>
+        set((state) => ({
+            aiResponses: {
+                ...state.aiResponses,
+                [chatRoomUuid]: [...(state.aiResponses[chatRoomUuid] || []), data],
+            },
         })),
 }));
 
