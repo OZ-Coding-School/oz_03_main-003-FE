@@ -149,7 +149,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                             className="bg-primary h-full animate-width"
                             style={
                                 {
-                                    "--target-width": `${treeExperience.percentage}`,
+                                    "--target-width": `${treeExperience.percentage}%`,
                                 } as React.CSSProperties
                             }
                         ></div>
