@@ -28,6 +28,17 @@ export interface UserTreeDetail {
 export interface UserTreeEmotionDetail {
     tree_uuid: string;
     emotions: Emotions;
+    type: string;
+    count: number;
+}
+interface TreeEmotion {
+    emotions: {
+        happiness: number;
+        anger: number;
+        sadness: number;
+        worry: number;
+        indifference: number;
+    };
 }
 
 // 감정 타입
@@ -90,6 +101,6 @@ export interface UserData {
     user: UserAccount;
     level: UserLevel;
     tree: UserTree;
-    treeDetail: UserTreeDetail[];
+    treeDetail: UserTreeDetail[] | Record<string, never>;
     treeEmotion: UserTreeEmotionDetail[];
 }
