@@ -4,7 +4,7 @@ import { twMerge as tw } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ModalListItem from "./ModalListItem";
-import { useUserStore } from "../../../config/store";
+import { useUserChatStore, useUserStore } from "../../../config/store";
 
 interface ModalUpdateChatProps {
     isOpen: boolean;
@@ -12,14 +12,20 @@ interface ModalUpdateChatProps {
     chat_room_uuid: string;
 }
 
-const ModalUpdateChat = ({ isOpen, onClose }: ModalUpdateChatProps) => {
+const ModalUpdateChat = ({ isOpen, onClose, chat_room_uuid }: ModalUpdateChatProps) => {
     const { treeDetail } = useUserStore((state) => state.userData);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     // dropDown treelist data
     const [selectedTree, setSelectedTree] = useState<{ name: string; uuid: string } | null>(null);
 
     const inputRef = useRef<HTMLInputElement>(null);
+    const { chatRooms } = useUserChatStore();
 
+    const chatRoomData = chatRooms.find((item) => item.chat_room_uuid === chat_room_uuid);
+    const chatRoomName = chatRoomData?.chat_room_name;
+
+    const treeData = treeDetail.find((item) => item.tree_uuid === chatRoomData?.tree_uuid);
+    const treeName = treeData?.tree_name;
     useEffect(() => {
         if (isOpen && inputRef.current) {
             inputRef.current.focus();
@@ -63,11 +69,12 @@ const ModalUpdateChat = ({ isOpen, onClose }: ModalUpdateChatProps) => {
                         )}
                     >
                         <h3 className="font-title leading-5 mb-4 text-gray-200">
-                            대화 분석방 이름 변경
+                            채팅방 정보 변경
                         </h3>
                         <p>
-                            ‘<strong>친구01</strong>’의 이름을 변경합니다.
+                            <b>{chatRoomName}</b>의 이름을 변경합니다.
                         </p>
+                        <p>{treeName}</p>
                         <input
                             ref={inputRef}
                             type="text"
@@ -87,7 +94,7 @@ const ModalUpdateChat = ({ isOpen, onClose }: ModalUpdateChatProps) => {
                                     "fill-white flex items-center justify-between select-none "
                                 )}
                             >
-                                {selectedTree ? selectedTree.name : "변경할 나무 선택"}
+                                {selectedTree ? selectedTree.name : treeName}
                                 <IconSelectArrow
                                     className={`w-4 transition-transform duration-300 ${isDropdownOpen ? "transform rotate-180" : ""}`}
                                 />
@@ -106,7 +113,8 @@ const ModalUpdateChat = ({ isOpen, onClose }: ModalUpdateChatProps) => {
                             )}
                         </div>
                         <div className="text-right mt-4">
-                            <ButtonDefault className="ml-1">변경하기</ButtonDefault>
+                            <ButtonDefault>변경하기</ButtonDefault>
+                            <ButtonDefault className="ml-1">취소하기</ButtonDefault>
                         </div>
                         <button
                             type="button"
