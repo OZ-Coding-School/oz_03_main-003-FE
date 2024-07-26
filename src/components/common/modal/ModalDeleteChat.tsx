@@ -48,20 +48,20 @@ const ModalDeleteChat = ({ isOpen, onClose, chat_room_uuid }: ModalDeleteChatPro
                     <nav
                         onClick={stopPropagation}
                         className={tw(
-                            "p-5 bg-gray-800 text-white w-80 border border-gray-600",
+                            "p-5 bg-gray-800 text-white w-[420px] border border-gray-600",
                             "absolute z-20"
                         )}
                     >
-                        <h3 className="font-title leading-5 mb-4 text-gray-200">
+                        <h3 className="font-title leading-5 mb-10 text-gray-200">
                             대화 분석방 삭제
                         </h3>
                         <p>대화 분석방을 삭제하시겠습니까?</p>
-                        <p className="text-literal-error text-xs">
+                        <p className="text-literal-error text-sm mt-2">
                             삭제 된 내용은 복구되지 않습니다
                         </p>
-                        <div className="text-right mt-2.5">
+                        <div className="text-right mt-10">
                             <ButtonError onClick={handleDelete}>삭제하기</ButtonError>
-                            <ButtonDefault className="ml-1">취소하기</ButtonDefault>
+                            <ButtonDefault className="ml-2">취소하기</ButtonDefault>
                         </div>
                         <button
                             type="button"
