@@ -97,3 +97,8 @@ export interface ChatRoom {
     chat_room_name: string;
     tree_uuid: string;
 }
+
+export interface UpdateChatRoom {
+    chat_room_uuid?: string;
+    tree_uuid?: string;
+}
