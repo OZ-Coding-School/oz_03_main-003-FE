@@ -10,6 +10,10 @@ import { findTreeLocation, moveTreeLocation, swapTreeLocation } from "../../util
 import useInfo from "../../hook/useInfo";
 import useVerify from "../../hook/useVerify";
 import ToastDefault from "../common/toast/ToastDefault";
+import useSound from "use-sound";
+import soundModal from "../../assets/sound/modal_ping.mp3";
+import soundBtn from "../../assets/sound/btn_click.mp3";
+import soundCollapse from "../../assets/sound/btn_collapse.mp3";
 
 const HomeGrid = () => {
     //? USER_DATA / USER_DATA SYNC / USER_VERIFY / TOASTER_MODAL
@@ -27,6 +31,9 @@ const HomeGrid = () => {
     const [isLoading, setIsLoading] = useState(false);
     //? REF
     const moveRef = useRef<HTMLDivElement>(null);
+    const [playModal] = useSound(soundModal, { volume: 0.75 });
+    const [playButton] = useSound(soundBtn, { volume: 0.75 });
+    const [playCollapse] = useSound(soundCollapse, { volume: 0.75 });
 
     //? CLOSE HANDLER
     const createModalCloseHandler = () => {
@@ -43,19 +50,23 @@ const HomeGrid = () => {
     const createModalOpenHandler = (id: number) => {
         setTreeLocation(id);
         setCreateModalOpen(true);
+        playButton();
     };
     const editModalOpenHandler = (id: string) => {
         setTreeUUID(id);
         setEditModalOpen(true);
+        playButton();
     };
     const detailModalOpenHandler = (id: string) => {
         setTreeUUID(id);
         setDetailModalOpen(true);
+        playCollapse();
     };
     const moveTreeOpenHandler = (id: string) => {
         setTreeUUID(id);
         moveRef.current?.focus();
         setMoveModalOpen(true);
+        playModal();
     };
 
     //? CONTROLLER HANDLER
