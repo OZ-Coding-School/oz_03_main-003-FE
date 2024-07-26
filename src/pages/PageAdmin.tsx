@@ -2,14 +2,7 @@ import { useEffect, useState } from "react";
 import AdminHeader from "../components/admin/AdminHeader";
 import AdminOverview from "../components/admin/AdminOverview";
 import AdminStatus from "../components/admin/AdminStatus";
-import { adminApi } from "../api";
-import useVerify from "../hook/useVerify";
-import {
-    AdminPageUserData,
-    UserTreeDetail,
-    UserTreeEmotionDetail,
-    FormData,
-} from "../config/types";
+import { FormData } from "../config/types";
 import useAdminData from "../hook/useAdminData";
 
 const PageAdmin = () => {
@@ -23,8 +16,6 @@ const PageAdmin = () => {
         };
         fetchUserData();
     }, [fetchData]);
-
-    console.log(data);
 
     return (
         <>

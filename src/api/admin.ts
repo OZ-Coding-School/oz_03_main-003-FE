@@ -14,13 +14,13 @@ export const getEmotionList = () => {
 
 export const adminToUser = (id: string) => {
     const requestData = {
-        is_superuser: "True",
+        is_superuser: "False",
     };
     return axiosInstance.put(`/user/${id}`, requestData);
 };
 export const userToAdmin = (id: string) => {
     const requestData = {
-        is_superuser: "False",
+        is_superuser: "True",
     };
     return axiosInstance.put(`/user/${id}`, requestData);
 };

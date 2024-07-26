@@ -5,6 +5,7 @@ import { FormData } from "../../config/types";
 import { twMerge as tw } from "tailwind-merge";
 import { adminApi } from "../../api";
 import useVerify from "../../hook/useVerify";
+import { useState } from "react";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -12,7 +13,8 @@ dayjs.extend(timezone);
 interface AdminStatusItemProps {
     data: FormData;
 }
-const AdminStatusItem = ({ data }: AdminStatusItemProps) => {
+const AdminStatusItem = ({ data: originData }: AdminStatusItemProps) => {
+    const [data, setData] = useState(originData);
     const { checkLoginStatus } = useVerify();
     const formatDate = (dateString: string) => {
         return dayjs(dateString).format("YYYY-MM-DD HH:mm");
