@@ -28,8 +28,6 @@ export interface UserTreeDetail {
 export interface UserTreeEmotionDetail {
     tree_uuid: string;
     emotions: Emotions;
-    type: string;
-    count: number;
 }
 
 // 감정 타입
