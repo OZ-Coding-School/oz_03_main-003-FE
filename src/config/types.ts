@@ -113,3 +113,16 @@ export interface UserMessage {
 export interface ChatRoomMessages {
     [chatRoomUuid: string]: UserMessage[];
 }
+
+export interface AIResponse {
+    emotions: {
+        happiness: number;
+        anger: number;
+        sadness: number;
+        worry: number;
+        indifference: number;
+    };
+    message_uuid: string;
+    message: string;
+    applied_state: boolean;
+}

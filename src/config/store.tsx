@@ -8,6 +8,7 @@ import {
     ChatRoom,
     UserMessage,
     ChatRoomMessages,
+    AIResponse,
 } from "./types";
 
 interface ModalStore {
@@ -90,13 +91,16 @@ export const useUserStore = create<UserStore>((set) => ({
 interface UserChatStore {
     chatRooms: ChatRoom[];
     userMessages: ChatRoomMessages;
+    aiResponses: { [chatRoomUuid: string]: AIResponse[] };
     setChatRooms: (data: ChatRoom[]) => void;
     setUserMessages: (chatRoomUuid: string, data: UserMessage[]) => void;
+    setAIResponse: (chatRoomUuid: string, data: AIResponse) => void;
 }
 
 export const useUserChatStore = create<UserChatStore>((set) => ({
     chatRooms: [],
     userMessages: {},
+    aiResponses: {},
 
     setChatRooms: (data: ChatRoom[]) =>
         set(() => ({
@@ -107,6 +111,13 @@ export const useUserChatStore = create<UserChatStore>((set) => ({
             userMessages: {
                 ...state.userMessages,
                 [chatRoomUuid]: data,
+            },
+        })),
+    setAIResponse: (chatRoomUuid: string, data: AIResponse) =>
+        set((state) => ({
+            aiResponses: {
+                ...state.aiResponses,
+                [chatRoomUuid]: [...(state.aiResponses[chatRoomUuid] || []), data],
             },
         })),
 }));
