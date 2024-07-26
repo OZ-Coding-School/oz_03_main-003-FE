@@ -16,10 +16,10 @@ const DialogHeader = ({ onClose, chatRoomUuid }: DialogHeaderProps) => {
     const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
 
     return (
-        <div className="select-none flex items-center w-full h-20">
+        <div className="select-none flex items-center w-full h-20 px-5 shadow-black shadow-lg">
             <button
                 type="button"
-                className="text-zero fill-white w-9 h-9 p-2 rounded-full hover:bg-gray-600"
+                className="text-zero fill-white w-9 h-9 p-2 rounded-full hover:bg-gray-600 transition"
                 onClick={onClose}
             >
                 <IconLeft />
