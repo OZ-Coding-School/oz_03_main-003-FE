@@ -161,7 +161,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                     <div className="text-gray-200 font-title text-sm mb-2">감정 기록</div>
                     <ModalTreeDetailGraph emotions={emotionData.emotions} />
                 </article>
-                <div className="flex justify-end gap-2">
+                <div className="flex justify-end gap-2 flex-col">
                     {treeExperience.percentage === 100 && treeData.tree_level === 0 ? (
                         <ButtonPrimary onClick={growHandler} className="mt-10 text-sm font-title">
                             비료 주기

@@ -1,3 +1,4 @@
+
 export interface AdminPageUserData {
     uuid: string;
     username: string;
@@ -46,6 +47,8 @@ export interface UserTreeDetail {
     location: number;
 }
 
+
+
 export interface AdminTreeDetail {
     user_uuid: string;
     tree_detail: {
@@ -58,6 +61,11 @@ export interface AdminTreeDetail {
 
 export interface UserTreeEmotionDetail {
     tree_uuid: string;
+    emotions: Emotions;
+    type: string;
+    count: number;
+}
+interface TreeEmotion {
     emotions: {
         happiness: number;
         anger: number;
@@ -67,10 +75,10 @@ export interface UserTreeEmotionDetail {
     };
 }
 
-export interface Emotion {
-    happiness: number;
-    anger: number;
-    sadness: number;
+export interface Emotions {
+    happy: number;
+    angry: number;
+    sorrow: number;
     worry: number;
     indifference: number;
 }
@@ -86,6 +94,7 @@ export interface UserTree {
 export interface AccessibleIndices {
     [key: number]: number[];
 }
+
 
 export enum AuthStatusType {
     LOADING = 1,
@@ -106,15 +115,17 @@ export interface AdminTreeFormData {
     location?: number;
 }
 
-// chat types
+
 export interface CreateChatRoomRequest {
     chat_room_name: string;
     tree_uuid: string;
 }
 
+
 export interface CreateChatRoomResponse {
     chat_room_uuid: string;
 }
+
 
 export interface ChatRoom {
     chat_room_uuid: string;
@@ -122,12 +133,20 @@ export interface ChatRoom {
     tree_uuid: string;
 }
 
+
+export interface UserData {
+    user: UserAccount;
+    level: UserLevel;
+    tree: UserTree;
+    treeDetail: UserTreeDetail[] | Record<string, never>;
+    treeEmotion: UserTreeEmotionDetail[];
+
+  
 export interface UpdateChatRoom {
     chat_room_uuid?: string;
     tree_uuid?: string;
 }
 
-// dialog types
 
 export interface UserMessage {
     message_uuid: string;
