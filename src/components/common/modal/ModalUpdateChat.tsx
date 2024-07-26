@@ -90,11 +90,11 @@ const ModalUpdateChat = ({ isOpen, onClose, chat_room_uuid }: ModalUpdateChatPro
                     <nav
                         onClick={stopPropagation}
                         className={tw(
-                            "p-5 bg-gray-800 text-white border border-gray-600 w-[360px]",
+                            "p-5 bg-gray-800 text-white border border-gray-600 w-[420px]",
                             "absolute z-20"
                         )}
                     >
-                        <h3 className="font-title leading-5 mb-5 text-gray-200">
+                        <h3 className="font-title leading-5 mb-10 text-gray-200">
                             채팅방 정보 변경
                         </h3>
                         <p>
@@ -106,6 +106,7 @@ const ModalUpdateChat = ({ isOpen, onClose, chat_room_uuid }: ModalUpdateChatPro
                             type="text"
                             placeholder={chatRoomName}
                             onChange={handleInputChange}
+                            maxLength={10}
                             className="mt-2 border-b outline-none border-gray-600 h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
                         ></input>
 
@@ -139,7 +140,7 @@ const ModalUpdateChat = ({ isOpen, onClose, chat_room_uuid }: ModalUpdateChatPro
                                 </ul>
                             )}
                         </div>
-                        <div className="text-right mt-4">
+                        <div className="text-right mt-10">
                             {isSubmitting ? (
                                 <ButtonDisable className="ml-1">변경 중...</ButtonDisable>
                             ) : (
