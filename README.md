@@ -11,6 +11,7 @@
 ![React OAuth](https://img.shields.io/badge/-React%20OAuth-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 ![React Router](https://img.shields.io/badge/-React%20Router%20Dom-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 ![SVGR/rollup](https://img.shields.io/badge/-SVGR/ROLLUP-FFB13B?style=for-the-badge&logo=svg&logoColor=black)
+![USESOUND](https://img.shields.io/badge/-USE%20SOUND-e04641?style=for-the-badge&logo=applemusic&logoColor=white)
 
 ### Styling Library
 ![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
