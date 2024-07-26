@@ -6,6 +6,7 @@ import {
     UserTreeDetail,
     UserTreeEmotionDetail,
     ChatRoom,
+    UserData,
 } from "./types";
 
 interface ModalStore {
@@ -15,26 +16,16 @@ interface ModalStore {
 
 export const useModalStore = create<ModalStore>((set) => ({
     modal: false,
-
-    setModal: (bool: boolean) =>
-        set(() => ({
-            modal: bool,
-        })),
+    setModal: (bool: boolean) => set(() => ({ modal: bool })),
 }));
 
 interface UserStore {
-    userData: {
-        user: UserAccount;
-        level: UserLevel;
-        tree: UserTree;
-        treeDetail: UserTreeDetail[] | Record<string, never>;
-        treeEmotion: UserTreeEmotionDetail[] | Record<string, never>;
-    };
+    userData: UserData;
     setUserData: (data: UserAccount) => void;
     setLevelData: (data: UserLevel) => void;
     setTreeData: (data: UserTree) => void;
     setTreeDetailData: (data: UserTreeDetail[]) => void;
-    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) => void;
+    setTreeEmotionData: (data: UserTreeEmotionDetail[]) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -61,7 +52,6 @@ export const useUserStore = create<UserStore>((set) => ({
         treeDetail: [],
         treeEmotion: [],
     },
-
     setUserData: (data: UserAccount) =>
         set((state) => ({
             userData: { ...state.userData, user: data },
@@ -78,7 +68,7 @@ export const useUserStore = create<UserStore>((set) => ({
         set((state) => ({
             userData: { ...state.userData, treeDetail: data },
         })),
-    setTreeDetailEmotionData: (data: UserTreeEmotionDetail[]) =>
+    setTreeEmotionData: (data: UserTreeEmotionDetail[]) =>
         set((state) => ({
             userData: { ...state.userData, treeEmotion: data },
         })),
@@ -91,9 +81,5 @@ interface UserChatStore {
 
 export const useUserChatStore = create<UserChatStore>((set) => ({
     chatRooms: [],
-
-    setChatRooms: (data: ChatRoom[]) =>
-        set(() => ({
-            chatRooms: data,
-        })),
+    setChatRooms: (data: ChatRoom[]) => set(() => ({ chatRooms: data })),
 }));

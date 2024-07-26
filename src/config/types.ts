@@ -77,3 +77,10 @@ export interface ChatRoom {
     chat_room_name: string;
     tree_uuid: string;
 }
+export interface UserData {
+    user: UserAccount;
+    level: UserLevel;
+    tree: UserTree;
+    treeDetail: UserTreeDetail[];
+    treeEmotion: UserTreeEmotionDetail[];
+}
