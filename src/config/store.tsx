@@ -6,6 +6,8 @@ import {
     UserTreeDetail,
     UserTreeEmotionDetail,
     ChatRoom,
+    UserMessage,
+    ChatRoomMessages,
 } from "./types";
 
 interface ModalStore {
@@ -87,14 +89,24 @@ export const useUserStore = create<UserStore>((set) => ({
 
 interface UserChatStore {
     chatRooms: ChatRoom[];
+    userMessages: ChatRoomMessages;
     setChatRooms: (data: ChatRoom[]) => void;
+    setUserMessages: (chatRoomUuid: string, data: UserMessage[]) => void;
 }
 
 export const useUserChatStore = create<UserChatStore>((set) => ({
     chatRooms: [],
+    userMessages: {},
 
     setChatRooms: (data: ChatRoom[]) =>
         set(() => ({
             chatRooms: data,
+        })),
+    setUserMessages: (chatRoomUuid: string, data: UserMessage[]) =>
+        set((state) => ({
+            userMessages: {
+                ...state.userMessages,
+                [chatRoomUuid]: data,
+            },
         })),
 }));

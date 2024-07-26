@@ -102,3 +102,14 @@ export interface UpdateChatRoom {
     chat_room_uuid?: string;
     tree_uuid?: string;
 }
+
+// dialog types
+
+export interface UserMessage {
+    message_uuid: string;
+    message: string;
+}
+
+export interface ChatRoomMessages {
+    [chatRoomUuid: string]: UserMessage[];
+}
