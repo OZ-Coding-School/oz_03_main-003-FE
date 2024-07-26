@@ -7,6 +7,14 @@ interface AdminCarouselProps {
 }
 
 const AdminCarousel = ({ carousel, data }: AdminCarouselProps) => {
+    const totalEmotions = data.emotion.reduce((acc, curr) => {
+        const objectSum = Object.values(curr.emotions).reduce((sum, value) => {
+            return sum + Number(value);
+        }, 0);
+
+        return acc + objectSum;
+    }, 0);
+
     return (
         <div>
             {carousel === 0 && (
@@ -33,7 +41,7 @@ const AdminCarousel = ({ carousel, data }: AdminCarouselProps) => {
                     className="flex flex-col justify-center items-center"
                 >
                     <div>Total Emotions</div>
-                    <div>{data.emotion.length}</div>
+                    <div>{totalEmotions}</div>
                 </motion.div>
             )}
         </div>

@@ -5,11 +5,15 @@ export const getUserList = () => {
 };
 
 export const getTreeList = () => {
-    return axiosInstance.get("/tree");
+    return axiosInstance.get("/tree/admin");
 };
 
 export const getEmotionList = () => {
-    return axiosInstance.get("/tree/emotion");
+    return axiosInstance.get("/tree/admin/emotion");
+};
+
+export const getChatRoomList = () => {
+    return axiosInstance.get("/chat/admin");
 };
 
 export const adminToUser = (id: string) => {

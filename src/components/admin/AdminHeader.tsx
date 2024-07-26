@@ -13,9 +13,17 @@ const AdminHeader = () => {
         }
     };
 
+    const refreshHandler = () => {
+        nav("/admin");
+    };
+
     return (
         <div className="select-none text-xl flex gap-2 font-bold bg-slate-600 text-white font-mono p-2">
-            <div>ADMIN PAGE |</div>
+            <img className="w-10" src="/img/profile-placeholder.png"></img>
+            <div onClick={refreshHandler} className="cursor-pointer">
+                ADMIN PAGE
+            </div>
+            <div>|</div>
 
             <button
                 onClick={logoutHandler}

@@ -4,6 +4,8 @@ import AdminOverview from "../components/admin/AdminOverview";
 import AdminStatus from "../components/admin/AdminStatus";
 import { FormData } from "../config/types";
 import useAdminData from "../hook/useAdminData";
+import AdminTree from "../components/admin/AdminTree";
+import AdminForest from "../components/admin/AdminForest";
 
 const PageAdmin = () => {
     const [data, setData] = useState<FormData | null>(null);
@@ -25,6 +27,8 @@ const PageAdmin = () => {
                     <div>
                         <AdminOverview data={data} />
                         <AdminStatus data={data} />
+                        <AdminForest data={data} />
+                        <AdminTree data={data} />
                     </div>
                 )}
             </div>
