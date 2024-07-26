@@ -14,7 +14,7 @@ const ButtonError = ({ className, type = "button", onClick, children }: ButtonPr
             onClick={onClick}
             className={tw(
                 "font-light text-sm select-none text-white text-center",
-                "bg-gray-600 w-[99px] h-[40px]",
+                "bg-gray-600 px-6 h-[48px]",
                 "hover:bg-literal-error transition",
                 className
             )}
