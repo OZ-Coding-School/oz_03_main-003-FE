@@ -1,7 +1,11 @@
 import ChatListItem from "./ChatListItem";
 import { useUserChatStore } from "../../../config/store";
 
-const ChatListContent = () => {
+interface ChatListContentProps {
+    onChatItemClick: (chat_room_uuid: string) => void;
+}
+
+const ChatListContent = ({ onChatItemClick }: ChatListContentProps) => {
     const { chatRooms } = useUserChatStore();
 
     return (
@@ -13,6 +17,7 @@ const ChatListContent = () => {
                         chat_room_uuid: item.chat_room_uuid,
                         chat_room_name: item.chat_room_name,
                     }}
+                    onClick={onChatItemClick}
                 />
             ))}
         </div>
