@@ -8,6 +8,8 @@ import useVerify from "../../hook/useVerify";
 import useAdminData from "../../hook/useAdminData";
 import { IconChange, IconCopy, IconDeleteBtn } from "../../config/IconData";
 import { useAdminStore } from "../../config/store";
+import useSound from "use-sound";
+import pingSound from "../../assets/sound/btn_ping.mp3";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -16,6 +18,7 @@ const AdminUserItem = () => {
     const { data, setData } = useAdminStore();
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
+    const [playCopy] = useSound(pingSound, { volume: 0.75 });
 
     const formatDate = (dateString: string) => {
         return dayjs(dateString).format("YYYY-MM-DD HH:mm");
@@ -77,6 +80,7 @@ const AdminUserItem = () => {
         `;
 
         await navigator.clipboard.writeText(form);
+        playCopy();
     };
 
     const filteredData = data.user.sort((a, b) => {

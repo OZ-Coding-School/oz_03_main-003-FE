@@ -3,7 +3,7 @@ import useVerify from "./useVerify";
 import {
     AdminPageForestData,
     AdminPageUserData,
-    UserTreeDetail,
+    AdminTreeDetail,
     UserTreeEmotionDetail,
 } from "../config/types";
 import { useCallback } from "react";
@@ -20,7 +20,7 @@ const useAdminData = () => {
 
             const formData = {
                 user: userData as AdminPageUserData[],
-                tree: treeData as UserTreeDetail[],
+                tree: treeData as AdminTreeDetail[],
                 forest: forestData as AdminPageForestData[],
                 emotion: emotionData as UserTreeEmotionDetail[],
             };

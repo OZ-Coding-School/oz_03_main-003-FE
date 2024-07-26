@@ -1,13 +1,15 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { FormData } from "../../config/types";
+import { AdminPageForestData, FormData } from "../../config/types";
 import { adminApi } from "../../api";
 import useVerify from "../../hook/useVerify";
 import useAdminData from "../../hook/useAdminData";
-import { IconChange } from "../../config/IconData";
+import { IconChange, IconCopy } from "../../config/IconData";
 import { useAdminStore } from "../../config/store";
 import { twMerge as tw } from "tailwind-merge";
+import useSound from "use-sound";
+import pingSound from "../../assets/sound/btn_ping.mp3";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -16,6 +18,7 @@ const AdminForestItem = () => {
     const { data, setData } = useAdminStore();
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
+    const [playCopy] = useSound(pingSound, { volume: 0.75 });
 
     const levelHandler = async (id: string) => {
         const level = window.prompt("변경하실 계정 레벨을 지정하세요.");
@@ -29,6 +32,12 @@ const AdminForestItem = () => {
         } catch (error) {
             console.error("Level Change Failed", error);
         }
+    };
+
+    const clipBoardHandler = async (item: AdminPageForestData) => {
+        const form = `USER_UUID: ${item.user_uuid} \nFOREST_UUID: ${item.forest_uuid} \nFOREST_LEVEL: ${item.forest_level}`;
+        await navigator.clipboard.writeText(form);
+        playCopy();
     };
 
     const sortedForest = data.forest.sort();
@@ -69,6 +78,14 @@ const AdminForestItem = () => {
                                         <div>Level</div>
                                     </div>
                                 </button>
+                            </td>
+                            <td>
+                                <div
+                                    onClick={() => clipBoardHandler(item)}
+                                    className="fill-white ml-2 p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md cursor-pointer flex justify-center"
+                                >
+                                    <IconCopy className="fill-white w-fit h-6" />
+                                </div>
                             </td>
                         </tr>
                     ))}

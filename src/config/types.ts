@@ -19,7 +19,7 @@ export interface AdminPageForestData {
 
 export interface FormData {
     user: AdminPageUserData[];
-    tree: UserTreeDetail[];
+    tree: AdminTreeDetail[];
     emotion: UserTreeEmotionDetail[];
     forest: AdminPageForestData[];
 }
@@ -44,6 +44,16 @@ export interface UserTreeDetail {
     tree_name: string;
     tree_level: number;
     location: number;
+}
+
+export interface AdminTreeDetail {
+    user_uuid: string;
+    tree_detail: {
+        tree_uuid: string;
+        tree_name: string;
+        tree_level: number;
+        location: number;
+    };
 }
 
 export interface UserTreeEmotionDetail {

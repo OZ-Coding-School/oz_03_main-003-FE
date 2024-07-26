@@ -19,8 +19,6 @@ const PageAdmin = () => {
         fetchUserData();
     }, [fetchData, setData]);
 
-    console.log(data);
-
     return (
         <>
             <AdminHeader />

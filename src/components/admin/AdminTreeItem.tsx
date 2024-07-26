@@ -8,6 +8,8 @@ import useVerify from "../../hook/useVerify";
 import useAdminData from "../../hook/useAdminData";
 import { IconChange, IconCopy, IconDeleteBtn } from "../../config/IconData";
 import { useAdminStore } from "../../config/store";
+import useSound from "use-sound";
+import pingSound from "../../assets/sound/btn_ping.mp3";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -16,18 +18,20 @@ const AdminTreeItem = () => {
     const { data, setData } = useAdminStore();
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
+    const [playCopy] = useSound(pingSound, { volume: 0.75 });
 
-    const levelHandler = async (id: string) => {
+    const levelHandler = async (treeId: string, userId: string) => {
         const level = window.prompt("변경하실 나무의 레벨을 지정하세요.");
         if (!level) return;
 
         const requestForm = {
             tree_level: Number(level),
+            user_uuid: userId,
         };
 
         try {
             await checkLoginStatus();
-            await adminApi.updateTree(id, requestForm);
+            await adminApi.updateTree(treeId, requestForm);
             const data = (await fetchData()) as FormData;
             setData(data);
         } catch (error) {
@@ -35,17 +39,18 @@ const AdminTreeItem = () => {
         }
     };
 
-    const locationHandler = async (id: string) => {
+    const locationHandler = async (treeId: string, userId: string) => {
         const location = window.prompt("변경하실 나무의 위치를 지정하세요.");
         if (!location) return;
 
         const requestForm = {
             location: Number(location),
+            user_uuid: userId,
         };
 
         try {
             await checkLoginStatus();
-            await adminApi.updateTree(id, requestForm);
+            await adminApi.updateTree(treeId, requestForm);
             const data = (await fetchData()) as FormData;
             setData(data);
         } catch (error) {
@@ -74,6 +79,7 @@ const AdminTreeItem = () => {
         `;
 
         await navigator.clipboard.writeText(form);
+        playCopy();
     };
 
     return (
@@ -91,14 +97,16 @@ const AdminTreeItem = () => {
                 </thead>
                 <tbody className="text-lg text-center">
                     {data.tree.map((item) => (
-                        <tr key={item.tree_uuid} className="">
-                            <td className="border p-2">{item.tree_uuid}</td>
-                            <td className="border p-2">{item.tree_name}</td>
-                            <td className="border p-2">{item.tree_level}</td>
+                        <tr key={item.tree_detail.tree_uuid} className="">
+                            <td className="border p-2">{item.tree_detail.tree_uuid}</td>
+                            <td className="border p-2">{item.tree_detail.tree_name}</td>
+                            <td className="border p-2">{item.tree_detail.tree_level}</td>
 
                             <td className="border p-2">
                                 <button
-                                    onClick={() => levelHandler(item.tree_uuid)}
+                                    onClick={() =>
+                                        levelHandler(item.tree_detail.tree_uuid, item.user_uuid)
+                                    }
                                     className="select-none p-1 w-full rounded-md transition bg-green-600 hover:bg-green-800 text-white"
                                 >
                                     <div className="flex justify-center items-center relative">
@@ -107,10 +115,12 @@ const AdminTreeItem = () => {
                                     </div>
                                 </button>
                             </td>
-                            <td className="border p-2">{item.location}</td>
+                            <td className="border p-2">{item.tree_detail.location}</td>
                             <td className="border p-2">
                                 <button
-                                    onClick={() => locationHandler(item.tree_uuid)}
+                                    onClick={() =>
+                                        locationHandler(item.tree_detail.tree_uuid, item.user_uuid)
+                                    }
                                     className="select-none p-1 w-full rounded-md transition bg-green-600 hover:bg-green-800 text-white"
                                 >
                                     <div className="flex justify-center items-center relative">
@@ -121,7 +131,7 @@ const AdminTreeItem = () => {
                             </td>
                             <td>
                                 <div
-                                    onClick={() => clipBoardHandler(item)}
+                                    onClick={() => clipBoardHandler(item.tree_detail)}
                                     className="fill-white ml-2 p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md cursor-pointer flex justify-center"
                                 >
                                     <IconCopy className="fill-white w-fit h-6" />
@@ -129,7 +139,7 @@ const AdminTreeItem = () => {
                             </td>
                             <td className="pl-4 rounded-md">
                                 <div
-                                    onClick={() => deleteAccountHandler(item.tree_uuid)}
+                                    onClick={() => deleteAccountHandler(item.tree_detail.tree_uuid)}
                                     className="fill-white ml-2 p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md hover:cursor-pointer flex justify-center"
                                 >
                                     <IconDeleteBtn className="fill-white w-fit h-6" />
