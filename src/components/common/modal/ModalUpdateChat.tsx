@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ModalListItem from "./ModalListItem";
 import { useUserChatStore, useUserStore } from "../../../config/store";
-
+import useChatRooms from "../../../hook/useChatRooms";
+import ButtonDisable from "../button/ButtonDisable";
 interface ModalUpdateChatProps {
     isOpen: boolean;
     onClose: () => void;
@@ -13,19 +14,20 @@ interface ModalUpdateChatProps {
 }
 
 const ModalUpdateChat = ({ isOpen, onClose, chat_room_uuid }: ModalUpdateChatProps) => {
+    const { updateChatRoom } = useChatRooms();
     const { treeDetail } = useUserStore((state) => state.userData);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    // dropDown treelist data
-    const [selectedTree, setSelectedTree] = useState<{ name: string; uuid: string } | null>(null);
-
-    const inputRef = useRef<HTMLInputElement>(null);
     const { chatRooms } = useUserChatStore();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [newChatRoomName, setNewChatRoomName] = useState("");
+    const [selectedTree, setSelectedTree] = useState<{ name: string; uuid: string } | null>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    const chatRoomData = chatRooms.find((item) => item.chat_room_uuid === chat_room_uuid);
-    const chatRoomName = chatRoomData?.chat_room_name;
+    const chatRoom = chatRooms.find((item) => item.chat_room_uuid === chat_room_uuid);
+    const chatRoomName = chatRoom?.chat_room_name ?? "";
+    const tree_uuid = chatRoom?.tree_uuid ?? "";
+    const treeName = treeDetail.find((item) => item.tree_uuid === tree_uuid)?.tree_name;
 
-    const treeData = treeDetail.find((item) => item.tree_uuid === chatRoomData?.tree_uuid);
-    const treeName = treeData?.tree_name;
     useEffect(() => {
         if (isOpen && inputRef.current) {
             inputRef.current.focus();
@@ -44,7 +46,31 @@ const ModalUpdateChat = ({ isOpen, onClose, chat_room_uuid }: ModalUpdateChatPro
     };
 
     const closeHandler = () => {
+        setIsDropdownOpen(false);
         onClose();
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewChatRoomName(e.target.value);
+    };
+
+    const handleSubmit = async () => {
+        const data = {
+            chat_room_name: newChatRoomName || chatRoomName,
+            tree_uuid: selectedTree?.uuid || tree_uuid,
+        };
+        if (!isSubmitting) {
+            setIsSubmitting(true);
+            try {
+                await updateChatRoom(chat_room_uuid, data);
+                onClose();
+                setIsSubmitting(false);
+            } catch (error) {
+                console.log("Failed to update chat room", error);
+            }
+        } else {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -64,26 +90,27 @@ const ModalUpdateChat = ({ isOpen, onClose, chat_room_uuid }: ModalUpdateChatPro
                     <nav
                         onClick={stopPropagation}
                         className={tw(
-                            "p-5 bg-gray-800 text-white w-80 border border-gray-600",
+                            "p-5 bg-gray-800 text-white border border-gray-600 w-[360px]",
                             "absolute z-20"
                         )}
                     >
-                        <h3 className="font-title leading-5 mb-4 text-gray-200">
+                        <h3 className="font-title leading-5 mb-5 text-gray-200">
                             채팅방 정보 변경
                         </h3>
                         <p>
-                            <b>{chatRoomName}</b>의 이름을 변경합니다.
+                            <span className="text-literal-happy">{chatRoomName}</span> 의 이름을
+                            변경합니다.
                         </p>
-                        <p>{treeName}</p>
                         <input
                             ref={inputRef}
                             type="text"
-                            placeholder="이름을 입력해주세요."
-                            className="mt-6 border-b outline-none border-gray-600 h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
+                            placeholder={chatRoomName}
+                            onChange={handleInputChange}
+                            className="mt-2 border-b outline-none border-gray-600 h-10 w-full bg-gray-800 placeholder:text-gray-600 focus:border-white"
                         ></input>
 
                         <h3 className="font-title leading-5 mb-2 mt-6 text-gray-200">
-                            나무를 선택해 주세요.
+                            변경할 나무를 선택해주세요.
                         </h3>
                         <div onClick={toggleDropdown} className="relative">
                             <div
@@ -113,8 +140,13 @@ const ModalUpdateChat = ({ isOpen, onClose, chat_room_uuid }: ModalUpdateChatPro
                             )}
                         </div>
                         <div className="text-right mt-4">
-                            <ButtonDefault>변경하기</ButtonDefault>
-                            <ButtonDefault className="ml-1">취소하기</ButtonDefault>
+                            {isSubmitting ? (
+                                <ButtonDisable className="ml-1">변경 중...</ButtonDisable>
+                            ) : (
+                                <ButtonDefault className="ml-1" onClick={handleSubmit}>
+                                    변경하기
+                                </ButtonDefault>
+                            )}
                         </div>
                         <button
                             type="button"
