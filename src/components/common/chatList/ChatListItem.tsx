@@ -12,9 +12,10 @@ interface ChatListItemProps {
         created_at?: string;
     };
     onClick: (chat_room_uuid: string) => void;
+    onClose: () => void;
 }
 
-const ChatListItem = ({ item, onClick }: ChatListItemProps) => {
+const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
     const [hover, setHover] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -80,6 +81,7 @@ const ChatListItem = ({ item, onClick }: ChatListItemProps) => {
             <ModalDeleteChat
                 isOpen={isDeleteModalOpen}
                 onClose={closeDeleteModal}
+                onDialogClose={onClose}
                 chat_room_uuid={item.chat_room_uuid}
             />
             <ModalUpdateChat

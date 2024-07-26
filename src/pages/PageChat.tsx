@@ -63,7 +63,7 @@ const PageChat = () => {
                 <div className="w-full h-full flex">
                     <div className="w-80 h-full border-r border-gray-600">
                         <ChatListHeader onAddChatClick={openModal} />
-                        <ChatListContent onChatItemClick={openDialog} />
+                        <ChatListContent onChatItemClick={openDialog} onClose={closeDialog} />
                     </div>
                     <div className="text-white w-full h-full">
                         {isDialogOpen && selectedChatRoomUuid && (

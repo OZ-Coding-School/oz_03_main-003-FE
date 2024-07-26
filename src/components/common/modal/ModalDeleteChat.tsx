@@ -11,9 +11,15 @@ interface ModalDeleteChatProps {
     isOpen: boolean;
     onClose: () => void;
     chat_room_uuid: string;
+    onDialogClose: () => void;
 }
 
-const ModalDeleteChat = ({ isOpen, onClose, chat_room_uuid }: ModalDeleteChatProps) => {
+const ModalDeleteChat = ({
+    isOpen,
+    onClose,
+    chat_room_uuid,
+    onDialogClose,
+}: ModalDeleteChatProps) => {
     const { removeChatRoom } = useChatRooms();
     const { checkLoginStatus } = useVerify();
 
@@ -29,7 +35,8 @@ const ModalDeleteChat = ({ isOpen, onClose, chat_room_uuid }: ModalDeleteChatPro
         await checkLoginStatus();
         await removeChatRoom(chat_room_uuid);
         onClose();
-    }, [removeChatRoom, chat_room_uuid, onClose, checkLoginStatus]);
+        onDialogClose();
+    }, [removeChatRoom, chat_room_uuid, onClose, checkLoginStatus, onDialogClose]);
 
     return (
         <AnimatePresence>

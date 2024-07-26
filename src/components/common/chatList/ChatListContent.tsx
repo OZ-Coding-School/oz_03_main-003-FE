@@ -3,9 +3,10 @@ import { useUserChatStore } from "../../../config/store";
 
 interface ChatListContentProps {
     onChatItemClick: (chat_room_uuid: string) => void;
+    onClose: () => void;
 }
 
-const ChatListContent = ({ onChatItemClick }: ChatListContentProps) => {
+const ChatListContent = ({ onClose, onChatItemClick }: ChatListContentProps) => {
     const { chatRooms } = useUserChatStore();
 
     return (
@@ -18,6 +19,7 @@ const ChatListContent = ({ onChatItemClick }: ChatListContentProps) => {
                         chat_room_name: item.chat_room_name,
                     }}
                     onClick={onChatItemClick}
+                    onClose={onClose}
                 />
             ))}
         </div>
