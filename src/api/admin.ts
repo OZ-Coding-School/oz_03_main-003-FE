@@ -1,6 +1,7 @@
 import { axiosInstance } from "./axios";
 import { AdminTreeFormData } from "../config/types";
 
+//? ADMIN GET API
 export const getUserList = () => {
     return axiosInstance.get("/user");
 };
@@ -21,6 +22,7 @@ export const getChatRoomList = () => {
     return axiosInstance.get("/chat/admin");
 };
 
+//? ADMIN UPDATE API
 export const adminToUser = (id: string) => {
     const requestData = {
         is_superuser: "False",
@@ -33,14 +35,12 @@ export const userToAdmin = (id: string) => {
     };
     return axiosInstance.put(`/user/${id}`, requestData);
 };
-
-export const updateTree = (id: string, form: AdminTreeFormData) => {
-    return axiosInstance.patch(`/tree/admin/${id}`, form);
-};
-
 export const updateForestLevel = (uuid: string, level: number) => {
     const requestForm = {
         forest_level: level,
     };
     return axiosInstance.put(`/forest/admin/${uuid}`, requestForm);
+};
+export const updateTree = (id: string, form: AdminTreeFormData) => {
+    return axiosInstance.patch(`/tree/admin/${id}`, form);
 };

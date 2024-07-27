@@ -1,3 +1,4 @@
+//? 나무의 종류를 컨트롤합니다.
 export const calculateTreeType = (emotion: string) => {
     switch (emotion) {
         case "happiness":

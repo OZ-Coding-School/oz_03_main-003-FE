@@ -1,5 +1,6 @@
 import { axiosInstance } from "./axios";
 
+//? AUTH API
 export const userGoogleAccessTokenReceiver = (token: string) => {
     const accessData = {
         access_token: token,
@@ -15,14 +16,23 @@ export const userDeleteAccount = () => {
     return axiosInstance.delete("/auth/delete");
 };
 
-export const getUserInfo = () => {
-    return axiosInstance.get("/user/profile");
+export const userTokenRefresh = () => {
+    return axiosInstance.post("/auth/token/refresh");
 };
 
+export const userTokenVerify = () => {
+    return axiosInstance.post(`/auth/token/verify`);
+};
+
+//? USER API
 export const deleteAccount = (email: string) => {
     return axiosInstance.delete("/auth/delete", {
         data: { email: email },
     });
+};
+
+export const getUserInfo = () => {
+    return axiosInstance.get("/user/profile");
 };
 
 export const updateUserInfoName = (name: string) => {
@@ -43,12 +53,4 @@ export const updateUserInfoProfileImage = (image: File) => {
             "Content-Type": "multipart/form-data",
         },
     });
-};
-
-export const userTokenRefresh = () => {
-    return axiosInstance.post("/auth/token/refresh");
-};
-
-export const userTokenVerify = () => {
-    return axiosInstance.post(`/auth/token/verify`);
 };

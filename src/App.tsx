@@ -13,7 +13,7 @@ function App() {
         <Routes>
             <Route path="/" element={<PageAuth />} />
             <Route path="/home" element={<PrivateRoute element={PageHome} />} />
-            <Route path="/mypage" element={<PrivateRoute element={PageMy} />} />
+            <Route path="/account" element={<PrivateRoute element={PageMy} />} />
             <Route path="/chat" element={<PrivateRoute element={PageChat} />} />
             <Route path="/admin" element={<AdminRoute element={PageAdmin} />} />
             <Route path="*" element={<PageNotFound />} />

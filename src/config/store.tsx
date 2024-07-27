@@ -14,6 +14,7 @@ import {
     FormData,
 } from "./types";
 
+//? TOASTER GLOBAL STATE
 interface ModalStore {
     modal: boolean;
     setModal: (bool: boolean) => void;
@@ -24,6 +25,7 @@ export const useModalStore = create<ModalStore>((set) => ({
     setModal: (bool: boolean) => set(() => ({ modal: bool })),
 }));
 
+//? USER DATA GLOBAL STATE
 interface UserStore {
     userData: UserData;
     setUserData: (data: UserAccount) => void;
@@ -85,6 +87,7 @@ export const useUserStore = create<UserStore>((set) => ({
         })),
 }));
 
+//? USER CHAT DATA GLOBAL STATE
 interface UserChatStore {
     chatRooms: ChatRoom[];
     userMessages: ChatRoomMessages;
@@ -119,6 +122,7 @@ export const useUserChatStore = create<UserChatStore>((set) => ({
         })),
 }));
 
+//? ADMIN DATA GLOBAL STATE
 interface AdminStore {
     data: FormData;
     setData: (data: FormData) => void;

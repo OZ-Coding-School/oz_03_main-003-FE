@@ -82,7 +82,7 @@ const ModalTreeDelete = ({ onClose, treeUUID }: ModalTreeDeleteProps) => {
                     </h3>
                     <p>'{treeData!.tree_name}'를 삭제하시겠습니까?</p>
                     <p className="text-literal-error text-xs">
-                        나무와 연결된 채팅방과 나무가 함께 삭제되며,
+                        나무와 연결된 채팅방과 함께 삭제되며,
                     </p>
                     <p className="text-literal-error text-xs">복구되지 않습니다.</p>
                     <div className="mt-4 font-title text-gray-200 text-sm">

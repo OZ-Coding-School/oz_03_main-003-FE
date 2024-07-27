@@ -31,7 +31,7 @@ const HeaderUserMenu = ({ isAdmin }: HeaderUserMenuProps) => {
                 </li>
                 <li className="w-full h-12">
                     <Link
-                        to="/mypage"
+                        to="/account"
                         className="w-full h-full px-6 flex items-center hover:bg-gray-600"
                     >
                         <div className="w-5 h-5 flex items-center justify-center mr-2">
