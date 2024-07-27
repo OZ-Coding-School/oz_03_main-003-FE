@@ -78,17 +78,16 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
                     </nav>
                 )}
             </div>
-            <ModalDeleteChat
-                isOpen={isDeleteModalOpen}
-                onClose={closeDeleteModal}
-                onDialogClose={onClose}
-                chat_room_uuid={item.chat_room_uuid}
-            />
-            <ModalUpdateChat
-                isOpen={isUpdateModalOpen}
-                onClose={closeUpdateModal}
-                chat_room_uuid={item.chat_room_uuid}
-            />
+            {isDeleteModalOpen && (
+                <ModalDeleteChat
+                    onClose={closeDeleteModal}
+                    onDialogClose={onClose}
+                    chat_room_uuid={item.chat_room_uuid}
+                />
+            )}
+            {isUpdateModalOpen && (
+                <ModalUpdateChat onClose={closeUpdateModal} chat_room_uuid={item.chat_room_uuid} />
+            )}
         </>
     );
 };

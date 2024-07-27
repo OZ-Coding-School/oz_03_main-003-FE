@@ -8,7 +8,6 @@ import useChatRooms from "../../../hook/useChatRooms";
 import useVerify from "../../../hook/useVerify";
 
 interface ModalDeleteChatProps {
-    isOpen: boolean;
     onClose: () => void;
     chat_room_uuid: string;
     onDialogClose: () => void;
