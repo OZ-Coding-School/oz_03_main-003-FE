@@ -69,7 +69,7 @@ const ModalEditProfile = ({ onClose, url }: ModalEditProfileProps) => {
                     )}
                 >
                     <h3 className="font-title leading-5 mb-10 text-gray-200">사용자 프로필 변경</h3>
-                    <p>사용자 프로필을 변경하시겠습니까?</p>
+                    <p>사용자 프로필 이미지를 변경하시겠습니까?</p>
                     <div className="text-right mt-10">
                         <ButtonPrimary onClick={imageSetHandler}>변경하기</ButtonPrimary>
                         <ButtonDefault onClick={closeHandler} className="ml-2">
