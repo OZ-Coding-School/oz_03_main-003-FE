@@ -36,7 +36,11 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest
     if (!isVerified) {
         return <PageLoading />;
     } else {
-        return <Component {...rest} />;
+        return (
+            <div className="Page_wrapper">
+                <Component {...rest} />
+            </div>
+        );
     }
 };
 

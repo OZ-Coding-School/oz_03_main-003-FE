@@ -8,7 +8,7 @@ interface ButtonProps extends PropsWithChildren {
     onClick?: () => void;
 }
 
-const ButtonDefault = ({ className, type = "button", onClick, children }: ButtonProps) => {
+const ButtonEmotree = ({ className, type = "button", onClick, children }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -23,8 +23,8 @@ const ButtonDefault = ({ className, type = "button", onClick, children }: Button
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 className={tw(
-                    "font-light font-title text-base select-none text-white text-center",
-                    "w-[230px] h-[40px] bg-gradient-to-l relative",
+                    "font-title text-base select-none text-white text-center items-center",
+                    "w-[220px] h-[48px] bg-gradient-to-l relative",
                     "bg-gradient-to-r from-[#B88BFF] via-[#FFB4A2] to-[#8BFFB2]",
                     "bg-[length:200%_100%] border border-white",
                     className
@@ -32,24 +32,24 @@ const ButtonDefault = ({ className, type = "button", onClick, children }: Button
             >
                 <div
                     style={{
-                        textShadow: "4px 0 4px rgba(0, 0, 0, 0.25)",
+                        textShadow: "0 2px 5px rgba(0, 0, 0, 0.5)",
                     }}
                     className="absolute w-full h-full top-0 left-0 flex justify-center items-center z-10"
                 >
                     {children}
                 </div>
                 <img
-                    className="absolute w-[37px] h-[43px] z-20 -top-3 -left-2 animate-bounce"
+                    className="absolute w-[37px] h-[43px] z-20 -top-2 -left-1 animate-bounce"
                     src="/icon-stars.png"
                     loading="lazy"
                     style={{
-                        filter: "drop-shadow(4px 0 4px rgba(0, 0, 0, 0.25))",
+                        filter: "drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5))",
                     }}
                 ></img>
                 <div
                     className={tw(
                         "w-full transition h-full absolute bg-black z-0 top-0 left-0",
-                        hovered ? "opacity-0" : "opacity-40"
+                        hovered ? "opacity-15" : "opacity-60"
                     )}
                 ></div>
             </motion.button>
@@ -57,4 +57,4 @@ const ButtonDefault = ({ className, type = "button", onClick, children }: Button
     );
 };
 
-export default ButtonDefault;
+export default ButtonEmotree;

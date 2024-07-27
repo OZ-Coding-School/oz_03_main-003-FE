@@ -10,6 +10,12 @@ import { findTreeLocation, moveTreeLocation, swapTreeLocation } from "../../util
 import useInfo from "../../hook/useInfo";
 import useVerify from "../../hook/useVerify";
 import ToastDefault from "../common/toast/ToastDefault";
+import useSound from "use-sound";
+import soundModal from "../../assets/sound/modal_ping.mp3";
+import soundBtn from "../../assets/sound/btn_click.mp3";
+import soundCollapse from "../../assets/sound/btn_collapse.mp3";
+import soundPing from "../../assets/sound/btn_ping.mp3";
+import ModalTreeDelete from "../common/modal/ModalTreeDelete";
 
 const HomeGrid = () => {
     //? USER_DATA / USER_DATA SYNC / USER_VERIFY / TOASTER_MODAL
@@ -21,12 +27,17 @@ const HomeGrid = () => {
     const [createModalOpen, setCreateModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [detailModalOpen, setDetailModalOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [treeLocation, setTreeLocation] = useState(0);
     const [moveModalOpen, setMoveModalOpen] = useState(false);
     const [treeUUID, setTreeUUID] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     //? REF
     const moveRef = useRef<HTMLDivElement>(null);
+    const [playModal] = useSound(soundModal, { volume: 0.75 });
+    const [playButton] = useSound(soundBtn, { volume: 0.75 });
+    const [playWarn] = useSound(soundPing, { volume: 0.75 });
+    const [playCollapse] = useSound(soundCollapse, { volume: 0.75 });
 
     //? CLOSE HANDLER
     const createModalCloseHandler = () => {
@@ -38,24 +49,36 @@ const HomeGrid = () => {
     const detailModalCloseHandler = () => {
         setDetailModalOpen(false);
     };
+    const deleteModalCloseHandler = () => {
+        setDeleteModalOpen(false);
+    };
 
     //? OPEN HANDLER
     const createModalOpenHandler = (id: number) => {
         setTreeLocation(id);
         setCreateModalOpen(true);
+        playButton();
     };
     const editModalOpenHandler = (id: string) => {
         setTreeUUID(id);
         setEditModalOpen(true);
+        playButton();
+    };
+    const deleteModalOpenHandler = (id: string) => {
+        setTreeUUID(id);
+        setDeleteModalOpen(true);
+        playWarn();
     };
     const detailModalOpenHandler = (id: string) => {
         setTreeUUID(id);
         setDetailModalOpen(true);
+        playCollapse();
     };
     const moveTreeOpenHandler = (id: string) => {
         setTreeUUID(id);
         moveRef.current?.focus();
         setMoveModalOpen(true);
+        playModal();
     };
 
     //? CONTROLLER HANDLER
@@ -157,6 +180,7 @@ const HomeGrid = () => {
                                                 onMoveModal={moveTreeOpenHandler}
                                                 onDetailModal={detailModalOpenHandler}
                                                 onEditModal={editModalOpenHandler}
+                                                onDeleteModal={deleteModalOpenHandler}
                                                 key={item.tree_uuid}
                                                 user_level={userData.level.userLevel}
                                                 {...item}
@@ -177,6 +201,9 @@ const HomeGrid = () => {
             )}
             {detailModalOpen && (
                 <ModalTreeDetail treeUUID={treeUUID} onClose={detailModalCloseHandler} />
+            )}
+            {deleteModalOpen && (
+                <ModalTreeDelete treeUUID={treeUUID} onClose={deleteModalCloseHandler} />
             )}
             {modal && <ToastDefault message={"위치가 변경되었습니다."} />}
         </>

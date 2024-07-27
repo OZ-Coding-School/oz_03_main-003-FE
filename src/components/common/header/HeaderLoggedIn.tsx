@@ -3,15 +3,19 @@ import HeaderUserMenu from "./HeaderUserMenu";
 import Gnb from "../../Gnb";
 import { useUserStore } from "../../../config/store";
 import { useNavigate } from "react-router-dom";
+import useSound from "use-sound";
+import soundCollapse from "../../../assets/sound/btn_collapse.mp3";
 
 const HeaderLoggedIn = () => {
     const { userData } = useUserStore();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const nav = useNavigate();
+    const [playCollapse] = useSound(soundCollapse, { volume: 0.5 });
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+        playCollapse();
     };
 
     useEffect(() => {
@@ -47,7 +51,7 @@ const HeaderLoggedIn = () => {
                         className="w-full h-full object-cover rounded-full cursor-pointer"
                     />
                     <div className="absolute right-0 top-12">
-                        {isMenuOpen && <HeaderUserMenu />}
+                        {isMenuOpen && <HeaderUserMenu isAdmin={userData.user.admin} />}
                     </div>
                 </div>
             </div>

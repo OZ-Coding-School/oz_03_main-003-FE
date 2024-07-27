@@ -6,17 +6,20 @@ import HomeBackground from "./HomeBackground";
 import HomeGrid from "./HomeGrid";
 import HomeDescription from "./HomeDescription";
 import useInfo from "../../hook/useInfo";
+import useChatRooms from "../../hook/useChatRooms";
 const HomeMain = () => {
     const { getUserInfo, getUserGridInfo, getUserLevelInfo } = useInfo();
+    const { fetchChatRooms } = useChatRooms();
 
     useEffect(() => {
         const refreshUserInfo = async () => {
             await getUserInfo();
             await getUserGridInfo();
             await getUserLevelInfo();
+            await fetchChatRooms();
         };
         refreshUserInfo();
-    }, [getUserInfo, getUserGridInfo, getUserLevelInfo]);
+    }, [getUserInfo, getUserGridInfo, getUserLevelInfo, fetchChatRooms]);
 
     return (
         <div className="">

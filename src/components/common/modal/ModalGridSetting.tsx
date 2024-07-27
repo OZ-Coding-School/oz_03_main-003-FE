@@ -1,14 +1,12 @@
-import { treeApi } from "../../../api";
 import { IconChange, IconDeleteBtn, IconDetail, IconUpdate } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
-import useVerify from "../../../hook/useVerify";
-import useInfo from "../../../hook/useInfo";
 
 interface ModalGridSettingProps {
     tree_uuid: string;
     onEditModal: (id: string) => void;
     onDetailModal: (id: string) => void;
     onMoveModal: (id: string) => void;
+    onDeleteModal: (id: string) => void;
 }
 
 const ModalGridSetting = ({
@@ -16,18 +14,10 @@ const ModalGridSetting = ({
     onEditModal,
     onDetailModal,
     onMoveModal,
+    onDeleteModal,
 }: ModalGridSettingProps) => {
-    const { checkLoginStatus } = useVerify();
-    const { getUserGridInfo } = useInfo();
-
     const editHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         onEditModal(e.currentTarget.id);
-    };
-
-    const deleteHandler = async () => {
-        await checkLoginStatus();
-        await treeApi.deleteTree(tree_uuid);
-        await getUserGridInfo();
     };
 
     const detailHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,7 +27,9 @@ const ModalGridSetting = ({
     const moveHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         onMoveModal(e.currentTarget.id);
     };
-
+    const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onDeleteModal(e.currentTarget.id);
+    };
     return (
         <>
             <div className="relative w-40 h-40 border-gray-600">

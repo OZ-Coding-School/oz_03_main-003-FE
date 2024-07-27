@@ -15,12 +15,11 @@ import { treeApi } from "../../../api";
 import useVerify from "../../../hook/useVerify";
 import useInfo from "../../../hook/useInfo";
 
-//? 추후 페이지 제작시 사용
-
 interface ModalTreeDetailProps {
     treeUUID: string;
     onClose: () => void;
 }
+
 const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
     const [isVisible, setIsVisible] = useState(false);
     const { userData } = useUserStore();
@@ -35,6 +34,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
         item.tree_uuid.includes(treeUUID)
     ) as UserTreeEmotionDetail;
     const treeExperience = calculateTreeLevel(emotionData, treeData.tree_level);
+    console.log(treeExperience);
 
     const closeHandler = () => {
         onClose();
@@ -61,21 +61,6 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
         }
     };
 
-    const devGrowHandler = async () => {
-        const type = window.prompt(
-            "성장할 레벨 타입을 입력해주세요. \n5를 초과하는 숫자를 입력할 경우 계정 초기화를 해야 합니다."
-        );
-        if (type) {
-            const requestForm = {
-                tree_level: Number(type),
-            };
-
-            await checkLoginStatus();
-            await treeApi.updateTree(treeUUID, requestForm);
-            await getUserGridInfo();
-        }
-    };
-
     return (
         <>
             <nav
@@ -94,21 +79,21 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                     e.key === "Escape" && closeHandler();
                     e.key === "Enter" && closeHandler();
                 }}
-                className="select-none absolute z-10 left-[370px] top-[140px] p-5 w-[340px] h-fit bg-gray-800 border border-gray-600"
+                className="select-none absolute z-10 left-[370px] top-[140px] p-5 w-[420px] h-fit bg-gray-800 border border-gray-600"
             >
                 <div className="w-full flex justify-between">
-                    <h1 className="text-gray-200 font-title text-base mb-5">나무 정보</h1>
+                    <h1 className="text-gray-200 font-title text-base mb-10">나무 정보</h1>
                     <IconClose
                         onClick={closeHandler}
                         className="w-5 h-5 cursor-pointer fill-gray-600 transition hover:fill-white"
                     />
                 </div>
-                <article className="mb-[10px]">
+                <article className="mb-6">
                     <div className="text-gray-200 font-title text-sm">이름</div>
 
                     <div className="text-white text-base">{treeData.tree_name}</div>
                 </article>
-                <article className="mb-[10px]">
+                <article className="mb-6">
                     <div className="flex gap-2 relative">
                         <div className={TREE_TYPE[treeData.tree_level].style}>
                             {TREE_TYPE[treeData.tree_level].name}
@@ -128,7 +113,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                                     transition={{ duration: 1, type: "spring" }}
                                     animate={{ translateX: [20, 0], opacity: [0, 1] }}
                                     exit={{ translateX: 20, opacity: 0 }}
-                                    className="absolute z-20 left-[150px] top-[2px]"
+                                    className="absolute z-20 left-[80px] top-[2px]"
                                 >
                                     <ModalTooltip type="DETAIL" />
                                 </motion.div>
@@ -139,7 +124,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                         {TREE_TYPE[treeData.tree_level].desc}
                     </div>
                 </article>
-                <article className="mb-[20px]">
+                <article className="mb-6">
                     <div className="w-full flex justify-between items-center">
                         <div className="text-gray-200 font-title text-sm">성장률</div>
                         <div className="text-gray-200 font-title">{treeExperience.percentage}%</div>
@@ -149,27 +134,26 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                             className="bg-primary h-full animate-width"
                             style={
                                 {
-                                    "--target-width": `${treeExperience.percentage}`,
+                                    "--target-width": `${treeExperience.percentage}%`,
                                 } as React.CSSProperties
                             }
                         ></div>
                     </div>
                 </article>
                 <article>
-                    <div className="text-gray-200 font-title text-sm">감정 기록</div>
+                    <div className="text-gray-200 font-title text-sm mb-2">감정 기록</div>
                     <ModalTreeDetailGraph emotions={emotionData.emotions} />
                 </article>
-                <div className="flex justify-end gap-2">
+                <div className="flex justify-end gap-2 flex-col">
                     {treeExperience.percentage === 100 && treeData.tree_level === 0 ? (
-                        <ButtonPrimary onClick={growHandler} className="mt-8 text-sm font-title">
+                        <ButtonPrimary onClick={growHandler} className="mt-10 text-sm font-title">
                             비료 주기
                         </ButtonPrimary>
                     ) : (
-                        <ButtonDisable className="mt-8 text-sm font-title">비료 주기</ButtonDisable>
+                        <ButtonDisable className="mt-10 text-sm font-title">
+                            비료 주기
+                        </ButtonDisable>
                     )}
-                    <ButtonPrimary onClick={devGrowHandler} className="mt-8 text-sm font-title">
-                        (개발)강제 성장
-                    </ButtonPrimary>
                 </div>
             </motion.div>
         </>

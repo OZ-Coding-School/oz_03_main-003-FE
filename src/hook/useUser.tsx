@@ -5,7 +5,6 @@ import { useUserStore } from "../config/store";
 
 const useUser = () => {
     const { setUserData } = useUserStore();
-
     const getUserInfo = useCallback(async () => {
         const { data: accountResponse } = await authApi.getUserInfo();
 
@@ -15,6 +14,7 @@ const useUser = () => {
             username: accountResponse.username,
             email: accountResponse.email,
             created_at: dayjs(accountResponse.created_at).format("YYYY-MM-DD"),
+            admin: accountResponse.is_superuser,
         });
     }, [setUserData]);
 
