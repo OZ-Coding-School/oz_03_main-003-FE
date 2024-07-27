@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import useInfo from "../../../hook/useInfo";
 import { authApi } from "../../../api";
 import useVerify from "../../../hook/useVerify";
+import useSound from "use-sound";
+import confirmSound from "../../../assets/sound/btn_confirm.mp3";
 
 interface ModalChangeNameProps {
     onClose: () => void;
@@ -17,6 +19,7 @@ const ModalChangeName = ({ onClose }: ModalChangeNameProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [isUpdatedNewName, setIsUpdatedNewName] = useState("");
     const [userNameAlert, setUserNameAlert] = useState(false);
+    const [playConfirm] = useSound(confirmSound, { volume: 0.75 });
 
     useEffect(() => {
         if (inputRef.current) {
@@ -36,7 +39,9 @@ const ModalChangeName = ({ onClose }: ModalChangeNameProps) => {
         await checkLoginStatus();
         await authApi.updateUserInfoName(isUpdatedNewName);
         await getUserInfo();
+
         handleModalClose();
+        playConfirm();
     };
 
     const handleModalClose = () => {
