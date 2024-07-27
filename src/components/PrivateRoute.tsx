@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import PageLoading from "../pages/PageLoading";
 import useVerify from "../hook/useVerify";
+import { useModalStore } from "../config/store";
 
 interface DefaultProps {
     [key: string]: unknown;
@@ -16,6 +17,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest
     const { checkLoginStatus } = useVerify();
     const { pathname } = useLocation();
     const [isVerified, setIsVerified] = useState<boolean | null>(false);
+    const { setModal } = useModalStore();
 
     const verifyUser = useCallback(async () => {
         try {
@@ -28,12 +30,17 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Component, ...rest
 
     useEffect(() => {
         verifyUser();
-    }, [verifyUser, checkLoginStatus, pathname]);
+        setModal(false);
+    }, [verifyUser, checkLoginStatus, pathname, setModal]);
 
     if (!isVerified) {
         return <PageLoading />;
     } else {
-        return <Component {...rest} />;
+        return (
+            <div className="Page_wrapper">
+                <Component {...rest} />
+            </div>
+        );
     }
 };
 

@@ -1,11 +1,19 @@
 import { axiosInstance } from "./axios";
 
 export const createForest = () => {
-    return axiosInstance.post("/forest/create");
+    return axiosInstance.post("/forest/new");
 };
 export const getForestData = () => {
-    return axiosInstance.get("/forest/get");
+    return axiosInstance.get("/forest");
 };
-export const deleteForest = () => {
-    return axiosInstance.delete("/forest/delete");
+
+export const updateForestLevel = (uuid: string, level: number) => {
+    const requestForm = {
+        forest_level: level,
+    };
+    return axiosInstance.put(`/forest/${uuid}`, requestForm);
+};
+
+export const deleteForest = (uuid: string) => {
+    return axiosInstance.delete(`/forest/${uuid}`);
 };

@@ -9,17 +9,17 @@ const HomeBackground = () => {
             <img
                 src="/img/grid-background.webp"
                 alt="gird-background"
-                className="absolute animate-blur w-full h-screen bg-cover"
+                className="select-none absolute w-full h-screen bg-cover"
             ></img>
             <img
                 alt="grid-cover"
                 src="/img/grid-cover.webp"
-                className="absolute animate-blur w-full h-screen bg-cover"
+                className="select-none absolute w-full h-screen bg-cover"
             ></img>
             <img
                 alt="grid-userLevel"
                 className={tw(
-                    "absolute animate-blur z-0 bg-cover flex justify-center items-center mr-10",
+                    "absolute select-none z-0 bg-cover flex justify-center items-center mr-10",
                     userData.level.userLevel > 1
                         ? "w-[900px] h-[710px] mt-[400px]"
                         : "w-[600px] h-[535px] mt-[200px]"

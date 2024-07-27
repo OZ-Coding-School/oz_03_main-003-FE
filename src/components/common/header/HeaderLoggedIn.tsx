@@ -2,14 +2,20 @@ import _React, { useState, useEffect, useRef } from "react";
 import HeaderUserMenu from "./HeaderUserMenu";
 import Gnb from "../../Gnb";
 import { useUserStore } from "../../../config/store";
+import { useNavigate } from "react-router-dom";
+import useSound from "use-sound";
+import soundCollapse from "../../../assets/sound/btn_collapse.mp3";
 
 const HeaderLoggedIn = () => {
     const { userData } = useUserStore();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const nav = useNavigate();
+    const [playCollapse] = useSound(soundCollapse, { volume: 0.5 });
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+        playCollapse();
     };
 
     useEffect(() => {
@@ -28,7 +34,12 @@ const HeaderLoggedIn = () => {
     return (
         <header className="fixed w-full z-30">
             <div className="h-20 p-5 w-full bg-black flex text-white justify-between">
-                <img src="/logo-white.png" alt="Logo" className="h-10" />
+                <img
+                    onClick={() => nav("/home")}
+                    src="/logo-white.png"
+                    alt="Logo"
+                    className="h-10 cursor-pointer"
+                />
                 <div
                     className="relative w-10 h-10 border border-white rounded-full z-10"
                     ref={menuRef}
@@ -40,7 +51,7 @@ const HeaderLoggedIn = () => {
                         className="w-full h-full object-cover rounded-full cursor-pointer"
                     />
                     <div className="absolute right-0 top-12">
-                        {isMenuOpen && <HeaderUserMenu />}
+                        {isMenuOpen && <HeaderUserMenu isAdmin={userData.user.admin} />}
                     </div>
                 </div>
             </div>

@@ -1,18 +1,17 @@
 import { useEffect } from "react";
 import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import UserInfoMyPage from "../components/common/userInfo/UserInfoMypage";
-import useUserInfo from "../hook/useUserInfo";
-
+import useUserInfo from "../hook/useInfo";
 const PageMy = () => {
-    const { getUserInfo, getUserLevelInfo } = useUserInfo();
+    const { getUserInfo, getUserGridInfo } = useUserInfo();
 
     useEffect(() => {
         const refreshUserInfo = async () => {
             await getUserInfo();
-            await getUserLevelInfo();
+            await getUserGridInfo();
         };
         refreshUserInfo();
-    }, [getUserInfo, getUserLevelInfo]);
+    }, [getUserInfo, getUserGridInfo]);
 
     return (
         <>

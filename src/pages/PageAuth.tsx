@@ -3,25 +3,45 @@ import ButtonSignInGoogle from "../components/common/button/ButtonSignInGoogle";
 import { authApi, forestApi } from "../api";
 import Landing from "../components/Landing";
 import { useNavigate } from "react-router-dom";
-import useUserInfo from "../hook/useUserInfo";
+import useUserInfo from "../hook/useInfo";
+import { useEffect } from "react";
 
 const PageAuth = () => {
     const nav = useNavigate();
-    const { getUserInfo, getUserLevelInfo } = useUserInfo();
+    const { getUserInfo, getUserGridInfo } = useUserInfo();
+
+    useEffect(() => {
+        const loginUserVerify = async () => {
+            try {
+                await authApi.userTokenVerify();
+                nav("/home");
+            } catch (tokenError) {
+                console.log("AccessToken Verification Failed. Retrying...");
+                try {
+                    await authApi.userTokenRefresh();
+                    await authApi.userTokenVerify();
+                    nav("/home");
+                } catch (retryError) {
+                    console.error(retryError);
+                }
+            }
+        };
+        loginUserVerify();
+    }, [nav]);
 
     const googleLoginRequest = async (token: string) => {
         try {
             const result = await authApi.userGoogleAccessTokenReceiver(token);
-            console.log(result);
+
             if (result.status === 200) {
                 await getUserInfo();
-                await getUserLevelInfo();
+                await getUserGridInfo();
                 nav("/home");
             }
             if (result.status === 201) {
                 await forestApi.createForest();
                 await getUserInfo();
-                await getUserLevelInfo();
+                await getUserGridInfo();
                 nav("/home");
             }
         } catch (error) {
@@ -46,5 +66,4 @@ const PageAuth = () => {
         </div>
     );
 };
-
 export default PageAuth;

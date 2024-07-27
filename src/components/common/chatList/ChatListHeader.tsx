@@ -5,8 +5,7 @@ interface ChatListHeaderProps {
     onAddChatClick: () => void;
 }
 
-// const ChatListHeader = () => {
-const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onAddChatClick }) => {
+const ChatListHeader = ({ onAddChatClick }: ChatListHeaderProps) => {
     return (
         <div className="px-5 w-full h-[64px] flex justify-between items-center">
             <div className="text-white select-none text-sm font-medium">목록</div>

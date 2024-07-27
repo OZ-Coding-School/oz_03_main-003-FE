@@ -4,8 +4,8 @@ const UserInfoText = () => {
             <article>
                 <h2 className="font-title mb-[3px]">Tree</h2>
                 <div className="text-sm">
-                    <div>현재 심어져 있는 나무와 심을</div>
-                    <div>수 있는 나무의 갯 수가 표기됩니다.</div>
+                    <div>현재 심어져 있는 나무와 </div>
+                    <div>심을 수 있는 나무가 표기됩니다.</div>
                 </div>
             </article>
             <article>
@@ -17,8 +17,8 @@ const UserInfoText = () => {
             </article>
             <article>
                 <div className="text-sm text-primary">
-                    <div>레벨이 오르면 심을 수 있는 Tree의</div>
-                    <div>갯 수와 Grid Size가 늘어납니다.</div>
+                    <div>레벨이 오르면 심을 수 있는 나무</div>
+                    <div>개수와 정원 크기가 늘어납니다.</div>
                 </div>
             </article>
         </div>

@@ -1,10 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
-import { IconLogout, IconUser } from "../../../config/IconData";
+import { IconLogout, IconTooltip, IconUser } from "../../../config/IconData";
 import { authApi } from "../../../api";
 import { useUserStore } from "../../../config/store";
 import { motion } from "framer-motion";
 
-const HeaderUserMenu = () => {
+interface HeaderUserMenuProps {
+    isAdmin: boolean;
+}
+
+const HeaderUserMenu = ({ isAdmin }: HeaderUserMenuProps) => {
     const nav = useNavigate();
     const { userData } = useUserStore();
     const logoutHandler = async () => {
@@ -47,6 +51,19 @@ const HeaderUserMenu = () => {
                         로그아웃
                     </button>
                 </li>
+                {isAdmin && (
+                    <li className="w-full h-12">
+                        <Link
+                            to="/admin"
+                            className="w-full h-full px-6 flex items-center hover:bg-gray-600"
+                        >
+                            <div className="w-5 h-5 flex items-center justify-center mr-2">
+                                <IconTooltip className="fill-white" />
+                            </div>
+                            어드민 페이지
+                        </Link>
+                    </li>
+                )}
             </ul>
         </motion.div>
     );

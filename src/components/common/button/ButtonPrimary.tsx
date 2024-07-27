@@ -13,8 +13,8 @@ const ButtonPrimary = ({ className, type = "button", onClick, children }: Button
             type={type}
             onClick={onClick}
             className={tw(
-                "font-light select-none font-title text-sm text-black text-center",
-                "bg-primary w-[99px] h-[40px]",
+                "select-none text-sm text-black text-center",
+                "bg-primary px-6 h-[48px]",
                 "hover:bg-primary-light hover:font-medium transition",
                 className
             )}

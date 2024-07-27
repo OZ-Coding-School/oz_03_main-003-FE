@@ -4,6 +4,11 @@ import { useUserStore } from "../../../config/store";
 import UserInfoBadge from "./UserInfoBadge";
 import { useState } from "react";
 import ModalChangeName from "../modal/ModalChangeName";
+import ButtonError from "../button/ButtonError";
+import ModalQuitSite from "../modal/ModalQuitSite";
+import useSound from "use-sound";
+import pingSound from "../../../assets/sound/btn_ping.mp3";
+import collapseSound from "../../../assets/sound/btn_collapse.mp3";
 
 export interface userInfoData {
     created_at: string;
@@ -15,6 +20,10 @@ export interface userInfoData {
 const UserInfoMyPage = () => {
     const { userData } = useUserStore();
     const [isOpen, setIsOpen] = useState(false);
+    const [isQuitOpen, setIsQuitOpen] = useState(false);
+
+    const [playWarn] = useSound(pingSound, { volume: 0.75 });
+    const [playCollapse] = useSound(collapseSound, { volume: 0.75 });
 
     const handleModalClose = () => {
         setIsOpen(false);
@@ -22,6 +31,16 @@ const UserInfoMyPage = () => {
 
     const handleModalOpen = () => {
         setIsOpen(true);
+        playCollapse();
+    };
+
+    const handleQuitModalClose = () => {
+        setIsQuitOpen(false);
+    };
+
+    const handleQuitModalOpen = () => {
+        setIsQuitOpen(true);
+        playWarn();
     };
 
     return (
@@ -68,28 +87,32 @@ const UserInfoMyPage = () => {
                     </div>
                     <div className="flex">
                         <ul className="w-20 text-gray-200">
-                            <li className="mb-3">nickName</li>
-                            <li className="mb-3">email</li>
-                            <li className="mb-3">join date</li>
-                            <li className="mb-3">tree</li>
-                            <li className="mb-3">grid size</li>
+                            <li className="mb-3">Name</li>
+                            <li className="mb-3">Email</li>
+                            <li className="mb-3">Join date</li>
+                            <li className="mb-3">Tree</li>
+                            <li className="mb-3">Grid size</li>
                         </ul>
                         <ul>
                             <li className="mb-3">: {userData.user.username}</li>
                             <li className="mb-3">: {userData.user.email}</li>
                             <li className="mb-3">: {userData.user.created_at}</li>
                             <li className="mb-3">
-                                : {userData.level.treeCurrent} / {userData.level.treeMax}
+                                : {userData.tree.treeCurrent} / {userData.tree.treeMax}
                             </li>
                             <li className="mb-3">
-                                : {userData.level.gridSize} x {userData.level.gridSize}
+                                : {userData.tree.gridSize} x {userData.tree.gridSize}
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <UserInfoBadge />
+            <ButtonError onClick={handleQuitModalOpen} className="mt-5">
+                계정 탈퇴
+            </ButtonError>
             {isOpen && <ModalChangeName isOpen={isOpen} onClose={handleModalClose} />}
+            {isQuitOpen && <ModalQuitSite onClose={handleQuitModalClose} />}
         </div>
     );
 };
