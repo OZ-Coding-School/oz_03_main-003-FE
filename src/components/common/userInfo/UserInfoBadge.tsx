@@ -80,7 +80,7 @@ const UserInfoBadge = () => {
                 </div>
                 <div className="text-sm text-gray-200">기본 프로필</div>
             </article>
-            <article className="gap-[82.5px] flex w-full justify-center items-center mt-2">
+            <article className="gap-[88px] flex w-full justify-center items-center mt-2">
                 <IconAngry className="w-5 h-5 fill-literal-angry" />
                 <IconHappy className="w-5 h-5 fill-literal-happy" />
                 <IconSorrow className="w-5 h-5 fill-literal-sorrow" />
