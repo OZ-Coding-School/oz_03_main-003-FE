@@ -12,6 +12,7 @@ import {
     ChatRoomMessages,
     AIResponse,
     FormData,
+    DialogItem,
 } from "./types";
 
 //? TOASTER GLOBAL STATE
@@ -118,6 +119,27 @@ export const useUserChatStore = create<UserChatStore>((set) => ({
             aiResponses: {
                 ...state.aiResponses,
                 [chatRoomUuid]: [...(state.aiResponses[chatRoomUuid] || []), data],
+            },
+        })),
+}));
+
+interface DialogStore {
+    dialogs: { [chatRoomUuid: string]: DialogItem[] };
+    setDialogs: (chatRoomUuid: string, dialogs: DialogItem[]) => void;
+    addDialog: (chatRoomUuid: string, dialog: DialogItem) => void;
+}
+
+export const useDialogStore = create<DialogStore>((set) => ({
+    dialogs: {},
+    setDialogs: (chatRoomUuid, dialogs) =>
+        set((state) => ({
+            dialogs: { ...state.dialogs, [chatRoomUuid]: dialogs },
+        })),
+    addDialog: (chatRoomUuid, dialog) =>
+        set((state) => ({
+            dialogs: {
+                ...state.dialogs,
+                [chatRoomUuid]: [...(state.dialogs[chatRoomUuid] || []), dialog],
             },
         })),
 }));

@@ -13,3 +13,7 @@ export const postAIResponseMessage = (chatRoomUuid: string, messageUuid: string)
         message_uuid: messageUuid,
     });
 };
+
+export const getDialogList = (chatRoomUuid: string) => {
+    return axiosInstance.get(`dialog/message/${chatRoomUuid}`);
+};

@@ -175,3 +175,28 @@ export interface AIResponse {
     message: string;
     applied_state: boolean;
 }
+
+export interface Sentiment {
+    happiness: number;
+    anger: number;
+    sadness: number;
+    worry: number;
+    indifference: number;
+}
+
+export interface UserMessage {
+    message_uuid: string;
+    message: string;
+}
+
+export interface AIResponse {
+    message_uuid: string;
+    message: string;
+    sentiments: Sentiment;
+    applied_state: boolean;
+}
+
+export interface DialogItem {
+    user: UserMessage;
+    ai: AIResponse;
+}
