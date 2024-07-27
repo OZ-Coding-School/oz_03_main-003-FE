@@ -7,6 +7,8 @@ import { useEffect, useRef } from "react";
 import { authApi } from "../../../api";
 import useSound from "use-sound";
 import confirmSound from "../../../assets/sound/btn_confirm.mp3";
+import useInfo from "../../../hook/useInfo";
+import useVerify from "../../../hook/useVerify";
 interface ModalEditProfileProps {
     onClose: () => void;
     url: string;
@@ -14,6 +16,8 @@ interface ModalEditProfileProps {
 
 const ModalEditProfile = ({ onClose, url }: ModalEditProfileProps) => {
     const ref = useRef<HTMLDivElement>(null);
+    const { getUserInfo } = useInfo();
+    const { checkLoginStatus } = useVerify();
     const [playConfirm] = useSound(confirmSound, { volume: 0.75 });
 
     useEffect(() => {
@@ -39,7 +43,9 @@ const ModalEditProfile = ({ onClose, url }: ModalEditProfileProps) => {
             const file = new File([blob], "profile_image", { type: "image/png" });
 
             //? 파일 업로드
+            await checkLoginStatus();
             await authApi.updateUserInfoProfileImage(file);
+            await getUserInfo();
             closeHandler();
             playConfirm();
         } catch (error) {

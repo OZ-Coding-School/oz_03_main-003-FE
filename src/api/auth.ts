@@ -48,7 +48,7 @@ export const updateUserInfoProfileImage = (image: File) => {
     const formData = new FormData();
     formData.append("profile_image", imageWithExtension);
 
-    return axiosInstance.post("/user/profile", formData, {
+    return axiosInstance.patch("/user/profile", formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },

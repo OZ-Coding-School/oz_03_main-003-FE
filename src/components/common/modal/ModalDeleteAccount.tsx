@@ -12,7 +12,7 @@ interface ModalDeleteChatProps {
     onClose: () => void;
 }
 
-const ModalQuitSite = ({ onClose }: ModalDeleteChatProps) => {
+const ModalDeleteAccount = ({ onClose }: ModalDeleteChatProps) => {
     const ref = useRef<HTMLDivElement>(null);
     const { userData } = useUserStore();
     const { checkLoginStatus } = useVerify();
@@ -58,13 +58,15 @@ const ModalQuitSite = ({ onClose }: ModalDeleteChatProps) => {
                 <nav
                     onClick={stopPropagation}
                     className={tw(
-                        "p-5 bg-gray-800 text-white w-80 border border-gray-600",
+                        "p-5 bg-gray-800 text-white w-[420px] border border-gray-600",
                         "absolute z-20"
                     )}
                 >
                     <h3 className="font-title leading-5 mb-4 text-gray-200">계정 탈퇴</h3>
-                    <p>계정 정보를 삭제하시겠습니까?</p>
-                    <p className="text-literal-error text-xs">삭제 된 내용은 복구되지 않습니다</p>
+                    <div className="pt-4">계정 정보를 삭제하시겠습니까?</div>
+                    <div className="text-literal-error text-xs pb-4">
+                        삭제 된 내용은 복구되지 않습니다
+                    </div>
                     <div className="text-right mt-2.5">
                         <ButtonError onClick={authDeleteHandler}>삭제하기</ButtonError>
                         <ButtonDefault onClick={closeHandler} className="ml-1">
@@ -85,4 +87,4 @@ const ModalQuitSite = ({ onClose }: ModalDeleteChatProps) => {
     );
 };
 
-export default ModalQuitSite;
+export default ModalDeleteAccount;

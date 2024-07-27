@@ -6,14 +6,30 @@ import {
     IconIndifference,
     IconSorrow,
     IconWorry,
+    IconUpdate,
 } from "../../../config/IconData";
 import UserInfoBadgeContent from "./UserInfoBadgeContent";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import ModalTooltip from "../modal/ModalTooltip";
+import useSound from "use-sound";
+import collapseSound from "../../../assets/sound/btn_collapse.mp3";
+import ModalEditProfile from "../modal/ModalEditProfile";
 
 const UserInfoBadge = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [modalOn, setModalOn] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [playCollapse] = useSound(collapseSound, { volume: 0.75 });
+
+    const modalOnHandler = () => {
+        setModalOn(true);
+        playCollapse();
+    };
+
+    const modalOffHandler = () => {
+        setModalOn(false);
+    };
 
     return (
         <div className="bg-gray-800 mt-5 w-[560px] h-[450px] p-5">
@@ -41,20 +57,46 @@ const UserInfoBadge = () => {
                     </motion.div>
                 )}
             </div>
-            <div className="gap-[82.5px] flex w-full justify-center items-center mt-10">
+            <article className="flex w-full justify-center flex-col items-center">
+                <div
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    className="mt-4 w-12 h-12 relative rounded-full border-2 border-gray-200"
+                >
+                    <img src="/img/badge_placeholder.png"></img>
+                    <AnimatePresence>
+                        {isHovered && (
+                            <motion.div
+                                onClick={() => modalOnHandler()}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="cursor-pointer absolute bg-gray-800 top-0 w-full h-full rounded-full flex justify-center items-center"
+                            >
+                                <IconUpdate className="w-1/2 fill-primary" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+                <div className="text-sm text-gray-200">기본 프로필</div>
+            </article>
+            <article className="gap-[82.5px] flex w-full justify-center items-center mt-2">
                 <IconAngry className="w-5 h-5 fill-literal-angry" />
                 <IconHappy className="w-5 h-5 fill-literal-happy" />
                 <IconSorrow className="w-5 h-5 fill-literal-sorrow" />
                 <IconWorry className="w-5 h-5 fill-literal-worry" />
                 <IconIndifference className="w-5 h-5 fill-gray-600" />
-            </div>
-            <div className="px-[18px] flex mt-4 w-full justify-between items-center">
+            </article>
+            <article className="px-[18px] flex mt-4 w-full justify-between items-center">
                 <UserInfoBadgeContent type="anger" />
                 <UserInfoBadgeContent type="happiness" />
                 <UserInfoBadgeContent type="sadness" />
                 <UserInfoBadgeContent type="worry" />
                 <UserInfoBadgeContent type="indifference" />
-            </div>
+            </article>
+            {modalOn && (
+                <ModalEditProfile url={"/img/badge_placeholder.png"} onClose={modalOffHandler} />
+            )}
         </div>
     );
 };

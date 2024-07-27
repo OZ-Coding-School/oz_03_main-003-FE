@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
-import UserInfoMyPage from "../components/common/userInfo/UserInfoMypage";
+import UserInfoMyPage from "../components/common/userInfo/UserInfoMyPage";
 import useUserInfo from "../hook/useInfo";
 const PageMy = () => {
     const { getUserInfo, getUserGridInfo } = useUserInfo();
