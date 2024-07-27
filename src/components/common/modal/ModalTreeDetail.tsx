@@ -15,8 +15,6 @@ import { treeApi } from "../../../api";
 import useVerify from "../../../hook/useVerify";
 import useInfo from "../../../hook/useInfo";
 
-//? 추후 페이지 제작시 사용
-
 interface ModalTreeDetailProps {
     treeUUID: string;
     onClose: () => void;
@@ -57,21 +55,6 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
             const requestForm = {
                 tree_level: type,
             };
-            await checkLoginStatus();
-            await treeApi.updateTree(treeUUID, requestForm);
-            await getUserGridInfo();
-        }
-    };
-
-    const devGrowHandler = async () => {
-        const type = window.prompt(
-            "성장할 레벨 타입을 입력해주세요. \n5를 초과하는 숫자를 입력할 경우 계정 초기화를 해야 합니다."
-        );
-        if (type) {
-            const requestForm = {
-                tree_level: Number(type),
-            };
-
             await checkLoginStatus();
             await treeApi.updateTree(treeUUID, requestForm);
             await getUserGridInfo();
@@ -171,9 +154,6 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                             비료 주기
                         </ButtonDisable>
                     )}
-                    <ButtonPrimary onClick={devGrowHandler} className="mt-10 text-sm font-title">
-                        (개발)강제 성장
-                    </ButtonPrimary>
                 </div>
             </motion.div>
         </>

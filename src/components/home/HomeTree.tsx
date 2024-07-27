@@ -15,6 +15,7 @@ interface HomeTreeProps {
     onEditModal: (id: string) => void;
     onDetailModal: (id: string) => void;
     onMoveModal: (id: string) => void;
+    onDeleteModal: (id: string) => void;
 }
 
 const HomeTree = ({
@@ -26,6 +27,7 @@ const HomeTree = ({
     onEditModal,
     onDetailModal,
     onMoveModal,
+    onDeleteModal,
     moveState,
 }: HomeTreeProps) => {
     const nowLevel = user_level > 2 ? true : false;
@@ -62,6 +64,7 @@ const HomeTree = ({
                                     onDetailModal={onDetailModal}
                                     onEditModal={onEditModal}
                                     onMoveModal={onMoveModal}
+                                    onDeleteModal={onDeleteModal}
                                     tree_uuid={tree_uuid}
                                 />
                             </>

@@ -13,7 +13,7 @@ const UserInfoBadge = () => {
             <div className="flex flex-col font-title text-base text-gray-200">
                 Emotion Collections
             </div>
-            <div className="px-[18px] flex w-full justify-between items-center mt-10">
+            <div className="gap-[82.5px] flex w-full justify-center items-center mt-10">
                 <IconAngry className="w-5 h-5 fill-literal-angry" />
                 <IconHappy className="w-5 h-5 fill-literal-happy" />
                 <IconSorrow className="w-5 h-5 fill-literal-sorrow" />

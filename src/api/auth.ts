@@ -32,11 +32,17 @@ export const updateUserInfoName = (name: string) => {
     return axiosInstance.post("/user/profile", userName);
 };
 
-export const updateUserInfoProfileImage = (image: string) => {
-    const userImage = {
-        profile_image: image,
-    };
-    return axiosInstance.post("/auth/profile", userImage);
+export const updateUserInfoProfileImage = (image: File) => {
+    const imageWithExtension = new File([image], "profile_image.png", { type: "image/png" });
+
+    const formData = new FormData();
+    formData.append("profile_image", imageWithExtension);
+
+    return axiosInstance.post("/user/profile", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 };
 
 export const userTokenRefresh = () => {

@@ -111,7 +111,7 @@ const UserInfoMyPage = () => {
             <ButtonError onClick={handleQuitModalOpen} className="mt-5">
                 계정 탈퇴
             </ButtonError>
-            {isOpen && <ModalChangeName isOpen={isOpen} onClose={handleModalClose} />}
+            {isOpen && <ModalChangeName onClose={handleModalClose} />}
             {isQuitOpen && <ModalQuitSite onClose={handleQuitModalClose} />}
         </div>
     );
