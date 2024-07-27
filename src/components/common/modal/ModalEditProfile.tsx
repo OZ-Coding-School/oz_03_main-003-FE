@@ -5,7 +5,8 @@ import ButtonDefault from "../button/ButtonDefault";
 import ButtonPrimary from "../button/ButtonPrimary";
 import { useEffect, useRef } from "react";
 import { authApi } from "../../../api";
-
+import useSound from "use-sound";
+import confirmSound from "../../../assets/sound/btn_confirm.mp3";
 interface ModalEditProfileProps {
     onClose: () => void;
     url: string;
@@ -13,6 +14,8 @@ interface ModalEditProfileProps {
 
 const ModalEditProfile = ({ onClose, url }: ModalEditProfileProps) => {
     const ref = useRef<HTMLDivElement>(null);
+    const [playConfirm] = useSound(confirmSound, { volume: 0.75 });
+
     useEffect(() => {
         if (ref.current) {
             ref.current.focus();
@@ -36,8 +39,9 @@ const ModalEditProfile = ({ onClose, url }: ModalEditProfileProps) => {
             const file = new File([blob], "profile_image", { type: "image/png" });
 
             //? 파일 업로드
-            const result = await authApi.updateUserInfoProfileImage(file);
-            console.log(result);
+            await authApi.updateUserInfoProfileImage(file);
+            closeHandler();
+            playConfirm();
         } catch (error) {
             console.error("Error Updating Profile Image", error);
         }
