@@ -18,7 +18,7 @@ const useUpdateChatRoom = () => {
                 );
                 setChatRooms(updatedRooms);
             } catch (error) {
-                console.log("Failed to update chat room", error);
+                console.error("Failed to update chat room", error);
             }
         },
         [chatRooms, setChatRooms]

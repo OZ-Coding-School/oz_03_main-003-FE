@@ -27,13 +27,13 @@ export const adminToUser = (id: string) => {
     const requestData = {
         is_superuser: "False",
     };
-    return axiosInstance.put(`/user/${id}`, requestData);
+    return axiosInstance.put(`/user/state/${id}`, requestData);
 };
 export const userToAdmin = (id: string) => {
     const requestData = {
         is_superuser: "True",
     };
-    return axiosInstance.put(`/user/${id}`, requestData);
+    return axiosInstance.put(`/user/state/${id}`, requestData);
 };
 export const updateForestLevel = (uuid: string, level: number) => {
     const requestForm = {
@@ -44,7 +44,23 @@ export const updateForestLevel = (uuid: string, level: number) => {
 export const updateTree = (id: string, form: AdminTreeFormData) => {
     return axiosInstance.patch(`/tree/admin/${id}`, form);
 };
-
+export const deleteTree = (id: string) => {
+    return axiosInstance.delete(`/tree/admin/${id}`);
+};
 export const updateEmotion = (id: string, form: AdminEmotionFormData) => {
     return axiosInstance.put(`/tree/admin/emotion/${id}`, form);
+};
+
+export const updateUserName = (id: string, name: string) => {
+    const requestData = {
+        username: name,
+    };
+    return axiosInstance.patch(`/user/${id}`, requestData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
+};
+export const deleteUser = (id: string) => {
+    return axiosInstance.delete(`/user/${id}`);
 };

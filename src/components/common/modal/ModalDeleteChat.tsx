@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useEffect, useRef } from "react";
 import ButtonError from "../button/ButtonError";
 import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import ButtonDefault from "../button/ButtonDefault";
 import useChatRooms from "../../../hook/useChatRooms";
 import useVerify from "../../../hook/useVerify";
+import useSound from "use-sound";
+import btnDelete from "../../../assets/sound/btn_delete.mp3";
 
 interface ModalDeleteChatProps {
     onClose: () => void;
@@ -16,6 +18,8 @@ interface ModalDeleteChatProps {
 const ModalDeleteChat = ({ onClose, chat_room_uuid, onDialogClose }: ModalDeleteChatProps) => {
     const { removeChatRoom } = useChatRooms();
     const { checkLoginStatus } = useVerify();
+    const ref = useRef<HTMLDivElement>(null);
+    const [playDelete] = useSound(btnDelete, { volume: 0.75 });
 
     const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
@@ -25,26 +29,38 @@ const ModalDeleteChat = ({ onClose, chat_room_uuid, onDialogClose }: ModalDelete
         onClose();
     };
 
-    const handleDelete = useCallback(async () => {
+    const handleDelete = async () => {
         await checkLoginStatus();
         await removeChatRoom(chat_room_uuid);
-        onClose();
+        closeHandler();
         onDialogClose();
-    }, [removeChatRoom, chat_room_uuid, onClose, checkLoginStatus, onDialogClose]);
+        playDelete();
+    };
+
+    useEffect(() => {
+        if (ref.current) {
+            ref.current.focus();
+        }
+    }, []);
 
     return (
         <>
             <nav className="absolute opacity-50 top-0 left-0 w-full h-screen bg-black z-10"></nav>
             <motion.div
+                tabIndex={-1}
+                ref={ref}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
                 transition={{ duration: 0.5, type: "spring" }}
-                onClick={closeHandler}
+                onClick={onClose}
                 onKeyDown={(e) => {
                     e.key === "Escape" && closeHandler();
+                    e.key === "Enter" && handleDelete();
                 }}
-                className={tw("inset-0 select-none z-10 fixed flex items-center justify-center")}
+                className={tw(
+                    "outline-none inset-0 select-none z-10 fixed flex items-center justify-center"
+                )}
             >
                 <nav
                     onClick={stopPropagation}

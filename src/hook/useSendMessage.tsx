@@ -22,7 +22,7 @@ const useSendMessage = () => {
                     userMessage: newMessage,
                 };
                 addDialogItem(chatRoomUuid, newDialogItem);
-                console.log("사용자 메시지 추가 완료:", newMessage);
+
                 return newMessage.message_uuid;
             } catch (error) {
                 console.error("Failed to send message", error);

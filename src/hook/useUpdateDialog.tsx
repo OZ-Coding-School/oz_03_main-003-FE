@@ -11,15 +11,10 @@ const useUpdateDialog = () => {
     const updateDialog = useCallback(
         async (chatRoomUuid: string, message: string) => {
             try {
-                console.log("Sending user message:", message);
                 const messageUuid = await sendMessage(chatRoomUuid, message);
                 if (messageUuid) {
-                    console.log("useUpdateDialog, User message sent, messageUuid:", messageUuid);
-                    const aiMessage = await fetchAIMessage(chatRoomUuid, messageUuid);
-                    console.log("AI message received:", aiMessage);
-
-                    const updatedDialog = dialogList[chatRoomUuid];
-                    console.log("useUpdateDialog, Updated dialog:", updatedDialog);
+                    await fetchAIMessage(chatRoomUuid, messageUuid);
+                    dialogList[chatRoomUuid];
                 }
             } catch (error) {
                 console.error("Failed to update dialog", error);

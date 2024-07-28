@@ -6,7 +6,7 @@ import { adminApi } from "../../api";
 import useVerify from "../../hook/useVerify";
 import useAdminData from "../../hook/useAdminData";
 import { IconChange, IconCopy } from "../../config/IconData";
-import { useAdminStore } from "../../config/store";
+import { useAdminStore, useModalStore } from "../../config/store";
 import { twMerge as tw } from "tailwind-merge";
 import useSound from "use-sound";
 import pingSound from "../../assets/sound/btn_ping.mp3";
@@ -19,6 +19,7 @@ const AdminForestItem = () => {
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
     const [playCopy] = useSound(pingSound, { volume: 0.75 });
+    const { setModal } = useModalStore();
 
     const levelHandler = async (id: string) => {
         const level = window.prompt("변경하실 계정 레벨을 지정하세요.");
@@ -38,6 +39,7 @@ const AdminForestItem = () => {
         const form = `USER_UUID: ${item.user_uuid} \nFOREST_UUID: ${item.forest_uuid} \nFOREST_LEVEL: ${item.forest_level}`;
         await navigator.clipboard.writeText(form);
         playCopy();
+        setModal(true);
     };
 
     const forestData = data.forest.sort((a, b) => {

@@ -8,7 +8,7 @@ const DialogHandle = ({ text }: { text: string }) => {
             className="select-none w-full h-full"
         >
             <div className="w-full text-center text-gray-200">{text}</div>
-            <div className="mx-10 mt-10 border-b border-gray-200"></div>
+            <div className="mx-10 mt-10 border-b border-gray-600"></div>
         </motion.div>
     );
 };

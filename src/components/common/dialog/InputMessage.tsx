@@ -3,6 +3,9 @@ import { IconSendMsg } from "../../../config/IconData";
 import useUpdateDialog from "../../../hook/useUpdateDialog";
 import InputLoadingBar from "./InputLoadingBar";
 import useVerify from "../../../hook/useVerify";
+import useSound from "use-sound";
+import messageSound from "../../../assets/sound/message_request.mp3";
+import responseSound from "../../../assets/sound/message_response.mp3";
 
 interface InputMessageProps {
     chatRoomUuid: string;
@@ -12,12 +15,16 @@ const InputMessage = ({ chatRoomUuid }: InputMessageProps) => {
     const [message, setMessage] = useState("");
     const { updateDialog, isAILoading } = useUpdateDialog();
     const { checkLoginStatus } = useVerify();
+    const [playSend] = useSound(messageSound, { volume: 0.75 });
+    const [playResponse] = useSound(responseSound, { volume: 0.75 });
 
     const handleSendMessage = async () => {
         if (message.trim() !== "") {
+            playSend();
             setMessage("");
             await checkLoginStatus();
             await updateDialog(chatRoomUuid, message);
+            playResponse();
         }
     };
 

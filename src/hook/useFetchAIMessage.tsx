@@ -41,7 +41,6 @@ const useFetchAIMessage = () => {
                         aiMessage: aiMessage,
                     };
                     updateDialogItem(chatRoomUuid, existingDialogItemIndex, updatedDialogItem);
-                    console.log("AI message updated in dialog item:", updatedDialogItem);
                 }
 
                 return aiMessage;

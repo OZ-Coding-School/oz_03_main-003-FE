@@ -2,12 +2,12 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { FormData, UserTreeDetail } from "../../config/types";
-import { adminApi, treeApi } from "../../api";
+import { adminApi } from "../../api";
 import useVerify from "../../hook/useVerify";
 
 import useAdminData from "../../hook/useAdminData";
 import { IconChange, IconCopy, IconDeleteBtn } from "../../config/IconData";
-import { useAdminStore } from "../../config/store";
+import { useAdminStore, useModalStore } from "../../config/store";
 import useSound from "use-sound";
 import pingSound from "../../assets/sound/btn_ping.mp3";
 dayjs.extend(utc);
@@ -18,6 +18,7 @@ const AdminTreeItem = () => {
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
     const [playCopy] = useSound(pingSound, { volume: 0.75 });
+    const { setModal } = useModalStore();
 
     const levelHandler = async (treeId: string, userId: string) => {
         const level = window.prompt("변경하실 나무의 레벨을 지정하세요.");
@@ -63,8 +64,7 @@ const AdminTreeItem = () => {
         if (confirm) {
             try {
                 await checkLoginStatus();
-                //TODO: 수정필요
-                await treeApi.deleteTree(id);
+                await adminApi.deleteTree(id);
                 const newData = (await fetchData()) as FormData;
                 setData(newData);
             } catch (error) {
@@ -79,6 +79,7 @@ const AdminTreeItem = () => {
 
         await navigator.clipboard.writeText(form);
         playCopy();
+        setModal(true);
     };
 
     const treeData = data.tree.sort((a, b) => {

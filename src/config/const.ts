@@ -165,7 +165,7 @@ export const accessibleIndices: AccessibleIndices = {
 
 //? 나무 경험치 정보
 export const treeExperience: { [key: number]: number } = {
-    0: 100,
+    0: 200,
 };
 
 export const treeLevelInitialExperience: { [key: number]: number } = {
@@ -174,13 +174,14 @@ export const treeLevelInitialExperience: { [key: number]: number } = {
 
 //? 유저 경험치 정보
 export const userExperience: { [key: number]: number } = {
-    0: 50,
-    ...Object.fromEntries(Array.from({ length: 200 }, (_, i) => [i + 1, (i + 1) * 150])),
+    0: 75,
+    1: 150,
+    ...Object.fromEntries(Array.from({ length: 199 }, (_, i) => [i + 2, 300 + i * 150])),
 };
 
 export const userLevelInitialExperience: { [key: number]: number } = {
     0: 0,
-    1: 50,
-    2: 200,
-    ...Object.fromEntries(Array.from({ length: 198 }, (_, i) => [i + 3, (i + 3 - 2) * 150])),
+    1: 75,
+    2: 150,
+    ...Object.fromEntries(Array.from({ length: 198 }, (_, i) => [i + 3, 300 + (i - 1) * 150])),
 };

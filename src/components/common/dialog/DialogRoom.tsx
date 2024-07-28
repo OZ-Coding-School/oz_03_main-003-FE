@@ -10,7 +10,6 @@ import BadgeIndifference from "../badge/BadgeIndifference";
 import BadgeHappy from "../badge/BadgeHappy";
 import BadgeSorrow from "../badge/BadgeSorrow";
 import BadgeWorry from "../badge/BadgeWorry";
-
 interface DialogRoomProps {
     chatRoomUuid: string;
 }
@@ -18,11 +17,11 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
     const { dialogList, error } = useGetDialogList(chatRoomUuid);
     const { chatRooms } = useUserChatStore();
     const { userData } = useUserStore();
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
     const treeUuid =
         chatRooms.find((data) => data.chat_room_uuid === chatRoomUuid)?.tree_uuid ?? "";
     const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
-
-    const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -56,7 +55,7 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
     const renderPositiveSentiments = (sentiments: Sentiment) => {
         return Object.entries(sentiments).map(([key, value]) => {
             if (parseFloat(value) > 0) {
-                return renderSentimentElement(key);
+                <div key={key}>{renderSentimentElement(key)}</div>;
             }
             return null;
         });
@@ -65,8 +64,8 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
     return (
         <div className="w-full h-full text-white overflow-y-auto">
             <div>
-                {dialogList.map((dialogItem, index) => (
-                    <div key={index}>
+                {dialogList.map((dialogItem) => (
+                    <div key={dialogItem.userMessage.message_uuid}>
                         <div className="mb-4 mr-8">
                             <p className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto">
                                 {dialogItem.userMessage.message}

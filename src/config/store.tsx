@@ -14,6 +14,20 @@ import {
     DialogItem,
 } from "./types";
 
+//? MUSIC GLOBAL STATE
+interface MusicStore {
+    play: boolean;
+    setPlay: () => void;
+}
+
+export const useMusicStore = create<MusicStore>((set) => ({
+    play: false,
+    setPlay: () =>
+        set((state) => ({
+            play: !state.play,
+        })),
+}));
+
 //? TOASTER GLOBAL STATE
 interface ModalStore {
     modal: boolean;

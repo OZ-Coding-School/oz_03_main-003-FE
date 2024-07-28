@@ -1,11 +1,14 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { IconChange } from "../../config/IconData";
-import { useAdminStore } from "../../config/store";
+import { IconChange, IconCopy } from "../../config/IconData";
+import { useAdminStore, useModalStore } from "../../config/store";
 import { useState } from "react";
-import ModalAdminChangeEmotion from "../common/modal/ModalAdminChangeEmotion";
-
+import ModalAdminChangeEmotion from "../common/modal/admin/ModalAdminChangeEmotion";
+import useSound from "use-sound";
+import pingSound from "../../assets/sound/btn_ping.mp3";
+import { UserTreeEmotionDetail } from "../../config/types";
+import ToastAdmin from "../common/toast/ToastAdmin";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -13,6 +16,8 @@ const AdminEmotionItem = () => {
     const { data } = useAdminStore();
     const [isModalOn, setIsModalOn] = useState(false);
     const [treeUUID, setTreeUUID] = useState("");
+    const [playCopy] = useSound(pingSound, { volume: 0.75 });
+    const { modal, setModal } = useModalStore();
 
     const modalOnHandler = (uuid: string) => {
         setTreeUUID(uuid);
@@ -27,6 +32,13 @@ const AdminEmotionItem = () => {
         if (a.tree_uuid > b.tree_uuid) return 1;
         return 0;
     });
+
+    const clipBoardHandler = async (item: UserTreeEmotionDetail) => {
+        const form = `TREE_UUID: ${item.tree_uuid}\nHAPPINESS: ${item.emotions.happiness}\nANGER: ${item.emotions.anger}\nSADNESS: ${item.emotions.sadness}\nWORRY: ${item.emotions.worry}\nINDIFFERENCE: ${item.emotions.indifference}`;
+        await navigator.clipboard.writeText(form);
+        playCopy();
+        setModal(true);
+    };
 
     return (
         <div className="w-full p-8 flex justify-center select-text">
@@ -62,11 +74,20 @@ const AdminEmotionItem = () => {
                                     </div>
                                 </button>
                             </td>
+                            <td>
+                                <div
+                                    onClick={() => clipBoardHandler(item)}
+                                    className="fill-white ml-2 p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md cursor-pointer flex justify-center"
+                                >
+                                    <IconCopy className="fill-white w-fit h-6" />
+                                </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
             {isModalOn && <ModalAdminChangeEmotion onClose={modalOffHandler} uuid={treeUUID} />}
+            {modal && <ToastAdmin />}
         </div>
     );
 };

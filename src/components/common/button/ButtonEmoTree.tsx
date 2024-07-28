@@ -2,28 +2,31 @@ import { motion } from "framer-motion";
 import { PropsWithChildren, useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import { useUpdateEmotions } from "../../../hook/useUpdateEmotions";
-// import { useUpdateEmotions } from "../../../hook/useUpdateEmotions";
+import useSound from "use-sound";
+import btnSendTree from "../../../assets/sound/btn_sendTree.mp3";
 
 interface ButtonProps extends PropsWithChildren {
     className?: string;
     type?: "submit" | "reset" | "button";
-    onClick?: () => void;
     treeUuid: string;
     messageUuid: string;
 }
 
-const ButtonEmotree = ({
+const ButtonEmoTree = ({
     className,
     type = "button",
-    // onClick,
     children,
     treeUuid,
     messageUuid,
 }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
     const { isLoading, error, updateTreeEmotions } = useUpdateEmotions();
+    const [playTree] = useSound(btnSendTree, { volume: 0.75 });
+
     const handleClick = async () => {
         await updateTreeEmotions(treeUuid, messageUuid);
+
+        playTree();
         if (error) {
             console.log(error, "안돼");
         }
@@ -76,4 +79,4 @@ const ButtonEmotree = ({
     );
 };
 
-export default ButtonEmotree;
+export default ButtonEmoTree;

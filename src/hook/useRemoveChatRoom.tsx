@@ -17,7 +17,7 @@ const useRemoveChatRoom = () => {
                 );
                 setChatRooms(updatedRooms);
             } catch (error) {
-                console.log("Failed to delete chat room", error);
+                console.error("Failed to delete chat room", error);
             }
         },
         [setChatRooms, chatRooms]

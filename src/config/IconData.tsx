@@ -24,6 +24,8 @@ import { ReactComponent as IconSetting } from "../assets/icon/icon-set.svg";
 import { ReactComponent as IconLogout } from "../assets/icon/icon-logout.svg";
 import { ReactComponent as IconStar } from "../assets/icon/icon-landing-star.svg";
 import { ReactComponent as IconCopy } from "../assets/icon/icon-copy.svg";
+import { ReactComponent as IconPlay } from "../assets/icon/icon-play.svg";
+import { ReactComponent as IconPause } from "../assets/icon/icon-pause.svg";
 
 export {
     IconAddChat,
@@ -52,4 +54,6 @@ export {
     LogoKakao,
     IconStar,
     IconCopy,
+    IconPlay,
+    IconPause,
 };

@@ -43,7 +43,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     onMouseLeave={() => setHoverBadge1(false)}
                     className="w-12 h-12 relative rounded-full border-2 border-gray-200"
                 >
-                    {emotionSum >= 50 && (
+                    {emotionSum >= 250 && (
                         <img
                             src={badge[0].url}
                             alt={badge[0].badge}
@@ -51,7 +51,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                         />
                     )}
                     <AnimatePresence>
-                        {emotionSum >= 50 && hoverBadge1 && (
+                        {emotionSum >= 250 && hoverBadge1 && (
                             <motion.div
                                 onClick={() => modalOnHandler(badge[0].url)}
                                 initial={{ opacity: 0 }}
@@ -65,7 +65,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     </AnimatePresence>
                 </nav>
                 <div className="mt-1 text-sm text-gray-200 text-center">
-                    {emotionSum >= 50 ? badge[0].type : "미획득"}
+                    {emotionSum >= 250 ? badge[0].type : "미획득"}
                 </div>
             </div>
 
@@ -75,7 +75,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     onMouseLeave={() => setHoverBadge2(false)}
                     className="w-12 h-12 relative rounded-full border-2 border-gray-200"
                 >
-                    {emotionSum >= 125 && (
+                    {emotionSum >= 500 && (
                         <img
                             src={badge[1].url}
                             alt={badge[1].badge}
@@ -83,7 +83,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                         />
                     )}
                     <AnimatePresence>
-                        {emotionSum >= 125 && hoverBadge2 && (
+                        {emotionSum >= 500 && hoverBadge2 && (
                             <motion.div
                                 onClick={() => modalOnHandler(badge[1].url)}
                                 initial={{ opacity: 0 }}
@@ -97,7 +97,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     </AnimatePresence>
                 </nav>
                 <div className="mt-1 text-sm text-gray-200 text-center">
-                    {emotionSum >= 125 ? badge[1].type : "미획득"}
+                    {emotionSum >= 500 ? badge[1].type : "미획득"}
                 </div>
             </div>
 
@@ -107,7 +107,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     onMouseLeave={() => setHoverBadge3(false)}
                     className="w-12 h-12 relative rounded-full border-2 border-gray-200"
                 >
-                    {emotionSum >= 250 && (
+                    {emotionSum >= 1000 && (
                         <img
                             src={badge[2].url}
                             alt={badge[2].badge}
@@ -115,7 +115,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                         />
                     )}
                     <AnimatePresence>
-                        {emotionSum >= 250 && hoverBadge3 && (
+                        {emotionSum >= 1000 && hoverBadge3 && (
                             <motion.div
                                 onClick={() => modalOnHandler(badge[2].url)}
                                 initial={{ opacity: 0 }}
@@ -129,7 +129,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     </AnimatePresence>
                 </nav>
                 <div className="mt-1 text-sm text-gray-200 text-center">
-                    {emotionSum >= 250 ? badge[2].type : "미획득"}
+                    {emotionSum >= 1000 ? badge[2].type : "미획득"}
                 </div>
             </div>
             {modalOn && <ModalEditProfile url={url} onClose={modalOffHandler} />}

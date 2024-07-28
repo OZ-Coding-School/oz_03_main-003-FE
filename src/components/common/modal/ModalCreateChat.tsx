@@ -8,6 +8,8 @@ import { useUserStore } from "../../../config/store";
 import useChatRooms from "../../../hook/useChatRooms";
 import ButtonDisable from "../button/ButtonDisable";
 import useVerify from "../../../hook/useVerify";
+import useSound from "use-sound";
+import btnConfirm from "../../../assets/sound/btn_confirm.mp3";
 
 interface ModalCreateChatProps {
     onClose: () => void;
@@ -24,6 +26,7 @@ const ModalCreateChat = ({ onClose }: ModalCreateChatProps) => {
     const [requireRoomName, setRequireRoomName] = useState(false);
     const [requireSelectTree, setRequireSelectTree] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
+    const [playConfirm] = useSound(btnConfirm, { volume: 0.75 });
 
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
     useEffect(() => {
@@ -57,6 +60,7 @@ const ModalCreateChat = ({ onClose }: ModalCreateChatProps) => {
                 await addChatRoom(chatRoomName, selectedTree.uuid);
                 await fetchChatRooms();
                 onClose();
+                playConfirm();
             } catch (error) {
                 console.error("Failed to create chat room", error);
             } finally {

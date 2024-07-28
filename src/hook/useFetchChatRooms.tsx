@@ -14,7 +14,7 @@ const useFetchChatRooms = () => {
             const rooms: ChatRoom[] = response.data;
             setChatRooms(rooms);
         } catch (error) {
-            console.log("Failed to fetch chat rooms", error);
+            console.error("Failed to fetch chat rooms", error);
         }
     }, [setChatRooms]);
 

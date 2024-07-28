@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import ButtonDefault from "../button/ButtonDefault";
-import { IconClose } from "../../../config/IconData";
+import ButtonDefault from "../../button/ButtonDefault";
+import { IconClose } from "../../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { motion } from "framer-motion";
-import useInfo from "../../../hook/useInfo";
-import { adminApi } from "../../../api";
-import useVerify from "../../../hook/useVerify";
+import useInfo from "../../../../hook/useInfo";
+import { adminApi } from "../../../../api";
+import useVerify from "../../../../hook/useVerify";
 import useSound from "use-sound";
-import confirmSound from "../../../assets/sound/btn_confirm.mp3";
-import { useAdminStore } from "../../../config/store";
-import { FormData } from "../../../config/types";
-import useAdminData from "../../../hook/useAdminData";
+import confirmSound from "../../../../assets/sound/btn_confirm.mp3";
+import { useAdminStore } from "../../../../config/store";
+import { FormData } from "../../../../config/types";
+import useAdminData from "../../../../hook/useAdminData";
 
 interface ModalChangeNameProps {
     onClose: () => void;
