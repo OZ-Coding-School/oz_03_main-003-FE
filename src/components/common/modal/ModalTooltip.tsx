@@ -8,10 +8,7 @@ interface ModalTooltipProps {
 
 const ModalTooltip = ({ type }: ModalTooltipProps) => {
     return (
-        <div
-            className="rounded-[4px] relative w-fit flex justify-center h-fit p-4 bg-gray-600
-    "
-        >
+        <div className="rounded-[4px] relative w-fit flex justify-center h-fit p-4 bg-gray-600">
             {type === "DETAIL" && <TooltipTree />}
             {type === "USERINFO" && <TooltipAccount />}
             {type === "COLLECTION" && <TooltipBadge />}

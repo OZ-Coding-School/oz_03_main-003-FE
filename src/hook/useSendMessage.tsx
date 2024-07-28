@@ -1,24 +1,34 @@
-// src/hook/useSendMessage.ts
 import { useCallback } from "react";
-import { sendUserMessage, getUserMessage } from "../api/dialog";
-import { useUserChatStore } from "../config/store";
-
+import { useDialogStore } from "../config/store";
+import { UserMessage, DialogItem } from "../config/types";
+import { dialogApi } from "../api";
 const useSendMessage = () => {
-    const { setUserMessages } = useUserChatStore((state) => ({
-        setUserMessages: state.setUserMessages,
+    const { setUserMessage, addDialogItem } = useDialogStore((state) => ({
+        setUserMessage: state.setUserMessage,
+        addDialogItem: state.addDialogItem,
     }));
 
     const sendMessage = useCallback(
         async (chatRoomUuid: string, message: string) => {
             try {
-                await sendUserMessage(chatRoomUuid, message);
-                const response = await getUserMessage(chatRoomUuid);
-                setUserMessages(chatRoomUuid, response.data);
+                const response = await dialogApi.sendUserMessage(chatRoomUuid, message);
+                const newMessage: UserMessage = {
+                    message_uuid: response.data.message_uuid,
+                    message: message,
+                };
+                setUserMessage(chatRoomUuid, newMessage);
+
+                const newDialogItem: DialogItem = {
+                    userMessage: newMessage,
+                };
+                addDialogItem(chatRoomUuid, newDialogItem);
+                console.log("사용자 메시지 추가 완료:", newMessage);
+                return newMessage.message_uuid;
             } catch (error) {
                 console.error("Failed to send message", error);
             }
         },
-        [setUserMessages]
+        [setUserMessage, addDialogItem]
     );
 
     return { sendMessage };

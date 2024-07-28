@@ -68,7 +68,7 @@ const ModalCreateTree = ({ onClose, treeLocation }: ModalCreateTreeProps) => {
 
     return (
         <>
-            <nav className="absolute opacity-50 top-0 w-full h-screen bg-black"></nav>
+            <nav className="absolute opacity-50 top-0 left-0 w-full h-screen bg-black"></nav>
 
             <motion.div
                 animate={{ opacity: [0, 1], scale: [0, 1] }}

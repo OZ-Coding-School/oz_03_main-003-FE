@@ -7,6 +7,11 @@ import {
     UserTreeEmotionDetail,
 } from "../config/types";
 import { useCallback } from "react";
+
+/**
+ *
+ * @returns fetchData 어드민화면 렌더링에 필요한 API요청을 합니다.
+ */
 const useAdminData = () => {
     const { checkLoginStatus } = useVerify();
 

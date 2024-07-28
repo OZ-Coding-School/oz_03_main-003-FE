@@ -10,7 +10,7 @@ const Gnb = () => {
     const navItems = [
         { path: "/home", label: "감정나무 숲", icon: IconHome },
         { path: "/chat", label: "대화 분석", icon: IconChat },
-        { path: "/mypage", label: "내 정보", icon: IconUser },
+        { path: "/account", label: "내 정보", icon: IconUser },
     ];
 
     return (

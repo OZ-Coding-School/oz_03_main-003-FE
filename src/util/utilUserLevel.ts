@@ -1,12 +1,9 @@
 import { treeApi, forestApi } from "../api";
-
-interface Emotion {
-    [key: string]: number;
-}
-
+import { userExperience, userLevelInitialExperience } from "../config/const";
+import { Emotions } from "../config/types";
 interface TreeEmotionData {
     tree_uuid: string;
-    emotions: Emotion;
+    emotions: Emotions;
 }
 
 interface LevelData {
@@ -14,18 +11,7 @@ interface LevelData {
     experience: number;
 }
 
-const userExperience: { [key: number]: number } = {
-    0: 50,
-    ...Object.fromEntries(Array.from({ length: 200 }, (_, i) => [i + 1, (i + 1) * 150])),
-};
-
-const levelInitialExperience: { [key: number]: number } = {
-    0: 0,
-    1: 50,
-    2: 200,
-    ...Object.fromEntries(Array.from({ length: 198 }, (_, i) => [i + 3, (i + 3 - 2) * 150])),
-};
-
+//? 사용자의 경험치를 %로 변환하여 계산합니다.
 const calculateExperience = (level: number, currentExperience: number): number => {
     const maxLevel = Object.keys(userExperience).length - 1;
 
@@ -33,7 +19,7 @@ const calculateExperience = (level: number, currentExperience: number): number =
         return 0;
     }
     const requiredExperience = userExperience[level];
-    const initialExperience = levelInitialExperience[level] || 0;
+    const initialExperience = userLevelInitialExperience[level] || 0;
 
     const adjustedCurrentExperience = Math.max(currentExperience - initialExperience, 0);
     const percentage = (adjustedCurrentExperience / requiredExperience) * 100;
@@ -41,6 +27,7 @@ const calculateExperience = (level: number, currentExperience: number): number =
     return Math.min(Math.max(percentage, 0), 100);
 };
 
+//? 사용자의 현재 경험치양을 숫자로 계산합니다.
 const calculateCurrentExperience = (res: TreeEmotionData[]) => {
     const totalExperience = res.reduce((acc, item) => {
         const emotionValues = Object.values(item.emotions);
@@ -51,6 +38,8 @@ const calculateCurrentExperience = (res: TreeEmotionData[]) => {
     return totalExperience;
 };
 
+//? 사용자의 레벨을 계산합니다
+//? 현재경험치와 요구경험치를 비교하여 재귀적으로 계산합니다.
 export const calculateUserLevel = async (level: number, forestUUID: string): Promise<LevelData> => {
     const maxLevel = Object.keys(userExperience).length - 1;
 
@@ -70,9 +59,7 @@ export const calculateUserLevel = async (level: number, forestUUID: string): Pro
     const percentage = calculateExperience(level, currentExp);
 
     if (Number(percentage) === 100 && level < maxLevel) {
-        // 레벨업 진행
         await forestApi.updateForestLevel(forestUUID, level + 1);
-        // 재귀적 레벨 계산
         return calculateUserLevel(level + 1, forestUUID);
     }
 

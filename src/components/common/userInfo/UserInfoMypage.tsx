@@ -5,7 +5,7 @@ import UserInfoBadge from "./UserInfoBadge";
 import { useState } from "react";
 import ModalChangeName from "../modal/ModalChangeName";
 import ButtonError from "../button/ButtonError";
-import ModalQuitSite from "../modal/ModalQuitSite";
+import ModalQuitSite from "../modal/ModalDeleteAccount";
 import useSound from "use-sound";
 import pingSound from "../../../assets/sound/btn_ping.mp3";
 import collapseSound from "../../../assets/sound/btn_collapse.mp3";

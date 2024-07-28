@@ -1,16 +1,9 @@
 import { treeApi } from "../api";
 import { UserTreeDetail } from "../config/types";
+import { SwapLocationData, LocationData } from "../config/types";
 
-interface LocationData {
-    nowId: string;
-    nowLocation: number;
-    selectLocation: number;
-}
-
-interface SwapLocationData extends LocationData {
-    selectId: string;
-}
-
+//? 사용자가 트리를 옮길때 트리의 위치정보를 전달합니다.
+//? ID, Location정보를 현재 트리와 사용자가 인터랙션한 위치를 전달합니다.
 export const findTreeLocation = (
     location: number,
     treeUUID: string,
@@ -39,6 +32,8 @@ export const findTreeLocation = (
     }
 };
 
+//? 사용자의 나무위치를 변경합니다. (나무 <-> 나무)
+//? 나무간의 위치정보를 비교하여 위치를 업데이트합니다.
 export const swapTreeLocation = async (data: SwapLocationData) => {
     const requestFormNowLocation = {
         location: data.nowLocation,
@@ -50,6 +45,7 @@ export const swapTreeLocation = async (data: SwapLocationData) => {
     await treeApi.updateTree(data.selectId, requestFormNowLocation);
 };
 
+//? 사용자의 나무위치를 변경합니다. (나무 <-> 빈칸)
 export const moveTreeLocation = async (data: LocationData) => {
     const requestForm = {
         location: data.selectLocation,
