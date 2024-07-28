@@ -25,3 +25,9 @@ export const updateTree = (id: string, form: TreeFormData) => {
 export const deleteTree = (id: string) => {
     return axiosInstance.delete(`/tree/${id}`);
 };
+
+export const updateEmotions = (treeUuid: string, aiMessageUuid: string) => {
+    return axiosInstance.put(`/tree/emotion/${treeUuid}`, {
+        message_uuid: aiMessageUuid,
+    });
+};

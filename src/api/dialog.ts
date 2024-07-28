@@ -8,12 +8,18 @@ export const getUserMessage = (uuid: string) => {
     return axiosInstance.get(`/dialog/message/user/${uuid}`);
 };
 
-export const postAIResponseMessage = (chatRoomUuid: string, messageUuid: string) => {
-    return axiosInstance.post(`/dialog/message/ai/${chatRoomUuid}`, {
-        message_uuid: messageUuid,
-    });
+export const postAIMessage = (chatRoomUuid: string, messageUuid: string) => {
+    return axiosInstance.post(
+        `/dialog/message/ai/${chatRoomUuid}`,
+        {
+            message_uuid: messageUuid,
+        },
+        {
+            validateStatus: () => true,
+        }
+    );
 };
 
 export const getDialogList = (chatRoomUuid: string) => {
-    return axiosInstance.get(`dialog/message/${chatRoomUuid}`);
+    return axiosInstance.get(`dialog/${chatRoomUuid}`);
 };
