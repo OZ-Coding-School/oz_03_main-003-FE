@@ -2,6 +2,10 @@ import { useCallback } from "react";
 import { authApi } from "../api";
 import { useNavigate } from "react-router-dom";
 
+/**
+ *
+ * @function checkLoginStatus 유저 토큰 유효성을 검증하고, 새로 발급합니다.
+ */
 const useVerify = () => {
     const nav = useNavigate();
 

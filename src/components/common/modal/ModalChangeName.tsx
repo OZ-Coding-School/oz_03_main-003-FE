@@ -6,23 +6,26 @@ import { motion } from "framer-motion";
 import useInfo from "../../../hook/useInfo";
 import { authApi } from "../../../api";
 import useVerify from "../../../hook/useVerify";
+import useSound from "use-sound";
+import confirmSound from "../../../assets/sound/btn_confirm.mp3";
 
 interface ModalChangeNameProps {
-    isOpen: boolean;
     onClose: () => void;
 }
 
-const ModalChangeName = ({ isOpen, onClose }: ModalChangeNameProps) => {
+const ModalChangeName = ({ onClose }: ModalChangeNameProps) => {
     const { getUserInfo } = useInfo();
     const { checkLoginStatus } = useVerify();
     const inputRef = useRef<HTMLInputElement>(null);
     const [isUpdatedNewName, setIsUpdatedNewName] = useState("");
     const [userNameAlert, setUserNameAlert] = useState(false);
+    const [playConfirm] = useSound(confirmSound, { volume: 0.75 });
+
     useEffect(() => {
-        if (inputRef.current && isOpen) {
+        if (inputRef.current) {
             inputRef.current.focus();
         }
-    }, [isOpen, getUserInfo]);
+    }, [getUserInfo]);
 
     const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
@@ -36,7 +39,9 @@ const ModalChangeName = ({ isOpen, onClose }: ModalChangeNameProps) => {
         await checkLoginStatus();
         await authApi.updateUserInfoName(isUpdatedNewName);
         await getUserInfo();
+
         handleModalClose();
+        playConfirm();
     };
 
     const handleModalClose = () => {
@@ -50,7 +55,7 @@ const ModalChangeName = ({ isOpen, onClose }: ModalChangeNameProps) => {
 
     return (
         <>
-            <nav className="absolute opacity-50 top-0 w-full h-screen bg-black"></nav>
+            <nav className="absolute opacity-50 top-0 left-0 w-full h-screen bg-black"></nav>
             <motion.div
                 animate={{ opacity: [0, 1], scale: [0, 1] }}
                 transition={{ duration: 0.5, type: "spring" }}
@@ -59,7 +64,9 @@ const ModalChangeName = ({ isOpen, onClose }: ModalChangeNameProps) => {
                     e.key === "Escape" && handleModalClose();
                     e.key === "Enter" && handleButtonClick();
                 }}
-                className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
+                className={tw(
+                    "outline-none inset-0 select-none z-0 fixed flex items-center justify-center"
+                )}
             >
                 <nav
                     onClick={stopPropagation}

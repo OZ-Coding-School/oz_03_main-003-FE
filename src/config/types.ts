@@ -1,3 +1,4 @@
+//? ADMIN DATA TYPES -------------------//
 export interface AdminPageUserData {
     uuid: string;
     username: string;
@@ -10,13 +11,11 @@ export interface AdminPageUserData {
     is_active: boolean;
     is_superuser: boolean;
 }
-
 export interface AdminPageForestData {
     user_uuid: string;
     forest_uuid: string;
     forest_level: number;
 }
-
 export interface FormData {
     user: AdminPageUserData[];
     tree: AdminTreeDetail[];
@@ -24,6 +23,32 @@ export interface FormData {
     forest: AdminPageForestData[];
 }
 
+export interface AdminTreeDetail {
+    user_uuid: string;
+    tree_detail: {
+        tree_uuid: string;
+        tree_name: string;
+        tree_level: number;
+        location: number;
+    };
+}
+
+export interface AdminTreeFormData {
+    user_uuid: string;
+    tree_name?: string;
+    tree_level?: number;
+    location?: number;
+}
+
+//? USER DATA TYPES -------------------//
+
+export interface UserData {
+    user: UserAccount;
+    level: UserLevel;
+    tree: UserTree;
+    treeDetail: UserTreeDetail[] | Record<string, never>;
+    treeEmotion: UserTreeEmotionDetail[];
+}
 export interface UserAccount {
     id: string;
     username: string;
@@ -45,15 +70,12 @@ export interface UserTreeDetail {
     tree_level: number;
     location: number;
 }
-
-export interface AdminTreeDetail {
-    user_uuid: string;
-    tree_detail: {
-        tree_uuid: string;
-        tree_name: string;
-        tree_level: number;
-        location: number;
-    };
+export interface Emotions {
+    happiness: number;
+    anger: number;
+    sadness: number;
+    worry: number;
+    indifference: number;
 }
 
 export interface UserTreeEmotionDetail {
@@ -61,14 +83,6 @@ export interface UserTreeEmotionDetail {
     emotions: Emotions;
     type: string;
     count: number;
-}
-
-export interface Emotions {
-    happiness: number;
-    anger: number;
-    sadness: number;
-    worry: number;
-    indifference: number;
 }
 
 export interface UserTree {
@@ -89,18 +103,36 @@ export enum AuthStatusType {
     UNVERIFIED = 3,
 }
 
+export interface LocationData {
+    nowId: string;
+    nowLocation: number;
+    selectLocation: number;
+}
+
+export interface SwapLocationData extends LocationData {
+    selectId: string;
+}
+
 export interface TreeFormData {
     tree_name?: string;
     tree_level?: number;
     location?: number;
 }
 
-export interface AdminTreeFormData {
-    user_uuid: string;
-    tree_name?: string;
-    tree_level?: number;
-    location?: number;
-}
+//? CONST DATA TYPES -------------------//
+
+export type TREE_CONST_TYPE = {
+    [key: number]: string;
+};
+export type TREE_CONST_TYPE_LIST = {
+    [key: number]: {
+        name: string;
+        style: string;
+        desc: string;
+    };
+};
+
+//? USER CHATROOM TYPES -------------------//
 
 export interface CreateChatRoomRequest {
     chat_room_name: string;
@@ -117,14 +149,6 @@ export interface ChatRoom {
     tree_uuid: string;
 }
 
-export interface UserData {
-    user: UserAccount;
-    level: UserLevel;
-    tree: UserTree;
-    treeDetail: UserTreeDetail[] | Record<string, never>;
-    treeEmotion: UserTreeEmotionDetail[];
-}
-
 export interface UpdateChatRoom {
     chat_room_uuid?: string;
     tree_uuid?: string;
@@ -135,19 +159,28 @@ export interface UserMessage {
     message: string;
 }
 
-export interface ChatRoomMessages {
-    [chatRoomUuid: string]: UserMessage[];
+export interface Sentiment {
+    happiness: number;
+    anger: number;
+    sadness: number;
+    worry: number;
+    indifference: number;
 }
 
-export interface AIResponse {
-    emotions: {
-        happiness: number;
-        anger: number;
-        sadness: number;
-        worry: number;
-        indifference: number;
-    };
+export interface AIMessage {
     message_uuid: string;
     message: string;
+    sentiments: Sentiment;
     applied_state: boolean;
+    date: string;
+}
+
+export interface DialogItem {
+    userMessage: UserMessage;
+    aiMessage?: AIMessage;
+}
+
+export interface DialogList {
+    ai: AIMessage;
+    user: UserMessage;
 }

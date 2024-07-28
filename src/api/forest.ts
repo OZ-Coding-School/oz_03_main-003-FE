@@ -1,5 +1,6 @@
 import { axiosInstance } from "./axios";
 
+//? FOREST API
 export const createForest = () => {
     return axiosInstance.post("/forest/new");
 };

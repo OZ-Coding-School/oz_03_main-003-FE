@@ -5,12 +5,12 @@ const BadgeSorrow = () => {
     return (
         <div
             className={tw(
-                "bg-literal-sorrow",
+                "bg-literal-sorrow text-black",
                 "px-4 w-24 h-10 font-title",
                 "flex items-center justify-center select-none"
             )}
         >
-            <IconSorrow className="w-5 mr-2" />
+            <IconSorrow className="w-5 mr-2 " />
             슬픔
         </div>
     );

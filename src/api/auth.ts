@@ -1,5 +1,6 @@
 import { axiosInstance } from "./axios";
 
+//? AUTH API
 export const userGoogleAccessTokenReceiver = (token: string) => {
     const accessData = {
         access_token: token,
@@ -15,14 +16,23 @@ export const userDeleteAccount = () => {
     return axiosInstance.delete("/auth/delete");
 };
 
-export const getUserInfo = () => {
-    return axiosInstance.get("/user/profile");
+export const userTokenRefresh = () => {
+    return axiosInstance.post("/auth/token/refresh");
 };
 
+export const userTokenVerify = () => {
+    return axiosInstance.post(`/auth/token/verify`);
+};
+
+//? USER API
 export const deleteAccount = (email: string) => {
     return axiosInstance.delete("/auth/delete", {
         data: { email: email },
     });
+};
+
+export const getUserInfo = () => {
+    return axiosInstance.get("/user/profile");
 };
 
 export const updateUserInfoName = (name: string) => {
@@ -32,17 +42,15 @@ export const updateUserInfoName = (name: string) => {
     return axiosInstance.post("/user/profile", userName);
 };
 
-export const updateUserInfoProfileImage = (image: string) => {
-    const userImage = {
-        profile_image: image,
-    };
-    return axiosInstance.post("/auth/profile", userImage);
-};
+export const updateUserInfoProfileImage = (image: File) => {
+    const imageWithExtension = new File([image], "profile_image.png", { type: "image/png" });
 
-export const userTokenRefresh = () => {
-    return axiosInstance.post("/auth/token/refresh");
-};
+    const formData = new FormData();
+    formData.append("profile_image", imageWithExtension);
 
-export const userTokenVerify = () => {
-    return axiosInstance.post(`/auth/token/verify`);
+    return axiosInstance.post("/user/profile", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 };

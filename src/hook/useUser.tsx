@@ -3,6 +3,9 @@ import { useCallback } from "react";
 import { authApi } from "../api";
 import { useUserStore } from "../config/store";
 
+/**
+ * @function getUserInfo id/img/username/email/created_at/admin 과 관련된 유저정보 API요청
+ */
 const useUser = () => {
     const { setUserData } = useUserStore();
     const getUserInfo = useCallback(async () => {

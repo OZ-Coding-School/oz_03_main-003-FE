@@ -5,7 +5,7 @@ import UserInfoBadge from "./UserInfoBadge";
 import { useState } from "react";
 import ModalChangeName from "../modal/ModalChangeName";
 import ButtonError from "../button/ButtonError";
-import ModalQuitSite from "../modal/ModalQuitSite";
+import ModalQuitSite from "../modal/ModalDeleteAccount";
 import useSound from "use-sound";
 import pingSound from "../../../assets/sound/btn_ping.mp3";
 import collapseSound from "../../../assets/sound/btn_collapse.mp3";
@@ -111,7 +111,7 @@ const UserInfoMyPage = () => {
             <ButtonError onClick={handleQuitModalOpen} className="mt-5">
                 계정 탈퇴
             </ButtonError>
-            {isOpen && <ModalChangeName isOpen={isOpen} onClose={handleModalClose} />}
+            {isOpen && <ModalChangeName onClose={handleModalClose} />}
             {isQuitOpen && <ModalQuitSite onClose={handleQuitModalClose} />}
         </div>
     );

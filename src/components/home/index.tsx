@@ -1,23 +1,10 @@
-import { useEffect } from "react";
 import { twMerge as tw } from "tailwind-merge";
 
 import UserInfoHome from "../common/userInfo/UserInfoHome";
 import HomeBackground from "./HomeBackground";
 import HomeGrid from "./HomeGrid";
 import HomeDescription from "./HomeDescription";
-import useInfo from "../../hook/useInfo";
 const HomeMain = () => {
-    const { getUserInfo, getUserGridInfo, getUserLevelInfo } = useInfo();
-
-    useEffect(() => {
-        const refreshUserInfo = async () => {
-            await getUserInfo();
-            await getUserGridInfo();
-            await getUserLevelInfo();
-        };
-        refreshUserInfo();
-    }, [getUserInfo, getUserGridInfo, getUserLevelInfo]);
-
     return (
         <div className="">
             <UserInfoHome />
