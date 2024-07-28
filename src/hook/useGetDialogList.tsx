@@ -19,7 +19,6 @@ const useGetDialogList = (chatRoomUuid: string) => {
             setError(null);
             try {
                 const response = await dialogApi.getDialogList(chatRoomUuid);
-                console.log("useGetDialogList update", response);
                 const fetchedDialogList: DialogItem[] = (response.data as DialogList[]).map(
                     (item) => ({
                         userMessage: item.user,
@@ -27,7 +26,6 @@ const useGetDialogList = (chatRoomUuid: string) => {
                     })
                 );
 
-                console.log("fetchedDialogList update", fetchedDialogList);
                 fetchedDialogList.forEach((dialogItem) => {
                     addDialogItem(chatRoomUuid, dialogItem);
                 });

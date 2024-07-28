@@ -2,12 +2,14 @@ import { useRef, useEffect } from "react";
 import { useUserChatStore, useUserStore } from "../../../config/store";
 import ButtonEmoTree from "../button/ButtonEmoTree";
 import useGetDialogList from "../../../hook/useGetDialogList";
+import DialogHandle from "./DialogHandle";
+import { motion } from "framer-motion";
 
 interface DialogRoomProps {
     chatRoomUuid: string;
 }
 const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
-    const { dialogList, isLoading, error } = useGetDialogList(chatRoomUuid);
+    const { dialogList, error } = useGetDialogList(chatRoomUuid);
     const { chatRooms } = useUserChatStore();
     const { userData } = useUserStore();
     const treeUuid = chatRooms.find((data) => data.chat_room_uuid === chatRoomUuid)?.tree_uuid;
@@ -23,21 +25,23 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
         scrollToBottom();
     }, [dialogList]);
 
-    if (isLoading) return <div>로딩 중...</div>;
-    if (error) return <div>에러 발생: {error}</div>;
+    if (dialogList.length === 0) return <DialogHandle text={"현재 대화내역이 없습니다."} />;
+    if (error) return <DialogHandle text={`Rendering Error Issue : ${error}`} />;
+
     return (
         <div className="w-full h-full text-white overflow-y-auto">
             <div>
-                {dialogList.length === 0 ? (
-                    <div>대화 기록이 없습니다.</div>
-                ) : (
-                    dialogList.map((dialogItem, index) => (
-                        <div key={index}>
-                            <div className="mb-4 mr-8">
-                                <p className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto">
-                                    {dialogItem.userMessage.message}
-                                </p>
-                            </div>
+                {dialogList.map((dialogItem, index) => (
+                    <div key={index}>
+                        <div className="mb-4 mr-8">
+                            <p className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto">
+                                {dialogItem.userMessage.message}
+                            </p>
+                        </div>
+                        <motion.div
+                            transition={{ duration: 0.5, type: "just" }}
+                            animate={{ opacity: [0, 1] }}
+                        >
                             {dialogItem.aiMessage && (
                                 <div className="mb-10">
                                     <div className="p-8 border-b border-gray-800">
@@ -62,9 +66,9 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
                                     </div>
                                 </div>
                             )}
-                        </div>
-                    ))
-                )}
+                        </motion.div>
+                    </div>
+                ))}
             </div>
             <div ref={messagesEndRef} />
         </div>
