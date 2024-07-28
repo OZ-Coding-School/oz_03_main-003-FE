@@ -4,6 +4,12 @@ import ButtonEmoTree from "../button/ButtonEmoTree";
 import useGetDialogList from "../../../hook/useGetDialogList";
 import DialogHandle from "./DialogHandle";
 import { motion } from "framer-motion";
+import { Sentiment } from "../../../config/types";
+import BadgeAngry from "../badge/BadgeAngry";
+import BadgeIndifference from "../badge/BadgeIndifference";
+import BadgeHappy from "../badge/BadgeHappy";
+import BadgeSorrow from "../badge/BadgeSorrow";
+import BadgeWorry from "../badge/BadgeWorry";
 
 interface DialogRoomProps {
     chatRoomUuid: string;
@@ -12,7 +18,8 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
     const { dialogList, error } = useGetDialogList(chatRoomUuid);
     const { chatRooms } = useUserChatStore();
     const { userData } = useUserStore();
-    const treeUuid = chatRooms.find((data) => data.chat_room_uuid === chatRoomUuid)?.tree_uuid;
+    const treeUuid =
+        chatRooms.find((data) => data.chat_room_uuid === chatRoomUuid)?.tree_uuid ?? "";
     const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -27,6 +34,33 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
 
     if (dialogList.length === 0) return <DialogHandle text={"현재 대화내역이 없습니다."} />;
     if (error) return <DialogHandle text={`Rendering Error Issue : ${error}`} />;
+
+    const renderSentimentElement = (key: string) => {
+        switch (key) {
+            case "anger":
+                return <BadgeAngry />;
+            case "happiness":
+                return <BadgeHappy />;
+            case "sadness":
+                return <BadgeSorrow />;
+            case "worry":
+                return <BadgeWorry />;
+            case "indifference":
+                return <BadgeIndifference />;
+
+            default:
+                return null;
+        }
+    };
+
+    const renderPositiveSentiments = (sentiments: Sentiment) => {
+        return Object.entries(sentiments).map(([key, value]) => {
+            if (parseFloat(value) > 0) {
+                return renderSentimentElement(key);
+            }
+            return null;
+        });
+    };
 
     return (
         <div className="w-full h-full text-white overflow-y-auto">
@@ -54,7 +88,11 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
                                         <p className="text-gray-200 text-lg font-title mb-6">
                                             감정 키워드 !
                                         </p>
-                                        {JSON.stringify(dialogItem.aiMessage.sentiments)}
+                                        <div className="flex gap-2">
+                                            {renderPositiveSentiments(
+                                                dialogItem.aiMessage.sentiments
+                                            )}
+                                        </div>
                                     </div>
                                     <div className="p-8 border-b border-gray-600 pb-10">
                                         <p className="text-gray-200 text-lg font-title mb-4">
@@ -62,7 +100,13 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
                                             <span className="text-primary">{treeName}</span>
                                             나무가 성장합니다!
                                         </p>
-                                        <ButtonEmoTree>감정을 나무에 전달하기</ButtonEmoTree>
+
+                                        <ButtonEmoTree
+                                            messageUuid={dialogItem.aiMessage?.message_uuid}
+                                            treeUuid={treeUuid}
+                                        >
+                                            감정을 나무에 전달하기
+                                        </ButtonEmoTree>
                                     </div>
                                 </div>
                             )}
