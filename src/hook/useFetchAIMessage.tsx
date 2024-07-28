@@ -1,43 +1,60 @@
-import { useState, useEffect, useCallback } from "react";
-import { postAIResponseMessage } from "../api/dialog";
-import { useUserChatStore } from "../config/store";
+import { useState, useCallback } from "react";
+import { useDialogStore } from "../config/store";
+import { AIMessage, DialogItem } from "../config/types";
+import { dialogApi } from "../api";
 
 const useFetchAIMessage = () => {
-    const [currentChatRoomUuid, setCurrentChatRoomUuid] = useState<string | null>(null);
-    const { setAIResponse } = useUserChatStore((state) => ({
-        setAIResponse: state.setAIResponse,
+    const { setAIMessage, updateDialogItem } = useDialogStore((state) => ({
+        setAIMessage: state.setAIMessage,
+        updateDialogItem: state.updateDialogItem,
     }));
+
+    const [isAILoading, setIsAILoading] = useState(false);
 
     const fetchAIMessage = useCallback(
         async (chatRoomUuid: string, messageUuid: string) => {
             if (!chatRoomUuid || !messageUuid) return;
 
+            setIsAILoading(true);
+
             try {
-                const response = await postAIResponseMessage(chatRoomUuid, messageUuid);
-                setAIResponse(chatRoomUuid, response.data);
+                const response = await dialogApi.postAIMessage(chatRoomUuid, messageUuid);
+                const responseDate = response.headers["date"];
+
+                const aiMessage: AIMessage = {
+                    message_uuid: response.data.message_uuid,
+                    message: response.data.message,
+                    sentiments: response.data.sentiments,
+                    applied_state: response.data.applied_state,
+                    date: responseDate,
+                };
+                setAIMessage(chatRoomUuid, aiMessage);
+
+                const dialogs = useDialogStore.getState().dialogList[chatRoomUuid] || [];
+                const existingDialogItemIndex = dialogs.findIndex(
+                    (item) => item.userMessage.message_uuid === messageUuid
+                );
+
+                if (existingDialogItemIndex !== -1) {
+                    const updatedDialogItem: DialogItem = {
+                        ...dialogs[existingDialogItemIndex],
+                        aiMessage: aiMessage,
+                    };
+                    updateDialogItem(chatRoomUuid, existingDialogItemIndex, updatedDialogItem);
+                    console.log("AI message updated in dialog item:", updatedDialogItem);
+                }
+
+                return aiMessage;
             } catch (error) {
                 console.error("Failed to fetch AI message", error);
+            } finally {
+                setIsAILoading(false);
             }
         },
-        [setAIResponse]
+        [setAIMessage, updateDialogItem]
     );
 
-    useEffect(() => {
-        if (currentChatRoomUuid) {
-            // Note: You need to provide a messageUuid here. You might want to store the last message UUID in the store or pass it as a parameter.
-            // fetchAIMessage(currentChatRoomUuid, lastMessageUuid);
-        }
-    }, [currentChatRoomUuid, fetchAIMessage]);
-
-    const initializeFetch = useCallback(
-        (chatRoomUuid: string, messageUuid: string) => {
-            setCurrentChatRoomUuid(chatRoomUuid);
-            fetchAIMessage(chatRoomUuid, messageUuid);
-        },
-        [fetchAIMessage]
-    );
-
-    return { fetchAIMessage: initializeFetch };
+    return { fetchAIMessage, isAILoading };
 };
 
 export default useFetchAIMessage;

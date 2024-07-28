@@ -1,15 +1,33 @@
 import { motion } from "framer-motion";
 import { PropsWithChildren, useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
+// import { useUpdateEmotions } from "../../../hook/useUpdateEmotions";
 
 interface ButtonProps extends PropsWithChildren {
     className?: string;
     type?: "submit" | "reset" | "button";
     onClick?: () => void;
+    // treeUuid: string;
+    // aiMessageUuid: string;
 }
 
-const ButtonEmotree = ({ className, type = "button", onClick, children }: ButtonProps) => {
+const ButtonEmotree = ({
+    className,
+    type = "button",
+    // onClick,
+    children,
+    // treeUuid,
+    // aiMessageUuid,
+}: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
+    // const { isLoading, error, updateTreeEmotions } = useUpdateEmotions();
+
+    // const handleClick = async () => {
+    //     await updateTreeEmotions(treeUuid, aiMessageUuid);
+    //     if (error) {
+    //         console.log(error, "안돼");
+    //     }
+    // };
 
     return (
         <>
@@ -19,12 +37,13 @@ const ButtonEmotree = ({ className, type = "button", onClick, children }: Button
                     transition: { duration: 0.5 },
                 }}
                 type={type}
-                onClick={onClick}
+                // onClick={handleClick}
+                // disabled={isLoading}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 className={tw(
                     "font-title text-base select-none text-white text-center items-center",
-                    "w-[220px] h-[48px] bg-gradient-to-l relative",
+                    "w-[220px] h-[48px] bg-gradient-to-l relative z-0",
                     "bg-gradient-to-r from-[#B88BFF] via-[#FFB4A2] to-[#8BFFB2]",
                     "bg-[length:200%_100%] border border-white",
                     className
