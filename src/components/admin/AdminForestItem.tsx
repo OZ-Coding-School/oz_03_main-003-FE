@@ -40,7 +40,11 @@ const AdminForestItem = () => {
         playCopy();
     };
 
-    const sortedForest = data.forest.sort();
+    const forestData = data.forest.sort((a, b) => {
+        if (a.user_uuid < b.user_uuid) return -1;
+        if (a.user_uuid > b.user_uuid) return 1;
+        return 0;
+    });
 
     return (
         <div className="w-fit p-8 select-text">
@@ -54,7 +58,7 @@ const AdminForestItem = () => {
                     </tr>
                 </thead>
                 <tbody className="text-lg text-center">
-                    {sortedForest.map((item) => (
+                    {forestData.map((item) => (
                         <tr key={item.forest_uuid} className="">
                             <td className="border p-2">
                                 <div

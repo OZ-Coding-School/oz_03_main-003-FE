@@ -40,6 +40,14 @@ export interface AdminTreeFormData {
     location?: number;
 }
 
+export interface AdminEmotionFormData {
+    happiness?: number;
+    anger?: number;
+    sadness?: number;
+    worry?: number;
+    indifference?: number;
+}
+
 //? USER DATA TYPES -------------------//
 
 export interface UserData {
