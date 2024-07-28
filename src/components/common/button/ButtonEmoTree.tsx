@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { PropsWithChildren, useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
+import { useUpdateEmotions } from "../../../hook/useUpdateEmotions";
 // import { useUpdateEmotions } from "../../../hook/useUpdateEmotions";
 
 interface ButtonProps extends PropsWithChildren {
     className?: string;
     type?: "submit" | "reset" | "button";
     onClick?: () => void;
-    // treeUuid: string;
-    // aiMessageUuid: string;
+    treeUuid: string;
+    messageUuid: string;
 }
 
 const ButtonEmotree = ({
@@ -16,18 +17,17 @@ const ButtonEmotree = ({
     type = "button",
     // onClick,
     children,
-    // treeUuid,
-    // aiMessageUuid,
+    treeUuid,
+    messageUuid,
 }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
-    // const { isLoading, error, updateTreeEmotions } = useUpdateEmotions();
-
-    // const handleClick = async () => {
-    //     await updateTreeEmotions(treeUuid, aiMessageUuid);
-    //     if (error) {
-    //         console.log(error, "안돼");
-    //     }
-    // };
+    const { isLoading, error, updateTreeEmotions } = useUpdateEmotions();
+    const handleClick = async () => {
+        await updateTreeEmotions(treeUuid, messageUuid);
+        if (error) {
+            console.log(error, "안돼");
+        }
+    };
 
     return (
         <>
@@ -37,8 +37,8 @@ const ButtonEmotree = ({
                     transition: { duration: 0.5 },
                 }}
                 type={type}
-                // onClick={handleClick}
-                // disabled={isLoading}
+                onClick={handleClick}
+                disabled={isLoading}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 className={tw(
