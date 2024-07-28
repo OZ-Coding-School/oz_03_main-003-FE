@@ -159,23 +159,6 @@ export interface UserMessage {
     message: string;
 }
 
-export interface ChatRoomMessages {
-    [chatRoomUuid: string]: UserMessage[];
-}
-
-export interface AIResponse {
-    emotions: {
-        happiness: number;
-        anger: number;
-        sadness: number;
-        worry: number;
-        indifference: number;
-    };
-    message_uuid: string;
-    message: string;
-    applied_state: boolean;
-}
-
 export interface Sentiment {
     happiness: number;
     anger: number;
@@ -184,19 +167,20 @@ export interface Sentiment {
     indifference: number;
 }
 
-export interface UserMessage {
-    message_uuid: string;
-    message: string;
-}
-
-export interface AIResponse {
+export interface AIMessage {
     message_uuid: string;
     message: string;
     sentiments: Sentiment;
     applied_state: boolean;
+    date: string;
 }
 
 export interface DialogItem {
+    userMessage: UserMessage;
+    aiMessage?: AIMessage;
+}
+
+export interface DialogList {
+    ai: AIMessage;
     user: UserMessage;
-    ai: AIResponse;
 }

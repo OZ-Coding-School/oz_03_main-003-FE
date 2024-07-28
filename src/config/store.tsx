@@ -9,8 +9,7 @@ import {
     ChatRoom,
     UserData,
     UserMessage,
-    ChatRoomMessages,
-    AIResponse,
+    AIMessage,
     FormData,
     DialogItem,
 } from "./types";
@@ -91,57 +90,66 @@ export const useUserStore = create<UserStore>((set) => ({
 //? USER CHAT DATA GLOBAL STATE
 interface UserChatStore {
     chatRooms: ChatRoom[];
-    userMessages: ChatRoomMessages;
-    aiResponses: { [chatRoomUuid: string]: AIResponse[] };
+
     setChatRooms: (data: ChatRoom[]) => void;
-    setUserMessages: (chatRoomUuid: string, data: UserMessage[]) => void;
-    setAIResponse: (chatRoomUuid: string, data: AIResponse) => void;
 }
 
 export const useUserChatStore = create<UserChatStore>((set) => ({
     chatRooms: [],
-    userMessages: {},
-    aiResponses: {},
 
     setChatRooms: (data: ChatRoom[]) =>
         set(() => ({
             chatRooms: data,
         })),
-    setUserMessages: (chatRoomUuid: string, data: UserMessage[]) =>
-        set((state) => ({
-            userMessages: {
-                ...state.userMessages,
-                [chatRoomUuid]: data,
-            },
-        })),
-    setAIResponse: (chatRoomUuid: string, data: AIResponse) =>
-        set((state) => ({
-            aiResponses: {
-                ...state.aiResponses,
-                [chatRoomUuid]: [...(state.aiResponses[chatRoomUuid] || []), data],
-            },
-        })),
 }));
 
 interface DialogStore {
-    dialogs: { [chatRoomUuid: string]: DialogItem[] };
-    setDialogs: (chatRoomUuid: string, dialogs: DialogItem[]) => void;
-    addDialog: (chatRoomUuid: string, dialog: DialogItem) => void;
+    dialogList: { [chatRoomUuid: string]: DialogItem[] };
+    userMessage: { [chatRoomUuid: string]: UserMessage[] };
+    aiMessages: { [chatRoomUuid: string]: AIMessage[] };
+    setUserMessage: (chatRoomUuid: string, data: UserMessage) => void;
+    setAIMessage: (chatRoomUuid: string, data: AIMessage) => void;
+    addDialogItem: (chatRoomUuid: string, dialogItem: DialogItem) => void;
+    updateDialogItem: (chatRoomUuid: string, index: number, updatedDialogItem: DialogItem) => void;
 }
 
 export const useDialogStore = create<DialogStore>((set) => ({
-    dialogs: {},
-    setDialogs: (chatRoomUuid, dialogs) =>
+    dialogList: {},
+    userMessage: {},
+    aiMessages: {},
+    setUserMessage: (chatRoomUuid: string, data: UserMessage) =>
         set((state) => ({
-            dialogs: { ...state.dialogs, [chatRoomUuid]: dialogs },
-        })),
-    addDialog: (chatRoomUuid, dialog) =>
-        set((state) => ({
-            dialogs: {
-                ...state.dialogs,
-                [chatRoomUuid]: [...(state.dialogs[chatRoomUuid] || []), dialog],
+            userMessage: {
+                ...state.userMessage,
+                [chatRoomUuid]: [...(state.aiMessages[chatRoomUuid] || []), data],
             },
         })),
+    setAIMessage: (chatRoomUuid: string, data: AIMessage) =>
+        set((state) => ({
+            aiMessages: {
+                ...state.aiMessages,
+                [chatRoomUuid]: [...(state.aiMessages[chatRoomUuid] || []), data],
+            },
+        })),
+    addDialogItem: (chatRoomUuid, dialogItem) =>
+        set((state) => ({
+            dialogList: {
+                ...state.dialogList,
+                [chatRoomUuid]: [...(state.dialogList[chatRoomUuid] || []), dialogItem],
+            },
+        })),
+    updateDialogItem: (chatRoomUuid, index, updatedDialogItem) =>
+        set((state) => {
+            const updatedDialogs = [...(state.dialogList[chatRoomUuid] || [])];
+            updatedDialogs[index] = updatedDialogItem;
+
+            return {
+                dialogList: {
+                    ...state.dialogList,
+                    [chatRoomUuid]: updatedDialogs,
+                },
+            };
+        }),
 }));
 
 //? ADMIN DATA GLOBAL STATE
