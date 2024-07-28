@@ -74,7 +74,7 @@ const ModalUpdateChat = ({ onClose, chat_room_uuid }: ModalUpdateChatProps) => {
 
     return (
         <>
-            <nav className="absolute opacity-50 top-0 left-0 w-full h-screen bg-black"></nav>
+            <nav className="absolute opacity-50 top-0 left-0 w-full h-screen bg-black z-10"></nav>
             <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -84,7 +84,7 @@ const ModalUpdateChat = ({ onClose, chat_room_uuid }: ModalUpdateChatProps) => {
                 onKeyDown={(e) => {
                     e.key === "Escape" && closeHandler();
                 }}
-                className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
+                className={tw("inset-0 select-none z-10 fixed flex items-center justify-center")}
             >
                 <nav
                     onClick={stopPropagation}
