@@ -1,12 +1,15 @@
-import useFetchMessages from "./useFetchMessage";
+import useFetchAIMessage from "./useFetchAIMessage";
 import useSendMessage from "./useSendMessage";
-
+import useUpdateDialog from "./useUpdateDialog";
 const useDialog = () => {
-    const { fetchMessages } = useFetchMessages();
     const { sendMessage } = useSendMessage();
+    const { fetchAIMessage } = useFetchAIMessage();
+    const { updateDialog, isAILoading } = useUpdateDialog();
     return {
         sendMessage,
-        fetchMessages,
+        fetchAIMessage,
+        updateDialog,
+        isAILoading,
     };
 };
 export default useDialog;

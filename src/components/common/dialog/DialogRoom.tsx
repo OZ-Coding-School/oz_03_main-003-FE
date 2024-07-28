@@ -1,73 +1,119 @@
-import { useEffect, useRef } from "react";
-import { useUserChatStore } from "../../../config/store";
-import useFetchMessages from "../../../hook/useFetchMessage";
-import useFetchAIMessage from "../../../hook/useFetchAIMessage";
+import { useRef, useEffect } from "react";
+import { useUserChatStore, useUserStore } from "../../../config/store";
 import ButtonEmoTree from "../button/ButtonEmoTree";
+import useGetDialogList from "../../../hook/useGetDialogList";
+import DialogHandle from "./DialogHandle";
+import { motion } from "framer-motion";
+import { Sentiment } from "../../../config/types";
+import BadgeAngry from "../badge/BadgeAngry";
+import BadgeIndifference from "../badge/BadgeIndifference";
+import BadgeHappy from "../badge/BadgeHappy";
+import BadgeSorrow from "../badge/BadgeSorrow";
+import BadgeWorry from "../badge/BadgeWorry";
+
 interface DialogRoomProps {
     chatRoomUuid: string;
 }
-
 const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
-    const { userMessages, aiResponses } = useUserChatStore((state) => ({
-        userMessages: state.userMessages[chatRoomUuid] || [],
-        aiResponses: state.aiResponses[chatRoomUuid] || [],
-    }));
-    const { fetchMessages } = useFetchMessages();
-    const { fetchAIMessage } = useFetchAIMessage();
+    const { dialogList, error } = useGetDialogList(chatRoomUuid);
+    const { chatRooms } = useUserChatStore();
+    const { userData } = useUserStore();
+    const treeUuid =
+        chatRooms.find((data) => data.chat_room_uuid === chatRoomUuid)?.tree_uuid ?? "";
+    const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
-        if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-        }
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
-        fetchMessages(chatRoomUuid);
-    }, [chatRoomUuid, fetchMessages]);
-
-    useEffect(() => {
-        if (userMessages.length > 0) {
-            const lastMessage = userMessages[userMessages.length - 1];
-            fetchAIMessage(chatRoomUuid, lastMessage.message_uuid);
-        }
-    }, [chatRoomUuid, userMessages, fetchAIMessage]);
-
-    useEffect(() => {
         scrollToBottom();
-    }, [userMessages, aiResponses]);
+    }, [dialogList]);
+
+    if (dialogList.length === 0) return <DialogHandle text={"현재 대화내역이 없습니다."} />;
+    if (error) return <DialogHandle text={`Rendering Error Issue : ${error}`} />;
+
+    const renderSentimentElement = (key: string) => {
+        switch (key) {
+            case "anger":
+                return <BadgeAngry />;
+            case "happiness":
+                return <BadgeHappy />;
+            case "sadness":
+                return <BadgeSorrow />;
+            case "worry":
+                return <BadgeWorry />;
+            case "indifference":
+                return <BadgeIndifference />;
+
+            default:
+                return null;
+        }
+    };
+
+    const renderPositiveSentiments = (sentiments: Sentiment) => {
+        return Object.entries(sentiments).map(([key, value]) => {
+            if (parseFloat(value) > 0) {
+                return renderSentimentElement(key);
+            }
+            return null;
+        });
+    };
 
     return (
         <div className="w-full h-full text-white overflow-y-auto">
-            {userMessages.map((msg, index) => (
-                <div key={msg.message_uuid}>
-                    <div className="p-8 bg-gray-800 rounded-md mb-4 w-10/12 ml-auto mr-10">
-                        {msg.message}
-                    </div>
-                    {aiResponses[index] && (
-                        <div className="rounded-md mb-10">
-                            <div className="p-8 border-b border-gray-800">
-                                <p className="text-gray-200  text-lg font-title mb-4">
-                                    대화 속의 감정을 요약했습니다
-                                </p>
-                                {aiResponses[index].message}
-                            </div>
-                            <div className="p-8 border-b border-gray-800">
-                                <p className="text-gray-200  text-lg font-title mb-6">
-                                    감정 키워드 !
-                                </p>
-                            </div>
-                            <div className="p-8 border-b border-gray-600 pb-10">
-                                <p className="text-gray-200  text-lg font-title mb-4">
-                                    감정을 전달하면 나무가 성장합니다!
-                                </p>
-                                <ButtonEmoTree>감정을 나무에 전달하기</ButtonEmoTree>
-                            </div>
+            <div>
+                {dialogList.map((dialogItem, index) => (
+                    <div key={index}>
+                        <div className="mb-4 mr-8">
+                            <p className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto">
+                                {dialogItem.userMessage.message}
+                            </p>
                         </div>
-                    )}
-                </div>
-            ))}
+                        <motion.div
+                            transition={{ duration: 0.5, type: "just" }}
+                            animate={{ opacity: [0, 1] }}
+                        >
+                            {dialogItem.aiMessage && (
+                                <div className="mb-10">
+                                    <div className="p-8 border-b border-gray-800">
+                                        <p className="text-gray-200 text-lg font-title mb-4">
+                                            대화 속의 감정을 요약했습니다
+                                        </p>
+                                        {dialogItem.aiMessage.message}
+                                    </div>
+                                    <div className="p-8 border-b border-gray-800">
+                                        <p className="text-gray-200 text-lg font-title mb-6">
+                                            감정 키워드 !
+                                        </p>
+                                        <div className="flex gap-2">
+                                            {renderPositiveSentiments(
+                                                dialogItem.aiMessage.sentiments
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="p-8 border-b border-gray-600 pb-10">
+                                        <p className="text-gray-200 text-lg font-title mb-4">
+                                            감정을 전달하면{" "}
+                                            <span className="text-primary">{treeName}</span>
+                                            나무가 성장합니다!
+                                        </p>
+
+                                        <ButtonEmoTree
+                                            messageUuid={dialogItem.aiMessage?.message_uuid}
+                                            treeUuid={treeUuid}
+                                        >
+                                            감정을 나무에 전달하기
+                                        </ButtonEmoTree>
+                                    </div>
+                                </div>
+                            )}
+                        </motion.div>
+                    </div>
+                ))}
+            </div>
             <div ref={messagesEndRef} />
         </div>
     );

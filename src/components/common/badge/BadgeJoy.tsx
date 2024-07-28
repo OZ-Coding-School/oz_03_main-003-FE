@@ -10,7 +10,7 @@ const BadgeJoy = () => {
                 "flex items-center justify-center select-none"
             )}
         >
-            <IconJoy className="w-5 mr-1" />
+            <IconJoy className="w-5 mr-1 fill-white" />
             즐거움
         </div>
     );

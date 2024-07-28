@@ -5,12 +5,12 @@ const BadgeIndifference = () => {
     return (
         <div
             className={tw(
-                "bg-gray-600",
+                "bg-gray-600 text-black",
                 "px-4 w-24 h-10 font-title",
                 "flex items-center justify-center select-none"
             )}
         >
-            <IconIndifference className="w-5 pt-2 mr-1" />
+            <IconIndifference className="w-5 pt-2 mr-1 " />
             무관심
         </div>
     );
