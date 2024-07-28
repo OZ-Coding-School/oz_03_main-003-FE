@@ -10,9 +10,11 @@ import BadgeIndifference from "../badge/BadgeIndifference";
 import BadgeHappy from "../badge/BadgeHappy";
 import BadgeSorrow from "../badge/BadgeSorrow";
 import BadgeWorry from "../badge/BadgeWorry";
+
 interface DialogRoomProps {
     chatRoomUuid: string;
 }
+
 const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
     const { dialogList, error } = useGetDialogList(chatRoomUuid);
     const { chatRooms } = useUserChatStore();
@@ -34,28 +36,20 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
     if (dialogList.length === 0) return <DialogHandle text={"현재 대화내역이 없습니다."} />;
     if (error) return <DialogHandle text={`Rendering Error Issue : ${error}`} />;
 
-    const renderSentimentElement = (key: string) => {
-        switch (key) {
-            case "anger":
-                return <BadgeAngry />;
-            case "happiness":
-                return <BadgeHappy />;
-            case "sadness":
-                return <BadgeSorrow />;
-            case "worry":
-                return <BadgeWorry />;
-            case "indifference":
-                return <BadgeIndifference />;
-
-            default:
-                return null;
-        }
+    const sentimentElements = {
+        anger: <BadgeAngry />,
+        happiness: <BadgeHappy />,
+        sadness: <BadgeSorrow />,
+        worry: <BadgeWorry />,
+        indifference: <BadgeIndifference />,
     };
 
     const renderPositiveSentiments = (sentiments: Sentiment) => {
         return Object.entries(sentiments).map(([key, value]) => {
-            if (parseFloat(value) > 0) {
-                <div key={key}>{renderSentimentElement(key)}</div>;
+            if (parseFloat(value) > 0 && key in sentimentElements) {
+                return (
+                    <div key={key}>{sentimentElements[key as keyof typeof sentimentElements]}</div>
+                );
             }
             return null;
         });
