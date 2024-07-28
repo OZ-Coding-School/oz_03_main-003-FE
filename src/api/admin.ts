@@ -1,5 +1,5 @@
 import { axiosInstance } from "./axios";
-import { AdminTreeFormData } from "../config/types";
+import { AdminTreeFormData, AdminEmotionFormData } from "../config/types";
 
 //? ADMIN GET API
 export const getUserList = () => {
@@ -43,4 +43,8 @@ export const updateForestLevel = (uuid: string, level: number) => {
 };
 export const updateTree = (id: string, form: AdminTreeFormData) => {
     return axiosInstance.patch(`/tree/admin/${id}`, form);
+};
+
+export const updateEmotion = (id: string, form: AdminEmotionFormData) => {
+    return axiosInstance.put(`/tree/admin/emotion/${id}`, form);
 };

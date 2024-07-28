@@ -10,7 +10,6 @@ import { IconChange, IconCopy, IconDeleteBtn } from "../../config/IconData";
 import { useAdminStore } from "../../config/store";
 import useSound from "use-sound";
 import pingSound from "../../assets/sound/btn_ping.mp3";
-
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -82,6 +81,12 @@ const AdminTreeItem = () => {
         playCopy();
     };
 
+    const treeData = data.tree.sort((a, b) => {
+        if (a.tree_detail.tree_uuid < b.tree_detail.tree_uuid) return -1;
+        if (a.tree_detail.tree_uuid > b.tree_detail.tree_uuid) return 1;
+        return 0;
+    });
+
     return (
         <div className="w-full p-8 flex justify-center select-text">
             <table className="border-collapse w-full text-xl">
@@ -96,7 +101,7 @@ const AdminTreeItem = () => {
                     </tr>
                 </thead>
                 <tbody className="text-lg text-center">
-                    {data.tree.map((item) => (
+                    {treeData.map((item) => (
                         <tr key={item.tree_detail.tree_uuid} className="">
                             <td className="border p-2">{item.tree_detail.tree_uuid}</td>
                             <td className="border p-2">{item.tree_detail.tree_name}</td>
@@ -121,7 +126,7 @@ const AdminTreeItem = () => {
                                     onClick={() =>
                                         locationHandler(item.tree_detail.tree_uuid, item.user_uuid)
                                     }
-                                    className="select-none p-1 w-full rounded-md transition bg-green-600 hover:bg-green-800 text-white"
+                                    className="select-none p-1 w-full rounded-md transition bg-amber-500 hover:bg-amber-600 text-white"
                                 >
                                     <div className="flex justify-center items-center relative">
                                         <IconChange className="fill-white w-4 absolute left-0 ml-2" />
