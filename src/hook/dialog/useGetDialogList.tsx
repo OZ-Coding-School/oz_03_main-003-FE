@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
-import { useDialogStore } from "../config/store";
-import { DialogItem, DialogList } from "../config/types";
-import { dialogApi } from "../api";
+import { useDialogStore } from "../../config/store";
+import { DialogItem, DialogList } from "../../config/types";
+import { dialogApi } from "../../api";
 
 const useGetDialogList = (chatRoomUuid: string) => {
     const [isLoading, setIsLoading] = useState(true);

@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
-import { useDialogStore } from "../config/store";
-import { AIMessage, DialogItem } from "../config/types";
-import { dialogApi } from "../api";
+import { AIMessage, DialogItem } from "../../config/types";
+import { dialogApi } from "../../api";
+import { useDialogStore } from "../../config/store";
 
 const useFetchAIMessage = () => {
     const { setAIMessage, updateDialogItem } = useDialogStore((state) => ({

@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useUserChatStore, useUserStore } from "../../../config/store";
 import ButtonEmoTree from "../button/ButtonEmoTree";
-import useGetDialogList from "../../../hook/useGetDialogList";
+import useGetDialogList from "../../../hook/dialog/useGetDialogList";
 import DialogHandle from "./DialogHandle";
 import { motion } from "framer-motion";
 import { Sentiment } from "../../../config/types";

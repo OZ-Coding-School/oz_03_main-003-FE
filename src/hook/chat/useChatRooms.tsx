@@ -1,7 +1,7 @@
 import useFetchChatRooms from "./useFetchChatRooms";
 import useAddChatRoom from "./useAddChatRoom";
 import useRemoveChatRoom from "./useRemoveChatRoom";
-import { useUserChatStore } from "../config/store";
+import { useUserChatStore } from "../../config/store";
 import useUpdateChatRoom from "./useUpdateChatRoom";
 
 /**

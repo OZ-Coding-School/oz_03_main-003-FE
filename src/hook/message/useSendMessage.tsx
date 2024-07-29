@@ -1,7 +1,8 @@
 import { useCallback } from "react";
-import { useDialogStore } from "../config/store";
-import { UserMessage, DialogItem } from "../config/types";
-import { dialogApi } from "../api";
+import { UserMessage, DialogItem } from "../../config/types";
+import { dialogApi } from "../../api";
+import { useDialogStore } from "../../config/store";
+
 const useSendMessage = () => {
     const { setUserMessage, addDialogItem } = useDialogStore((state) => ({
         setUserMessage: state.setUserMessage,

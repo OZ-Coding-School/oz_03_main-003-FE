@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { useDialogStore } from "../config/store";
-import useSendMessage from "./useSendMessage";
-import useFetchAIMessage from "./useFetchAIMessage";
+import { useDialogStore } from "../../config/store";
+import useSendMessage from "../message/useSendMessage";
+import useFetchAIMessage from "../message/useFetchAIMessage";
 
 const useUpdateDialog = () => {
     const { sendMessage } = useSendMessage();

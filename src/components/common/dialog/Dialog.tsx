@@ -1,7 +1,7 @@
 import DialogHeader from "./DialogHeader";
 import InputMessage from "./InputMessage";
 import DialogRoom from "./DialogRoom";
-import useGetDialogList from "../../../hook/useGetDialogList";
+import useGetDialogList from "../../../hook/dialog/useGetDialogList";
 import { useEffect } from "react";
 
 interface DialogProps {

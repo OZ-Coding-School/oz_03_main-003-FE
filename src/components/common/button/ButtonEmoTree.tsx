@@ -4,7 +4,7 @@ import { twMerge as tw } from "tailwind-merge";
 import { useUpdateEmotions } from "../../../hook/useUpdateEmotions";
 import useSound from "use-sound";
 import btnSendTree from "../../../assets/sound/btn_sendTree.mp3";
-import useGetDialogList from "../../../hook/useGetDialogList";
+import useGetDialogList from "../../../hook/dialog/useGetDialogList";
 
 interface ButtonProps extends PropsWithChildren {
     className?: string;

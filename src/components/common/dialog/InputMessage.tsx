@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IconSendMsg } from "../../../config/IconData";
-import useUpdateDialog from "../../../hook/useUpdateDialog";
+import useUpdateDialog from "../../../hook/dialog/useUpdateDialog";
 import InputLoadingBar from "./InputLoadingBar";
 import useVerify from "../../../hook/useVerify";
 import useSound from "use-sound";

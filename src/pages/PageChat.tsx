@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import ModalCreateChat from "../components/common/modal/ModalCreateChat";
-import useChatRooms from "../hook/useChatRooms";
+import useChatRooms from "../hook/chat/useChatRooms";
 import { useUserStore } from "../config/store";
 import NonData from "../components/NonData";
 import useInfo from "../hook/useInfo";

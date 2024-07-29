@@ -4,7 +4,7 @@ import { IconClose } from "../../../config/IconData";
 import { twMerge as tw } from "tailwind-merge";
 import { motion } from "framer-motion";
 import ButtonDefault from "../button/ButtonDefault";
-import useChatRooms from "../../../hook/useChatRooms";
+import useChatRooms from "../../../hook/chat/useChatRooms";
 import useVerify from "../../../hook/useVerify";
 import useSound from "use-sound";
 import btnDelete from "../../../assets/sound/btn_delete.mp3";

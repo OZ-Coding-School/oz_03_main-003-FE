@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ModalListItem from "./ModalListItem";
 import { useUserChatStore, useUserStore } from "../../../config/store";
-import useChatRooms from "../../../hook/useChatRooms";
+import useChatRooms from "../../../hook/chat/useChatRooms";
 import ButtonDisable from "../button/ButtonDisable";
 import useSound from "use-sound";
 import btnConfirm from "../../../assets/sound/btn_confirm.mp3";

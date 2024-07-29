@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { useUserStore, useUserChatStore } from "../config/store";
-import { createChatRoom } from "../api/chat";
-import { ChatRoom, CreateChatRoomResponse } from "../config/types";
+import { useUserStore, useUserChatStore } from "../../config/store";
+import { createChatRoom } from "../../api/chat";
+import { ChatRoom, CreateChatRoomResponse } from "../../config/types";
 
 const useAddChatRoom = () => {
     const { setChatRooms } = useUserChatStore((state) => ({

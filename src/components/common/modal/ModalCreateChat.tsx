@@ -5,7 +5,7 @@ import ModalListItem from "./ModalListItem";
 import { useEffect, useRef, useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import { useUserStore } from "../../../config/store";
-import useChatRooms from "../../../hook/useChatRooms";
+import useChatRooms from "../../../hook/chat/useChatRooms";
 import ButtonDisable from "../button/ButtonDisable";
 import useVerify from "../../../hook/useVerify";
 import useSound from "use-sound";
