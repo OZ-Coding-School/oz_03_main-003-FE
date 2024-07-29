@@ -39,7 +39,11 @@ export const updateUserInfoName = (name: string) => {
     const userName = {
         username: name,
     };
-    return axiosInstance.post("/user/profile", userName);
+    return axiosInstance.patch("/user/profile", userName, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 };
 
 export const updateUserInfoProfileImage = (image: File) => {
