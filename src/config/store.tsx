@@ -125,6 +125,7 @@ interface DialogStore {
     setAIMessage: (chatRoomUuid: string, data: AIMessage) => void;
     addDialogItem: (chatRoomUuid: string, dialogItem: DialogItem) => void;
     updateDialogItem: (chatRoomUuid: string, index: number, updatedDialogItem: DialogItem) => void;
+    refreshStatus: (chatRoomUuid: string, newStatuses: boolean[]) => void;
 }
 
 export const useDialogStore = create<DialogStore>((set) => ({
@@ -156,6 +157,22 @@ export const useDialogStore = create<DialogStore>((set) => ({
         set((state) => {
             const updatedDialogs = [...(state.dialogList[chatRoomUuid] || [])];
             updatedDialogs[index] = updatedDialogItem;
+
+            return {
+                dialogList: {
+                    ...state.dialogList,
+                    [chatRoomUuid]: updatedDialogs,
+                },
+            };
+        }),
+
+    refreshStatus: (chatRoomUuid, newStatuses) =>
+        set((state) => {
+            const updatedDialogs =
+                state.dialogList[chatRoomUuid]?.map((dialog, index) => ({
+                    ...dialog,
+                    applied_state: newStatuses[index] || dialog.applied_state,
+                })) || [];
 
             return {
                 dialogList: {

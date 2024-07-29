@@ -6,7 +6,7 @@ import { dialogApi } from "../../api";
 const useGetDialogList = (chatRoomUuid: string) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { dialogList, addDialogItem } = useDialogStore();
+    const { dialogList, addDialogItem, refreshStatus } = useDialogStore();
 
     const fetchDialogList = useCallback(async () => {
         if (dialogList[chatRoomUuid]) {
@@ -38,19 +38,12 @@ const useGetDialogList = (chatRoomUuid: string) => {
     const updateDialogList = useCallback(async () => {
         try {
             const response = await dialogApi.getDialogList(chatRoomUuid);
-            const fetchedDialogList: DialogItem[] = response.data.map((item: DialogList) => ({
-                userMessage: item.user,
-                aiMessage: item.ai,
-                applied_state: item.applied_state,
-            }));
-
-            fetchedDialogList.forEach((dialogItem) => {
-                addDialogItem(chatRoomUuid, dialogItem);
-            });
+            const newStatuses = response.data.map((item: DialogList) => item.applied_state);
+            refreshStatus(chatRoomUuid, newStatuses);
         } catch (err) {
-            console.error("fetchDialogList Failed", err);
+            console.error("updateDialogList Failed", err);
         }
-    }, [addDialogItem, chatRoomUuid]);
+    }, [chatRoomUuid, refreshStatus]);
 
     const currentDialogList = dialogList[chatRoomUuid] || [];
 

@@ -57,8 +57,8 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
     return (
         <div className="w-full h-full text-white overflow-y-auto">
             <div>
-                {dialogList.map((dialogItem) => (
-                    <div key={dialogItem.userMessage.message_uuid}>
+                {dialogList.map((dialogItem, index) => (
+                    <div key={dialogItem.userMessage.message_uuid + index}>
                         <div className="mb-4 mr-8">
                             <p className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto">
                                 {dialogItem.userMessage.message}

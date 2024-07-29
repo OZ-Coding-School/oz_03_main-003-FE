@@ -25,7 +25,6 @@ const ButtonEmoTree = ({
     const [hovered, setHovered] = useState(false);
     const { isLoading, error, updateTreeEmotions } = useUpdateEmotions();
     const { updateDialogList } = useGetDialogList(chatRoomUuid);
-
     const [playTree] = useSound(btnSendTree, { volume: 0.75 });
     const handleClick = async () => {
         await updateTreeEmotions(treeUuid, messageUuid);
