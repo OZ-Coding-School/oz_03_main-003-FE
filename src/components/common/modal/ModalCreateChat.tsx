@@ -89,6 +89,7 @@ const ModalCreateChat = ({ onClose }: ModalCreateChatProps) => {
                 onClick={closeHandler}
                 onKeyDown={(e) => {
                     e.key === "Escape" && closeHandler();
+                    e.key === "Enter" && handleSubmit();
                 }}
                 className={tw("inset-0 select-none z-0 fixed flex items-center justify-center")}
             >

@@ -31,13 +31,12 @@ const InputMessage = ({ chatRoomUuid }: InputMessageProps) => {
     return (
         <div className="px-5 shadow-black shadow-lg relative">
             <div className="border border-color-white h-12 px-5 rounded-full flex w-full box-border relative">
-                <input
-                    type="text"
+                <textarea
                     value={message}
-                    className="bg-transparent outline-none text-white flex-grow"
+                    className="overflow-y-hidden bg-transparent outline-none resize-none py-2.5 text-white flex-grow"
                     placeholder="대화를 입력해주세요."
                     onChange={(e) => setMessage(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+                    onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSendMessage()}
                     disabled={isAILoading}
                 />
                 <div className="absolute right-1 top-1 rounded-full w-10 h-10 flex justify-center items-center hover:bg-gray-800 transition">
