@@ -47,8 +47,6 @@ const useGetDialogList = (chatRoomUuid: string) => {
             fetchedDialogList.forEach((dialogItem) => {
                 addDialogItem(chatRoomUuid, dialogItem);
             });
-
-            setIsLoading(false);
         } catch (err) {
             console.error("fetchDialogList Failed", err);
         }
