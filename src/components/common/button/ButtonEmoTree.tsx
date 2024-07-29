@@ -4,11 +4,13 @@ import { twMerge as tw } from "tailwind-merge";
 import { useUpdateEmotions } from "../../../hook/useUpdateEmotions";
 import useSound from "use-sound";
 import btnSendTree from "../../../assets/sound/btn_sendTree.mp3";
+import useGetDialogList from "../../../hook/useGetDialogList";
 
 interface ButtonProps extends PropsWithChildren {
     className?: string;
     type?: "submit" | "reset" | "button";
     treeUuid: string;
+    chatRoomUuid: string;
     messageUuid: string;
 }
 
@@ -18,14 +20,16 @@ const ButtonEmoTree = ({
     children,
     treeUuid,
     messageUuid,
+    chatRoomUuid,
 }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
     const { isLoading, error, updateTreeEmotions } = useUpdateEmotions();
-    const [playTree] = useSound(btnSendTree, { volume: 0.75 });
+    const { updateDialogList } = useGetDialogList(chatRoomUuid);
 
+    const [playTree] = useSound(btnSendTree, { volume: 0.75 });
     const handleClick = async () => {
         await updateTreeEmotions(treeUuid, messageUuid);
-
+        await updateDialogList();
         playTree();
         if (error) {
             console.log(error, "안돼");

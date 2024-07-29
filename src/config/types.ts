@@ -186,9 +186,11 @@ export interface AIMessage {
 export interface DialogItem {
     userMessage: UserMessage;
     aiMessage?: AIMessage;
+    applied_state: boolean;
 }
 
 export interface DialogList {
     ai: AIMessage;
     user: UserMessage;
+    applied_state: boolean;
 }

@@ -20,13 +20,12 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
     const { chatRooms } = useUserChatStore();
     const { userData } = useUserStore();
     const messagesEndRef = useRef<HTMLDivElement>(null);
-
     const treeUuid =
         chatRooms.find((data) => data.chat_room_uuid === chatRoomUuid)?.tree_uuid ?? "";
     const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        messagesEndRef.current?.scrollIntoView();
     };
 
     useEffect(() => {
@@ -87,20 +86,23 @@ const DialogRoom = ({ chatRoomUuid }: DialogRoomProps) => {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="p-8 border-b border-gray-600 pb-10">
-                                        <p className="text-gray-200 text-lg font-title mb-4">
-                                            감정을 전달하면{" "}
-                                            <span className="text-primary">{treeName}</span>
-                                            나무가 성장합니다!
-                                        </p>
+                                    {!dialogItem.applied_state && (
+                                        <div className="p-8 border-b border-gray-600 pb-10">
+                                            <p className="text-gray-200 text-lg font-title mb-4">
+                                                감정을 전달하면{" "}
+                                                <span className="text-primary">{treeName}</span>
+                                                나무가 성장합니다!
+                                            </p>
 
-                                        <ButtonEmoTree
-                                            messageUuid={dialogItem.aiMessage?.message_uuid}
-                                            treeUuid={treeUuid}
-                                        >
-                                            감정을 나무에 전달하기
-                                        </ButtonEmoTree>
-                                    </div>
+                                            <ButtonEmoTree
+                                                chatRoomUuid={chatRoomUuid}
+                                                messageUuid={dialogItem.aiMessage?.message_uuid}
+                                                treeUuid={treeUuid}
+                                            >
+                                                감정을 나무에 전달하기
+                                            </ButtonEmoTree>
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </motion.div>

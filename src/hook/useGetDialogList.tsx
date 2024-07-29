@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState } from "react";
 import { useDialogStore } from "../config/store";
 import { DialogItem, DialogList } from "../config/types";
 import { dialogApi } from "../api";
@@ -8,42 +8,55 @@ const useGetDialogList = (chatRoomUuid: string) => {
     const [error, setError] = useState(null);
     const { dialogList, addDialogItem } = useDialogStore();
 
-    useEffect(() => {
-        const fetchDialogList = async () => {
-            if (dialogList[chatRoomUuid]) {
-                setIsLoading(false);
-                return;
-            }
+    const fetchDialogList = useCallback(async () => {
+        if (dialogList[chatRoomUuid]) {
+            setIsLoading(false);
+            return;
+        }
+        setIsLoading(true);
+        setError(null);
+        try {
+            const response = await dialogApi.getDialogList(chatRoomUuid);
+            const fetchedDialogList: DialogItem[] = response.data.map((item: DialogList) => ({
+                userMessage: item.user,
+                aiMessage: item.ai,
+                applied_state: item.applied_state,
+            }));
 
-            setIsLoading(true);
-            setError(null);
-            try {
-                const response = await dialogApi.getDialogList(chatRoomUuid);
-                const fetchedDialogList: DialogItem[] = (response.data as DialogList[]).map(
-                    (item) => ({
-                        userMessage: item.user,
-                        aiMessage: item.ai,
-                    })
-                );
+            fetchedDialogList.forEach((dialogItem) => {
+                addDialogItem(chatRoomUuid, dialogItem);
+            });
 
-                fetchedDialogList.forEach((dialogItem) => {
-                    addDialogItem(chatRoomUuid, dialogItem);
-                });
+            setIsLoading(false);
+        } catch (err) {
+            console.error("fetchDialogList Failed", err);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [addDialogItem, chatRoomUuid, dialogList]);
 
-                setIsLoading(false);
-            } catch (err) {
-                // ... (error handling)
-            } finally {
-                setIsLoading(false);
-            }
-        };
+    const updateDialogList = useCallback(async () => {
+        try {
+            const response = await dialogApi.getDialogList(chatRoomUuid);
+            const fetchedDialogList: DialogItem[] = response.data.map((item: DialogList) => ({
+                userMessage: item.user,
+                aiMessage: item.ai,
+                applied_state: item.applied_state,
+            }));
 
-        fetchDialogList();
-    }, [chatRoomUuid, addDialogItem, dialogList]);
+            fetchedDialogList.forEach((dialogItem) => {
+                addDialogItem(chatRoomUuid, dialogItem);
+            });
+
+            setIsLoading(false);
+        } catch (err) {
+            console.error("fetchDialogList Failed", err);
+        }
+    }, [addDialogItem, chatRoomUuid]);
 
     const currentDialogList = dialogList[chatRoomUuid] || [];
 
-    return { dialogList: currentDialogList, isLoading, error };
+    return { dialogList: currentDialogList, isLoading, error, fetchDialogList, updateDialogList };
 };
 
 export default useGetDialogList;

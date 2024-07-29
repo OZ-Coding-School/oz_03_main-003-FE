@@ -52,6 +52,7 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
     const handleClick = () => {
         onClick(item.chat_room_uuid);
     };
+
     return (
         <>
             <div
