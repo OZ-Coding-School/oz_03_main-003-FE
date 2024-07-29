@@ -30,6 +30,7 @@ const ButtonEmoTree = ({
     const handleClick = async () => {
         await updateTreeEmotions(treeUuid, messageUuid);
         await updateDialogList();
+
         playTree();
         if (error) {
             console.log(error, "안돼");
