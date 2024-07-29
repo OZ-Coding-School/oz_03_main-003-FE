@@ -2,11 +2,13 @@ import { useCallback, useState } from "react";
 import { useDialogStore } from "../../config/store";
 import { DialogItem, DialogList } from "../../config/types";
 import { dialogApi } from "../../api";
+import useVerify from "../useVerify";
 
 const useGetDialogList = (chatRoomUuid: string) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const { dialogList, addDialogItem } = useDialogStore();
+    const { checkLoginStatus } = useVerify();
 
     const fetchDialogList = useCallback(async () => {
         if (dialogList[chatRoomUuid]) {
@@ -16,6 +18,7 @@ const useGetDialogList = (chatRoomUuid: string) => {
         setIsLoading(true);
         setError(null);
         try {
+            await checkLoginStatus();
             const response = await dialogApi.getDialogList(chatRoomUuid);
             const fetchedDialogList: DialogItem[] = response.data.map((item: DialogList) => ({
                 userMessage: item.user,
@@ -33,7 +36,7 @@ const useGetDialogList = (chatRoomUuid: string) => {
         } finally {
             setIsLoading(false);
         }
-    }, [addDialogItem, chatRoomUuid, dialogList]);
+    }, [addDialogItem, chatRoomUuid, dialogList, checkLoginStatus]);
 
     const currentDialogList = dialogList[chatRoomUuid] || [];
 

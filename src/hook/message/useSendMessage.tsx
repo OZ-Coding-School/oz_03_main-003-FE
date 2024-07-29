@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { UserMessage, DialogItem } from "../../config/types";
 import { dialogApi } from "../../api";
 import { useDialogStore } from "../../config/store";
+import useVerify from "../useVerify";
 
 const useSendMessage = () => {
     const { setUserMessage, addDialogItem } = useDialogStore((state) => ({
@@ -9,9 +10,12 @@ const useSendMessage = () => {
         addDialogItem: state.addDialogItem,
     }));
 
+    const { checkLoginStatus } = useVerify();
+
     const sendMessage = useCallback(
         async (chatRoomUuid: string, message: string) => {
             try {
+                await checkLoginStatus();
                 const response = await dialogApi.sendUserMessage(chatRoomUuid, message);
                 const newMessage: UserMessage = {
                     message_uuid: response.data.message_uuid,
@@ -30,7 +34,7 @@ const useSendMessage = () => {
                 console.error("Failed to send message", error);
             }
         },
-        [setUserMessage, addDialogItem]
+        [setUserMessage, addDialogItem, checkLoginStatus]
     );
 
     return { sendMessage };

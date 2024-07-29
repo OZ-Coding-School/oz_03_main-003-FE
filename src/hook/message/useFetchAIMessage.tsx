@@ -2,12 +2,14 @@ import { useState, useCallback } from "react";
 import { AIMessage, DialogItem } from "../../config/types";
 import { dialogApi } from "../../api";
 import { useDialogStore } from "../../config/store";
+import useVerify from "../useVerify";
 
 const useFetchAIMessage = () => {
     const { setAIMessage, updateDialogItem } = useDialogStore((state) => ({
         setAIMessage: state.setAIMessage,
         updateDialogItem: state.updateDialogItem,
     }));
+    const { checkLoginStatus } = useVerify();
 
     const [isAILoading, setIsAILoading] = useState(false);
 
@@ -18,6 +20,7 @@ const useFetchAIMessage = () => {
             setIsAILoading(true);
 
             try {
+                checkLoginStatus();
                 const response = await dialogApi.postAIMessage(chatRoomUuid, messageUuid);
                 const responseDate = response.headers["date"];
 
@@ -51,7 +54,7 @@ const useFetchAIMessage = () => {
                 setIsAILoading(false);
             }
         },
-        [setAIMessage, updateDialogItem]
+        [setAIMessage, updateDialogItem, checkLoginStatus]
     );
 
     return { fetchAIMessage, isAILoading };

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { IconSendMsg } from "../../../config/IconData";
-import useUpdateDialog from "../../../hook/dialog/useUpdateDialog";
 import InputLoadingBar from "./InputLoadingBar";
 import useVerify from "../../../hook/useVerify";
 import useSound from "use-sound";
 import messageSound from "../../../assets/sound/message_request.mp3";
 import responseSound from "../../../assets/sound/message_response.mp3";
+import useUpdateDialog from "../../../hook/dialog/useUpdateDialog";
 
 interface InputMessageProps {
     chatRoomUuid: string;
