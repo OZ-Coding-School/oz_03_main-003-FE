@@ -45,6 +45,8 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
         }
     }, []);
 
+    console.log(treeExperience.emotionMax);
+
     const growHandler = async () => {
         if (treeExperience.emotionMax === null) {
             console.log("모든 값이 같음");
