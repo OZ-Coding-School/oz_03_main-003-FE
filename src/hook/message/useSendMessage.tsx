@@ -17,13 +17,11 @@ const useSendMessage = () => {
                     message_uuid: response.data.message_uuid,
                     message: message,
                 };
-                const applied_state = response.data.applied_state;
 
                 setUserMessage(chatRoomUuid, newMessage);
 
                 const newDialogItem: DialogItem = {
                     userMessage: newMessage,
-                    applied_state: applied_state,
                 };
                 addDialogItem(chatRoomUuid, newDialogItem);
 

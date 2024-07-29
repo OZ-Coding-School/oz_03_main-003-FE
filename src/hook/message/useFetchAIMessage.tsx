@@ -25,7 +25,7 @@ const useFetchAIMessage = () => {
                     message_uuid: response.data.message_uuid,
                     message: response.data.message,
                     sentiments: response.data.sentiments,
-                    applied_state: response.data.applied_state,
+
                     date: responseDate,
                 };
                 setAIMessage(chatRoomUuid, aiMessage);
@@ -39,6 +39,7 @@ const useFetchAIMessage = () => {
                     const updatedDialogItem: DialogItem = {
                         ...dialogs[existingDialogItemIndex],
                         aiMessage: aiMessage,
+                        applied_state: response.data.applied_state,
                     };
                     updateDialogItem(chatRoomUuid, existingDialogItemIndex, updatedDialogItem);
                 }

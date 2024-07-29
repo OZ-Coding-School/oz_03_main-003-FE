@@ -179,14 +179,13 @@ export interface AIMessage {
     message_uuid: string;
     message: string;
     sentiments: Sentiment;
-    applied_state: boolean;
     date: string;
 }
 
 export interface DialogItem {
     userMessage: UserMessage;
     aiMessage?: AIMessage;
-    applied_state: boolean;
+    applied_state?: boolean;
 }
 
 export interface DialogList {
