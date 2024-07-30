@@ -9,6 +9,10 @@ import soundMusic from "../../../assets/sound/music_loop.mp3";
 import { IconPause, IconPlay } from "../../../config/IconData";
 import { motion } from "framer-motion";
 
+const globalAudio = new Audio(soundMusic);
+globalAudio.loop = true;
+globalAudio.volume = 0.25;
+
 const HeaderLoggedIn = () => {
     const { userData } = useUserStore();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,14 +20,6 @@ const HeaderLoggedIn = () => {
     const { play, setPlay } = useMusicStore();
     const menuRef = useRef<HTMLDivElement>(null);
     const nav = useNavigate();
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-
-    useEffect(() => {
-        const audio = new Audio(soundMusic);
-        audio.loop = true;
-        audio.volume = 0.25;
-        audioRef.current = audio;
-    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -32,9 +28,9 @@ const HeaderLoggedIn = () => {
 
     const musicHandler = () => {
         if (play) {
-            audioRef.current?.pause();
+            globalAudio.pause();
         } else {
-            audioRef.current?.play();
+            globalAudio.play();
         }
         setPlay();
     };
@@ -58,7 +54,7 @@ const HeaderLoggedIn = () => {
                 <div className="flex-grow">
                     <img
                         onClick={() => nav("/home")}
-                        src="/logo-primary.png"
+                        src="/img/logo-primary.png"
                         alt="Logo"
                         className="h-10 cursor-pointer"
                     />

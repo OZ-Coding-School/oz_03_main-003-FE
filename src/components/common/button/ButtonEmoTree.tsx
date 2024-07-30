@@ -4,7 +4,7 @@ import { twMerge as tw } from "tailwind-merge";
 import useSound from "use-sound";
 import btnSendTree from "../../../assets/sound/btn_sendTree.mp3";
 import { treeApi } from "../../../api";
-import { useDialogStore } from "../../../config/store";
+import { useDialogStore, useModalStore } from "../../../config/store";
 import useVerify from "../../../hook/useVerify";
 
 interface ButtonProps extends PropsWithChildren {
@@ -18,6 +18,7 @@ const ButtonEmoTree = ({ className, type = "button", aiUuid, children }: ButtonP
     const { selected_tree, messages, setStateChange } = useDialogStore();
     const { checkLoginStatus } = useVerify();
     const [playTree] = useSound(btnSendTree, { volume: 0.75 });
+    const { setModal } = useModalStore();
 
     const currentIndex = messages.ai.findIndex((item) => item.message_uuid === aiUuid);
 
@@ -26,6 +27,7 @@ const ButtonEmoTree = ({ className, type = "button", aiUuid, children }: ButtonP
         await treeApi.updateEmotions(selected_tree.tree_uuid, aiUuid);
         setStateChange(currentIndex);
         playTree();
+        setModal(true);
     };
 
     return (

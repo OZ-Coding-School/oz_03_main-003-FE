@@ -7,7 +7,7 @@ interface ToastDefaultProps {
     duration?: number;
 }
 
-const ToastDefault = ({ message, duration = 2000 }: ToastDefaultProps) => {
+const ToastChat = ({ message, duration = 2000 }: ToastDefaultProps) => {
     const [progress, setProgress] = useState(100);
     const { setModal } = useModalStore();
 
@@ -34,7 +34,9 @@ const ToastDefault = ({ message, duration = 2000 }: ToastDefaultProps) => {
 
     return (
         <div
-            className={tw("absolute select-none top-[300px] flex w-full h-fit z-50 justify-center")}
+            className={tw(
+                "absolute select-none -top-[900px] flex w-full h-fit z-50 justify-center"
+            )}
         >
             <div className=" relative font-title bg-gray-800 border border-gray-600 w-[320px] h-[60px] text-gray-200 overflow-hidden">
                 <div className="p-5 flex flex-col">{message}</div>
@@ -46,4 +48,4 @@ const ToastDefault = ({ message, duration = 2000 }: ToastDefaultProps) => {
         </div>
     );
 };
-export default ToastDefault;
+export default ToastChat;

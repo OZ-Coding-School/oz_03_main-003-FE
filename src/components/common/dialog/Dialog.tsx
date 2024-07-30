@@ -24,7 +24,7 @@ const Dialog = ({ onClose }: DialogProps) => {
     }, [initDialogList, checkLoginStatus]);
 
     return (
-        <div className="h-full w-[800px] mx-auto flex flex-col border-l border-r border-gray-600 overflow-hidden">
+        <div className="h-full transition-all w-[800px] mx-auto flex flex-col border-l border-r border-gray-600 overflow-hidden">
             <DialogHeader onClose={onClose} />
             <DialogRoom />
             <InputMessage />

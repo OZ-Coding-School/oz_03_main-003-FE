@@ -6,8 +6,10 @@ import useSound from "use-sound";
 import messageSound from "../../../assets/sound/message_request.mp3";
 import responseSound from "../../../assets/sound/message_response.mp3";
 import { dialogApi } from "../../../api";
-import { useDialogStore } from "../../../config/store";
+import { useDialogStore, useModalStore } from "../../../config/store";
 import { ResponseAIMessage, UserMessage } from "../../../config/types";
+import { twMerge as tw } from "tailwind-merge";
+import ToastChat from "../toast/ToastChat";
 
 const InputMessage = () => {
     const [message, setMessage] = useState("");
@@ -16,6 +18,7 @@ const InputMessage = () => {
     const { chatroom_uuid, setAiMessages, setUserMessages } = useDialogStore();
     const [playSend] = useSound(messageSound, { volume: 0.75 });
     const [playResponse] = useSound(responseSound, { volume: 0.75 });
+    const { modal } = useModalStore();
 
     const handleSendMessage = async () => {
         if (message.trim() !== "") {
@@ -51,36 +54,43 @@ const InputMessage = () => {
     };
 
     return (
-        <div className="px-5 shadow-black shadow-lg relative">
-            <div className="border border-color-white h-12 px-5 rounded-full flex w-full box-border relative">
+        <div className="relative pl-5 pr-12 shadow-black w-full">
+            <div
+                className={tw(
+                    "border border-color-white h-[50px] whitespace-normal transition-all px-5 rounded-md flex w-full box-border relative",
+                    message.length > 35 && "h-[75px]",
+                    message.length > 75 && "h-[100px]"
+                )}
+            >
                 <textarea
                     value={message}
-                    className="overflow-y-hidden bg-transparent outline-none resize-none py-2.5 text-white flex-grow"
+                    className={tw(
+                        "outline-none overflow-y-auto bg-transparent",
+                        "resize-none p-2.5 pl-2 pr-10 text-white flex-grow"
+                    )}
                     placeholder="대화를 입력해주세요."
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSendMessage()}
                     disabled={loading}
                 />
-                <div className="absolute right-1 top-1 rounded-full w-10 h-10 flex justify-center items-center hover:bg-gray-800 transition">
-                    <button
-                        type="button"
-                        className="w-full h-full text-zero fill-white flex items-center justify-center"
-                        onClick={handleSendMessage}
-                        disabled={loading}
-                    >
+
+                <button
+                    type="button"
+                    className="absolute -right-[46px] h-full text-zero fill-white flex items-center justify-center"
+                    onClick={handleSendMessage}
+                    disabled={loading}
+                >
+                    <div className="hover:bg-gray-800 transition p-3 rounded-full ">
                         <IconSendMsg className="h-4.5" />
                         전송
-                    </button>
-                </div>
+                    </div>
+                </button>
             </div>
-            <p className="text-center text-sm  text-gray-200 mt-1 mb-4">
+            <p className="text-center text-sm text-gray-200 mt-1 mb-4">
                 emotree AI는 원하는 대상의 부가설명을 해주면 더 정확한 감정분석을 합니다.
             </p>
-            {loading && (
-                <div className="text-white absolute top-[-100px] left-[50%] translate-x-[-50%]">
-                    <InputLoadingBar />
-                </div>
-            )}
+            {loading && <InputLoadingBar />}
+            {modal && <ToastChat message="감정이 전달 되었습니다." />}
         </div>
     );
 };

@@ -46,7 +46,7 @@ const DialogRoom = () => {
         return <DialogHandle text={"현재 대화내역이 없습니다."} />;
 
     return (
-        <div className="w-full h-full text-white overflow-y-auto">
+        <div className="w-full h-full text-white overflow-y-auto overflow-x-hidden">
             <div>
                 {messages.user.map((dialogItem, index) => (
                     <div key={index}>
@@ -54,10 +54,10 @@ const DialogRoom = () => {
                             transition={{ delay: 0.5, duration: 0.5, type: "just" }}
                             animate={{ opacity: [0, 1] }}
                         >
-                            <div className="mb-4 mr-8">
-                                <p className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto">
+                            <div className="mb-4 mr-8 w-full">
+                                <div className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto break-words whitespace-pre-line">
                                     {dialogItem.message}
-                                </p>
+                                </div>
                             </div>
                             <div className="mb-10">
                                 <div className="p-8 border-b border-gray-800">
@@ -77,7 +77,7 @@ const DialogRoom = () => {
                                 {!messages.ai[index].applied_state ? (
                                     <div className="p-8 border-b border-gray-600 pb-10">
                                         <p className="text-gray-200 text-lg font-title mb-4">
-                                            감정을 전달하면{" "}
+                                            감정을 전달하면
                                             <span className="text-primary">
                                                 {selected_tree.tree_name}
                                             </span>

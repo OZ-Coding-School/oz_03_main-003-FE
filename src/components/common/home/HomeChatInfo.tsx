@@ -5,8 +5,8 @@ const HomeChatInfo = () => {
     return (
         <div>
             <div className="m-auto mt-[70px] flex justify-center">
-                <img className="" src="../src/assets/images/landing-chat.svg" alt="채팅 이미지" />
-                <div className="mt-[202px]">
+                <img className="" src="/img/landing_chat.png" alt="채팅 이미지" />
+                <div className="">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}

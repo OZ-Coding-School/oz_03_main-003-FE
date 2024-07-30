@@ -6,7 +6,8 @@ const ButtonEmoTreeDisabled = () => {
             <button
                 className={tw(
                     "font-title cursor-default text-base select-none text-white text-center items-center",
-                    "w-[220px] h-[48px] bg-gradient-to-l relative z-0",
+
+                    "w-[220px] h-[48px] mt-1 bg-gradient-to-l relative z-0",
                     "bg-gray-800",
                     "border border-gray-600"
                 )}

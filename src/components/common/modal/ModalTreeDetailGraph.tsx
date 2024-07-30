@@ -77,7 +77,7 @@ const ModalTreeDetailGraph = ({ emotions }: ModalTreeDetailGraphProps) => {
             <main className="relative flex h-full">
                 <article className="w-[20px] border-r border-gray-400 h-full flex flex-col justify-between items-center">
                     {yAxisLabels.map((label, index) => (
-                        <div key={index} className="text-gray-200 text-sm">
+                        <div key={index} className="text-gray-200 text-sm mr-3">
                             {label}
                         </div>
                     ))}
