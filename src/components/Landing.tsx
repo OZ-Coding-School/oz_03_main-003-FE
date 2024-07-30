@@ -24,7 +24,11 @@ const Landing = () => {
             <div className="text-white w-full">
                 <header className="sticky top-0 w-full h-[80px] bg-black mt-10 text-center z-30 flex items-center justify-center">
                     <h1 className="">
-                        <img className="w-[184px] m-auto" src="/logo-white.png" alt="emotree"></img>
+                        <img
+                            className="w-[184px] m-auto"
+                            src="/logo-primary.png"
+                            alt="emotree"
+                        ></img>
                     </h1>
                 </header>
                 <div className="mt-[100px] pb-[80px]">

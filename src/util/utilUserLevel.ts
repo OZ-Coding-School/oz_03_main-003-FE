@@ -38,33 +38,36 @@ const calculateCurrentExperience = (res: TreeEmotionData[]) => {
     return totalExperience;
 };
 
+const maxLevel = Object.keys(userExperience).length - 1;
 //? 사용자의 레벨을 계산합니다
 //? 현재경험치와 요구경험치를 비교하여 재귀적으로 계산합니다.
-export const calculateUserLevel = async (level: number, forestUUID: string): Promise<LevelData> => {
-    const maxLevel = Object.keys(userExperience).length - 1;
-
+const calculateUserLevelRecursive = (level: number, currentExp: number): LevelData => {
     if (level < 0 || level > maxLevel) {
         throw new Error("Invalid level");
-    }
-
-    const { data: emotionResponse } = await treeApi.getTreeEmotionDataAll();
-    let currentExp = 0;
-
-    if (emotionResponse.length === 0) {
-        currentExp = 0;
-    } else {
-        currentExp = calculateCurrentExperience(emotionResponse);
     }
 
     const percentage = calculateExperience(level, currentExp);
 
     if (Number(percentage) === 100 && level < maxLevel) {
-        await forestApi.updateForestLevel(forestUUID, level + 1);
-        return calculateUserLevel(level + 1, forestUUID);
+        return calculateUserLevelRecursive(level + 1, currentExp);
     }
 
     return {
         userLevel: level,
         experience: Number(percentage),
     };
+};
+
+export const calculateUserLevel = async (level: number, forestUUID: string): Promise<LevelData> => {
+    const { data: emotionResponse } = await treeApi.getTreeEmotionDataAll();
+    const currentExp =
+        emotionResponse.length === 0 ? 0 : calculateCurrentExperience(emotionResponse);
+
+    const result = calculateUserLevelRecursive(level, currentExp);
+
+    if (result.userLevel > level) {
+        await forestApi.updateForestLevel(forestUUID, result.userLevel);
+    }
+
+    return result;
 };

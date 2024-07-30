@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { PropsWithChildren, useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
-import useSound from "use-sound";
-import btnSendTree from "../../../assets/sound/btn_sendTree.mp3";
 
 interface ButtonProps extends PropsWithChildren {
     className?: string;

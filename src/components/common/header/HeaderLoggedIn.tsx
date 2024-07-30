@@ -58,7 +58,7 @@ const HeaderLoggedIn = () => {
                 <div className="flex-grow">
                     <img
                         onClick={() => nav("/home")}
-                        src="/logo-white.png"
+                        src="/logo-primary.png"
                         alt="Logo"
                         className="h-10 cursor-pointer"
                     />
