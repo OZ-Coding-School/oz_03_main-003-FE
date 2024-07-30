@@ -3,26 +3,38 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { FormData, AdminPageUserData } from "../../config/types";
 import { twMerge as tw } from "tailwind-merge";
-import { adminApi, authApi } from "../../api";
+import { adminApi } from "../../api";
 import useVerify from "../../hook/useVerify";
 import useAdminData from "../../hook/useAdminData";
-import { IconChange, IconCopy, IconDeleteBtn } from "../../config/IconData";
-import { useAdminStore } from "../../config/store";
+import { IconChange, IconCopy, IconDeleteBtn, IconUpdate } from "../../config/IconData";
+import { useAdminStore, useModalStore } from "../../config/store";
 import useSound from "use-sound";
 import pingSound from "../../assets/sound/btn_ping.mp3";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+const formatDate = (dateString: string) => {
+    return dayjs(dateString).format("YYYY-MM-DD HH:mm");
+};
+
 const AdminUserItem = () => {
     const { data, setData } = useAdminStore();
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
     const [playCopy] = useSound(pingSound, { volume: 0.75 });
+    const { setModal } = useModalStore();
 
-    const formatDate = (dateString: string) => {
-        return dayjs(dateString).format("YYYY-MM-DD HH:mm");
+    const changeUserNameHandler = async (uuid: string) => {
+        const userName = window.prompt("수정할 유저의 닉네임을 입력하세요");
+        if (!userName || userName.trim() === "") return;
+
+        await checkLoginStatus();
+        await adminApi.updateUserName(uuid, userName);
+        const data = (await fetchData()) as FormData;
+        setData(data);
     };
+
     const roleSelect = (role: boolean) => {
         if (role) {
             return "ADMIN";
@@ -66,7 +78,7 @@ const AdminUserItem = () => {
         if (confirm) {
             try {
                 await checkLoginStatus();
-                await authApi.deleteAccount(email);
+                await adminApi.deleteUser(email);
                 const newData = (await fetchData()) as FormData;
                 setData(newData);
             } catch (error) {
@@ -81,6 +93,7 @@ const AdminUserItem = () => {
 
         await navigator.clipboard.writeText(form);
         playCopy();
+        setModal(true);
     };
 
     const filteredData = data.user.sort((a, b) => {
@@ -96,6 +109,7 @@ const AdminUserItem = () => {
                     <tr className="bg-gray-100">
                         <th className="border p-2">USER UUID</th>
                         <th className="border p-2">USER EMAIL</th>
+                        <th className="border p-2">USER NAME</th>
                         <th className="border p-2">CREATED</th>
                         <th className="border p-2">LAST LOGIN</th>
                         <th className="border p-2">ROLE</th>
@@ -123,6 +137,23 @@ const AdminUserItem = () => {
                                     )}
                                 >
                                     {item.email}
+                                </div>
+                            </td>
+                            <td className="border p-2">
+                                <div
+                                    className={tw(
+                                        "hover:bg-white hover:fill-black hover:text-black ",
+                                        "bg-slate-300 text-slate-300 fill-slate-300 rounded-md"
+                                    )}
+                                >
+                                    <div className="flex gap-1 px-2 hover:visible items-center">
+                                        <div className="flex-grow">{item.username}</div>
+
+                                        <IconUpdate
+                                            onClick={() => changeUserNameHandler(item.uuid)}
+                                            className="w-4 h-4 hover:cursor-pointer"
+                                        />
+                                    </div>
                                 </div>
                             </td>
                             <td className="border p-2">{formatDate(item.created_at)}</td>
@@ -163,7 +194,7 @@ const AdminUserItem = () => {
                             </td>
                             <td className="pl-4 rounded-md">
                                 <div
-                                    onClick={() => deleteAccountHandler(item.email)}
+                                    onClick={() => deleteAccountHandler(item.uuid)}
                                     className="fill-white p-2 bg-gray-300 hover:bg-gray-500 transition rounded-md cursor-pointer flex justify-center"
                                 >
                                     <IconDeleteBtn className="fill-white w-fit h-6" />

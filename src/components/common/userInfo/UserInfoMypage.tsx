@@ -19,28 +19,25 @@ export interface userInfoData {
 
 const UserInfoMyPage = () => {
     const { userData } = useUserStore();
-    const [isOpen, setIsOpen] = useState(false);
-    const [isQuitOpen, setIsQuitOpen] = useState(false);
-
+    const [isChangeModalOpen, setIsChangeModalOpen] = useState(false);
+    const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] = useState(false);
     const [playWarn] = useSound(pingSound, { volume: 0.75 });
     const [playCollapse] = useSound(collapseSound, { volume: 0.75 });
 
-    const handleModalClose = () => {
-        setIsOpen(false);
-    };
-
-    const handleModalOpen = () => {
-        setIsOpen(true);
+    const handleChangeModalOpen = () => {
+        setIsChangeModalOpen(true);
         playCollapse();
     };
-
-    const handleQuitModalClose = () => {
-        setIsQuitOpen(false);
+    const handleDeleteAccountModalOpen = () => {
+        setIsDeleteAccountModalOpen(true);
+        playWarn();
     };
 
-    const handleQuitModalOpen = () => {
-        setIsQuitOpen(true);
-        playWarn();
+    const handleDeleteAccountModalClose = () => {
+        setIsDeleteAccountModalOpen(false);
+    };
+    const handleChangeModalClose = () => {
+        setIsChangeModalOpen(false);
     };
 
     return (
@@ -80,7 +77,7 @@ const UserInfoMyPage = () => {
                                 "fill-white hover:bg-gray-600",
                                 "cursor-pointer transition"
                             )}
-                            onClick={handleModalOpen}
+                            onClick={handleChangeModalOpen}
                         >
                             <IconUpdate className="h-4" />
                         </div>
@@ -108,11 +105,11 @@ const UserInfoMyPage = () => {
                 </div>
             </div>
             <UserInfoBadge />
-            <ButtonError onClick={handleQuitModalOpen} className="mt-5">
-                계정 탈퇴
-            </ButtonError>
-            {isOpen && <ModalChangeName onClose={handleModalClose} />}
-            {isQuitOpen && <ModalQuitSite onClose={handleQuitModalClose} />}
+            <div className="flex flex-col gap-3 mt-5">
+                <ButtonError onClick={handleDeleteAccountModalOpen}>계정 탈퇴</ButtonError>
+            </div>
+            {isChangeModalOpen && <ModalChangeName onClose={handleChangeModalClose} />}
+            {isDeleteAccountModalOpen && <ModalQuitSite onClose={handleDeleteAccountModalClose} />}
         </div>
     );
 };

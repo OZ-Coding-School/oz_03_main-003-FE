@@ -39,7 +39,11 @@ export const updateUserInfoName = (name: string) => {
     const userName = {
         username: name,
     };
-    return axiosInstance.post("/user/profile", userName);
+    return axiosInstance.patch("/user/profile", userName, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 };
 
 export const updateUserInfoProfileImage = (image: File) => {
@@ -48,7 +52,7 @@ export const updateUserInfoProfileImage = (image: File) => {
     const formData = new FormData();
     formData.append("profile_image", imageWithExtension);
 
-    return axiosInstance.post("/user/profile", formData, {
+    return axiosInstance.patch("/user/profile", formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },

@@ -11,8 +11,22 @@ import {
     UserMessage,
     AIMessage,
     FormData,
-    DialogItem,
+    ResponseAIMessage,
 } from "./types";
+
+//? MUSIC GLOBAL STATE
+interface MusicStore {
+    play: boolean;
+    setPlay: () => void;
+}
+
+export const useMusicStore = create<MusicStore>((set) => ({
+    play: false,
+    setPlay: () =>
+        set((state) => ({
+            play: !state.play,
+        })),
+}));
 
 //? TOASTER GLOBAL STATE
 interface ModalStore {
@@ -104,52 +118,74 @@ export const useUserChatStore = create<UserChatStore>((set) => ({
 }));
 
 interface DialogStore {
-    dialogList: { [chatRoomUuid: string]: DialogItem[] };
-    userMessage: { [chatRoomUuid: string]: UserMessage[] };
-    aiMessages: { [chatRoomUuid: string]: AIMessage[] };
-    setUserMessage: (chatRoomUuid: string, data: UserMessage) => void;
-    setAIMessage: (chatRoomUuid: string, data: AIMessage) => void;
-    addDialogItem: (chatRoomUuid: string, dialogItem: DialogItem) => void;
-    updateDialogItem: (chatRoomUuid: string, index: number, updatedDialogItem: DialogItem) => void;
+    messages: {
+        ai: AIMessage[];
+        user: UserMessage[];
+    };
+    chatroom_uuid: string;
+    selected_tree: {
+        tree_uuid: string;
+        tree_name: string;
+    };
+    initUserMessages: (data: UserMessage[]) => void;
+    initAiMessages: (data: AIMessage[]) => void;
+    setUserMessages: (data: UserMessage) => void;
+    setAiMessages: (data: ResponseAIMessage) => void;
+    setRoomData: (uuid: string) => void;
+    setTreeData: (uuid: string, name: string) => void;
+    setStateChange: (index: number) => void;
 }
 
 export const useDialogStore = create<DialogStore>((set) => ({
-    dialogList: {},
-    userMessage: {},
-    aiMessages: {},
-    setUserMessage: (chatRoomUuid: string, data: UserMessage) =>
-        set((state) => ({
-            userMessage: {
-                ...state.userMessage,
-                [chatRoomUuid]: [...(state.aiMessages[chatRoomUuid] || []), data],
-            },
-        })),
-    setAIMessage: (chatRoomUuid: string, data: AIMessage) =>
-        set((state) => ({
-            aiMessages: {
-                ...state.aiMessages,
-                [chatRoomUuid]: [...(state.aiMessages[chatRoomUuid] || []), data],
-            },
-        })),
-    addDialogItem: (chatRoomUuid, dialogItem) =>
-        set((state) => ({
-            dialogList: {
-                ...state.dialogList,
-                [chatRoomUuid]: [...(state.dialogList[chatRoomUuid] || []), dialogItem],
-            },
-        })),
-    updateDialogItem: (chatRoomUuid, index, updatedDialogItem) =>
-        set((state) => {
-            const updatedDialogs = [...(state.dialogList[chatRoomUuid] || [])];
-            updatedDialogs[index] = updatedDialogItem;
+    messages: {
+        ai: [],
+        user: [],
+    },
+    chatroom_uuid: "",
+    selected_tree: {
+        tree_uuid: "",
+        tree_name: "",
+    },
 
-            return {
-                dialogList: {
-                    ...state.dialogList,
-                    [chatRoomUuid]: updatedDialogs,
-                },
-            };
-        }),
+    initUserMessages: (data) =>
+        set((state) => ({
+            messages: { ...state.messages, user: data },
+        })),
+    initAiMessages: (data) =>
+        set((state) => ({
+            messages: { ...state.messages, ai: data },
+        })),
+    setAiMessages: (data) =>
+        set((state) => ({
+            ...state,
+            messages: { ...state.messages, ai: [...state.messages.ai, data] },
+        })),
+    setUserMessages: (data) =>
+        set((state) => ({
+            ...state,
+            messages: { ...state.messages, user: [...state.messages.user, data] },
+        })),
+    setRoomData: (uuid: string) =>
+        set(() => ({
+            chatroom_uuid: uuid,
+        })),
+    setTreeData: (uuid, name) =>
+        set(() => ({
+            selected_tree: {
+                tree_uuid: uuid,
+                tree_name: name,
+            },
+        })),
+    setStateChange: (index: number) =>
+        set((state) => ({
+            messages: {
+                ...state.messages,
+
+                ai: state.messages.ai.map((message, i) =>
+                    i === index ? { ...message, applied_state: !message.applied_state } : message
+                ),
+            },
+        })),
 }));
 
 //? ADMIN DATA GLOBAL STATE

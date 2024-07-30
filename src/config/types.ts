@@ -40,6 +40,14 @@ export interface AdminTreeFormData {
     location?: number;
 }
 
+export interface AdminEmotionFormData {
+    happiness?: number;
+    anger?: number;
+    sadness?: number;
+    worry?: number;
+    indifference?: number;
+}
+
 //? USER DATA TYPES -------------------//
 
 export interface UserData {
@@ -172,15 +180,31 @@ export interface AIMessage {
     message: string;
     sentiments: Sentiment;
     applied_state: boolean;
-    date: string;
+    date?: string;
+}
+export interface ResponseAIMessage {
+    message_uuid: string;
+    message: string;
+    sentiments: Sentiment;
+    applied_state: boolean;
+    date?: string;
 }
 
 export interface DialogItem {
     userMessage: UserMessage;
     aiMessage?: AIMessage;
+    applied_state?: boolean;
 }
 
-export interface DialogList {
-    ai: AIMessage;
-    user: UserMessage;
+export interface ResponseDialogList {
+    ai: {
+        message: string;
+        message_uuid: string;
+        sentiments: Sentiment;
+    };
+    user: {
+        message: string;
+        message_uuid: string;
+    };
+    applied_state: boolean;
 }

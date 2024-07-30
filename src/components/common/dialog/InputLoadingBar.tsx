@@ -11,7 +11,7 @@ const InputLoadingBar = () => {
     };
 
     return (
-        <div className="rounded-full overflow-hidden bg-gray-800 w-[200px] h-[5px]">
+        <div className="rounded-full overflow-hidden bg-slate-800 w-[200px] h-[5px]">
             <motion.div
                 className="h-full w-[20px] rounded-md bg-primary"
                 variants={loaderVariants}

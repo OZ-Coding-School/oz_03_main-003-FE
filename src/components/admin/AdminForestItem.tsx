@@ -6,7 +6,7 @@ import { adminApi } from "../../api";
 import useVerify from "../../hook/useVerify";
 import useAdminData from "../../hook/useAdminData";
 import { IconChange, IconCopy } from "../../config/IconData";
-import { useAdminStore } from "../../config/store";
+import { useAdminStore, useModalStore } from "../../config/store";
 import { twMerge as tw } from "tailwind-merge";
 import useSound from "use-sound";
 import pingSound from "../../assets/sound/btn_ping.mp3";
@@ -19,6 +19,7 @@ const AdminForestItem = () => {
     const { checkLoginStatus } = useVerify();
     const { fetchData } = useAdminData();
     const [playCopy] = useSound(pingSound, { volume: 0.75 });
+    const { setModal } = useModalStore();
 
     const levelHandler = async (id: string) => {
         const level = window.prompt("변경하실 계정 레벨을 지정하세요.");
@@ -38,9 +39,14 @@ const AdminForestItem = () => {
         const form = `USER_UUID: ${item.user_uuid} \nFOREST_UUID: ${item.forest_uuid} \nFOREST_LEVEL: ${item.forest_level}`;
         await navigator.clipboard.writeText(form);
         playCopy();
+        setModal(true);
     };
 
-    const sortedForest = data.forest.sort();
+    const forestData = data.forest.sort((a, b) => {
+        if (a.user_uuid < b.user_uuid) return -1;
+        if (a.user_uuid > b.user_uuid) return 1;
+        return 0;
+    });
 
     return (
         <div className="w-fit p-8 select-text">
@@ -54,7 +60,7 @@ const AdminForestItem = () => {
                     </tr>
                 </thead>
                 <tbody className="text-lg text-center">
-                    {sortedForest.map((item) => (
+                    {forestData.map((item) => (
                         <tr key={item.forest_uuid} className="">
                             <td className="border p-2">
                                 <div

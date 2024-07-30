@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import { IconChange, IconDeleteBtn } from "../../../config/IconData";
+import { useDialogStore, useUserChatStore, useUserStore } from "../../../config/store";
 import ModalDeleteChat from "../modal/ModalDeleteChat";
 import ModalUpdateChat from "../modal/ModalUpdateChat";
-import { useUserChatStore, useUserStore } from "../../../config/store";
+import useSound from "use-sound";
+import btnPing from "../../../assets/sound/btn_ping.mp3";
+import btnCollapse from "../../../assets/sound/btn_collapse.mp3";
 
 interface ChatListItemProps {
     item: {
@@ -21,14 +24,16 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
     const { userData } = useUserStore();
     const { chatRooms } = useUserChatStore();
-
+    const [playPing] = useSound(btnPing, { volume: 0.75 });
+    const [playCollapse] = useSound(btnCollapse, { volume: 0.75 });
     const treeUuid = chatRooms.find(
         (data) => data.chat_room_uuid === item.chat_room_uuid
     )?.tree_uuid;
     const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
-
+    const { setTreeData } = useDialogStore();
     const openDeleteModal = () => {
         setIsDeleteModalOpen(true);
+        playPing();
     };
 
     const closeDeleteModal = () => {
@@ -37,6 +42,7 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
 
     const openUpdateModal = () => {
         setIsUpdateModalOpen(true);
+        playCollapse();
     };
 
     const closeUpdateModal = () => {
@@ -44,8 +50,10 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
     };
 
     const handleClick = () => {
+        setTreeData(treeUuid as string, treeName as string);
         onClick(item.chat_room_uuid);
     };
+
     return (
         <>
             <div
@@ -59,10 +67,8 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
                 onClick={handleClick}
             >
                 <nav className="flex flex-col">
-                    <div className="text-sm">
-                        {item.chat_room_name} <span className="text-primary">{treeName}</span>
-                    </div>
-                    <div className="text-gray-400 text-xs">{item.created_at || "No date"}</div>
+                    <div className="text-primary text-xs">{treeName}</div>
+                    <div className="text-sm">{item.chat_room_name}</div>
                 </nav>
                 {hover && (
                     <nav className="flex gap-1">

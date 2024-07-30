@@ -21,7 +21,7 @@ const AdminHeader = () => {
     };
 
     return (
-        <div className="select-none text-xl flex gap-2 font-bold bg-slate-600 text-white font-mono p-2">
+        <div className="select-none text-xl flex gap-2 font-bold bg-slate-800 text-white font-mono p-2">
             <img className="w-10" src="/img/profile-placeholder.png"></img>
             <div onClick={refreshHandler} className="cursor-pointer">
                 ADMIN PAGE
@@ -29,13 +29,13 @@ const AdminHeader = () => {
             <div>|</div>
             <button
                 onClick={homeHandler}
-                className="p-1 w-[80px] hover:bg-slate-400 transition rounded-md bg-slate-200 text-black text-base"
+                className="p-1 w-[80px] hover:bg-slate-400 transition rounded-md bg-slate-600 text-white text-base"
             >
                 Home
             </button>
             <button
                 onClick={logoutHandler}
-                className="p-1 w-[80px] hover:bg-slate-400 transition rounded-md bg-slate-200 text-black text-base"
+                className="p-1 w-[80px] hover:bg-slate-400 transition rounded-md bg-slate-600 text-white text-base"
             >
                 Logout
             </button>

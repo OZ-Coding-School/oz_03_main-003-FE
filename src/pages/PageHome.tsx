@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import HomeMain from "../components/home";
-import useChatRooms from "../hook/useChatRooms";
+import useChatRooms from "../hook/chat/useChatRooms";
 import useInfo from "../hook/useInfo";
 
 const PageHome = () => {

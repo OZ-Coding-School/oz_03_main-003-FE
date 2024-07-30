@@ -34,7 +34,6 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
         item.tree_uuid.includes(treeUUID)
     ) as UserTreeEmotionDetail;
     const treeExperience = calculateTreeLevel(emotionData, treeData.tree_level);
-    console.log(treeExperience);
 
     const closeHandler = () => {
         onClose();
@@ -45,6 +44,8 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
             ref.current.focus();
         }
     }, []);
+
+    console.log(treeExperience.emotionMax);
 
     const growHandler = async () => {
         if (treeExperience.emotionMax === null) {

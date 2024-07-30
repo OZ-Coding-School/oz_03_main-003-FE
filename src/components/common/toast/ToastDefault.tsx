@@ -32,7 +32,7 @@ const ToastDefault = ({ message, duration = 2000 }: ToastDefaultProps) => {
     }, [duration, setModal]);
 
     return (
-        <div className="absolute select-none top-[300px] flex w-full h-fit z-0 justify-center">
+        <div className="absolute select-none top-[300px] flex w-full h-fit z-50 justify-center">
             <div className=" relative font-title bg-gray-800 border border-gray-600 w-[320px] h-[60px] text-gray-200 overflow-hidden">
                 <div className="p-5 flex flex-col">{message}</div>
                 <div

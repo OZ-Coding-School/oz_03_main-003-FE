@@ -7,6 +7,7 @@ import AdminTree from "../components/admin/AdminTree";
 import AdminForest from "../components/admin/AdminForest";
 import AdminUser from "../components/admin/AdminUser";
 import { useAdminStore } from "../config/store";
+import AdminEmotion from "../components/admin/AdminEmotion";
 
 const PageAdmin = () => {
     const { fetchData } = useAdminData();
@@ -28,6 +29,7 @@ const PageAdmin = () => {
                         <AdminOverview />
                         <AdminUser />
                         <AdminTree />
+                        <AdminEmotion />
                         <AdminForest />
                     </div>
                 )}

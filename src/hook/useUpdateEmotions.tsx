@@ -17,7 +17,6 @@ export const useUpdateEmotions = (): UpdateEmotionsResult => {
 
         try {
             await treeApi.updateEmotions(treeUuid, aiMessageUuid);
-            console.log("성공");
         } catch (err) {
             setError("Failed to update emotions");
             console.error("Error updating emotions:", err);

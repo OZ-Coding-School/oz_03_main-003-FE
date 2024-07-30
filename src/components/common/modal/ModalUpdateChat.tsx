@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ModalListItem from "./ModalListItem";
 import { useUserChatStore, useUserStore } from "../../../config/store";
-import useChatRooms from "../../../hook/useChatRooms";
+import useChatRooms from "../../../hook/chat/useChatRooms";
 import ButtonDisable from "../button/ButtonDisable";
+import useSound from "use-sound";
+import btnConfirm from "../../../assets/sound/btn_confirm.mp3";
 interface ModalUpdateChatProps {
     onClose: () => void;
     chat_room_uuid: string;
@@ -21,7 +23,7 @@ const ModalUpdateChat = ({ onClose, chat_room_uuid }: ModalUpdateChatProps) => {
     const [newChatRoomName, setNewChatRoomName] = useState("");
     const [selectedTree, setSelectedTree] = useState<{ name: string; uuid: string } | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-
+    const [playConfirm] = useSound(btnConfirm, { volume: 0.75 });
     const chatRoom = chatRooms.find((item) => item.chat_room_uuid === chat_room_uuid);
     const chatRoomName = chatRoom?.chat_room_name ?? "";
     const tree_uuid = chatRoom?.tree_uuid ?? "";
@@ -63,6 +65,7 @@ const ModalUpdateChat = ({ onClose, chat_room_uuid }: ModalUpdateChatProps) => {
             try {
                 await updateChatRoom(chat_room_uuid, data);
                 onClose();
+                playConfirm();
                 setIsSubmitting(false);
             } catch (error) {
                 console.log("Failed to update chat room", error);
@@ -83,6 +86,7 @@ const ModalUpdateChat = ({ onClose, chat_room_uuid }: ModalUpdateChatProps) => {
                 onClick={closeHandler}
                 onKeyDown={(e) => {
                     e.key === "Escape" && closeHandler();
+                    e.key === "Enter" && handleSubmit();
                 }}
                 className={tw("inset-0 select-none z-10 fixed flex items-center justify-center")}
             >

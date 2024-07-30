@@ -1,17 +1,17 @@
 import { IconLeft } from "../../../config/IconData";
-import { useUserChatStore, useUserStore } from "../../../config/store";
+import { useDialogStore, useUserChatStore, useUserStore } from "../../../config/store";
 
 interface DialogHeaderProps {
     onClose: () => void;
-    chatRoomUuid: string;
 }
 
-const DialogHeader = ({ onClose, chatRoomUuid }: DialogHeaderProps) => {
+const DialogHeader = ({ onClose }: DialogHeaderProps) => {
     const { chatRooms } = useUserChatStore();
     const { userData } = useUserStore();
-    const treeUuid = chatRooms.find((data) => data.chat_room_uuid === chatRoomUuid)?.tree_uuid;
+    const { chatroom_uuid } = useDialogStore();
+    const treeUuid = chatRooms.find((data) => data.chat_room_uuid === chatroom_uuid)?.tree_uuid;
     const chatRoomName = chatRooms.find(
-        (data) => data.chat_room_uuid === chatRoomUuid
+        (data) => data.chat_room_uuid === chatroom_uuid
     )?.chat_room_name;
     const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
 

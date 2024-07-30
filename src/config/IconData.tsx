@@ -24,6 +24,13 @@ import { ReactComponent as IconSetting } from "../assets/icon/icon-set.svg";
 import { ReactComponent as IconLogout } from "../assets/icon/icon-logout.svg";
 import { ReactComponent as IconStar } from "../assets/icon/icon-landing-star.svg";
 import { ReactComponent as IconCopy } from "../assets/icon/icon-copy.svg";
+import { ReactComponent as IconPlay } from "../assets/icon/icon-play.svg";
+import { ReactComponent as IconPause } from "../assets/icon/icon-pause.svg";
+import { ReactComponent as IconLineStar } from "../assets/icon/icon-linestar.svg";
+import { ReactComponent as IconBlog } from "../assets/icon/icon-blog.svg";
+import { ReactComponent as IconGithub } from "../assets/icon/icon-github.svg";
+import { ReactComponent as IconGemini } from "../assets/icon/icon-gemini.svg";
+import { ReactComponent as IconTopArw } from "../assets/icon/icon-top-arw.svg";
 
 export {
     IconAddChat,
@@ -52,4 +59,11 @@ export {
     LogoKakao,
     IconStar,
     IconCopy,
+    IconPlay,
+    IconPause,
+    IconLineStar,
+    IconBlog,
+    IconGithub,
+    IconGemini,
+    IconTopArw,
 };
