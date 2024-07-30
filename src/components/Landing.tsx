@@ -35,45 +35,6 @@ const Landing = () => {
         };
     }, []);
 
-    // 스크롤 이벤트 핸들러
-    useEffect(() => {
-        const handleScroll = () => {
-            const treeSection = document.getElementById("tree-section");
-            const analysisSection = document.getElementById("analysis-section");
-            const forestSection = document.getElementById("forest-section");
-
-            if (treeSection && analysisSection && forestSection) {
-                const treeSectionRect = treeSection.getBoundingClientRect();
-                const analysisSectionRect = analysisSection.getBoundingClientRect();
-                const forestSectionRect = forestSection.getBoundingClientRect();
-
-                if (
-                    treeSectionRect.top <= analysisSectionRect.bottom &&
-                    forestSectionRect.top > window.innerHeight
-                ) {
-                    treeSection.style.zIndex = "0";
-                    analysisSection.style.zIndex = "1";
-                } else if (
-                    forestSectionRect.top <= window.innerHeight &&
-                    forestSectionRect.bottom > 0
-                ) {
-                    treeSection.style.zIndex = "-1";
-                    analysisSection.style.zIndex = "0";
-                    forestSection.style.zIndex = "1";
-                } else {
-                    treeSection.style.zIndex = "1";
-                    analysisSection.style.zIndex = "0";
-                    forestSection.style.zIndex = "0";
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
     return (
         <>
             <div className="text-white w-full">
@@ -82,7 +43,10 @@ const Landing = () => {
                         <img className="w-[184px] m-auto" src="/logo-white.png" alt="emotree" />
                     </h1>
                 </header>
-                <div id="analysis-section" className="mt-[100px] pb-[80px] relative z-1">
+                <div
+                    id="analysis-section"
+                    className="pt-[100px] pb-[80px] relative z-10 mb-[1080px] bg-black"
+                >
                     <div className="text-center">
                         <h2 className="font-title text-[32px] leading-5">AI 감정 분석 서비스</h2>
                         <p className="text-xl mt-[23px]">
@@ -94,8 +58,8 @@ const Landing = () => {
                     </div>
                     <HomeChatInfo />
                 </div>
-                <div id="tree-section" className="left-0 right-0 relative z-0">
-                    <div className="relative pt-[240px] pb-[180px]">
+                <div id="tree-section" className="left-0 right-0 fixed top-0 z-0">
+                    <div className="relative pt-[140px] pb-[180px]">
                         <div className="relative z-10">
                             <div className="text-center">
                                 <h2 className="font-title text-[32px] leading-5">
@@ -114,7 +78,7 @@ const Landing = () => {
                 </div>
                 <motion.div
                     id="forest-section"
-                    className="z-0 pt-[240px] relative bg-black"
+                    className="z-20 pt-[240px] relative bg-black"
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                     transition={{ duration: 0.5 }}
@@ -127,7 +91,7 @@ const Landing = () => {
                             감정나무 숲을 마음대로 꾸밀 수 있습니다.
                         </p>
                     </div>
-                    <HomeForestInfo />
+                    <HomeForestInfo isInView={isInView} />
                     <div className="text-center mb-[100px]">
                         <h3 className="text-gray-200 text-[20px] mb-[10px]">Introduce the team</h3>
                         <p>

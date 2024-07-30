@@ -1,8 +1,10 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 
-const HomeForestInfo = () => {
-    const [isInView, setIsInView] = useState(false);
+interface HomeForestInfoProps {
+    isInView: boolean;
+}
+
+const HomeForestInfo = ({ isInView }: HomeForestInfoProps) => {
     return (
         <div>
             <div className="relative left-[50%]">
