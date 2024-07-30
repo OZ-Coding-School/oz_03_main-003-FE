@@ -26,6 +26,7 @@ import { ReactComponent as IconStar } from "../assets/icon/icon-landing-star.svg
 import { ReactComponent as IconCopy } from "../assets/icon/icon-copy.svg";
 import { ReactComponent as IconPlay } from "../assets/icon/icon-play.svg";
 import { ReactComponent as IconPause } from "../assets/icon/icon-pause.svg";
+import { ReactComponent as IconLineStar } from "../assets/icon/icon-linestar.svg";
 
 export {
     IconAddChat,
@@ -56,4 +57,5 @@ export {
     IconCopy,
     IconPlay,
     IconPause,
+    IconLineStar,
 };
