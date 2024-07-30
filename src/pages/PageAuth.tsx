@@ -2,12 +2,13 @@ import { useGoogleLogin } from "@react-oauth/google";
 import ButtonSignInGoogle from "../components/common/button/ButtonSignInGoogle";
 import { authApi, forestApi } from "../api";
 import Landing from "../components/Landing";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import useUserInfo from "../hook/useInfo";
 import { useEffect } from "react";
 
 const PageAuth = () => {
     const nav = useNavigate();
+    const location = useLocation();
     const { getUserInfo, getUserGridInfo } = useUserInfo();
 
     useEffect(() => {
@@ -60,10 +61,13 @@ const PageAuth = () => {
     });
 
     return (
-        <div className="w-full h-[100vh] bg-black m-auto flex flex-col gap-[10px] justify-center items-center">
+        <div
+            className={`${location.pathname !== "/" ? "h-[100vh]" : ""} w-full bg-black m-auto flex flex-col gap-[10px] justify-center items-center`}
+        >
             <Landing />
             <ButtonSignInGoogle onClick={googleLoginHandler} />
         </div>
     );
 };
+
 export default PageAuth;
