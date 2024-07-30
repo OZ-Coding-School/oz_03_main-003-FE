@@ -9,9 +9,13 @@ interface ChatListContentProps {
 const ChatListContent = ({ onClose, onChatItemClick }: ChatListContentProps) => {
     const { chatRooms } = useUserChatStore();
 
+    const sortedChatRooms = chatRooms
+        .slice()
+        .sort((a, b) => a.chat_room_name.localeCompare(b.chat_room_name, "ko-KR"));
+
     return (
         <div className="select-none overflow-y-auto w-fit flex flex-col">
-            {chatRooms.map((item) => (
+            {sortedChatRooms.map((item) => (
                 <ChatListItem
                     key={item.chat_room_uuid}
                     item={{

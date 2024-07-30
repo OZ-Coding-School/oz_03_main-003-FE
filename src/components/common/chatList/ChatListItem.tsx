@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import { IconChange, IconDeleteBtn } from "../../../config/IconData";
-import { useUserChatStore, useUserStore } from "../../../config/store";
+import { useDialogStore, useUserChatStore, useUserStore } from "../../../config/store";
 import ModalDeleteChat from "../modal/ModalDeleteChat";
 import ModalUpdateChat from "../modal/ModalUpdateChat";
 import useSound from "use-sound";
@@ -30,7 +30,7 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
         (data) => data.chat_room_uuid === item.chat_room_uuid
     )?.tree_uuid;
     const treeName = userData.treeDetail.find((t) => t.tree_uuid === treeUuid)?.tree_name;
-
+    const { setTreeData } = useDialogStore();
     const openDeleteModal = () => {
         setIsDeleteModalOpen(true);
         playPing();
@@ -50,6 +50,7 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
     };
 
     const handleClick = () => {
+        setTreeData(treeUuid as string, treeName as string);
         onClick(item.chat_room_uuid);
     };
 
@@ -66,10 +67,8 @@ const ChatListItem = ({ item, onClick, onClose }: ChatListItemProps) => {
                 onClick={handleClick}
             >
                 <nav className="flex flex-col">
-                    <div className="text-sm">
-                        {item.chat_room_name} <span className="text-primary">{treeName}</span>
-                    </div>
-                    <div className="text-gray-400 text-xs">{item.created_at || "No date"}</div>
+                    <div className="text-primary text-xs">{treeName}</div>
+                    <div className="text-sm">{item.chat_room_name}</div>
                 </nav>
                 {hover && (
                     <nav className="flex gap-1">

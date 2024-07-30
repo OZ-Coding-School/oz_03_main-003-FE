@@ -3,30 +3,15 @@ import { PropsWithChildren, useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
 import useSound from "use-sound";
 import btnSendTree from "../../../assets/sound/btn_sendTree.mp3";
-import { treeApi } from "../../../api";
-import { useDialogStore } from "../../../config/store";
-import useVerify from "../../../hook/useVerify";
 
 interface ButtonProps extends PropsWithChildren {
     className?: string;
     type?: "submit" | "reset" | "button";
-    aiUuid: string;
+    onClick?: () => void;
 }
 
-const ButtonEmoTree = ({ className, type = "button", aiUuid, children }: ButtonProps) => {
+const ButtonEmoTreeSkeleton = ({ className, type = "button", children, onClick }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
-    const { selected_tree, messages, setStateChange } = useDialogStore();
-    const { checkLoginStatus } = useVerify();
-    const [playTree] = useSound(btnSendTree, { volume: 0.75 });
-
-    const currentIndex = messages.ai.findIndex((item) => item.message_uuid === aiUuid);
-
-    const handleClick = async () => {
-        await checkLoginStatus();
-        await treeApi.updateEmotions(selected_tree.tree_uuid, aiUuid);
-        setStateChange(currentIndex);
-        playTree();
-    };
 
     return (
         <>
@@ -36,7 +21,7 @@ const ButtonEmoTree = ({ className, type = "button", aiUuid, children }: ButtonP
                     transition: { duration: 0.5 },
                 }}
                 type={type}
-                onClick={handleClick}
+                onClick={onClick}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 className={tw(
@@ -74,4 +59,4 @@ const ButtonEmoTree = ({ className, type = "button", aiUuid, children }: ButtonP
     );
 };
 
-export default ButtonEmoTree;
+export default ButtonEmoTreeSkeleton;
