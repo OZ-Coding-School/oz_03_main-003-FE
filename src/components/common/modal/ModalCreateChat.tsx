@@ -37,6 +37,7 @@ const ModalCreateChat = ({ onClose }: ModalCreateChatProps) => {
 
     const handleItemClick = (tree: { name: string; uuid: string }) => {
         setSelectedTree(tree);
+
         setIsDropdownOpen(false);
         setRequireSelectTree(false);
     };

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import HeaderLoggedIn from "../components/common/header/HeaderLoggedIn";
 import ModalCreateChat from "../components/common/modal/ModalCreateChat";
 import useChatRooms from "../hook/chat/useChatRooms";
-import { useUserStore } from "../config/store";
+import { useDialogStore, useUserStore } from "../config/store";
 import NonData from "../components/NonData";
 import useInfo from "../hook/useInfo";
 import Dialog from "../components/common/dialog/Dialog";
@@ -15,18 +15,18 @@ const PageChat = () => {
     const { userData } = useUserStore();
     const { getUserInfo, getUserGridInfo, getUserLevelInfo } = useInfo();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [selectedChatRoomUuid, setSelectedChatRoomUuid] = useState<string | null>(null);
     const [playBtn] = useSound(btnClick, { volume: 0.75 });
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { setRoomData, chatroom_uuid: uuid } = useDialogStore();
 
-    const openDialog = (chat_room_uuid: string): void => {
-        setSelectedChatRoomUuid(chat_room_uuid);
+    const openDialogHandler = (chat_room_uuid: string): void => {
+        setRoomData(chat_room_uuid);
         setIsDialogOpen(true);
     };
 
-    const closeDialog = (): void => {
+    const closeDialogHandler = (): void => {
         setIsDialogOpen(false);
-        setSelectedChatRoomUuid(null);
+        setRoomData("");
     };
 
     useEffect(() => {
@@ -64,12 +64,13 @@ const PageChat = () => {
                 <div className="w-full h-full flex">
                     <div className="w-80 h-full border-r border-gray-600">
                         <ChatListHeader onAddChatClick={openModal} />
-                        <ChatListContent onChatItemClick={openDialog} onClose={closeDialog} />
+                        <ChatListContent
+                            onChatItemClick={openDialogHandler}
+                            onClose={closeDialogHandler}
+                        />
                     </div>
                     <div className="text-white w-full h-full">
-                        {isDialogOpen && selectedChatRoomUuid && (
-                            <Dialog chatRoomUuid={selectedChatRoomUuid} onClose={closeDialog} />
-                        )}
+                        {isDialogOpen && uuid !== "" && <Dialog onClose={closeDialogHandler} />}
                     </div>
                 </div>
             </div>

@@ -76,7 +76,9 @@ const ModalDeleteChat = ({ onClose, chat_room_uuid, onDialogClose }: ModalDelete
                     </p>
                     <div className="text-right mt-10">
                         <ButtonError onClick={handleDelete}>삭제하기</ButtonError>
-                        <ButtonDefault className="ml-2">취소하기</ButtonDefault>
+                        <ButtonDefault onClick={closeHandler} className="ml-2">
+                            취소하기
+                        </ButtonDefault>
                     </div>
                     <button
                         type="button"

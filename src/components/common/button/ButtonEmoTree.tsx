@@ -1,43 +1,31 @@
 import { motion } from "framer-motion";
 import { PropsWithChildren, useState } from "react";
 import { twMerge as tw } from "tailwind-merge";
-import { useUpdateEmotions } from "../../../hook/useUpdateEmotions";
 import useSound from "use-sound";
 import btnSendTree from "../../../assets/sound/btn_sendTree.mp3";
+import { treeApi } from "../../../api";
 import { useDialogStore } from "../../../config/store";
+import useVerify from "../../../hook/useVerify";
 
 interface ButtonProps extends PropsWithChildren {
     className?: string;
     type?: "submit" | "reset" | "button";
-    treeUuid: string;
-    chatRoomUuid: string;
-    messageUuid: string;
+    aiUuid: string;
 }
 
-const ButtonEmoTree = ({
-    className,
-    type = "button",
-    children,
-    treeUuid,
-    messageUuid,
-    chatRoomUuid,
-}: ButtonProps) => {
+const ButtonEmoTree = ({ className, type = "button", aiUuid, children }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
-    const { isLoading, error, updateTreeEmotions } = useUpdateEmotions();
-
-    const { dialogList, updateSingleDialog } = useDialogStore();
-    console.log(dialogList);
-
+    const { selected_tree, messages, setStateChange } = useDialogStore();
+    const { checkLoginStatus } = useVerify();
     const [playTree] = useSound(btnSendTree, { volume: 0.75 });
+
+    const currentIndex = messages.ai.findIndex((item) => item.message_uuid === aiUuid);
+
     const handleClick = async () => {
-        await updateTreeEmotions(treeUuid, messageUuid);
-
-        updateSingleDialog(chatRoomUuid, messageUuid, true);
+        await checkLoginStatus();
+        await treeApi.updateEmotions(selected_tree.tree_uuid, aiUuid);
+        setStateChange(currentIndex);
         playTree();
-
-        if (error) {
-            console.log(error, "안돼");
-        }
     };
 
     return (
@@ -49,7 +37,6 @@ const ButtonEmoTree = ({
                 }}
                 type={type}
                 onClick={handleClick}
-                disabled={isLoading}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 className={tw(
