@@ -11,7 +11,7 @@ const HomeCopyright = () => {
                 >
                     Copyright
                 </Link>
-                for ungpyolee All rights reserved
+                &nbsp;for ungpyolee All rights reserved
             </p>
         </div>
     );

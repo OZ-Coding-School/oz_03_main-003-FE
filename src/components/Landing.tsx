@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import HomeTreeInfo from "./common/home/HomeTreeInfo";
 import HomeChatInfo from "./common/home/HomeChatInfo";
 import HomeBg from "./common/home/HomeBg";
@@ -34,37 +33,18 @@ const Landing = () => {
             }
         };
     }, []);
-import { IconLineStar } from "../config/IconData";
-import ButtonEmoTreeSkeleton from "./common/button/ButtonEmoTreeSkeleton";
-import { TREE_IMG } from "../config/const";
-import useSound from "use-sound";
-import btnSendTree from "../assets/sound/btn_sendTree.mp3";
-import { useState } from "react";
-
-const Landing = () => {
-    const [playTree] = useSound(btnSendTree, { volume: 0.75 });
-    const [index, setIndex] = useState(0);
-
-    const treeChangeHandler = () => {
-        playTree();
-        if (index === 5) {
-            setIndex(0);
-        } else {
-            setIndex((prev) => prev + 1);
-        }
-    };
 
     return (
         <>
             <div className="text-white w-full">
                 <header className="sticky top-0 w-full h-[80px] bg-black mt-10 text-center z-30 flex items-center justify-center">
                     <h1 className="">
-                        <img className="w-[184px] m-auto" src="/logo-white.png" alt="emotree" />
+                        <img className="w-[184px] m-auto" src="/logo-primary.png" alt="emotree" />
                     </h1>
                 </header>
                 <div
                     id="analysis-section"
-                    className="pt-[100px] pb-[80px] relative z-10 mb-[1080px] bg-black"
+                    className="pt-[100px] h-screen pb-[80px] relative z-10 md:mb-[768px] lg:mb-[1024px] xl:mb-[1280px] 2xl:mb-[1536px]  bg-black"
                 >
                     <div className="text-center">
                         <h2 className="font-title text-[32px] leading-5">AI 감정 분석 서비스</h2>
@@ -78,7 +58,7 @@ const Landing = () => {
                     <HomeChatInfo />
                 </div>
                 <div id="tree-section" className="left-0 right-0 fixed top-0 z-0">
-                    <div className="relative pt-[140px] pb-[180px]">
+                    <div className="relative pt-[240px] pb-[180px]">
                         <div className="relative z-10">
                             <div className="text-center">
                                 <h2 className="font-title text-[32px] leading-5">
@@ -91,39 +71,6 @@ const Landing = () => {
                                 </p>
                             </div>
                             <HomeTreeInfo />
-                            <div className="text-center mt-[113px] relative">
-                                <div className="">
-                                    <strong className="font-title text-[14px] text-primary">
-                                        새싹
-                                    </strong>
-                                    <p className="mt-[2px]">지훈의 감정</p>
-                                </div>
-                                <div className="mt-[105px] w-full relative flex flex-col items-center animate-gravity">
-                                    <motion.img
-                                        className="absolute w-[200px] -top-[110px]"
-                                        src={TREE_IMG[index]}
-                                    ></motion.img>
-                                    <img
-                                        src="../src/assets/images/landing-ground.svg"
-                                        alt="땅"
-                                        className="m-auto"
-                                    />
-                                </div>
-                                <ButtonEmoTreeSkeleton
-                                    onClick={treeChangeHandler}
-                                    className="mt-10 mb-5"
-                                >
-                                    감정을 나무에 전달하기
-                                </ButtonEmoTreeSkeleton>
-                                <p>전달하기 버튼을 클릭해보세요.</p>
-                            </div>
-                        </div>
-                        <div className="absolute inset-0 -z-10">
-                            <img
-                                src="../src/assets/images/landing-bg.png"
-                                alt="배경이미지"
-                                className="h-full"
-                            />
                         </div>
                         <HomeBg />
                     </div>
@@ -158,7 +105,7 @@ const Landing = () => {
                     </div>
                     <HomeTeamInfo />
                 </motion.div>
-                <footer className="text-center">
+                <footer className="text-center bg-black h-[200px] w-full absolute">
                     <HomeCopyright />
                 </footer>
             </div>

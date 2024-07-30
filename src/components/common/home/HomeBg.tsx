@@ -5,7 +5,7 @@ const HomeBg = () => {
                 <img
                     src="../src/assets/images/landing-bg.png"
                     alt="배경이미지"
-                    className="h-full"
+                    className="h-screen w-full"
                 />
             </div>
         </div>
