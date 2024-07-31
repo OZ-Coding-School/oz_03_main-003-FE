@@ -86,8 +86,11 @@ const InputMessage = () => {
                     </div>
                 </button>
             </div>
+            <p className="text-center text-sm text-gray-200 mt-1">
+                Gemini AI는 원하는 대상의 부가설명을 해주면 더 정확한 감정분석을 합니다.
+            </p>
             <p className="text-center text-sm text-gray-200 mt-1 mb-4">
-                emotree AI는 원하는 대상의 부가설명을 해주면 더 정확한 감정분석을 합니다.
+                Gemini AI는 이상한 답변을 할 수도 있습니다
             </p>
             {loading && <InputLoadingBar />}
             {modal && <ToastChat message="감정이 전달 되었습니다." />}
