@@ -32,13 +32,13 @@ const InputMessage = () => {
 
     const handleSendMessage = async () => {
         if (message.trim() !== "") {
-            const nowMessage = message;
+            setLoading(true);
             playSend();
+            const nowMessage = message;
 
             await checkLoginStatus();
             const responseUserMessage = await dialogApi.sendUserMessage(chatroom_uuid, message);
             setMessage("");
-            setLoading(true);
             const responseAiMessage = await dialogApi.postAIMessage(
                 chatroom_uuid,
                 responseUserMessage.data.message_uuid
@@ -76,7 +76,9 @@ const InputMessage = () => {
                     )}
                     placeholder="대화를 입력해주세요."
                     onChange={(e) => setMessage(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSendMessage()}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) handleSendMessage();
+                    }}
                     disabled={loading}
                 />
 
