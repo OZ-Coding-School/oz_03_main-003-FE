@@ -125,7 +125,7 @@ const InputMessage = () => {
     useEffect(() => {
         if (textareaRef.current) {
             const textarea = textareaRef.current;
-            textarea.style.height = "auto";
+            textarea.style.height = "48px";
             const scrollHeight = textarea.scrollHeight;
             textarea.style.height = `${Math.min(scrollHeight, 100)}px`;
         }
@@ -165,7 +165,7 @@ const InputMessage = () => {
     };
 
     return (
-        <div className="relative pl-5 pr-12 shadow-black w-full">
+        <div className="relative pl-5 pr-12 shadow-black w-full pb-2">
             <div className="border border-color-white h-auto min-h-[50px] max-h-[100px] whitespace-normal transition-all px-5 rounded-[24px] flex w-full box-border relative">
                 <textarea
                     ref={textareaRef}
