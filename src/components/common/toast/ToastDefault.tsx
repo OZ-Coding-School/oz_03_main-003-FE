@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useModalStore } from "../../../config/store";
+import { useFirstModalStore, useModalStore } from "../../../config/store";
 import { twMerge as tw } from "tailwind-merge";
 
 interface ToastDefaultProps {
@@ -10,10 +10,12 @@ interface ToastDefaultProps {
 const ToastDefault = ({ message, duration = 2000 }: ToastDefaultProps) => {
     const [progress, setProgress] = useState(100);
     const { setModal } = useModalStore();
+    const { setModal: setFirstModal } = useFirstModalStore();
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setModal(false);
+            setFirstModal(false);
         }, duration);
 
         const interval = setInterval(() => {
@@ -30,7 +32,7 @@ const ToastDefault = ({ message, duration = 2000 }: ToastDefaultProps) => {
             clearTimeout(timer);
             clearInterval(interval);
         };
-    }, [duration, setModal]);
+    }, [duration, setModal, setFirstModal]);
 
     return (
         <div
