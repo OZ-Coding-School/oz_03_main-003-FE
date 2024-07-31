@@ -8,7 +8,7 @@ interface ChatListHeaderProps {
 const ChatListHeader = ({ onAddChatClick }: ChatListHeaderProps) => {
     return (
         <div className="px-5 w-full h-[64px] flex justify-between items-center">
-            <div className="text-white select-none text-sm font-medium">목록</div>
+            <div className="text-white select-none text-base font-medium">목록</div>
             <div
                 className={tw(
                     "w-10 h-10 rounded-full flex justify-center items-center",
