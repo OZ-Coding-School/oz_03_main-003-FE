@@ -93,7 +93,7 @@ const Landing = () => {
                         <h2 className="font-title text-2xl text-primary-light">
                             AI 감정 분석 서비스
                         </h2>
-                        <p className="text-base mt-6 text-white">
+                        <p className="text-lg mt-6 text-white">
                             대화를 ai에게 전달해주세요.
                             <br />
                             대화를 요약하고 상대방이 어떤 감정을 가지고 나와 대화하는지 분석합니다.
@@ -107,7 +107,7 @@ const Landing = () => {
                             <h2 className="font-title text-2xl text-primary-light">
                                 감정 나무 키우기
                             </h2>
-                            <p className="text-base mt-6 text-white">
+                            <p className="text-lg   mt-6 text-white">
                                 Emotree에는 다양한 감정나무가 있습니다.
                                 <br />
                                 대화 속의 감정을 나무에 기록하고 나무를 성장시키세요!
@@ -134,7 +134,7 @@ const Landing = () => {
                 >
                     <div className="text-center">
                         <h2 className="font-title text-2xl text-primary-light">숲을 내 마음대로</h2>
-                        <p className="text-base mt-6 text-white">
+                        <p className="text-lg  mt-6 text-white">
                             유저는 다양한 나무로 자유롭게 배치해,
                             <br />
                             감정나무 숲을 마음대로 꾸밀 수 있습니다.
@@ -146,13 +146,13 @@ const Landing = () => {
                 <footer className="text-center bg-black h-[1000px] pt-40 w-full absolute">
                     <div className="text-center mb-[120px]">
                         <h2 className="font-title text-2xl text-primary-light">팀을 소개합니다</h2>
-                        <p className="text-base mt-6 text-gray-200">
+                        <p className="text-lg  mt-6 text-gray-200">
                             우리 팀은 인공지능(AI)을 활용한 혁신적인 감정 분석 서비스를
                             개발했습니다. <br />
                             사용자들의 감정을 분석하여 그 데이터를 나무에게 전달함으로써 나무가
                             성장하는 형태의 인터랙티브 경험을 제공합니다.
                         </p>
-                        <p className="text-base mb-24 mt-1 text-gray-200">
+                        <p className="text-lg  mb-24 mt-1 text-gray-200">
                             <br /> 감정을 시각적으로 표현하고, 사용자들에게 긍정적인 피드백을
                             제공하여 감정 관리와 <br />
                             정서적 성장을 도울 수 있도록 설계되었습니다.
