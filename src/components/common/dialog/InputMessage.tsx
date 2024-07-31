@@ -57,7 +57,7 @@ const InputMessage = () => {
         <div className="relative pl-5 pr-12 shadow-black w-full">
             <div
                 className={tw(
-                    "border border-color-white h-[50px] whitespace-normal transition-all px-5 rounded-md flex w-full box-border relative",
+                    "border border-color-white h-[50px] whitespace-normal transition-all px-5 rounded-[24px] flex w-full box-border relative",
                     message.length > 35 && "h-[75px]",
                     message.length > 75 && "h-[100px]"
                 )}
