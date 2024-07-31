@@ -70,7 +70,9 @@ const InputMessage = () => {
                     )}
                     placeholder="대화를 입력해주세요."
                     onChange={(e) => setMessage(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSendMessage()}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) handleSendMessage();
+                    }}
                     disabled={loading}
                 />
 
