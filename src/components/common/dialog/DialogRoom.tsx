@@ -33,7 +33,7 @@ const DialogRoom = () => {
 
     const renderPositiveSentiments = (sentiments: Sentiment) => {
         return Object.entries(sentiments).map(([key, value]) => {
-            if (parseFloat(value) > 0 && key in sentimentElements) {
+            if (parseFloat(value) > 3 && key in sentimentElements) {
                 return (
                     <div key={key}>{sentimentElements[key as keyof typeof sentimentElements]}</div>
                 );
