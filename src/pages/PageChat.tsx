@@ -75,7 +75,7 @@ const PageChat = () => {
                 </div>
             </div>
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center font-body">
                     <ModalCreateChat onClose={closeModal} />
                 </div>
             )}

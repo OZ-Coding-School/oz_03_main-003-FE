@@ -65,7 +65,7 @@ const PageAuth = () => {
 
     return (
         <div
-            className={`${location.pathname !== "/" ? "h-[100vh]" : ""} w-full bg-black m-auto flex flex-col gap-[10px] justify-center items-center`}
+            className={`${location.pathname !== "/" ? "h-[100vh]" : ""} w-full bg-black m-auto flex flex-col gap-[10px] justify-center items-center font-body`}
         >
             <Landing />
             <ButtonSignInGoogle onClick={googleLoginHandler} />

@@ -18,10 +18,10 @@ const PageHome = () => {
     }, [getUserInfo, getUserGridInfo, getUserLevelInfo, fetchChatRooms]);
 
     return (
-        <>
+        <div className="font-body">
             <HeaderLoggedIn />
             <HomeMain />
-        </>
+        </div>
     );
 };
 

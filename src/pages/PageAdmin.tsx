@@ -23,7 +23,7 @@ const PageAdmin = () => {
     return (
         <>
             <AdminHeader />
-            <div className="bg-slate-200 select-none overflow-y-scroll w-full h-screen p-10 flex flex-col gap-10">
+            <div className="bg-slate-200 select-none overflow-y-scroll w-full h-screen p-10 flex flex-col gap-10 font-body">
                 {data && (
                     <div>
                         <AdminOverview />

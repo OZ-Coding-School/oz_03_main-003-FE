@@ -28,7 +28,7 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
 
     if (isMaintenanceTime) {
         return (
-            <div className="flex items-center justify-center h-screen bg-gray-100">
+            <div className="flex items-center justify-center h-screen bg-gray-100 font-body">
                 <div className="text-center p-8 bg-white rounded-lg shadow-md">
                     <h1 className="text-2xl font-bold mb-4">서버 점검 중</h1>
                     <p className="mb-4">현재 서버 점검 중입니다. 잠시 후 다시 시도해 주세요.</p>

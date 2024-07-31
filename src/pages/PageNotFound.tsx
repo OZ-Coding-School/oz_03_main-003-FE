@@ -5,7 +5,7 @@ const PageNotFound = () => {
     const nav = useNavigate();
 
     return (
-        <div className="select-none w-full h-[100vh] bg-black flex flex-col justify-center items-center">
+        <div className="select-none w-full h-[100vh] bg-black flex flex-col justify-center items-center font-body">
             <img className="w-[150px] mb-[120px]" src="/logo-white.png" />
             <div className="font-extrabold text-[96px] text-white">404</div>
             <div className="text-lg text-white mb-10">Not Found</div>
