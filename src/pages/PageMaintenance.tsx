@@ -26,7 +26,7 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
         return () => clearInterval(intervalId);
     }, []);
 
-    if (!isMaintenanceTime) {
+    if (isMaintenanceTime) {
         return (
             <div className="flex items-center justify-center h-screen bg-gray-100">
                 <div className="text-center p-8 bg-white rounded-lg shadow-md">
