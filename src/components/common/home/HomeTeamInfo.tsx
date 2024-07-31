@@ -151,7 +151,7 @@ const HomeTeamInfo = () => {
                     <ul className="flex justify-center gap-2">
                         <li className="w-10 h-10 border border-gray-400 rounded-full flex items-center justify-center group">
                             <Link
-                                to="https://github.com/ChoSeongRak"
+                                to="https://velog.io/@sr_c/posts"
                                 target="_blank"
                                 className="w-full h-full border border-gray-400 rounded-full flex items-center justify-center hover:border-white fill-gray-400 hover:fill-white pt-0.5 transition "
                             >
@@ -160,7 +160,7 @@ const HomeTeamInfo = () => {
                         </li>
                         <li className="w-10 h-10 border border-gray-400 rounded-full flex items-center justify-center group">
                             <Link
-                                to="https://velog.io/@sr_c/posts"
+                                to="https://github.com/ChoiSeongRak"
                                 target="_blank"
                                 className="w-full h-full border border-gray-400 rounded-full flex items-center justify-center hover:border-white fill-gray-400 hover:fill-white pb-0.5 transition"
                             >

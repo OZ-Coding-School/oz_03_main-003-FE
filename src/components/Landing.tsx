@@ -84,7 +84,7 @@ const Landing = () => {
                             : "bg-none"
                     )}
                 >
-                    <h1 className="">
+                    <h1>
                         <img className="h-10 m-auto" src="img/logo-primary.png" alt="emotree" />
                     </h1>
                 </motion.header>
