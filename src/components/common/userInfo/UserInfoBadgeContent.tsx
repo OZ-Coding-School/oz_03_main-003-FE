@@ -43,10 +43,16 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     onMouseLeave={() => setHoverBadge1(false)}
                     className="w-12 h-12 relative rounded-full border-2 border-gray-200"
                 >
-                    {emotionSum >= 250 && (
+                    {emotionSum >= 250 ? (
                         <img
                             src={badge[0].url}
                             alt={badge[0].badge}
+                            className="w-full transition h-full object-cover rounded-full"
+                        />
+                    ) : (
+                        <img
+                            src={"/img/badge_unknown.png"}
+                            alt={"미획득 배지"}
                             className="w-full transition h-full object-cover rounded-full"
                         />
                     )}
