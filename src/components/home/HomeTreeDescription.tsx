@@ -9,8 +9,8 @@ interface HomeTreeDescription {
 const HomeTreeDescription = ({ treeName, treeType }: HomeTreeDescription) => {
     return (
         <div className="absolute select-none flex flex-col items-center top-10">
-            <div className={treeType.style}>{treeType.name}</div>
-            <div className="text-base w-[300px] text-center">{treeName}</div>
+            <p className={treeType.style}>{treeType.name}</p>
+            <p className="text-base w-40 text-center">{treeName}</p>
         </div>
     );
 };

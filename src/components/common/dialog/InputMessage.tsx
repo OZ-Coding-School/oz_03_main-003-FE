@@ -95,9 +95,8 @@ const InputMessage = () => {
                 </button>
             </div>
             <p className="text-center text-sm text-gray-200 mt-1">
-                Gemini AI는 대상을 지정하면 더 정확한 감정분석을 하며,
-                <br />
-                AI는 이상한 답변을 할 수도 있습니다 .
+                Gemini AI는 대상을 지정하면 더 정확한 감정분석을 하며, AI는 이상한 답변을 할 수도
+                있습니다 .
             </p>
             {loading && <InputLoadingBar />}
             {modal && <ToastChat message="감정이 전달 되었습니다." />}

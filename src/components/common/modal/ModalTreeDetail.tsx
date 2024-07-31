@@ -78,7 +78,7 @@ const ModalTreeDetail = ({ treeUUID, onClose }: ModalTreeDetailProps) => {
                     e.key === "Escape" && closeHandler();
                     e.key === "Enter" && closeHandler();
                 }}
-                className="select-none absolute z-10 left-[370px] top-[140px] p-5 w-[420px] h-fit bg-gray-800 border border-gray-600"
+                className="select-none absolute z-10 left-[370px] top-[149px] p-5 w-[420px] h-fit bg-gray-800 border border-gray-600"
             >
                 <div className="w-full flex justify-between">
                     <h1 className="text-gray-200 font-title text-base mb-10">나무 정보</h1>
