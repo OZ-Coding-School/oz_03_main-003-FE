@@ -54,15 +54,15 @@ const DialogRoom = () => {
                             transition={{ delay: 0.5, duration: 0.5, type: "just" }}
                             animate={{ opacity: [0, 1] }}
                         >
-                            <div className="mb-4 mr-8 w-full">
-                                <div className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto break-words whitespace-pre-line mr-4">
+                            <div className="mb-4 pr-8 w-full">
+                                <div className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto break-words whitespace-pre-line">
                                     {dialogItem.message}
                                 </div>
                             </div>
                             <div className="mb-10">
                                 <div className="p-8 border-b border-gray-800">
                                     <p className="text-gray-200 text-lg font-title mb-4">
-                                        대화 속의 감정을 요약했습니다
+                                        감정구슬이 보이기 시작한다 !
                                     </p>
                                     {messages.ai[index].message}
                                 </div>
@@ -78,7 +78,7 @@ const DialogRoom = () => {
                                     <div className="p-8 border-b border-gray-600 pb-10">
                                         <p className="text-gray-200 text-lg font-title mb-4">
                                             감정을 전달하면
-                                            <span className="text-primary">
+                                            <span className="text-primary mx-1">
                                                 {selected_tree.tree_name}
                                             </span>
                                             나무가 성장합니다!
