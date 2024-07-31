@@ -86,7 +86,7 @@ const HomeTeamInfo = () => {
                     <ul className="flex justify-center gap-2">
                         <li className="w-10 h-10 border border-gray-400 rounded-full flex items-center justify-center group">
                             <Link
-                                to="https://github.com/ungpyolee"
+                                to="https://www.notion.so/8c211738daeb4dd58f907e92a0cc3649"
                                 target="_blank"
                                 className="w-full h-full border border-gray-400 rounded-full flex items-center justify-center hover:border-white fill-gray-400 hover:fill-white pt-0.5 transition "
                             >
