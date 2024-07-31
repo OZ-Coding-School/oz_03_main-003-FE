@@ -23,7 +23,7 @@ const InputLoadingBar = () => {
     });
 
     return (
-        <div className="w-full absolute flex flex-col justify-center bottom-[150px] z-50">
+        <div className="w-full absolute flex flex-col justify-center items-center bottom-[150px] z-50">
             {isLoading && (
                 <div className="text-gray-200 animate-pulse">
                     대화내용을 분석하고 있습니다 잠시만 기다려주세요
