@@ -58,7 +58,7 @@ const PageChat = () => {
     }
 
     return (
-        <>
+        <div className="font-body">
             <HeaderLoggedIn />
             <div className="bg-black pt-[129px] w-full h-screen box-border">
                 <div className="w-full h-full flex">
@@ -79,7 +79,7 @@ const PageChat = () => {
                     <ModalCreateChat onClose={closeModal} />
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

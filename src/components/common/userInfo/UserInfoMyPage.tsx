@@ -91,13 +91,13 @@ const UserInfoMyPage = () => {
                             <li className="mb-3">정원 크기</li>
                         </ul>
                         <ul>
-                            <li className="mb-3">: {userData.user.username}</li>
-                            <li className="mb-3">: {userData.user.email}</li>
-                            <li className="mb-3">: {userData.user.created_at}</li>
-                            <li className="mb-3">
+                            <li className="mb-3 font-light">: {userData.user.username}</li>
+                            <li className="mb-3 font-light">: {userData.user.email}</li>
+                            <li className="mb-3 font-light">: {userData.user.created_at}</li>
+                            <li className="mb-3 font-light">
                                 : {userData.tree.treeCurrent} / {userData.tree.treeMax}
                             </li>
-                            <li className="mb-3">
+                            <li className="mb-3 font-light">
                                 : {userData.tree.gridSize} x {userData.tree.gridSize}
                             </li>
                         </ul>
