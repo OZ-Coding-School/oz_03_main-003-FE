@@ -72,7 +72,7 @@ const ModalDeleteChat = ({ onClose, chat_room_uuid, onDialogClose }: ModalDelete
                     <h3 className="font-title leading-5 mb-10 text-gray-200">대화 분석방 삭제</h3>
                     <p>대화 분석방을 삭제하시겠습니까?</p>
                     <p className="text-literal-error text-sm mt-2">
-                        삭제 된 내용은 복구되지 않습니다
+                        대화 분석방 삭제 시 모든 대화 내역이 삭제됩니다.
                     </p>
                     <div className="text-right mt-10">
                         <ButtonError onClick={handleDelete}>삭제하기</ButtonError>
