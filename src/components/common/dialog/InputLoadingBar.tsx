@@ -25,9 +25,9 @@ const InputLoadingBar = () => {
     return (
         <div className="w-full absolute flex justify-center bottom-[150px] z-50">
             {isLoading && (
-                <p className="text-gray-200 animate-pulse">
+                <div className="text-gray-200 animate-pulse">
                     대화내용을 분석하고 있습니다 잠시만 기다려주세요
-                </p>
+                </div>
             )}
             <div className="rounded-full overflow-hidden bg-slate-800 w-[200px] h-[5px]">
                 <motion.div
