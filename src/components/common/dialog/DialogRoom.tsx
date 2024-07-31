@@ -55,7 +55,7 @@ const DialogRoom = () => {
                             animate={{ opacity: [0, 1] }}
                         >
                             <div className="mb-4 mr-8 w-full">
-                                <div className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto break-words whitespace-pre-line">
+                                <div className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto break-words whitespace-pre-line mr-4">
                                     {dialogItem.message}
                                 </div>
                             </div>

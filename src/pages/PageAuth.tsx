@@ -5,11 +5,13 @@ import Landing from "../components/Landing";
 import { useNavigate, useLocation } from "react-router-dom";
 import useUserInfo from "../hook/useInfo";
 import { useEffect } from "react";
+import { useFirstModalStore } from "../config/store";
 
 const PageAuth = () => {
     const nav = useNavigate();
     const location = useLocation();
     const { getUserInfo, getUserGridInfo } = useUserInfo();
+    const { setModal } = useFirstModalStore();
 
     useEffect(() => {
         const loginUserVerify = async () => {
@@ -43,6 +45,7 @@ const PageAuth = () => {
                 await forestApi.createForest();
                 await getUserInfo();
                 await getUserGridInfo();
+                setModal(true);
                 nav("/home");
             }
         } catch (error) {

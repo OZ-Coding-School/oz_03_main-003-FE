@@ -39,6 +39,17 @@ export const useModalStore = create<ModalStore>((set) => ({
     setModal: (bool: boolean) => set(() => ({ modal: bool })),
 }));
 
+//? 최초 사용자 STATE
+interface FirstModalStore {
+    modal: boolean;
+    setModal: (bool: boolean) => void;
+}
+
+export const useFirstModalStore = create<FirstModalStore>((set) => ({
+    modal: false,
+    setModal: (bool: boolean) => set(() => ({ modal: bool })),
+}));
+
 //? USER DATA GLOBAL STATE
 interface UserStore {
     userData: UserData;

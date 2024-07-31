@@ -1,5 +1,5 @@
 import { twMerge as tw } from "tailwind-merge";
-import { useModalStore, useUserStore } from "../../config/store";
+import { useFirstModalStore, useModalStore, useUserStore } from "../../config/store";
 import HomeTree from "./HomeTree";
 import { useRef, useState } from "react";
 import { UserTreeDetail } from "../../config/types";
@@ -23,6 +23,7 @@ const HomeGrid = () => {
     const { getUserGridInfo } = useInfo();
     const { checkLoginStatus } = useVerify();
     const { modal, setModal } = useModalStore();
+    const { modal: firstModal } = useFirstModalStore();
     //? MODAL STATE
     const [createModalOpen, setCreateModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
@@ -206,6 +207,12 @@ const HomeGrid = () => {
                 <ModalTreeDelete treeUUID={treeUUID} onClose={deleteModalCloseHandler} />
             )}
             {modal && <ToastDefault message={"위치가 변경되었습니다."} />}
+            {firstModal && (
+                <ToastDefault
+                    duration={5000}
+                    message="최초 사용자시네요, 우선 땅을 클릭해보세요!"
+                />
+            )}
         </>
     );
 };
