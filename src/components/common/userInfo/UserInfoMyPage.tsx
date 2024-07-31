@@ -83,12 +83,12 @@ const UserInfoMyPage = () => {
                         </div>
                     </div>
                     <div className="flex">
-                        <ul className="w-20 text-gray-200">
-                            <li className="mb-3">Name</li>
-                            <li className="mb-3">Email</li>
-                            <li className="mb-3">Join date</li>
-                            <li className="mb-3">Tree</li>
-                            <li className="mb-3">Grid size</li>
+                        <ul className="w-20 text-gray-200 font-body font-semibold">
+                            <li className="mb-3">이름</li>
+                            <li className="mb-3">이메일</li>
+                            <li className="mb-3">가입 일자</li>
+                            <li className="mb-3">잔여 나무</li>
+                            <li className="mb-3">정원 크기</li>
                         </ul>
                         <ul>
                             <li className="mb-3">: {userData.user.username}</li>
