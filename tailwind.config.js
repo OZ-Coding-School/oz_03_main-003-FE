@@ -35,13 +35,13 @@ export default {
 
             fontSize: {
                 zero: ["0"],
-                xs: ["12px", { lineHeight: "18px" }],
-                sm: ["14px", { lineHeight: "22px" }],
-                base: ["16px", { lineHeight: "24px" }],
-                lg: ["20px", { lineHeight: "30px" }],
-                xl: ["24px", { lineHeight: "36px" }],
-                "2xl": ["32px", { lineHeight: "48px" }],
-                "3xl": ["48px", { lineHeight: "64px" }],
+                xs: ["12px", { lineHeight: "18px", letterSpacing: "-0.1px" }],
+                sm: ["14px", { lineHeight: "22px", letterSpacing: "-0.5px" }],
+                base: ["16px", { lineHeight: "24px", letterSpacing: "-0.5px" }],
+                lg: ["20px", { lineHeight: "30px", letterSpacing: "-1.2px" }],
+                xl: ["24px", { lineHeight: "36px", letterSpacing: "-1.7px" }],
+                "2xl": ["32px", { lineHeight: "48px", letterSpacing: "-2.3px" }],
+                "3xl": ["48px", { lineHeight: "64px", letterSpacing: "-3px" }],
             },
             fontWeight: {
                 thin: "200",

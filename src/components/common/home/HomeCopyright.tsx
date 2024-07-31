@@ -8,6 +8,7 @@ const HomeCopyright = () => {
                 <Link
                     to="https://github.com/OZ-Coding-School/oz_03_main-003-FE"
                     className="underline"
+                    target="_blank"
                 >
                     Copyright
                 </Link>

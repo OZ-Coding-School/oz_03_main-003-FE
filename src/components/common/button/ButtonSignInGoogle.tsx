@@ -18,7 +18,7 @@ const ButtonSignInGoogle = ({ type = "button", onClick }: ButtonProps) => {
     return (
         <div className="select-none fixed left-2/4 bottom-[60px] transform -translate-x-1/2 z-30 text-center">
             <p className="flex text-white mb-[10px] items-center justify-center">
-                Emotree uses <IconGemini className="ml-1" />
+                Emotree uses <IconGemini className="ml-2 mb-1" />
             </p>
             <div className="flex justify-center items-center">
                 <motion.button
