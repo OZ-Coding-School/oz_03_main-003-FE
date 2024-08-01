@@ -185,4 +185,3 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 
 ---
 
-[https://gptonline.ai/ko/](https://gptonline.ai/ko/)
