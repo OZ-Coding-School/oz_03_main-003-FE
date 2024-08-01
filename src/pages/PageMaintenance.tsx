@@ -28,13 +28,32 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
 
     if (isMaintenanceTime) {
         return (
-            <div className="flex items-center justify-center h-screen bg-gray-100 font-body">
-                <div className="text-center p-8 bg-white rounded-lg shadow-md">
-                    <h1 className="text-2xl font-bold mb-4">서버 점검 중</h1>
-                    <p className="mb-4">현재 서버 점검 중입니다. 잠시 후 다시 시도해 주세요.</p>
-                    <p>예상 완료 시간: 2024/08/02</p>
+            <>
+                <div className="select-none font-body flex items-center justify-center h-screen bg-black">
+                    <img
+                        className="absolute left-0 top-0"
+                        src="/img/landing_sideBranch01.png"
+                    ></img>
+                    <img
+                        className="absolute right-0 top-0"
+                        src="/img/landing_sideBranch02.png"
+                    ></img>
+                    <img
+                        className="absolute right-0 bottom-0"
+                        src="/img/landing_sideBranch03.png"
+                    ></img>
+                    <div className="animate-pulse text-center p-8 bg-gray-800 rounded-lg shadow-md">
+                        <div className="flex gap-2 justify-center">
+                            <h1 className="text-2xl font-bold mb-4 text-white">서버 점검 중</h1>
+                            <img className="h-[50px]" src="/img/badge_placeholder.png" />
+                        </div>
+                        <p className="mb-4 text-gray-200">
+                            현재 서버 점검 중입니다. 잠시 후 다시 시도해 주세요.
+                        </p>
+                        <p className="text-gray-200">예상 완료 시간: 2024/08/02</p>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 
