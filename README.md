@@ -100,12 +100,12 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 ## 3. 주요 페이지
 | 랜딩 페이지                                 | 감정나무 숲 페이지                                |
 |--------------------------------------------|--------------------------------------------------|
-| <img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Landing.png?raw=true)"/> | <img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Home.png?raw=true)"| 
-|--------------------------------------------|--------------------------------------------------|
+| <img src="https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Landing.png?raw=true"/> | <img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Home.png?raw=true)"| 
+|서비스 소개와 로그인이 가능합니다              |나무를 심을 수 있으며, 나무 관리와 성장 정보를 확인합니다|
 | AI 대화분석 페이지                          | 내 정보 페이지                                     |
 |--------------------------------------------|--------------------------------------------------|
 | <img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Chat.png?raw=true)"/> |<img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Mypage.png?raw=true)"/>| 
-|--------------------------------------------|--------------------------------------------------|
+|채팅방을 만들고 대화를 입력하면 AI가 대화를 요약하고 감정 키워드를 추출합니다|유저의 정보를 볼 수 있으며, 프로필 이미지와 이름을 변경할 수 있습니다.|
 
 
 ---
