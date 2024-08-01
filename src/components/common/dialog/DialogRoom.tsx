@@ -40,12 +40,12 @@ const DialogRoom = () => {
             .map(([key, value]) => {
                 if (parseFloat(value) > 3 && key in sentimentElements) {
                     return (
-                        <>
-                            <p className="text-gray-200 text-lg font-title mb-6">감정 키워드 !</p>
+                        <div className="flex flex-col gap-6">
+                            <div className="text-gray-200 text-lg font-title">감정 키워드 !</div>
                             <div key={key}>
                                 {sentimentElements[key as keyof typeof sentimentElements]}
                             </div>
-                        </>
+                        </div>
                     );
                 }
                 return null;
