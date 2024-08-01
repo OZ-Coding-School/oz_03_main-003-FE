@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactNode } from "react";
+import InputLoadingBar from "../components/common/dialog/InputLoadingBar";
 
 const PageMaintenance = ({ children }: { children: ReactNode }) => {
     const [isMaintenanceTime, setIsMaintenanceTime] = useState(false);
@@ -42,15 +43,18 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
                         className="absolute right-0 bottom-0"
                         src="/img/landing_sideBranch03.png"
                     ></img>
-                    <div className="animate-pulse text-center p-8 bg-gray-800 rounded-lg shadow-md">
+                    <div className="absolute z-[99] text-center p-8 bg-gray-800 rounded-lg shadow-md">
                         <div className="flex gap-2 justify-center">
                             <h1 className="text-2xl font-bold mb-4 text-white">서버 점검 중</h1>
                             <img className="h-[50px]" src="/img/badge_placeholder.png" />
                         </div>
                         <p className="mb-4 text-gray-200">
-                            현재 서버 점검 중입니다. 잠시 후 다시 시도해 주세요.
+                            현재 서버 점검 중입니다. 나중에 다시 시도해 주세요.
                         </p>
                         <p className="text-gray-200">예상 완료 시간: 2024/08/02</p>
+                    </div>
+                    <div className="w-full bottom-[376px] absolute">
+                        <InputLoadingBar />
                     </div>
                 </div>
             </>
