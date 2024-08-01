@@ -1,5 +1,5 @@
 <h1 align="center">Emotree 프로젝트🎄 </h1>
-<img src="(https://github.com/user-attachments/assets/35d33bcf-96eb-4c24-b118-299bf56c9aa5)" width="width size%">
+![readme_intro](https://github.com/user-attachments/assets/4c879e6e-b179-4dc9-9753-e399e120940f)
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FOZ-Coding-School%2Foz_03_main-003-FE%2Fhit-counter&count_bg=%233F3DC8&title_bg=%231B1B1B&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 
 ### Programming Languages
