@@ -97,7 +97,15 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 
 ---
 
-## 3. 프로젝트 구조(변 필요)
+## 3. 주요 페이지
+| 랜딩 페이지                                 | 감정나무 숲 페이지                                |
+|--------------------------------------------|--------------------------------------------------|
+| <img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Landing.png?raw=true)"/> | <img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Home.png?raw=true)"| 
+|--------------------------------------------|--------------------------------------------------|
+| AI 대화분석 페이지                          | 내 정보 페이지                                     |
+|--------------------------------------------|--------------------------------------------------|
+| <img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Chat.png?raw=true)"/> |<img src="[https://github.com/MinSuKim.png](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ReadMe_Mypage.png?raw=true)"/>| 
+|--------------------------------------------|--------------------------------------------------|
 
 
 ---
