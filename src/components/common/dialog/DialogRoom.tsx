@@ -31,15 +31,29 @@ const DialogRoom = () => {
         indifference: <BadgeIndifference />,
     };
 
-    const renderPositiveSentiments = (sentiments: Sentiment) => {
-        return Object.entries(sentiments).map(([key, value]) => {
-            if (parseFloat(value) > 3 && key in sentimentElements) {
-                return (
-                    <div key={key}>{sentimentElements[key as keyof typeof sentimentElements]}</div>
-                );
-            }
-            return null;
-        });
+    const NoSentimentBadge: React.FC = () => (
+        <div className="p-2 bg-gray-600 text-white rounded-sm">특별한 감정이 없습니다..</div>
+    );
+
+    const renderSentiments = (sentiments: Sentiment) => {
+        const positiveSentiments = Object.entries(sentiments)
+            .map(([key, value]) => {
+                if (parseFloat(value) > 3 && key in sentimentElements) {
+                    return (
+                        <div key={key}>
+                            {sentimentElements[key as keyof typeof sentimentElements]}
+                        </div>
+                    );
+                }
+                return null;
+            })
+            .filter(Boolean);
+
+        if (positiveSentiments.length === 0) {
+            return <NoSentimentBadge />;
+        }
+
+        return positiveSentiments;
     };
 
     if (messages.user.length === 0 && messages.ai.length === 0)
@@ -75,7 +89,7 @@ const DialogRoom = () => {
                                         감정 키워드 !
                                     </p>
                                     <div className="flex gap-2">
-                                        {renderPositiveSentiments(messages.ai[index].sentiments)}
+                                        {renderSentiments(messages.ai[index].sentiments)}
                                     </div>
                                 </div>
                                 {shouldRenderButtonEmoTree(messages.ai[index].sentiments) &&
