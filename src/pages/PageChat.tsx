@@ -10,6 +10,7 @@ import ChatListContent from "../components/common/chatList/ChatListContent";
 import ChatListHeader from "../components/common/chatList/ChatListHeader";
 import useSound from "use-sound";
 import btnClick from "../assets/sound/btn_click.mp3";
+import { Helmet } from "react-helmet-async";
 const PageChat = () => {
     const { fetchChatRooms } = useChatRooms();
     const { userData } = useUserStore();
@@ -51,6 +52,9 @@ const PageChat = () => {
     if (userData.tree.treeCurrent === 0) {
         return (
             <>
+                <Helmet>
+                    <title>감정 분석 :: Emotree</title>
+                </Helmet>
                 <HeaderLoggedIn />
                 <NonData />
             </>
@@ -58,28 +62,33 @@ const PageChat = () => {
     }
 
     return (
-        <div className="font-body">
-            <HeaderLoggedIn />
-            <div className="bg-black pt-[129px] w-full h-screen box-border">
-                <div className="w-full h-full flex">
-                    <div className="w-80 h-full border-r border-gray-600">
-                        <ChatListHeader onAddChatClick={openModal} />
-                        <ChatListContent
-                            onChatItemClick={openDialogHandler}
-                            onClose={closeDialogHandler}
-                        />
-                    </div>
-                    <div className="text-white w-full h-full">
-                        {isDialogOpen && uuid !== "" && <Dialog onClose={closeDialogHandler} />}
+        <>
+            <Helmet>
+                <title>감정 분석 :: Emotree</title>
+            </Helmet>
+            <div className="font-body">
+                <HeaderLoggedIn />
+                <div className="bg-black pt-[129px] w-full h-screen box-border">
+                    <div className="w-full h-full flex">
+                        <div className="w-80 h-full border-r border-gray-600">
+                            <ChatListHeader onAddChatClick={openModal} />
+                            <ChatListContent
+                                onChatItemClick={openDialogHandler}
+                                onClose={closeDialogHandler}
+                            />
+                        </div>
+                        <div className="text-white w-full h-full">
+                            {isDialogOpen && uuid !== "" && <Dialog onClose={closeDialogHandler} />}
+                        </div>
                     </div>
                 </div>
+                {isModalOpen && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center font-body">
+                        <ModalCreateChat onClose={closeModal} />
+                    </div>
+                )}
             </div>
-            {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center font-body">
-                    <ModalCreateChat onClose={closeModal} />
-                </div>
-            )}
-        </div>
+        </>
     );
 };
 

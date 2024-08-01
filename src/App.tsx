@@ -14,11 +14,13 @@ function App() {
             <Route path="/" element={<PageAuth />} />
             <Route path="/home" element={<PrivateRoute element={PageHome} />} />
             <Route path="/account" element={<PrivateRoute element={PageMy} />} />
-            <Route path="/chat" element={<PrivateRoute element={PageChat} />} />
+            <Route path="/chat" element={<PageChat />} />
             <Route path="/admin" element={<AdminRoute element={PageAdmin} />} />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     );
 }
-
+{
+    /* <PrivateRoute element={PageChat} /> */
+}
 export default App;
