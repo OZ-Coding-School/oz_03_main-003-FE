@@ -24,8 +24,8 @@ const ChatListContent = ({ onClose, onChatItemClick }: ChatListContentProps) => 
                     item={{
                         chat_room_uuid: item.chat_room_uuid,
                         chat_room_name: item.chat_room_name,
-                        created_at: item.created_at,
-                        updated_at: item.updated_at,
+                        created_at: item.created_at as string,
+                        updated_at: item.updated_at as string,
                     }}
                     onClick={onChatItemClick}
                     onClose={onClose}
