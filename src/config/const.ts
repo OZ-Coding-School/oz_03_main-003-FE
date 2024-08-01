@@ -118,29 +118,29 @@ export const TREE_TYPE: TREE_CONST_TYPE_LIST = {
         desc: "아직 자라고있는 무궁무진한 가능성의 새싹\n감정에 민감하게 반응할 것 같다.",
     },
     1: {
-        name: "발광 묘목",
+        name: "웃음꽃 묘목",
         style: "font-title text-white text-base",
-        desc: "어쩌구 저쩌구",
+        desc: "웃음을 먹고 자라며, 나무에 다가가기만 해도 기분이 좋아지는 꽃들이 피어납니다.",
     },
     2: {
-        name: "구름 묘목",
+        name: "눈물구름 묘목",
         style: "font-title text-white text-base",
-        desc: "어쩌구 저쩌구",
+        desc: "작은 물방울이 마치 비처럼 내립니다. 슬픈 날에는 잔잔한 위로를 주는 나무예요.",
     },
     3: {
-        name: "기운없는 묘목",
+        name: "한숨 묘목",
         style: "font-title text-white text-base",
-        desc: "어쩌구 저쩌구",
+        desc: "걱정을 먹고 자라며, 한숨들이 떠다닙니다.. 마음의 짐을 덜어주고 있습니다.",
     },
     4: {
-        name: "무관심 묘목",
+        name: "담쟁이 묘목",
         style: "font-title text-white text-base",
-        desc: "어쩌구 저쩌구",
+        desc: "무관심을 먹고 자라며, 주변 환경에 따라 모습이 변하지 않고 그대로 유지됩니다.",
     },
     5: {
-        name: "불꽃 묘목",
+        name: "예민 묘목",
         style: "font-title text-white text-base",
-        desc: "어쩌구 저쩌구",
+        desc: "날카로운 잎사귀가 마치 불꽃처럼 반짝입니다. 화가 날 때마다 강렬하게 빛나는 나무입니다.",
     },
 };
 
