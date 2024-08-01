@@ -30,7 +30,7 @@ const HomeTree = ({
     onDeleteModal,
     moveState,
 }: HomeTreeProps) => {
-    const nowLevel = user_level > 2 ? true : false;
+    const nowLevel = user_level >= 2 ? true : false;
     const [hover, setHover] = useState(false);
 
     return (
