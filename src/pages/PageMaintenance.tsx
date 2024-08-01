@@ -13,7 +13,7 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
             if (hours === 12 && minutes >= 0 && minutes < 5) {
                 setIsMaintenanceTime(true);
             } else {
-                setIsMaintenanceTime(false);
+                setIsMaintenanceTime(true);
             }
         };
 
@@ -32,7 +32,7 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
                 <div className="text-center p-8 bg-white rounded-lg shadow-md">
                     <h1 className="text-2xl font-bold mb-4">서버 점검 중</h1>
                     <p className="mb-4">현재 서버 점검 중입니다. 잠시 후 다시 시도해 주세요.</p>
-                    <p>예상 완료 시간: 12:05</p>
+                    <p>예상 완료 시간: 2024/08/02</p>
                 </div>
             </div>
         );
