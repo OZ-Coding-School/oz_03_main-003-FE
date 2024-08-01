@@ -10,12 +10,11 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
             const now = new Date();
             const hours = now.getHours();
             const minutes = now.getMinutes();
-            console.log(now);
 
-            if (hours === 12 && minutes >= 0 && minutes < 5) {
+            if (hours === 0 && minutes >= 0 && minutes < 5) {
                 setIsMaintenanceTime(true);
             } else {
-                setIsMaintenanceTime(true);
+                setIsMaintenanceTime(false);
             }
         };
 

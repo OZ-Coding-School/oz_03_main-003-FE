@@ -19,7 +19,7 @@ const PageChat = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [playBtn] = useSound(btnClick, { volume: 0.75 });
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { setRoomData, chatroom_uuid: uuid } = useDialogStore();
+    const { setRoomData, setTreeData, chatroom_uuid: uuid } = useDialogStore();
 
     const openDialogHandler = (chat_room_uuid: string): void => {
         setRoomData(chat_room_uuid);
@@ -58,11 +58,15 @@ const PageChat = () => {
                 const currentDate = dayjs(current.updated_at);
                 return currentDate.isAfter(latestDate) ? current : latest;
             }, validChatRooms[0]);
+            const treeName = userData.treeDetail.find(
+                (t) => t.tree_uuid === latestRoom?.tree_uuid
+            )?.tree_name;
 
             setRoomData(latestRoom?.chat_room_uuid);
+            setTreeData(latestRoom?.tree_uuid, treeName as string);
             setIsDialogOpen(true);
         }
-    }, [chatRooms, setRoomData]);
+    }, [chatRooms, setRoomData, setTreeData, userData]);
 
     const openModal = () => {
         setIsModalOpen(true);
