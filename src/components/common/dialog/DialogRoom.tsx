@@ -38,7 +38,7 @@ const DialogRoom = () => {
                     <div key={key}>{sentimentElements[key as keyof typeof sentimentElements]}</div>
                 );
             }
-            return <div>특별한 감정정보가 없는 것 같습니다...</div>;
+            return null;
         });
     };
 
