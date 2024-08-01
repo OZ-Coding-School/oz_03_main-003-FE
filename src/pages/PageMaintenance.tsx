@@ -54,7 +54,7 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
                         <p className="mb-4 text-gray-200">
                             현재 서버 점검 중입니다. 나중에 다시 시도해 주세요.
                         </p>
-                        <p className="text-gray-200">예상 완료 시간: 2024/08/02</p>
+                        <p className="text-gray-200">예상 완료 시간: 00:00 ~ 00:05</p>
                     </div>
                     <div className="w-full bottom-[376px] absolute">
                         <MaintenanceLoadingBar />
