@@ -80,8 +80,6 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 
 # Emotree: AI 감정 분석 서비스
 
-![프로젝트 로고](https://emotree.yoyobar.xyz/logo.png)
-
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FOZ-Coding-School%2Foz_03_main-003-FE%2Fhit-counter&count_bg=%2383df00&title_bg=%231B1B1B&icon=&icon_color=%23E7E7E7&titl=ehits&edge_flat=false"/></a>
 
 
@@ -104,11 +102,11 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 
 | 이름       | 역할               | 사진                                       | GitHub                                           | Blog                                      |
 |------------|--------------------|--------------------------------------------|--------------------------------------------------|-------------------------------------------|
-| Kim, Min Su| 팀&프론트엔드 팀장    | ![Min Su](https://github.com/MinSuKim.png) | [GitHub](https://github.com/MinSuKim)            | [Blog](https://blog.minsu.dev)            |
-| Park, Min Ah | 프론트엔드 팀원  | ![Min Ah](https://github.com/MinAhPark.png) | [GitHub](https://github.com/MinAhPark)           | [Blog](https://blog.minah.dev)            |
-| Lee, Ung Pyo | 프론트엔드 팀원  | ![Ung Pyo](https://github.com/UngPyoLee.png) | [GitHub](https://github.com/UngPyoLee)           | [Blog](https://blog.ungpyo.dev)           |
-| Yang, Ui Jong| 백엔드 팀장       | ![Ui Jong](https://github.com/UiJongYang.png) | [GitHub](https://github.com/UiJongYang)          | [Blog](https://blog.uijong.dev)           |
-| Choi, Seong Rak| 백엔드 팀원    | ![Seong Rak](https://github.com/SeongRakChoi.png) | [GitHub](https://github.com/SeongRakChoi)       | [Blog](https://blog.seongrak.dev)         |
+| Kim, Min Su| 팀&프론트엔드 팀장 | <img src="https://github.com/MinSuKim.png" width="50"/> | [GitHub](https://github.com/MinSuKim)            | [Blog](wiki.yoyobar.xyz)            |
+| Park, Min Ah | 프론트엔드 팀원  | <img src="https://github.com/MinAhPark.png" width="50"/> | [GitHub](https://github.com/MinAhPark)           | [Blog](https://29-0.tistory.com/)            |
+| Lee, Ung Pyo | 프론트엔드 팀원  | <img src="https://github.com/UngPyoLee.png" width="50"/> | [GitHub](https://github.com/UngPyoLee)           | [Blog](https://blog.ungpyo.dev)           |
+| Yang, Ui Jong| 백엔드 팀장       | <img src="https://github.com/Scanf-s.png" width="50"/> | [GitHub](https://github.com/Scanf-s)          | [Blog](https://velog.io/@calzone0404/posts)           |
+| Choi, Seong Rak| 백엔드 팀원    | <img src="https://github.com/ChoiSeongRak.png" width="50"/> | [GitHub](https://github.com/ChoiSeongRak)       | [Blog](https://velog.io/@sr_c/posts)         |
 
 ---
 
@@ -210,7 +208,8 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 ![Architecture](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/Architecture.png?raw=true)
 
 ### 클라우드 아키텍처
-![클라우드 아키텍처 다이어그램](https://emotree.yoyobar.xyz/cloud-architecture.png)
+![CloudArchitecture](https://github.com/user-attachments/assets/6584c9ca-cf38-4ec1-a208-772eb48e6e62)
+
 
 ### ERD
 ![ERD](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ERD.png?raw=true)
