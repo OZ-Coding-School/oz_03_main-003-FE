@@ -43,7 +43,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     onMouseLeave={() => setHoverBadge1(false)}
                     className="w-12 h-12 relative rounded-full border-2 border-gray-200"
                 >
-                    {emotionSum >= 250 ? (
+                    {emotionSum >= 0 ? (
                         <img
                             src={badge[0].url}
                             alt={badge[0].badge}
@@ -57,7 +57,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                         />
                     )}
                     <AnimatePresence>
-                        {emotionSum >= 250 && hoverBadge1 && (
+                        {emotionSum >= 0 && hoverBadge1 && (
                             <motion.div
                                 onClick={() => modalOnHandler(badge[0].url)}
                                 initial={{ opacity: 0 }}
@@ -71,7 +71,7 @@ const UserInfoBadgeContent = ({ type }: { type: keyof Emotions }) => {
                     </AnimatePresence>
                 </nav>
                 <div className="mt-1 text-sm text-gray-200 text-center">
-                    {emotionSum >= 250 ? badge[0].type : "미획득"}
+                    {emotionSum >= 0 ? badge[0].type : "미획득"}
                 </div>
             </div>
 
