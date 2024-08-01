@@ -38,12 +38,16 @@ const DialogRoom = () => {
                     <div key={key}>{sentimentElements[key as keyof typeof sentimentElements]}</div>
                 );
             }
-            return null;
+            return <div>특별한 감정정보가 없는 것 같습니다...</div>;
         });
     };
 
     if (messages.user.length === 0 && messages.ai.length === 0)
         return <DialogHandle text={"현재 대화내역이 없습니다."} />;
+
+    const shouldRenderButtonEmoTree = (sentiments: Sentiment) => {
+        return Object.values(sentiments).some((value) => parseFloat(value) > 3);
+    };
 
     return (
         <div className="w-full h-full text-white overflow-y-auto overflow-x-hidden">
@@ -74,7 +78,8 @@ const DialogRoom = () => {
                                         {renderPositiveSentiments(messages.ai[index].sentiments)}
                                     </div>
                                 </div>
-                                {!messages.ai[index].applied_state ? (
+                                {shouldRenderButtonEmoTree(messages.ai[index].sentiments) &&
+                                !messages.ai[index].applied_state ? (
                                     <div className="p-8 border-b border-gray-600 pb-10">
                                         <p className="text-gray-200 text-lg font-title mb-4">
                                             감정을 전달하면
