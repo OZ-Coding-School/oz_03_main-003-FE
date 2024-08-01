@@ -10,6 +10,7 @@ import { useDialogStore, useModalStore } from "../../../config/store";
 import { ResponseAIMessage, UserMessage } from "../../../config/types";
 import { twMerge as tw } from "tailwind-merge";
 import ToastChat from "../toast/ToastChat";
+import useChatRooms from "../../../hook/chat/useChatRooms";
 
 const InputMessage = () => {
     const [message, setMessage] = useState("");
@@ -20,6 +21,7 @@ const InputMessage = () => {
     const [playSend] = useSound(messageSound, { volume: 0.75 });
     const [playResponse] = useSound(responseSound, { volume: 0.75 });
     const { modal } = useModalStore();
+    const { fetchChatRooms } = useChatRooms();
 
     useEffect(() => {
         if (textareaRef.current) {
@@ -38,6 +40,7 @@ const InputMessage = () => {
 
             await checkLoginStatus();
             const responseUserMessage = await dialogApi.sendUserMessage(chatroom_uuid, message);
+            await fetchChatRooms();
             setMessage("");
             const responseAiMessage = await dialogApi.postAIMessage(
                 chatroom_uuid,

@@ -11,6 +11,7 @@ const useFetchChatRooms = () => {
     const fetchChatRooms = useCallback(async () => {
         try {
             const response = await getChatRoomList();
+
             const rooms: ChatRoom[] = response.data;
             setChatRooms(rooms);
         } catch (error) {

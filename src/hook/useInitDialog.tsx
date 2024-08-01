@@ -8,6 +8,7 @@ const useInitDialog = () => {
 
     const initDialogList = useCallback(async () => {
         const responseList = await dialogApi.getDialogList(chatroom_uuid);
+
         const userData = responseList.data.map((response: ResponseDialogList) => {
             return {
                 message_uuid: response.user.message_uuid,

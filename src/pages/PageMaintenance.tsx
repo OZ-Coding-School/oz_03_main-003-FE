@@ -15,7 +15,7 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
             if (hours === 12 && minutes >= 0 && minutes < 5) {
                 setIsMaintenanceTime(true);
             } else {
-                setIsMaintenanceTime(true);
+                setIsMaintenanceTime(false);
             }
         };
 

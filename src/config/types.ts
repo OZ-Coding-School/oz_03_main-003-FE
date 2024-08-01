@@ -155,6 +155,8 @@ export interface ChatRoom {
     chat_room_uuid: string;
     chat_room_name: string;
     tree_uuid: string;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface UpdateChatRoom {

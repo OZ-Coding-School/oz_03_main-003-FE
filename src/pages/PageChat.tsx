@@ -11,8 +11,9 @@ import ChatListHeader from "../components/common/chatList/ChatListHeader";
 import useSound from "use-sound";
 import btnClick from "../assets/sound/btn_click.mp3";
 import { Helmet } from "react-helmet-async";
+import dayjs from "dayjs";
 const PageChat = () => {
-    const { fetchChatRooms } = useChatRooms();
+    const { fetchChatRooms, chatRooms } = useChatRooms();
     const { userData } = useUserStore();
     const { getUserInfo, getUserGridInfo, getUserLevelInfo } = useInfo();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -40,8 +41,28 @@ const PageChat = () => {
     }, [getUserInfo, getUserGridInfo, getUserLevelInfo]);
 
     useEffect(() => {
-        fetchChatRooms();
+        const fetchChatRoomsHandler = async () => {
+            await fetchChatRooms();
+        };
+        fetchChatRoomsHandler();
     }, [fetchChatRooms]);
+
+    useEffect(() => {
+        if (chatRooms.length > 0) {
+            const validChatRooms = chatRooms.filter((room) =>
+                dayjs(room.updated_at).isAfter(dayjs(room.created_at))
+            );
+
+            const latestRoom = validChatRooms.reduce((latest, current) => {
+                const latestDate = dayjs(latest.updated_at);
+                const currentDate = dayjs(current.updated_at);
+                return currentDate.isAfter(latestDate) ? current : latest;
+            }, validChatRooms[0]);
+
+            setRoomData(latestRoom?.chat_room_uuid);
+            setIsDialogOpen(true);
+        }
+    }, [chatRooms, setRoomData]);
 
     const openModal = () => {
         setIsModalOpen(true);

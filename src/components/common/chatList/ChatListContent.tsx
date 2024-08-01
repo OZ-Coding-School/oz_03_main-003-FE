@@ -1,5 +1,6 @@
 import ChatListItem from "./ChatListItem";
 import { useUserChatStore } from "../../../config/store";
+import dayjs from "dayjs";
 
 interface ChatListContentProps {
     onChatItemClick: (chat_room_uuid: string) => void;
@@ -9,9 +10,11 @@ interface ChatListContentProps {
 const ChatListContent = ({ onClose, onChatItemClick }: ChatListContentProps) => {
     const { chatRooms } = useUserChatStore();
 
-    const sortedChatRooms = chatRooms
-        .slice()
-        .sort((a, b) => a.chat_room_name.localeCompare(b.chat_room_name, "ko-KR"));
+    const sortedChatRooms = chatRooms.sort((a, b) => {
+        const dateA = dayjs(a.updated_at).valueOf();
+        const dateB = dayjs(b.updated_at).valueOf();
+        return dateB - dateA;
+    });
 
     return (
         <div className="select-none overflow-y-auto w-fit flex flex-col">
@@ -21,6 +24,8 @@ const ChatListContent = ({ onClose, onChatItemClick }: ChatListContentProps) => 
                     item={{
                         chat_room_uuid: item.chat_room_uuid,
                         chat_room_name: item.chat_room_name,
+                        created_at: item.created_at,
+                        updated_at: item.updated_at,
                     }}
                     onClick={onChatItemClick}
                     onClose={onClose}
