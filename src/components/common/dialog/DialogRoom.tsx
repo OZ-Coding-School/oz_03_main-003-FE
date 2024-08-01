@@ -32,7 +32,7 @@ const DialogRoom = () => {
     };
 
     const NoSentimentBadge: React.FC = () => (
-        <div className="p-2 bg-gray-600 text-white rounded-sm">특별한 감정이 없습니다..</div>
+        <div className="text-white rounded-sm">특별한 감정이 없습니다..</div>
     );
 
     const renderSentiments = (sentiments: Sentiment) => {
@@ -40,9 +40,12 @@ const DialogRoom = () => {
             .map(([key, value]) => {
                 if (parseFloat(value) > 3 && key in sentimentElements) {
                     return (
-                        <div key={key}>
-                            {sentimentElements[key as keyof typeof sentimentElements]}
-                        </div>
+                        <>
+                            <p className="text-gray-200 text-lg font-title mb-6">감정 키워드 !</p>
+                            <div key={key}>
+                                {sentimentElements[key as keyof typeof sentimentElements]}
+                            </div>
+                        </>
                     );
                 }
                 return null;
@@ -85,9 +88,6 @@ const DialogRoom = () => {
                                     {messages.ai[index].message}
                                 </div>
                                 <div className="p-8 border-b border-gray-800">
-                                    <p className="text-gray-200 text-lg font-title mb-6">
-                                        감정 키워드 !
-                                    </p>
                                     <div className="flex gap-2">
                                         {renderSentiments(messages.ai[index].sentiments)}
                                     </div>
