@@ -16,7 +16,7 @@
 
 | 이름       | 역할               | 사진                                       | GitHub                                           | Blog                                      |
 |------------|--------------------|--------------------------------------------|--------------------------------------------------|-------------------------------------------|
-| Kim, Min Su| 팀&프론트엔드 팀장 | <img src="https://github.com/MinSuKim.png" width="50"/> | [GitHub](https://github.com/MinSuKim)            | [Blog](wiki.yoyobar.xyz)            |
+| Kim, Min Su| 팀&프론트엔드 팀장 | <img src="https://github.com/yoyobar.png" width="50"/> | [GitHub](https://github.com/yoyobar)            | [Blog](wiki.yoyobar.xyz)            |
 | Park, Min Ah | 프론트엔드 팀원  | <img src="https://github.com/MinAhPark.png" width="50"/> | [GitHub](https://github.com/MinAhPark)           | [Blog](https://29-0.tistory.com/)            |
 | Lee, Ung Pyo | 프론트엔드 팀원  | <img src="https://github.com/UngPyoLee.png" width="50"/> | [GitHub](https://github.com/UngPyoLee)           | [Blog](https://blog.ungpyo.dev)           |
 | Yang, Ui Jong| 백엔드 팀장       | <img src="https://github.com/Scanf-s.png" width="50"/> | [GitHub](https://github.com/Scanf-s)          | [Blog](https://velog.io/@calzone0404/posts)           |
