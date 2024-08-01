@@ -82,7 +82,8 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 
 ![프로젝트 로고](https://emotree.yoyobar.xyz/logo.png)
 
-![방문횟수](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://emotree.yoyobar.xyz/)
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FOZ-Coding-School%2Foz_03_main-003-FE%2Fhit-counter&count_bg=%2383df00&title_bg=%231B1B1B&icon=&icon_color=%23E7E7E7&titl=ehits&edge_flat=false"/></a>
+
 
 ---
 
@@ -101,27 +102,13 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 
 ### 팀 소개
 
-#### 프론트엔드 팀
-- **팀장:** Kim, Min Su  
-  ![Min Su](https://github.com/MinSuKim.png)  
-  [GitHub](https://github.com/MinSuKim) | [Blog](https://blog.minsu.dev)
-
-- **팀원:** Park, Min Ah  
-  ![Min Ah](https://github.com/MinAhPark.png)  
-  [GitHub](https://github.com/MinAhPark) | [Blog](https://blog.minah.dev)
-
-- **팀원:** Lee, Ung Pyo  
-  ![Ung Pyo](https://github.com/UngPyoLee.png)  
-  [GitHub](https://github.com/UngPyoLee) | [Blog](https://blog.ungpyo.dev)
-
-#### 백엔드 팀
-- **팀장:** Yang, Ui Jong  
-  ![Ui Jong](https://github.com/UiJongYang.png)  
-  [GitHub](https://github.com/UiJongYang) | [Blog](https://blog.uijong.dev)
-
-- **팀원:** Choi, Seong Rak  
-  ![Seong Rak](https://github.com/SeongRakChoi.png)  
-  [GitHub](https://github.com/SeongRakChoi) | [Blog](https://blog.seongrak.dev)
+| 이름       | 역할               | 사진                                       | GitHub                                           | Blog                                      |
+|------------|--------------------|--------------------------------------------|--------------------------------------------------|-------------------------------------------|
+| Kim, Min Su| 팀&프론트엔드 팀장    | ![Min Su](https://github.com/MinSuKim.png) | [GitHub](https://github.com/MinSuKim)            | [Blog](https://blog.minsu.dev)            |
+| Park, Min Ah | 프론트엔드 팀원  | ![Min Ah](https://github.com/MinAhPark.png) | [GitHub](https://github.com/MinAhPark)           | [Blog](https://blog.minah.dev)            |
+| Lee, Ung Pyo | 프론트엔드 팀원  | ![Ung Pyo](https://github.com/UngPyoLee.png) | [GitHub](https://github.com/UngPyoLee)           | [Blog](https://blog.ungpyo.dev)           |
+| Yang, Ui Jong| 백엔드 팀장       | ![Ui Jong](https://github.com/UiJongYang.png) | [GitHub](https://github.com/UiJongYang)          | [Blog](https://blog.uijong.dev)           |
+| Choi, Seong Rak| 백엔드 팀원    | ![Seong Rak](https://github.com/SeongRakChoi.png) | [GitHub](https://github.com/SeongRakChoi)       | [Blog](https://blog.seongrak.dev)         |
 
 ---
 
@@ -158,7 +145,21 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 
 ---
 
-## 2. 채택한 브랜치 전략 ( 내용 보충 필요 )
+## 2. 채택한 브랜치 전략
+
+### 기술
+- **React**와 **TypeScript**를 사용하여 빠르고 안정적인 프론트엔드 개발.
+- **Tailwind CSS**와 **framer motion**을 사용한 스타일링 및 애니메이션.
+- **zustand**를 통한 효율적이고 단순한 상태 관리.
+
+### 브랜치 전략
+우리는 프로젝트를 fork하여 각자의 리포지토리에서 개발을 진행했습니다. 
+각 개발자는 `develop/개발구역이름` 브랜치와 `main` 브랜치로 나눠 작업했으며, 
+개발 구역에서 기능을 구현한 후 `Pull Request`를 통해 코드를 검토하고 `merge`하는 방식을 사용했습니다. 
+이를 통해 코드 품질을 높이고 협업 효율성을 극대화할 수 있었습니다.
+
+### Commit Convention
+
 |      | Tag Name | Description                               |
 | ---- | --------- | ---------------------------------- |
 | 기능 | Feat      | 새로운 기능을 추가할 경우          |
@@ -172,41 +173,19 @@ PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <b
 | ETC  | Rename    | 파일 명 수정                       |
 
 
-## Issue Convention
-
-이슈와 관련된 템플릿은 이슈를 생성할때 자동으로 생성됩니다. <br/>
-해당 내용을 참고하시어 작성을 진행해주시기 바랍니다.
-
 ## Pull Request(PR) Convention
 
 PR과 관련된 템플릿은 PR을 생성할때 자동으로 생성됩니다. <br/>
 해당 내용을 참고하시어 작성을 진행해주시기 바랍니다.
 
-### 기술
-- **React**와 **TypeScript**를 사용하여 빠르고 안정적인 프론트엔드 개발.
-- **Tailwind CSS**와 **framer motion**을 사용한 스타일링 및 애니메이션.
-- **zustand**를 통한 상태 관리.
+## Issue Convention
 
-### 브랜치 전략
-- `main`: 배포 가능한 최종 버전.
-- `develop`: 통합 개발 브랜치.
-- `feature/*`: 개별 기능 개발 브랜치.
+이슈와 관련된 템플릿은 이슈를 생성할때 자동으로 생성됩니다. <br/>
+해당 내용을 참고하시어 작성을 진행해주시기 바랍니다.
 
 ---
 
 ## 3. 프로젝트 구조(변 필요)
-Emotree/
-├── public/
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── hooks/
-│ ├── store/
-│ ├── utils/
-│ └── App.tsx
-├── .gitignore
-├── package.json
-└── README.md
 
 
 ---
@@ -228,13 +207,13 @@ Emotree/
 ## 5. 아키텍처, 클라우드 아키텍처, ERD
 
 ### 아키텍처
-![아키텍처 다이어그램](https://emotree.yoyobar.xyz/architecture.png)
+![Architecture](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/Architecture.png?raw=true)
 
 ### 클라우드 아키텍처
 ![클라우드 아키텍처 다이어그램](https://emotree.yoyobar.xyz/cloud-architecture.png)
 
 ### ERD
-![ERD 다이어그램](https://emotree.yoyobar.xyz/erd.png)
+![ERD](https://github.com/OZ-Coding-School/oz_03_main-003-FE/blob/main/docs/ERD.png?raw=true)
 
 ---
 
