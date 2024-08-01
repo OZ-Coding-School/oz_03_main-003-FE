@@ -1,5 +1,6 @@
 import { useState, useEffect, ReactNode } from "react";
-import InputLoadingBar from "../components/common/dialog/InputLoadingBar";
+import MaintenanceLoadingBar from "../components/common/maintenance/MaintenanceLoadingBar";
+import { Helmet } from "react-helmet-async";
 
 const PageMaintenance = ({ children }: { children: ReactNode }) => {
     const [isMaintenanceTime, setIsMaintenanceTime] = useState(false);
@@ -30,6 +31,9 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
     if (isMaintenanceTime) {
         return (
             <>
+                <Helmet>
+                    <title>Maintenance :: Emotree</title>
+                </Helmet>
                 <div className="select-none font-body flex items-center justify-center h-screen bg-black">
                     <img
                         className="absolute left-0 top-0"
@@ -54,7 +58,7 @@ const PageMaintenance = ({ children }: { children: ReactNode }) => {
                         <p className="text-gray-200">예상 완료 시간: 2024/08/02</p>
                     </div>
                     <div className="w-full bottom-[376px] absolute">
-                        <InputLoadingBar />
+                        <MaintenanceLoadingBar />
                     </div>
                 </div>
             </>
