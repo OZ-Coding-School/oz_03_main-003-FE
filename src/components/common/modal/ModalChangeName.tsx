@@ -75,7 +75,7 @@ const ModalChangeName = ({ onClose }: ModalChangeNameProps) => {
                         "absolute z-20"
                     )}
                 >
-                    <h3 className="font-title leading-5 text-gray-200 mb-10">닉네임 변경</h3>
+                    <h3 className="font-title leading-5 text-gray-200 mb-10">이름 변경</h3>
                     <input
                         type="text"
                         maxLength={15}
