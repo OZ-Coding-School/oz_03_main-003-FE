@@ -64,7 +64,23 @@ const PageChat = () => {
     return (
         <>
             <Helmet>
-                <title>감정 분석 :: Emotree</title>
+                <title>Chat :: Emotree</title>
+                <meta
+                    name="keywords"
+                    content="채팅, ai, 챗봇, 채팅서비스, 채팅 서비스, ai 채팅, ai 감정"
+                />
+                <meta property="twitter:url" content="https://emotree.yoyobar.xyz" />
+                <meta name="twitter:title" content="Chat :: Emotree" />
+                <meta
+                    name="twitter:description"
+                    content="AI가 분석한 나의 대화를 나무를 통해 들여다 보세요."
+                />
+                <meta property="og:url" content="https://emotree.yoyobar.xyz" />
+                <meta property="og:title" content="Chat :: Emotree" />
+                <meta
+                    property="og:description"
+                    content="AI가 분석한 나의 대화를 나무를 통해 들여다 보세요."
+                />
             </Helmet>
             <div className="font-body">
                 <HeaderLoggedIn />
