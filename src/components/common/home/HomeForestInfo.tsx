@@ -6,8 +6,8 @@ interface HomeForestInfoProps {
 
 const HomeForestInfo = ({ isInView }: HomeForestInfoProps) => {
     return (
-        <div className="h-[1080px] overflow-hidden">
-            <div className="relative left-[50%] sm:block hidden">
+        <div className="h-[660px] lg:h-[1080px] overflow-hidden">
+            <div className="relative left-[136%] sm:left-[80%] lg:left-[50%]">
                 <motion.img
                     className="relative animate-gravity"
                     initial={{ left: -800, top: 100, scale: 0.6, opacity: 0 }}
@@ -41,7 +41,7 @@ const HomeForestInfo = ({ isInView }: HomeForestInfoProps) => {
                     src="/img/landing_tree_02.png"
                 />
             </div>
-            <div className="relative -top-[240px] left-[47%] sm:block hidden">
+            <div className="relative -top-[240px] left-[60%] lg:left-[47%] sm:block hidden">
                 <motion.img
                     className="relative animate-gravity"
                     initial={{ left: 30, top: -50, opacity: 0 }}
@@ -57,7 +57,7 @@ const HomeForestInfo = ({ isInView }: HomeForestInfoProps) => {
                     src="/img/landing_tree_03.png"
                 />
             </div>
-            <div className="relative -right-[83%] sm:left-[50%] sm:bottom-[360px] bottom-[-250px] -translate-x-2/4 sm:translate-x-0">
+            <div className="relative -right-[95%] sm:left-[50%] sm:bottom-[360px] bottom-[-250px] -translate-x-2/4 sm:translate-x-0 lg:block hidden">
                 <motion.img
                     className="relative animate-gravity"
                     initial={{ right: 0, top: 100, opacity: 0 }}
@@ -78,7 +78,7 @@ const HomeForestInfo = ({ isInView }: HomeForestInfoProps) => {
                 />
             </div>
             <motion.img
-                className="absolute left-0 top-0 -z-10"
+                className="absolute left-0 top-0 -z-10 w-[200px] sm:w-[320px] md:w-[480px] lg:w-[600px] xl:w-auto"
                 initial={{ left: -200, opacity: 0 }}
                 animate={isInView ? { left: 0, opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0, type: "tween" }}

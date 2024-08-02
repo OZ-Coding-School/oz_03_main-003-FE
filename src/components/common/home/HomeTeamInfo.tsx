@@ -5,7 +5,7 @@ const HomeTeamInfo = () => {
     return (
         <div>
             <div className="text-white flex text-center m-auto break-keep sm:max-w-[1200px] w-full flex-col sm:flex-row">
-                <dl className="sm:w-60 w-full relative">
+                <dl className="sm:w-60 w-full relative mb-10">
                     <dt>
                         <p className="block text-sm font-medium text-literal-angry">
                             Team & FE Leader
@@ -43,7 +43,7 @@ const HomeTeamInfo = () => {
                         className="top-0 absolute right-0 sm:block hidden"
                     />
                 </dl>
-                <dl className="sm:w-60 w-full relative mt-10 sm:mt-0">
+                <dl className="sm:w-60 w-full relative mb-10 mt-10 sm:mt-0">
                     <dt>
                         <p className="block text-sm font-medium text-literal-joy">FE Member</p>
                         Park, Min Ah
@@ -78,7 +78,7 @@ const HomeTeamInfo = () => {
                         className="top-0 absolute right-0 sm:block hidden"
                     />
                 </dl>
-                <dl className="sm:w-60 w-full relative mt-10 sm:mt-0">
+                <dl className="sm:w-60 w-full relative mb-10 mt-10 sm:mt-0">
                     <dt>
                         <p className="block text-sm font-medium text-primary">FE Member</p>
                         Lee, Ung Pyo
@@ -113,7 +113,7 @@ const HomeTeamInfo = () => {
                         className="top-0 absolute right-0 sm:block hidden"
                     />
                 </dl>
-                <dl className="sm:w-60 w-full relative mt-10 sm:mt-0">
+                <dl className="sm:w-60 w-full relative mb-10 mt-10 sm:mt-0">
                     <dt>
                         <p className="block text-sm font-medium text-literal-sorrow">BE Leader</p>
                         Yang, Ui Jong
