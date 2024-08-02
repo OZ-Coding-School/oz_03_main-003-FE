@@ -74,7 +74,7 @@ const Landing = () => {
 
     return (
         <>
-            <div className="text-white w-full px-3 break-keep">
+            <div className="text-white w-full break-keep">
                 <HomeBg />
                 <motion.header
                     className={tw(
@@ -88,80 +88,86 @@ const Landing = () => {
                         <img className="h-10 m-auto" src="img/logo-primary.png" alt="emotree" />
                     </h1>
                 </motion.header>
-                <div id="analysis-section" className="pt-24 pb-40 relative">
-                    <div className="text-center">
-                        <h2 className="font-title text-2xl text-primary-light">
-                            AI 감정 분석 서비스
-                        </h2>
-                        <p className="text-lg mt-6 text-white">
-                            대화를 ai에게 전달해주세요.
-                            <br />
-                            대화를 요약하고 상대방이 어떤 감정을 <br className="md:hidden" />
-                            가지고 나와 대화하는지 분석합니다.
-                        </p>
-                    </div>
-                    <HomeChatInfo />
-                </div>
-                <div id="tree-section" className="relative py-40">
-                    <div className="relative z-10">
+                <div className="w-full px-3 ">
+                    <div id="analysis-section" className="pt-24 pb-40 relative">
                         <div className="text-center">
                             <h2 className="font-title text-2xl text-primary-light">
-                                감정 나무 키우기
+                                AI 감정 분석 서비스
                             </h2>
-                            <p className="text-lg   mt-6 text-white">
-                                Emotree에는 다양한 감정나무가 있습니다.
+                            <p className="text-lg mt-6 text-white">
+                                대화를 ai에게 전달해주세요.
                                 <br />
-                                대화 속의 감정을 나무에 기록하고 나무를 성장시키세요!
+                                대화를 요약하고 상대방이 어떤 감정을 <br className="md:hidden" />
+                                가지고 나와 대화하는지 분석합니다.
                             </p>
                         </div>
-                        <HomeTreeInfo />
+                        <HomeChatInfo />
                     </div>
-                    {sparkles.map((sparkle) => (
-                        <Sparkle
-                            key={sparkle.id}
-                            x={sparkle.x}
-                            y={sparkle.y}
-                            size={sparkle.size}
-                            delay={sparkle.delay}
-                        />
-                    ))}
+                    <div id="tree-section" className="relative py-40">
+                        <div className="relative z-10">
+                            <div className="text-center">
+                                <h2 className="font-title text-2xl text-primary-light">
+                                    감정 나무 키우기
+                                </h2>
+                                <p className="text-lg   mt-6 text-white">
+                                    Emotree에는 다양한 감정나무가 있습니다.
+                                    <br />
+                                    대화 속의 감정을 나무에 기록하고 나무를 성장시키세요!
+                                </p>
+                            </div>
+                            <HomeTreeInfo />
+                        </div>
+                        {sparkles.map((sparkle) => (
+                            <Sparkle
+                                key={sparkle.id}
+                                x={sparkle.x}
+                                y={sparkle.y}
+                                size={sparkle.size}
+                                delay={sparkle.delay}
+                            />
+                        ))}
+                    </div>
+                    <motion.div
+                        id="forest-section"
+                        className="z-20 pt-40 relative overflow-hidden"
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <div className="text-center">
+                            <h2 className="font-title text-2xl text-primary-light">
+                                숲을 내 마음대로
+                            </h2>
+                            <p className="text-lg  mt-6 text-white">
+                                유저는 다양한 나무로 자유롭게 배치해,
+                                <br />
+                                감정나무 숲을 마음대로 꾸밀 수 있습니다.
+                            </p>
+                        </div>
+                        <div className="absolute w-full h-[160px] bottom-0 bg-gradient-to-b from-transparent via-black to-black z-30"></div>
+                        <HomeForestInfo isInView={isInView} />
+                    </motion.div>
+                    <footer className="text-center bg-black pt-40 pb-40 w-full">
+                        <div className="text-center mb-[120px] px-5">
+                            <h2 className="font-title text-2xl text-primary-light">
+                                팀을 소개합니다
+                            </h2>
+                            <p className="text-lg  mt-6 text-gray-200">
+                                우리 팀은 인공지능(AI)을 활용한 <br className="sm:hidden" />
+                                혁신적인 감정 분석 서비스를 개발했습니다. <br />
+                                사용자들의 감정을 분석하여 그 데이터를 나무에게 전달함으로써 나무가
+                                성장하는 형태의 인터랙티브 경험을 제공합니다.
+                            </p>
+                            <p className="text-lg  mb-24 mt-1 text-gray-200">
+                                <br /> 감정을 시각적으로 표현하고, 사용자들에게 긍정적인 피드백을
+                                제공하여 감정 관리와 <br className="hidden lg:block" />
+                                정서적 성장을 도울 수 있도록 설계되었습니다.
+                            </p>
+                            <HomeTeamInfo />
+                        </div>
+                        <HomeCopyright />
+                    </footer>
                 </div>
-                <motion.div
-                    id="forest-section"
-                    className="z-20 pt-40 relative overflow-hidden"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <div className="text-center">
-                        <h2 className="font-title text-2xl text-primary-light">숲을 내 마음대로</h2>
-                        <p className="text-lg  mt-6 text-white">
-                            유저는 다양한 나무로 자유롭게 배치해,
-                            <br />
-                            감정나무 숲을 마음대로 꾸밀 수 있습니다.
-                        </p>
-                    </div>
-                    <div className="absolute w-full h-[160px] bottom-0 bg-gradient-to-b from-transparent via-black to-black z-30"></div>
-                    <HomeForestInfo isInView={isInView} />
-                </motion.div>
-                <footer className="text-center bg-black pt-40 pb-40 w-full">
-                    <div className="text-center mb-[120px] px-5">
-                        <h2 className="font-title text-2xl text-primary-light">팀을 소개합니다</h2>
-                        <p className="text-lg  mt-6 text-gray-200">
-                            우리 팀은 인공지능(AI)을 활용한 <br className="sm:hidden" />
-                            혁신적인 감정 분석 서비스를 개발했습니다. <br />
-                            사용자들의 감정을 분석하여 그 데이터를 나무에게 전달함으로써 나무가
-                            성장하는 형태의 인터랙티브 경험을 제공합니다.
-                        </p>
-                        <p className="text-lg  mb-24 mt-1 text-gray-200">
-                            <br /> 감정을 시각적으로 표현하고, 사용자들에게 긍정적인 피드백을
-                            제공하여 감정 관리와 <br className="hidden lg:block" />
-                            정서적 성장을 도울 수 있도록 설계되었습니다.
-                        </p>
-                        <HomeTeamInfo />
-                    </div>
-                    <HomeCopyright />
-                </footer>
             </div>
         </>
     );
