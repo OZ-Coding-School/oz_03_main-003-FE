@@ -78,7 +78,7 @@ const PageChat = () => {
         return (
             <>
                 <Helmet>
-                    <title>감정 분석 :: Emotree</title>
+                    <title>Chat :: Emotree</title>
                 </Helmet>
                 <HeaderLoggedIn />
                 <NonData />
