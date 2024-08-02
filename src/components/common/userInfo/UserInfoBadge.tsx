@@ -32,7 +32,7 @@ const UserInfoBadge = () => {
     };
 
     return (
-        <div className="bg-gray-800 mt-5 w-[560px] h-[450px] p-5">
+        <div className="bg-gray-800 mt-5 lg:w-[560px] h-[450px] p-5 w-full">
             <div className="relative flex font-title text-base gap-2 text-gray-200">
                 <div>Emotion Collections</div>
                 <div className="w-4">
@@ -80,7 +80,7 @@ const UserInfoBadge = () => {
                 </div>
                 <div className="text-sm text-gray-200">기본 프로필</div>
             </article>
-            <article className="gap-[88px] flex w-full justify-center items-center mt-2">
+            <article className="pl-[35px] pr-[30px] flex w-full justify-between items-center mt-2">
                 <IconAngry className="w-5 h-5 fill-literal-angry" />
                 <IconHappy className="w-5 h-5 fill-literal-happy" />
                 <IconSorrow className="w-5 h-5 fill-literal-sorrow" />
