@@ -10,6 +10,7 @@ import BadgeHappy from "../badge/BadgeHappy";
 import BadgeSorrow from "../badge/BadgeSorrow";
 import BadgeWorry from "../badge/BadgeWorry";
 import ButtonEmoTreeDisabled from "../button/ButtonEmoTreeDisabled";
+import { twMerge as tw } from "tailwind-merge";
 
 const DialogRoom = () => {
     const { selected_tree, messages } = useDialogStore();
@@ -65,7 +66,7 @@ const DialogRoom = () => {
     };
 
     return (
-        <div className="w-full h-full text-white overflow-y-auto overflow-x-hidden">
+        <div className={tw("w-full h-full text-white overflow-y-auto overflow-x-hidden")}>
             <div>
                 {messages.user.map((dialogItem, index) => (
                     <div key={index}>
@@ -73,7 +74,7 @@ const DialogRoom = () => {
                             transition={{ delay: 0.5, duration: 0.5, type: "just" }}
                             animate={{ opacity: [0, 1] }}
                         >
-                            <div className="mb-4 pr-8 w-full">
+                            <div className="mb-4 pr-8 w-full ">
                                 <div className="p-8 bg-gray-800 rounded-md w-10/12 ml-auto break-words whitespace-pre-line">
                                     {dialogItem.message}
                                 </div>

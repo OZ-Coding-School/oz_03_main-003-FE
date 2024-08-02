@@ -23,7 +23,7 @@ const Gnb = () => {
                     <li
                         key={item.path}
                         className={tw(
-                            "relative w-36 group",
+                            "relative w-36 group min-w-[100px]",
                             active
                                 ? "text-primary bg-gray-800"
                                 : "hover:text-white hover:bg-gray-800"
