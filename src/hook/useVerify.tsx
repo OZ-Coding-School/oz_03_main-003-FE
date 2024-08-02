@@ -13,7 +13,7 @@ const useVerify = () => {
         try {
             await authApi.userTokenVerify();
         } catch (error) {
-            console.log("AccessToken Verification Failed. Retrying...");
+            console.warn("AccessToken Verification Failed. Retrying...");
             try {
                 await authApi.userTokenRefresh();
                 await authApi.userTokenVerify();

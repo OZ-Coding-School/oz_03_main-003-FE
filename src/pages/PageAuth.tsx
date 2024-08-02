@@ -19,7 +19,7 @@ const PageAuth = () => {
                 await authApi.userTokenVerify();
                 nav("/home");
             } catch (tokenError) {
-                console.log("AccessToken Verification Failed. Retrying...");
+                console.warn("AccessToken Verification Failed. Retrying...");
                 try {
                     await authApi.userTokenRefresh();
                     await authApi.userTokenVerify();

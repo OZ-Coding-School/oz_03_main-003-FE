@@ -26,7 +26,7 @@ const useAddChatRoom = () => {
                 ];
                 setChatRooms(newChatRooms);
             } catch (error) {
-                console.log("Failed to create chat room", error);
+                console.error("Failed to create chat room", error);
             }
         },
         [setChatRooms, userData.treeDetail]
