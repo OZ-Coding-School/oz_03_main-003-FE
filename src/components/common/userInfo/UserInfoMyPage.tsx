@@ -105,11 +105,11 @@ const UserInfoMyPage = () => {
                         </div>
                     </div>
                 </div>
-                <ButtonError onClick={handleDeleteAccountModalOpen} className="mt-5">
-                    계정 탈퇴
-                </ButtonError>
             </div>
             <UserInfoBadge />
+            <ButtonError onClick={handleDeleteAccountModalOpen} className="mt-5">
+                계정 탈퇴
+            </ButtonError>
             <div className="flex flex-col gap-3 mt-5"></div>
             {isChangeModalOpen && <ModalChangeName onClose={handleChangeModalClose} />}
             {isDeleteAccountModalOpen && <ModalQuitSite onClose={handleDeleteAccountModalClose} />}
