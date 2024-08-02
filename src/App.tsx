@@ -7,8 +7,21 @@ import PageNotFound from "./pages/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import PageAdmin from "./pages/PageAdmin";
 import AdminRoute from "./components/AdminRoute";
+import { useEffect } from "react";
 
 function App() {
+    useEffect(() => {
+        if (location.pathname === "/" || location.pathname === "/account") {
+            document.body.classList.add("overflow-y-auto");
+        } else {
+            document.body.classList.remove("overflow-y-auto");
+        }
+
+        return () => {
+            document.body.classList.remove("overflow-y-auto");
+        };
+    }, [location.pathname]);
+
     return (
         <Routes>
             <Route path="/" element={<PageAuth />} />
