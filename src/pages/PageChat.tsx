@@ -12,6 +12,7 @@ import useSound from "use-sound";
 import btnClick from "../assets/sound/btn_click.mp3";
 import { Helmet } from "react-helmet-async";
 import dayjs from "dayjs";
+import { twMerge as tw } from "tailwind-merge";
 const PageChat = () => {
     const { fetchChatRooms, chatRooms } = useChatRooms();
     const { userData } = useUserStore();
@@ -110,15 +111,19 @@ const PageChat = () => {
             <div className="font-body">
                 <HeaderLoggedIn />
                 <div className="bg-black pt-[129px] w-full h-screen box-border">
-                    <div className="w-full h-full flex">
-                        <div className="w-80 h-full border-r border-gray-600">
+                    <div className="w-full h-full flex relative">
+                        <div
+                            className={tw(
+                                "w-full h-full border-r border-gray-600 sm:max-w-[320px]"
+                            )}
+                        >
                             <ChatListHeader onAddChatClick={openModal} />
                             <ChatListContent
                                 onChatItemClick={openDialogHandler}
                                 onClose={closeDialogHandler}
                             />
                         </div>
-                        <div className="text-white w-full h-full">
+                        <div className="text-white h-full sm:w-full">
                             {isDialogOpen && uuid !== "" && <Dialog onClose={closeDialogHandler} />}
                         </div>
                     </div>

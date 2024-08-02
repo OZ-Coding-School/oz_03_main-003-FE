@@ -93,8 +93,8 @@ const ModalUpdateChat = ({ onClose, chat_room_uuid }: ModalUpdateChatProps) => {
                 <nav
                     onClick={stopPropagation}
                     className={tw(
-                        "p-5 bg-gray-800 text-white border border-gray-600 w-[420px]",
-                        "absolute z-20"
+                        "p-5 bg-gray-800 text-white border border-gray-600 w-full h-full top-[129px] sm:w-[420px] sm:h-fit sm:top-[0px]",
+                        "relative z-20"
                     )}
                 >
                     <h3 className="font-title leading-5 mb-10 text-gray-200">채팅방 정보 변경</h3>

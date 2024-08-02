@@ -17,7 +17,7 @@ const ChatListContent = ({ onClose, onChatItemClick }: ChatListContentProps) => 
     });
 
     return (
-        <div className="select-none overflow-y-auto w-fit flex flex-col">
+        <div className="select-none overflow-y-auto w-full flex flex-col">
             {sortedChatRooms.map((item) => (
                 <ChatListItem
                     key={item.chat_room_uuid}

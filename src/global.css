@@ -45,8 +45,9 @@
 
 body {
     background-color: black;
-    overflow-y: hidden;
     min-width: 320px;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 html,

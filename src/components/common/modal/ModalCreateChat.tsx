@@ -96,8 +96,9 @@ const ModalCreateChat = ({ onClose }: ModalCreateChatProps) => {
             >
                 <div
                     className={tw(
-                        "p-5 bg-gray-800 text-white w-[420px]",
-                        "relative border border-gray-600"
+                        "p-5 bg-gray-800 text-white",
+                        "relative border border-gray-600",
+                        "w-full h-full top-[129px] sm:w-[420px] sm:h-fit sm:top-[0px]"
                     )}
                     onClick={stopPropagation}
                 >
