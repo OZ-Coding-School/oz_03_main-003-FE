@@ -68,7 +68,7 @@ const ModalUpdateChat = ({ onClose, chat_room_uuid }: ModalUpdateChatProps) => {
                 playConfirm();
                 setIsSubmitting(false);
             } catch (error) {
-                console.log("Failed to update chat room", error);
+                console.error("Failed to update chat room", error);
             }
         } else {
             setIsSubmitting(false);
