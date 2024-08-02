@@ -51,7 +51,7 @@ const UserInfoBadge = () => {
                         transition={{ duration: 1, type: "spring" }}
                         animate={{ translateX: [20, 0], opacity: [0, 1] }}
                         exit={{ translateX: 20, opacity: 0 }}
-                        className="absolute z-10 right-28"
+                        className="absolute z-10 right-[20px] sm:right-[120px]"
                     >
                         <ModalTooltip type="COLLECTION" />
                     </motion.div>
