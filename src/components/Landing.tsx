@@ -74,7 +74,7 @@ const Landing = () => {
 
     return (
         <>
-            <div className="text-white w-full">
+            <div className="text-white w-full px-3 break-keep">
                 <HomeBg />
                 <motion.header
                     className={tw(
@@ -143,7 +143,7 @@ const Landing = () => {
                     <div className="absolute w-full h-[160px] bottom-0 bg-gradient-to-b from-transparent via-black to-black z-30"></div>
                     <HomeForestInfo isInView={isInView} />
                 </motion.div>
-                <footer className="text-center bg-black h-[1000px] pt-40 w-full absolute">
+                <footer className="text-center bg-black pt-40 w-full">
                     <div className="text-center mb-[120px]">
                         <h2 className="font-title text-2xl text-primary-light">팀을 소개합니다</h2>
                         <p className="text-lg  mt-6 text-gray-200">
