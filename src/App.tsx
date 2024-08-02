@@ -20,7 +20,7 @@ function App() {
         return () => {
             document.body.classList.remove("overflow-y-auto");
         };
-    }, [location.pathname]);
+    }, []);
 
     return (
         <Routes>
