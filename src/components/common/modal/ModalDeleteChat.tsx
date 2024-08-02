@@ -65,8 +65,8 @@ const ModalDeleteChat = ({ onClose, chat_room_uuid, onDialogClose }: ModalDelete
                 <nav
                     onClick={stopPropagation}
                     className={tw(
-                        "p-5 bg-gray-800 text-white w-[420px] border border-gray-600",
-                        "absolute z-20"
+                        "p-5 bg-gray-800 text-white border border-gray-600 w-full h-full top-[129px] sm:w-[420px] sm:h-fit sm:top-[0px]",
+                        "relative z-20"
                     )}
                 >
                     <h3 className="font-title leading-5 mb-10 text-gray-200">대화 분석방 삭제</h3>
