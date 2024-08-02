@@ -10,7 +10,7 @@ const HomeChatInfo = () => {
                     src="/img/landing_chat.webp"
                     alt="채팅 이미지"
                 />
-                <div className="mt-10 ml-10 sm:ml-0 lg:mt-[210px]  flex flex-col">
+                <div className="mt-10 ml-0 lg:mt-[210px]  flex flex-col">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
